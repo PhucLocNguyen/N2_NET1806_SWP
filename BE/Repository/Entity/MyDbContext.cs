@@ -124,16 +124,18 @@ public partial class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 
         modelBuilder.Entity<MasterGemstone>(entity =>
         {
-            entity.HasKey(e => e.MasterGemstoneId).HasName("PK__MasterGe__D4657CE342C7183F");
+            entity.HasKey(e => e.MasterGemstoneId).HasName("PK__MasterGe__D4657CE325820E1C");
 
             entity.ToTable("MasterGemstone");
 
             entity.Property(e => e.MasterGemstoneId).HasColumnName("MasterGemstoneID");
-            entity.Property(e => e.Clarity).HasMaxLength(255);
-            entity.Property(e => e.Cut).HasMaxLength(255);
-            entity.Property(e => e.Kind).HasMaxLength(255);
+            entity.Property(e => e.Clarity).HasMaxLength(50);
+            entity.Property(e => e.Cut).HasMaxLength(50);
+            entity.Property(e => e.Kind).HasMaxLength(100);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.Size).HasMaxLength(255);
+            entity.Property(e => e.Shape).HasMaxLength(50);
+            entity.Property(e => e.Size).HasMaxLength(50);
+            entity.Property(e => e.Weight).HasColumnType("decimal(18, 2)");
         });
 
         modelBuilder.Entity<Material>(entity =>

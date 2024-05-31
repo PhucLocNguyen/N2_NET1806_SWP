@@ -17,5 +17,9 @@ public partial class MasterGemstone
 
     public string? Cut { get; set; }
 
+    public decimal? Weight { get; set; }
+
+    public string? Shape { get; set; }
+
     public virtual ICollection<Design> Designs { get; set; } = new List<Design>();
 }

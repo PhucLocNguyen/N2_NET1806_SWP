@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FormControl, OutlinedInput, InputAdornment, IconButton, InputLabel } from '@mui/material'
 
-function InputPassword({label,handleChild, ref}) {
+function InputPasswordConfirm({label,handleChild, data}) {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -26,7 +26,7 @@ function InputPassword({label,handleChild, ref}) {
                             onClick={handleClickShowPassword}
                             onMouseDown={handleMouseDownPassword}
                             edge="end"
-                        >   
+                        >
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                     </InputAdornment>
@@ -37,4 +37,4 @@ function InputPassword({label,handleChild, ref}) {
     )
 }
 
-export default InputPassword
+export default InputPasswordConfirm

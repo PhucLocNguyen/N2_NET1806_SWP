@@ -13,12 +13,9 @@
 
   <ItemGroup>
     <Folder Include="Model\HaveModel\" />
-    <Folder Include="Model\MasterGemstoneModel\" />
-    <Folder Include="Model\PaymentModel\" />
     <Folder Include="Model\RequirementModel\" />
     <Folder Include="Model\RoleModel\" />
     <Folder Include="Model\UserModel\" />
-    <Folder Include="Model\WarrantyCardModel\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,11 +11,11 @@ public partial class Payment
 
     public string? Method { get; set; }
 
-    public DateOnly? CompletedAt { get; set; }
+    public DateTime? CompletedAt { get; set; }
 
     public int? CustomerId { get; set; }
 
-    public int? RequirementId { get; set; }
+    public int? RequirementsId { get; set; }
 
     public virtual User? Customer { get; set; }
 

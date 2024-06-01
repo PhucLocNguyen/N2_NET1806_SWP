@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repository\\Repository.csproj": {}
+    "D:\\Slide\\Sem_5\\SWP\\N2_NET1806_SWP\\BE\\Repository\\Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repository\\Repository.csproj": {
+    "D:\\Slide\\Sem_5\\SWP\\N2_NET1806_SWP\\BE\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repository\\Repository.csproj",
+        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\N2_NET1806_SWP\\BE\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repository\\obj\\",
+        "projectPath": "D:\\Slide\\Sem_5\\SWP\\N2_NET1806_SWP\\BE\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
+        "outputPath": "D:\\Slide\\Sem_5\\SWP\\N2_NET1806_SWP\\BE\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

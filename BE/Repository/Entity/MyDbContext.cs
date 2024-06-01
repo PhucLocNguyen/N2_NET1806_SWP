@@ -42,7 +42,7 @@ public partial class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=MSI;uid=sa;pwd=12345;database=JewelleryOrder;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=LAPTOP-0BE7JLH6\\SQLEXPRESS;uid=sa;pwd=12345;database=JewelleryOrder;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -164,14 +164,14 @@ public partial class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
             entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.Method).HasMaxLength(255);
-            entity.Property(e => e.RequirementId).HasColumnName("RequirementID");
+            entity.Property(e => e.RequirementsId).HasColumnName("RequirementsID");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.CustomerId)
                 .HasConstraintName("FK__Payment__Custome__5BE2A6F2");
 
             entity.HasOne(d => d.Requirement).WithMany(p => p.Payments)
-                .HasForeignKey(d => d.RequirementId)
+                .HasForeignKey(d => d.RequirementsId)
                 .HasConstraintName("FK__Payment__Require__5CD6CB2B");
         });
 

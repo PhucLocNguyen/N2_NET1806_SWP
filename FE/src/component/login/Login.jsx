@@ -19,11 +19,18 @@ function Login() {
             setFormData({ Username: "", Email:"" ,Password:"",});
         }
     },[isToggle]);
-
+    console.log(formData); 
     const HandleSubmit = async (e)=>{
         e.preventDefault();
         let pathReq = "register";
         //reset cac field trong form
+        const form = e.target;
+        var data = new FormData(form);
+        const listState ={};
+        await Object.entries(formData).forEach(([key, value]) => {
+            listState[key] =data.get(key);
+        });
+        await setFormData(listState);
         var htmlCollection =[...e.target];
         htmlCollection.forEach((element, index)=>{
             if(element.tagName === "INPUT"){
@@ -35,7 +42,7 @@ function Login() {
             pathReq="login";
         }
         try {
-            const response = await axios.post(`https://localhost:7169/api/account/${pathReq}`, formData).then((res)=>
+            const response = await axios.post(`https://localhost:7169/api/account/${pathReq}`, listState).then((res)=>
             {
                 if(e.target.name==="login" && res.status === 200) {localStorage.setItem("userInfo",JSON.stringify(res.data))};
                 setDataSource([...dataSource, res.data]);
@@ -46,35 +53,8 @@ function Login() {
         }
 
     }
-    const debounce = (func, delay) => {
-        let timeoutId;
-        return (...args) => {
-          if (timeoutId) {
-            clearTimeout(timeoutId);
-          }
-          timeoutId = setTimeout(() => {
-            func(...args);
-          }, delay);
-        };
-      };
-    const debouncedOnChange = useCallback(debounce(handleInputChange, 1000), [handleInputChange]);
-    function handleInputChange(e) {
-        e.preventDefault();
-        const {name, value} = e.target;
-        if(!ValidateInputChange(name,value)){
-            e.target.color="error";
-        }else{
-            e.target.color="info";
-        }
-        setFormData({
-            ...formData, [name]: value,
-        });
-      };
-    function ValidateInputChange(name, value){
-        if(value.length==0){
-            return false;
-        }
-    }
+   
+   
     return (
         <div className="bg-[#c9d6ff] w-full h-screen bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">
             <div className="bg-[#fff] rounded-[30px] shadow-[0_5px_15px_rgba(0,0,0,0.35)] relative overflow-hidden w-[768px] max-w-[100%] min-h-[480px]">
@@ -104,9 +84,9 @@ function Login() {
                         </div>
                         <span className="text-[13px]">or use your email for registeration</span>
 
-                        <InputText label='Username' type='text' handleChild={debouncedOnChange} ></InputText>
-                        <InputText label='Email' type='email' handleChild={debouncedOnChange}></InputText>
-                        <InputPassword label='Password' handleChild={debouncedOnChange}></InputPassword>
+                        <InputText label='Username' type='text'></InputText>
+                        <InputText label='Email' type='email' pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"></InputText>
+                        <InputPassword label='Password' inputCase='register'></InputPassword>
                         <Button variant="contained" type='submit'>Sign Up</Button>
                     </form>
                 </motion.div>
@@ -124,7 +104,7 @@ function Login() {
                     }}
                     className='absolute h-[100%] top-0 left-0 w-[50%] z-2'
                 >
-                    <form method='POST' onSubmit={(e)=> HandleSubmit(e)} className='bg-[#fff] flex items-center justify-center flex-col h-[100%] px-[40px]' name='login'>
+                    <form method='POST' onSubmit={HandleSubmit} className='bg-[#fff] flex items-center justify-center flex-col h-[100%] px-[40px]' name='login'>
                         <h1 className='font-bold text-[35px]'>Sign In</h1>
                         <div className='my-[10px]'>
                             <motion.a whileHover={{ scale: 1.2 }} href='#' className='border-[2px] border-solid border-[#ccc] rounded-[20%] inline-flex justify-center items-center mx-[4px] w-[40px] h-[40px]'>
@@ -137,9 +117,10 @@ function Login() {
                         </div>
                         <span className="text-[13px]">or use your username password</span>
 
-                        <InputText label='Username' type='text' handleChild={debouncedOnChange} ></InputText>
-                        <InputPassword label='Password' handleChild={debouncedOnChange}></InputPassword>
-
+                        {/* <InputText label='Username' type='text' handleChild={debouncedOnChange} ></InputText>
+                        <InputPassword label='Password' handleChild={debouncedOnChange}></InputPassword> */}
+                        <InputText label='Username' type='text' ></InputText>
+                        <InputPassword label='Password' ></InputPassword>
                         <a className="text-[#333] text-[13px] mt-[15px] mb-[10px]" href="#">Forget Your Password?</a>
                         <Button variant="contained" type='submit'>Sign In</Button>
                     </form>

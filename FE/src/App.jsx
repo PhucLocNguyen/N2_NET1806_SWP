@@ -9,10 +9,13 @@ import ListBracelet from './component/category/ListBracelet.jsx'
 import ListNecklace from './component/category/ListNecklace.jsx'
 import ListRing from './component/category/ListRing.jsx'
 import './App.css'
+import Blog from "./component/blog/Blog.jsx"
+import Footer from "./component/footer/Footer.jsx"
+import Navbar from "./component/nav/Navbar.jsx"
 
 function App() {
-
   return (
+
     <Routes>
       <Route path='/login' element={<Login></Login>}></Route>
       <Route path='/design' element={<Category></Category>}>
@@ -23,6 +26,7 @@ function App() {
         <Route path='ring' element={<ListRing></ListRing>}></Route>
       </Route>
     </Routes>
+
   )
 }
 

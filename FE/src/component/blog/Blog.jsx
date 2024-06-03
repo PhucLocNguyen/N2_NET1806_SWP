@@ -24,9 +24,9 @@ function Blog() {
           </h1>
         </div>
         {/* content */}
-        <div className="grid grid-cols-12 place-items-center px-[350px] mt-12">
+        <div className="grid grid-cols-12 place-items-center px-[250px] mt-12">
           {/* content Blog */}
-          <div className="col-span-8">
+          <div className="col-span-9">
             {/* Description blog */}
             <div className="relative shadow-xl pb-14">
               <img className="w-full" src={picture} />
@@ -107,41 +107,7 @@ function Blog() {
                     </span>
                   </li>
                 </ul>
-                {/* Icon Share */}
-                <div className="absolute right-16 bottom-19 group hover:text-[#C6AD8A]">
-                  <div>
-                    <ShareIcon
-                      style={{ color: "black" }}
-                      fontSize="small"
-                      className="mb-2"
-                    />{" "}
-                    SHARE
-                  </div>
-                  <div className="absolute right-[-35px] group-hover:block hidden bg-[#d8d8d8]">
-                    <div className="flex text-black h-fit w-fit px-3 py-2">
-                      <EmailIcon
-                        id="IconStyle"
-                        fontSize="small"
-                        className="mx-1"
-                      />
-                      <FacebookIcon
-                        id="IconStyle"
-                        fontSize="small"
-                        className="mx-1"
-                      />
-                      <TwitterIcon
-                        id="IconStyle"
-                        fontSize="small"
-                        className="mx-1"
-                      />
-                      <InstagramIcon
-                        id="IconStyle"
-                        fontSize="small"
-                        className="mx-1"
-                      />
-                    </div>
-                  </div>
-                </div>
+                
               </div>
             </div>
 
@@ -208,56 +174,11 @@ function Blog() {
                 </p>
               </div>
             </div>
-
-            {/* Comments input */}
-            <div>
-              <h1 className="text-[#C6AD8A] text-4xl mt-12 font-thin">
-                Post A Comment
-              </h1>
-              <p className="text-[#6a6a6a] my-4">
-                Your email address will not be published. Required fields are
-                marked *
-              </p>
-              <textarea
-                className="border-[#E1E1E1] border-[1px] w-full p-4 h-48"
-                placeholder="Comment *"
-              ></textarea>
-
-              <div className="flex w-full justify-between mt-2">
-                <input
-                  placeholder="Name *"
-                  className="px-4 py-6 w-[31%] h-10 border-[#E1E1E1] border-[1px]"
-                />
-                <input
-                  placeholder="Email *"
-                  className="px-4 py-6 w-[31%] h-10 border-[#E1E1E1] border-[1px]"
-                />
-                <input
-                  placeholder="Website"
-                  className="px-4 py-6 w-[31%] h-10 border-[#E1E1E1] border-[1px]"
-                />
-              </div>
-
-              <div className="relative mt-6">
-                <input
-                  type="checkbox"
-                  className="form-checkbox border-[#D1D1D1] border-[1px] outline-none w-4 h-4 mr-2 accent-slate-700 focus:accent-slate-950 bg-[#E1E1E1]"
-                />
-                <label className="absolute top-[-3px] text-[#6a6a6a] pb-1">
-                  Save my name, email, and website in this browser for the next
-                  time I comment.
-                </label>
-              </div>
-
-              <div className="flex group justify-center items-center w-full h-16 bg-white border-[1px] border-[#C6AD8A] hover:bg-[#C6AD8A] duration-300 mt-6">
-                <p className="text-[#C6AD8A] group-hover:text-white text-base">
-                  POST COMMENTS
-                </p>
-              </div>
-            </div>
           </div>
+
+
           {/* Navblog and search */}
-          <div className="col-span-4 w-[90%] h-full ml-7">
+          <div className="col-span-3 w-full h-full ml-7">
             {/* Search form */}
             <form class="border-b border-t border-[#d5d4d4] py-8 w-full mx-auto">
               <label
@@ -288,7 +209,7 @@ function Blog() {
                   type="search"
                   id="default-search"
                   class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-black focus:border-black dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-black dark:focus:border-black"
-                  placeholder="Search Mockups, Logos..."
+                  placeholder="...."
                   required
                 />
                 <button
@@ -309,8 +230,8 @@ function Blog() {
               {/* Blog */}
               <div className="mt-8">
                 <div className="flex mt-8">
-                  <span className="w-14 h-w-14">
-                    <img src={blogPicture} />
+                  <span className="w-[45px] h-[45px]">
+                    <img src={blogPicture} className="object-contain"/>
                   </span>
                   <div className="ml-4">
                     <a className="hover:text-[#C6AD8A] text-base text-[#6a6a6a] duration-300 cursor-pointer">
@@ -323,8 +244,8 @@ function Blog() {
                 </div>
 
                 <div className="flex mt-8">
-                  <span className="w-14 h-w-14">
-                    <img src={BlogPicture2} />
+                  <span className="w-[45px] h-[45px]">
+                    <img src={BlogPicture2} className=" w-[56px] object-contain"/>
                   </span>
                   <div className="ml-4">
                     <a className="hover:text-[#C6AD8A] text-base text-[#6a6a6a] duration-300 cursor-pointer">

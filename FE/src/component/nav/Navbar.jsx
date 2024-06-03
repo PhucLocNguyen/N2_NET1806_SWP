@@ -9,12 +9,12 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 function Navbar() {
   return (
     <>
-      <header>
-        <nav className="flex h-20 border-b-[1px] border-black px-10 pt-3 pb-[5rem] justify-between">
+      <header className="fixed w-full ">
+        <nav className="flex h-20 border-b-[1px] border-black px-12 pt-[30px] pb-[5rem] justify-between">
           {/* Left header */}
           <div className="w-1/4">
             <div>
-              <span className="font-normal text-sm font-serif">
+              <span className="font-normal text-sm">
                 <EditLocationIcon
                   style={{ fontSize: "1.1rem", marginRight: "0.4rem" }}
                 />
@@ -22,7 +22,7 @@ function Navbar() {
               </span>
             </div>
             <div className="mt-4">
-              <span className="font-normal text-sm font-serif">
+              <span className="font-normal text-sm">
                 <LocalPhoneIcon
                   style={{ fontSize: "1.1rem", marginRight: "0.4rem" }}
                 />
@@ -80,7 +80,7 @@ function Navbar() {
             {/* Navbar */}
             <div className="flex justify-between px-36 mt-4">
               <div class="relative group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
+                <a class="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
                   Home
                   <KeyboardArrowUpIcon
                     style={{
@@ -93,7 +93,7 @@ function Navbar() {
                 <div className="absolute top-10 group-hover:block hidden w-[200px] h-[200px] bg-white border-[1px] border-black"></div>
               </div>
               <div class="group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
+                <a class="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
                   Shop
                   <KeyboardArrowUpIcon
                     style={{
@@ -104,7 +104,7 @@ function Navbar() {
                 </a>
               </div>
               <div class="group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
+                <a class="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
                   Blog
                   <KeyboardArrowUpIcon
                     style={{
@@ -115,18 +115,7 @@ function Navbar() {
                 </a>
               </div>
               <div class="group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
-                  Page
-                  <KeyboardArrowUpIcon
-                    style={{
-                      transition: "transform 0.4s ease",
-                    }}
-                    className="group-hover:transform group-hover:rotate-180"
-                  />
-                </a>
-              </div>
-              <div class="group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
+                <a class="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
                   About Us
                   <KeyboardArrowUpIcon
                     style={{
@@ -193,7 +182,7 @@ function Navbar() {
                     <li className="w-36">
                       <a
                         href=""
-                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-black p-2 font-serif"
+                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
                       >
                         Tài khoản của tôi
                       </a>
@@ -201,7 +190,7 @@ function Navbar() {
                     <li className="w-36">
                       <a
                         href=""
-                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-black p-2 font-serif"
+                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
                       >
                         Đơn mua
                       </a>
@@ -209,7 +198,7 @@ function Navbar() {
                     <li className="w-36">
                       <a
                         href=""
-                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-black p-2 font-serif"
+                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
                       >
                         Đăng xuất
                       </a>
@@ -233,7 +222,7 @@ function Navbar() {
             </div>
             {/* Message */}
             <div className="text-right mt-2">
-              <span className="font-normal text-sm font-serif">
+              <span className="font-normal text-sm">
                 {" "}
                 Best special offers every week! 40% Off!{" "}
               </span>

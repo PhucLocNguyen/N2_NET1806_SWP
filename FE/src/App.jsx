@@ -7,7 +7,7 @@ import Navbar from "./component/nav/Navbar.jsx"
 
 function App() {
   return (
-    <Home/>
+    <Navbar/>
   )
 }
 

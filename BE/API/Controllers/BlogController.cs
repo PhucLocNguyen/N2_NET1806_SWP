@@ -1,8 +1,10 @@
 ﻿using API.Model.BlogModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Entity;
+using System.Linq.Expressions;
 
 namespace API.Controllers
 {
@@ -15,6 +17,36 @@ namespace API.Controllers
         public BlogController(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+        [HttpGet]
+        public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel) 
+        {
+            var sortBy = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
+            var sortType = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
+            Expression<Func<Blog, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchBlogModel.Title) || x.Title.Contains(requestSearchBlogModel.Title)) &&
+                (x.ManagerId == requestSearchBlogModel.ManagerId || requestSearchBlogModel.ManagerId == null);
+            Func<IQueryable<Blog>, IOrderedQueryable<Blog>> orderBy = null;
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortType == SortBlogTypeEnum.Ascending.ToString())
+                {
+                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                }
+                else if (sortType == SortBlogTypeEnum.Descending.ToString())
+                {
+                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                }
+            }
+            var reponseBlog = _unitOfWork.BlogRepository.Get(
+                filter,
+                orderBy,
+                includeProperties: "",
+                pageIndex: requestSearchBlogModel.pageIndex,
+                pageSize: requestSearchBlogModel.pageSize
+                );
+            return Ok(reponseBlog);
         }
 
         [HttpGet("{id}")]

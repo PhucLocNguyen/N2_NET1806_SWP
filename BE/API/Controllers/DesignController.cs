@@ -2,8 +2,10 @@
 using API.Model.DesignModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Entity;
+using System.Linq.Expressions;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace API.Controllers
@@ -17,6 +19,44 @@ namespace API.Controllers
         public DesignController(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        [HttpGet]
+        public IActionResult SearchBlog([FromQuery] RequestSearchDesignModel requestSearchDesignModel)
+        {
+            var sortBy = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignBy.ToString() : null;
+            var sortType = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignType.ToString() : null;
+            Expression<Func<Design, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchDesignModel.DesignName) || x.DesignName.Contains(requestSearchDesignModel.DesignName)) &&
+                (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null) &&
+                (x.StoneId == requestSearchDesignModel.StoneId || requestSearchDesignModel.StoneId == null) &&
+                (x.MasterGemstoneId == requestSearchDesignModel.MasterGemstoneId || requestSearchDesignModel.MasterGemstoneId == null) &&
+                (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
+                (x.TypeOfJewelleryId == requestSearchDesignModel.TypeOfJewelleryId || requestSearchDesignModel.TypeOfJewelleryId == null) &&
+                (x.MaterialId == requestSearchDesignModel.MaterialId || requestSearchDesignModel.MaterialId == null) &&
+                x.WeightOfMaterial >= requestSearchDesignModel.FromWeightOfMaterial &&
+                (x.WeightOfMaterial <= requestSearchDesignModel.ToWeightOfMaterial || requestSearchDesignModel.ToWeightOfMaterial == null);
+            Func<IQueryable<Design>, IOrderedQueryable<Design>> orderBy = null;
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortType == SortDesignTypeEnum.Ascending.ToString())
+                {
+                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                }
+                else if (sortType == SortDesignTypeEnum.Descending.ToString())
+                {
+                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                }
+            }
+            var reponseDesign = _unitOfWork.DesignRepository.Get(
+                filter,
+                orderBy,
+                includeProperties: "",
+                pageIndex: requestSearchDesignModel.pageIndex,
+                pageSize: requestSearchDesignModel.pageSize
+                );
+            return Ok(reponseDesign);
         }
 
         [HttpGet("{id}")]

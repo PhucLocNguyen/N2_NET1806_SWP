@@ -18,6 +18,13 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var reponseJewellery = _unitOfWork.TypeOfJewellryRepository.Get();
+            return Ok(reponseJewellery);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetTypeOfJewelleryById(int id)
         {

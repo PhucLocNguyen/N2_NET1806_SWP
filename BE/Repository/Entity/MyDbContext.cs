@@ -42,7 +42,7 @@ public partial class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-0BE7JLH6\\SQLEXPRESS;uid=sa;pwd=12345;database=JewelleryOrder;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=MSI;uid=sa;pwd=12345;database=JewelleryOrder;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -121,6 +121,25 @@ public partial class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Have__WarrantyCa__5441852A");
         });
+        modelBuilder.Entity<UserRequirement>(entity =>
+        {
+            entity.HasKey(e => new { e.UsersId, e.RequirementId }).HasName("PK__UsersReq__EC83D35F40A575F1");
+
+            entity.ToTable("UsersRequirement");
+
+            entity.Property(e => e.UsersId).HasColumnName("UsersID");
+            entity.Property(e => e.RequirementId).HasColumnName("RequirementID");
+
+            entity.HasOne(d => d.Requirement).WithMany(p => p.UsersRequirements)
+                .HasForeignKey(d => d.RequirementId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__UsersRequ__Requi__52593CB8");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UsersRequirements)
+                .HasForeignKey(d => d.UsersId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__UsersRequ__Users__5165187F");
+        });
 
         modelBuilder.Entity<MasterGemstone>(entity =>
         {
@@ -180,14 +199,17 @@ public partial class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
             entity.HasKey(e => e.RequirementId).HasName("PK__Requirem__7DF11E7DA4E2ED57");
 
             entity.Property(e => e.RequirementId).HasColumnName("RequirementID");
+            entity.Property(e => e.CustomerNote).HasMaxLength(200);
+            entity.Property(e => e.Design3D).HasMaxLength(200);
             entity.Property(e => e.DesignId).HasColumnName("DesignID");
             entity.Property(e => e.GoldPriceAtMoment).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.MachiningFee).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Size).HasMaxLength(255);
+            entity.Property(e => e.StaffNote).HasMaxLength(200);
             entity.Property(e => e.Status).HasMaxLength(255);
             entity.Property(e => e.StonePriceAtMoment).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TotalMoney).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e._3ddesign).HasColumnName("3DDesign");
+            /*entity.Property(e => e.Design3D).HasColumnName("Design3D");*/
 
             entity.HasOne(d => d.Design).WithMany(p => p.Requirements)
                 .HasForeignKey(d => d.DesignId)
@@ -237,25 +259,6 @@ public partial class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
                 .HasConstraintName("FK__Users__RoleID__398D8EEE");
-
-            entity.HasMany(d => d.Requirements).WithMany(p => p.Users)
-                .UsingEntity<Dictionary<string, object>>(
-                    "UsersRequirement",
-                    r => r.HasOne<Requirement>().WithMany()
-                        .HasForeignKey("RequirementId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__UsersRequ__Requi__59063A47"),
-                    l => l.HasOne<User>().WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__UsersRequ__Users__5812160E"),
-                    j =>
-                    {
-                        j.HasKey("UsersId", "RequirementId").HasName("PK__UsersReq__6496A1A5D914E9FC");
-                        j.ToTable("UsersRequirement");
-                        j.IndexerProperty<int>("UsersId").HasColumnName("UsersID");
-                        j.IndexerProperty<int>("RequirementId").HasColumnName("RequirementID");
-                    });
         });
 
         modelBuilder.Entity<WarrantyCard>(entity =>

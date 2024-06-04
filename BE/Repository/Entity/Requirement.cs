@@ -15,7 +15,7 @@ public partial class Requirement
 
     public int? DesignId { get; set; }
 
-    public string? _3ddesign { get; set; }
+    public string? Design3D { get; set; }
 
     public decimal? GoldPriceAtMoment { get; set; }
 
@@ -25,9 +25,9 @@ public partial class Requirement
 
     public decimal? TotalMoney { get; set; }
 
-    public string? CustomerNotes { get; set; }
+    public string? CustomerNote { get; set; }
 
-    public string? SaleStaffNote { get; set; }
+    public string? StaffNote { get; set; }
 
     public virtual Design? Design { get; set; }
 
@@ -35,5 +35,5 @@ public partial class Requirement
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+    public virtual ICollection<UserRequirement> UsersRequirements { get; set; } = new List<UserRequirement>();
 }

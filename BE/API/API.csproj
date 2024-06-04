@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\HaveModel\" />
-    <Folder Include="Model\RequirementModel\" />
     <Folder Include="Model\RoleModel\" />
     <Folder Include="Model\UserModel\" />
   </ItemGroup>

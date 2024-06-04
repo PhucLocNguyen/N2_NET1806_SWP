@@ -1,9 +1,13 @@
 ﻿using API.Model.BlogModel;
+using API.Model.DesignModel;
+using API.Model.MasterGemstoneModel;
 using API.Model.MaterialModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Entity;
+using System.Linq.Expressions;
 
 namespace API.Controllers
 {
@@ -16,6 +20,40 @@ namespace API.Controllers
         public MaterialController(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+
+        [HttpGet]
+        public IActionResult SearchBlog([FromQuery] RequestSearchMaterialModel requestSearchMaterialModel)
+        {
+            var sortBy = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialBy.ToString() : null;
+            var sortType = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialType.ToString() : null;
+            Expression<Func<Material, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchMaterialModel.Name) || x.Name.Contains(requestSearchMaterialModel.Name)) &&
+                (x.ManagerId == requestSearchMaterialModel.ManagerId || requestSearchMaterialModel.ManagerId ==null)&&
+                x.Price >= requestSearchMaterialModel.FromPrice &&
+                (x.Price <= requestSearchMaterialModel.ToPrice || requestSearchMaterialModel.ToPrice == null);
+            Func<IQueryable<Material>, IOrderedQueryable<Material>> orderBy = null;
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortType == SortMaterialTypeEnum.Ascending.ToString())
+                {
+                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                }
+                else if (sortType == SortMaterialTypeEnum.Descending.ToString())
+                {
+                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                }
+            }
+            var reponseDesign = _unitOfWork.MaterialRepository.Get(
+                filter,
+                orderBy,
+                includeProperties: "",
+                pageIndex: requestSearchMaterialModel.pageIndex,
+                pageSize: requestSearchMaterialModel.pageSize
+                );
+            return Ok(reponseDesign);
         }
 
         [HttpGet("{id}")]

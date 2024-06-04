@@ -16,6 +16,11 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_unitOfWork.WarrantyCardRepository.Get());
+        }
+        [HttpGet]
         [Route("{id}")]
         public IActionResult GetWarrantyCardById(int id)
         {

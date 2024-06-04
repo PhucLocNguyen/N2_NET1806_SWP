@@ -25,7 +25,7 @@ public partial class User
 
     public virtual Role? Role { get; set; }
 
-    public virtual ICollection<Requirement> Requirements { get; set; } = new List<Requirement>();
+    public virtual ICollection<UserRequirement> UsersRequirements { get; set; } = new List<UserRequirement>();
 
     public object Select(Func<object, object> value)
     {

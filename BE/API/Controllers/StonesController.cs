@@ -1,9 +1,13 @@
-﻿using API.Model.StonesModel;
+﻿using API.Model.DesignModel;
+using API.Model.StonesModel;
+using API.Model.StonesModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Entity;
 using System.Drawing;
+using System.Linq.Expressions;
 
 namespace API.Controllers
 {
@@ -16,6 +20,41 @@ namespace API.Controllers
         public StonesController(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        [HttpGet]
+        public IActionResult SearchBlog([FromQuery] RequestSearchStonesModel requestSearchStonesModel)
+        {
+            var sortBy = requestSearchStonesModel.SortContent != null ? requestSearchStonesModel.SortContent?.sortStonestBy.ToString() : null;
+            var sortType = requestSearchStonesModel.SortContent != null ? requestSearchStonesModel.SortContent?.sortStonestType.ToString() : null;
+            Expression<Func<Stones, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchStonesModel.Kind) || x.Kind.Contains(requestSearchStonesModel.Kind)) &&
+                (string.IsNullOrEmpty(requestSearchStonesModel.Size) || x.Size.Contains(requestSearchStonesModel.Size)) &&
+                x.Quantity >= requestSearchStonesModel.FromQuantity &&
+                (x.Quantity <= requestSearchStonesModel.ToQuantity || requestSearchStonesModel.ToQuantity == null) &&
+                x.Price >= requestSearchStonesModel.FromPrice &&
+                (x.Price <= requestSearchStonesModel.ToPrice || requestSearchStonesModel.ToPrice == null);
+            Func<IQueryable<Stones>, IOrderedQueryable<Stones>> orderBy = null;
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortType == SortStonestTypeEnum.Ascending.ToString())
+                {
+                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                }
+                else if (sortType == SortStonestTypeEnum.Descending.ToString())
+                {
+                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                }
+            }
+            var reponseDesign = _unitOfWork.StoneRepository.Get(
+                filter,
+                orderBy,
+                includeProperties: "",
+                pageIndex: requestSearchStonesModel.pageIndex,
+                pageSize: requestSearchStonesModel.pageSize
+                );
+            return Ok(reponseDesign);
         }
 
         [HttpGet("{id}")]

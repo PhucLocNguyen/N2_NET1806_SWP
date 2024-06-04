@@ -1,5 +1,5 @@
 import react from "react";
-import Logocard from "../../image/footer/Logocard.webp";
+import Logocard from "../../assets/footer/Logocard.webp";
 import { SvgIcon } from "@mui/material";
 import EditLocationIcon from "@mui/icons-material/EditLocation";
 import CallIcon from "@mui/icons-material/Call";

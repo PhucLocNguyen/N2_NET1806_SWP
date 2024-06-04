@@ -1,5 +1,5 @@
 import react from "react";
-import picture from "../../image/blog/PictureBlog1.webp";
+import picture from "../../assets/blog/PictureBlog1.webp";
 import ShareIcon from "@mui/icons-material/Share";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -7,11 +7,11 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Avatar from "../../image/blog/Avatar.png";
+import Avatar from "../../assets/blog/Avatar.png";
 import { color } from "framer-motion";
 import SearchIcon from "@mui/icons-material/Search";
-import blogPicture from "../../image/blog/BlogPictue.webp";
-import BlogPicture2 from "../../image/blog/BlogPicture2.webp";
+import blogPicture from "../../assets/blog/BlogPictue.webp";
+import BlogPicture2 from "../../assets/blog/BlogPicture2.webp";
 
 function Blog() {
   return (

@@ -80,8 +80,10 @@ function Navbar() {
             </div>
             {/* Navbar */}
             <div className="flex justify-between px-36 mt-4">
+
               <div className="relative group">
                 <NavLink to='/' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+
                   Home
                   <KeyboardArrowUpIcon
                     style={{
@@ -93,8 +95,10 @@ function Navbar() {
                 <div className="absolute top-4 left-4 h-6 w-10"></div>
                 <div className="absolute top-10 group-hover:block hidden w-[200px] h-[200px] bg-white border-[1px] border-black"></div>
               </div>
+
               <div className="group">
                 <NavLink to='/design' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+
                   Shop
                   <KeyboardArrowUpIcon
                     style={{
@@ -104,8 +108,10 @@ function Navbar() {
                   />
                 </NavLink>
               </div>
+
               <div className="group">
                 <NavLink to='/blog' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+
                   Blog
                   <KeyboardArrowUpIcon
                     style={{
@@ -115,8 +121,10 @@ function Navbar() {
                   />
                 </NavLink>
               </div>
+
               <div className="group">
                 <NavLink to='/about' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+
                   About Us
                   <KeyboardArrowUpIcon
                     style={{

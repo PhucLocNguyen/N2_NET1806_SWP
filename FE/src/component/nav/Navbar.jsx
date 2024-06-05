@@ -5,16 +5,17 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
     <>
-      <header>
-        <nav className="flex h-20 border-b-[1px] border-black px-10 pt-3 pb-[5rem] justify-between">
+      <header className="fixed w-full ">
+        <nav className="flex h-20 border-b-[1px] border-black px-12 pt-[30px] pb-[5rem] justify-between">
           {/* Left header */}
           <div className="w-1/4">
             <div>
-              <span className="font-normal text-sm font-serif">
+              <span className="font-normal text-sm">
                 <EditLocationIcon
                   style={{ fontSize: "1.1rem", marginRight: "0.4rem" }}
                 />
@@ -22,7 +23,7 @@ function Navbar() {
               </span>
             </div>
             <div className="mt-4">
-              <span className="font-normal text-sm font-serif">
+              <span className="font-normal text-sm">
                 <LocalPhoneIcon
                   style={{ fontSize: "1.1rem", marginRight: "0.4rem" }}
                 />
@@ -47,8 +48,8 @@ function Navbar() {
                     fill="#181818"
                   />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M24.5522 6.98077C24.5522 7.98077 24.7254 8.91026 25.0717 9.76923C25.4181 10.6282 25.9055 11.3718 26.534 12C27.1626 12.6282 27.9002 13.1218 28.7468 13.4808C29.6062 13.8269 30.5362 14 31.5368 14C32.563 14 33.4994 13.8269 34.346 13.4808C35.1926 13.1218 35.9302 12.6282 36.5588 12C37.1873 11.3718 37.6748 10.6282 38.0211 9.76923C38.3674 8.91026 38.5406 7.98077 38.5406 6.98077C38.5406 5.96795 38.3674 5.03846 38.0211 4.19231C37.6748 3.34615 37.1809 2.61538 36.5395 2C35.911 1.37179 35.1734 0.884616 34.3268 0.538462C33.4802 0.179487 32.5502 0 31.5368 0C30.5491 0 29.6255 0.179487 28.766 0.538462C27.9194 0.884616 27.1754 1.37179 26.534 2C25.9055 2.61538 25.4181 3.34615 25.0717 4.19231C24.7254 5.03846 24.5522 5.96795 24.5522 6.98077ZM26.9574 6.98077C26.9574 6.05769 27.1562 5.23718 27.5538 4.51923C27.9515 3.78846 28.4902 3.21795 29.1701 2.80769C29.8628 2.39744 30.6517 2.19231 31.5368 2.19231C32.4475 2.19231 33.2428 2.39744 33.9227 2.80769C34.6154 3.21795 35.1542 3.78846 35.539 4.51923C35.9238 5.23718 36.1162 6.05769 36.1162 6.98077C36.1162 7.90385 35.9174 8.72436 35.5197 9.44231C35.1349 10.1603 34.5962 10.7308 33.9035 11.1538C33.2236 11.5641 32.4347 11.7692 31.5368 11.7692C30.6517 11.7692 29.8628 11.5641 29.1701 11.1538C28.4902 10.7308 27.9515 10.1603 27.5538 9.44231C27.1562 8.72436 26.9574 7.90385 26.9574 6.98077Z"
                     fill="#181818"
                   />
@@ -57,8 +58,8 @@ function Navbar() {
                     fill="#181818"
                   />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M69.7641 0.25V13.7115H74.8294C76.2019 13.7115 77.4077 13.4359 78.4468 12.8846C79.4858 12.3205 80.2939 11.5385 80.8712 10.5385C81.4612 9.52564 81.7563 8.33974 81.7563 6.98077C81.7563 5.62179 81.4612 4.44231 80.8712 3.44231C80.2939 2.42949 79.4858 1.64744 78.4468 1.09615C77.4077 0.532051 76.2019 0.25 74.8294 0.25H69.7641ZM74.7717 11.5769H72.0923V2.38461H74.7717C75.4387 2.38461 76.0544 2.48077 76.6188 2.67308C77.1833 2.86539 77.6707 3.15385 78.0812 3.53846C78.5045 3.92308 78.8316 4.40385 79.0625 4.98077C79.3062 5.55769 79.4281 6.22436 79.4281 6.98077C79.4281 7.73718 79.3062 8.40384 79.0625 8.98077C78.8316 9.55769 78.5045 10.0385 78.0812 10.4231C77.6707 10.7949 77.1833 11.0833 76.6188 11.2885C76.0544 11.4808 75.4387 11.5769 74.7717 11.5769Z"
                     fill="#181818"
                   />
@@ -79,8 +80,10 @@ function Navbar() {
             </div>
             {/* Navbar */}
             <div className="flex justify-between px-36 mt-4">
-              <div class="relative group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
+
+              <div className="relative group">
+                <NavLink to='/' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+
                   Home
                   <KeyboardArrowUpIcon
                     style={{
@@ -88,12 +91,14 @@ function Navbar() {
                     }}
                     className="group-hover:transform group-hover:rotate-180"
                   />
-                </a>
+                </NavLink>
                 <div className="absolute top-4 left-4 h-6 w-10"></div>
                 <div className="absolute top-10 group-hover:block hidden w-[200px] h-[200px] bg-white border-[1px] border-black"></div>
               </div>
-              <div class="group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
+
+              <div className="group">
+                <NavLink to='/design' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+
                   Shop
                   <KeyboardArrowUpIcon
                     style={{
@@ -101,10 +106,12 @@ function Navbar() {
                     }}
                     className="group-hover:transform group-hover:rotate-180"
                   />
-                </a>
+                </NavLink>
               </div>
-              <div class="group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
+
+              <div className="group">
+                <NavLink to='/blog' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+
                   Blog
                   <KeyboardArrowUpIcon
                     style={{
@@ -112,21 +119,12 @@ function Navbar() {
                     }}
                     className="group-hover:transform group-hover:rotate-180"
                   />
-                </a>
+                </NavLink>
               </div>
-              <div class="group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
-                  Page
-                  <KeyboardArrowUpIcon
-                    style={{
-                      transition: "transform 0.4s ease",
-                    }}
-                    className="group-hover:transform group-hover:rotate-180"
-                  />
-                </a>
-              </div>
-              <div class="group">
-                <a class="font-normal text-sm font-serif hover:text-[#C6AD8A] hover:duration-200">
+
+              <div className="group">
+                <NavLink to='/about' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+
                   About Us
                   <KeyboardArrowUpIcon
                     style={{
@@ -134,7 +132,7 @@ function Navbar() {
                     }}
                     className="group-hover:transform group-hover:rotate-180"
                   />
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -143,17 +141,17 @@ function Navbar() {
             {/* Icon navbar */}
             <div className="flex text-right">
               {/* <SearchIcon style={{ marginLeft: "1rem", fontSize: "1.4rem" }} /> */}
-              <form class="flex w-full">
+              <form className="flex w-full">
                 <label
-                  for="default-search"
-                  class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+                  htmlFor="default-search"
+                  className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
                 >
                   Search
                 </label>
-                <div class="relative w-full"> 
-                  <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <div className="relative w-full"> 
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     <svg
-                      class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                      className="w-4 h-4 text-gray-500 dark:text-gray-400"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -161,9 +159,9 @@ function Navbar() {
                     >
                       <path
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                       />
                     </svg>
@@ -193,7 +191,7 @@ function Navbar() {
                     <li className="w-36">
                       <a
                         href=""
-                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-black p-2 font-serif"
+                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
                       >
                         Tài khoản của tôi
                       </a>
@@ -201,7 +199,7 @@ function Navbar() {
                     <li className="w-36">
                       <a
                         href=""
-                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-black p-2 font-serif"
+                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
                       >
                         Đơn mua
                       </a>
@@ -209,7 +207,7 @@ function Navbar() {
                     <li className="w-36">
                       <a
                         href=""
-                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-black p-2 font-serif"
+                        className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
                       >
                         Đăng xuất
                       </a>
@@ -233,7 +231,7 @@ function Navbar() {
             </div>
             {/* Message */}
             <div className="text-right mt-2">
-              <span className="font-normal text-sm font-serif">
+              <span className="font-normal text-sm">
                 {" "}
                 Best special offers every week! 40% Off!{" "}
               </span>

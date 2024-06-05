@@ -1,31 +1,32 @@
 import Button from '@mui/material/Button'
 import { motion } from "framer-motion";
 import { styled } from '@mui/material/styles';
-import anh1 from '../../image/home/handLeftPic1.png'
-import anh2 from '../../image/home/handLeftPic2.png'
-import anh3 from '../../image/home/logoCircle.svg'
-import anh4 from '../../image/home/aboutImage.png'
-import Arrow from '../../image/home/arrow.svg'
-import Signature from '../../image/home/Signature.png'
-import BackGroundImage from '../../image/home/backgroundImage.png'
-import Rings from '../../image/home/Rings.png'
-import Earrings from '../../image/home/Earrings.png'
-import Bracelets from '../../image/home/Bracelets.png'
-import backgroundSection from '../../image/home/backgroundSection.png'
-import ArrowWhite from '../../image/home/arrowWhite.svg'
-import LogoCircleWhite from '../../image/home/logoCircleWhite.svg'
-import Design1 from '../../image/home/design1.png'
-import Design2 from '../../image/home/design2.png'
-import Design3 from '../../image/home/design3.png'
-import Brand1 from '../../image/home/brand1.svg'
-import Brand2 from '../../image/home/brand2.svg'
-import Brand3 from '../../image/home/brand3.svg'
-import Brand4 from '../../image/home/brand4.svg'
-import Brand5 from '../../image/home/brand5.svg'
-import Brand6 from '../../image/home/brand6.svg'
-import Blog1 from '../../image/home/blog1.png'
-import Blog2 from '../../image/home/blog2.png'
-import Blog3 from '../../image/home/blog3.png'
+import { Link } from 'react-router-dom';
+import anh1 from '../../assets/home/handLeftPic1.png'
+import anh2 from '../../assets/home/handLeftPic2.png'
+import anh3 from '../../assets/home/logoCircle.svg'
+import anh4 from '../../assets/home/aboutImage.png'
+import Arrow from '../../assets/home/arrow.svg'
+import Signature from '../../assets/home/Signature.png'
+import BackGroundImage from '../../assets/home/backgroundImage.png'
+import Rings from '../../assets/home/Rings.png'
+import Earrings from '../../assets/home/Earrings.png'
+import Bracelets from '../../assets/home/Bracelets.png'
+import backgroundSection from '../../assets/home/backgroundSection.png'
+import ArrowWhite from '../../assets/home/arrowWhite.svg'
+import LogoCircleWhite from '../../assets/home/logoCircleWhite.svg'
+import Design1 from '../../assets/home/design1.png'
+import Design2 from '../../assets/home/design2.png'
+import Design3 from '../../assets/home/design3.png'
+import Brand1 from '../../assets/home/brand1.svg'
+import Brand2 from '../../assets/home/brand2.svg'
+import Brand3 from '../../assets/home/brand3.svg'
+import Brand4 from '../../assets/home/brand4.svg'
+import Brand5 from '../../assets/home/brand5.svg'
+import Brand6 from '../../assets/home/brand6.svg'
+import Blog1 from '../../assets/home/blog1.png'
+import Blog2 from '../../assets/home/blog2.png'
+import Blog3 from '../../assets/home/blog3.png'
 
 
 
@@ -41,10 +42,10 @@ const CustomButton = styled(Button)({
 function Home() {
       return (
             <>
-                  <div className='px-[1.5rem]'>
+                  <div className='px-[1.5rem] pt-[5rem]'>
                         <div className='max-w-[75rem] ml-auto mr-auto pt-[8.75rem] pb-[4.375rem] flex justify-between'>
                               <motion.div initial={{ opacity: 0, x: -50 }}
-                                    animate={{opacity: [0,0.3,0.5,0.7,1], x:0}}
+                                    animate={{ opacity: [0, 0.3, 0.5, 0.7, 1], x: 0 }}
                                     className='max-w-[39.3rem]'>
                                     <h1 className='text-[#000] my-0 text-[4rem] font-normal leading-[4.5rem]'>
                                           Choose jewelry with heart & feelings
@@ -58,10 +59,11 @@ function Home() {
                                           Embrace the allure of our jewelry and make a statement that echoes sophistication, individuality, and everlasting elegance. Unveil the extraordinary with Diamond&FPT
                                     </p>
                                     <div className='pb-[2.5rem] w-[100%]'></div>
-
-                                    <CustomButton variant='contained' sx={{ color: '#fff', bgcolor: '#000', letterSpacing: 4, padding: '0.7rem 2.375rem', fontSiz: '1rem', fontWeight: 400, lineHeight: '1.5rem', }} href='#' >
-                                          EXPLORE COLLECTIONS
-                                    </CustomButton>
+                                    <Link to='/design'>
+                                          <CustomButton variant='contained' sx={{ color: '#fff', bgcolor: '#000', letterSpacing: 4, padding: '0.7rem 2.375rem', fontSiz: '1rem', fontWeight: 400, lineHeight: '1.5rem', }} >
+                                                EXPLORE COLLECTIONS
+                                          </CustomButton>
+                                    </Link>
                               </motion.div>
                               <div className='flex items-end relative gap-x-[1.875rem]'>
                                     <img className='inline-block max-w-[100%] align-middle' src={anh1} />
@@ -104,39 +106,39 @@ function Home() {
                                     <div className='w-[100%]'>
                                           <div className='w-[100%] grid gap-x-[1.5rem] gap-y-[1.5rem] grid-rows-1 grid-cols-4'>
                                                 <div>
-                                                      <a style={{ filter: 'grayscale(100%)' }} className='flex relative items-center flex-col cursor-none max-w-[100%]'>
+                                                      <Link to='/design/earring' style={{ filter: 'grayscale(100%)' }} className='flex relative items-center flex-col cursor-none max-w-[100%]'>
                                                             <img src={Earrings} className='inline-block max-w-[100%] align-middle' />
                                                             <div style={{ backgroundColor: 'rgb(255,255,255,0.5)' }} className='border-[1px] divide-solid border-[white] py-[0.625rem] px-[1.5rem] absolute bottom-[218px]'>
                                                                   <h6 className='text-[1.25rem] font-normal leading-[1.75rem]'>Earrings</h6>
                                                             </div>
-                                                      </a>
+                                                      </Link>
                                                 </div>
 
                                                 <div>
-                                                      <a style={{ filter: 'grayscale(100%)' }} className='flex relative items-center flex-col cursor-none max-w-[100%]'>
+                                                      <Link to='/design/bracelet' style={{ filter: 'grayscale(100%)' }} className='flex relative items-center flex-col cursor-none max-w-[100%]'>
                                                             <img src={Bracelets} className='inline-block max-w-[100%] align-middle' />
                                                             <div style={{ backgroundColor: 'rgb(255,255,255,0.5)' }} className='border-[1px] divide-solid border-[white] py-[0.625rem] px-[1.5rem] absolute bottom-[218px]'>
                                                                   <h6 className='text-[1.25rem] font-normal leading-[1.75rem]'>Bracelets</h6>
                                                             </div>
-                                                      </a>
+                                                      </Link>
                                                 </div>
 
                                                 <div>
-                                                      <a style={{ filter: 'grayscale(100%)' }} className='flex relative items-center flex-col cursor-none max-w-[100%]'>
+                                                      <Link to='/design/necklace' style={{ filter: 'grayscale(100%)' }} className='flex relative items-center flex-col cursor-none max-w-[100%]'>
                                                             <img src={Rings} className='inline-block max-w-[100%] align-middle' />
                                                             <div style={{ backgroundColor: 'rgb(255,255,255,0.5)' }} className='border-[1px] divide-solid border-[white] py-[0.625rem] px-[1.5rem] absolute bottom-[218px]'>
                                                                   <h6 className='text-[1.25rem] font-normal leading-[1.75rem]'>Necklaces</h6>
                                                             </div>
-                                                      </a>
+                                                      </Link>
                                                 </div>
 
                                                 <div>
-                                                      <a style={{ filter: 'grayscale(100%)' }} className='flex relative items-center flex-col cursor-none max-w-[100%]'>
+                                                      <Link to='/design/ring' style={{ filter: 'grayscale(100%)' }} className='flex relative items-center flex-col cursor-none max-w-[100%]'>
                                                             <img src={Rings} className='inline-block max-w-[100%] align-middle' />
                                                             <div style={{ backgroundColor: 'rgb(255,255,255,0.5)' }} className='border-[1px] divide-solid border-[white] py-[0.625rem] px-[1.5rem] absolute bottom-[218px]'>
                                                                   <h6 className='text-[1.25rem] font-normal leading-[1.75rem]'>Rings</h6>
                                                             </div>
-                                                      </a>
+                                                      </Link>
                                                 </div>
 
                                           </div>

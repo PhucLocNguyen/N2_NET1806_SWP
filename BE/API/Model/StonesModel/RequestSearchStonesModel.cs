@@ -22,17 +22,17 @@
     }
     public class SortContent
     {
-        public SortStonestByEnum sortStonestBy { get; set; }
-        public SortStonestTypeEnum sortStonestType { get; set; }
+        public SortStonesByEnum sortStonetBy { get; set; }
+        public SortStonesTypeEnum sortStonesType { get; set; }
     }
 
-    public enum SortStonestByEnum
+    public enum SortStonesByEnum
     {
         Kind = 1,
         Quantity = 2,
         Price = 3,
     }
-    public enum SortStonestTypeEnum
+    public enum SortStonesTypeEnum
     {
         Ascending = 1,
         Descending = 2,

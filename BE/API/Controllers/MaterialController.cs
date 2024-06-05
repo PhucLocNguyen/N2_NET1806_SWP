@@ -1,12 +1,7 @@
-﻿using API.Model.BlogModel;
-using API.Model.DesignModel;
-using API.Model.MasterGemstoneModel;
-using API.Model.MaterialModel;
-using Microsoft.AspNetCore.Http;
+﻿using API.Model.MaterialModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Repository;
-using Repository.Entity;
+using Repositories;
 using System.Linq.Expressions;
 
 namespace API.Controllers
@@ -49,10 +44,10 @@ namespace API.Controllers
             var reponseDesign = _unitOfWork.MaterialRepository.Get(
                 filter,
                 orderBy,
-                includeProperties: "",
+                /*includeProperties: "",*/
                 pageIndex: requestSearchMaterialModel.pageIndex,
-                pageSize: requestSearchMaterialModel.pageSize
-                );
+                pageSize: requestSearchMaterialModel.pageSize, m=>m.Designs
+                ).Select(m=>m.toMaterialDTO());
             return Ok(reponseDesign);
         }
 
@@ -66,7 +61,7 @@ namespace API.Controllers
                 return NotFound();
             }
             
-            return Ok(Material);
+            return Ok(Material.toMaterialDTO());
         }
 
         [HttpPost]

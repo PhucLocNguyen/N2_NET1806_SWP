@@ -1,9 +1,10 @@
 ﻿using API.Model.BlogModel;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Repository;
-using Repository.Entity;
+using Repositories;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace API.Controllers
@@ -12,6 +13,7 @@ namespace API.Controllers
     [ApiController]
     public class BlogController : ControllerBase
     {
+
         private readonly UnitOfWork _unitOfWork;
 
         public BlogController(UnitOfWork unitOfWork)
@@ -19,6 +21,7 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel) 
         {
             var sortBy = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
@@ -42,9 +45,9 @@ namespace API.Controllers
             var reponseBlog = _unitOfWork.BlogRepository.Get(
                 filter,
                 orderBy,
-                includeProperties: "",
+                /*includeProperties: "",*/
                 pageIndex: requestSearchBlogModel.pageIndex,
-                pageSize: requestSearchBlogModel.pageSize
+                pageSize: requestSearchBlogModel.pageSize, m=>m.Manager
                 );
             return Ok(reponseBlog);
         }
@@ -52,7 +55,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetBlogById(int id)
         {
-            var Blog = _unitOfWork.BlogRepository.GetByID(id);
+            var Blog = _unitOfWork.BlogRepository.GetByID(id, m => m.Manager);
             if (Blog == null)
             {
                 return NotFound();

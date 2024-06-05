@@ -14,9 +14,9 @@
 
         public int? MasterGemstoneId { get; set; }
 
-        public int ManagerId { get; set; }
+        public string? ManagerId { get; set; }
 
-        public int TypeOfJewelleryId { get; set; }
+        public int? TypeOfJewelleryId { get; set; }
 
         public int? MaterialId { get; set; }
 

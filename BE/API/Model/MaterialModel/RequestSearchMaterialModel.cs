@@ -4,7 +4,7 @@
     {
         public string? Name { get; set; } = null!;
 
-        public int? ManagerId { get; set; }
+        public string? ManagerId { get; set; }
 
         public decimal? FromPrice { get; set; } = decimal.Zero;
 

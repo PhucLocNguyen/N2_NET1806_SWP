@@ -1,9 +1,8 @@
-﻿using API.Model.BlogModel;
-using API.Model.TypeOfJewellryModel;
-using Microsoft.AspNetCore.Http;
+﻿using API.Model.TypeOfJewellryModel;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
-using Repository.Entity;
+using Microsoft.EntityFrameworkCore;
+using Repositories;
+using System.Linq.Expressions;
 
 namespace API.Controllers
 {
@@ -19,22 +18,44 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] RequestSearchTypeOfJewelleryModel requestSearchTypeOfJewelleryModel)
         {
-            var reponseJewellery = _unitOfWork.TypeOfJewellryRepository.Get();
+
+            var sortBy = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryBy.ToString() : null;
+            var sortType = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryType.ToString() : null;
+            Expression<Func<TypeOfJewellery, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchTypeOfJewelleryModel.Name) || x.Name.Contains(requestSearchTypeOfJewelleryModel.Name));
+            Func<IQueryable<TypeOfJewellery>, IOrderedQueryable<TypeOfJewellery>> orderBy = null;
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortType == SortTypeOfJewelleryTypeEnum.Ascending.ToString())
+                {
+                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                }
+                else if (sortType == SortTypeOfJewelleryTypeEnum.Descending.ToString())
+                {
+                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                }
+            }
+            var reponseJewellery = _unitOfWork.TypeOfJewellryRepository.Get(filter,
+                orderBy,
+                pageIndex: requestSearchTypeOfJewelleryModel.pageIndex,
+                pageSize: requestSearchTypeOfJewelleryModel.pageSize,
+                includes: m =>m.Designs).Select(x=>x.toTypeOfJewelleryDTO());
             return Ok(reponseJewellery);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetTypeOfJewelleryById(int id)
         {
-            var Blog = _unitOfWork.TypeOfJewellryRepository.GetByID(id,p=>p.Designs);
-            if (Blog == null)
+            var TypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.GetByID(id,p=>p.Designs);
+            if (TypeOfJewellery == null)
             {
                 return NotFound();
             }
 
-            return Ok(Blog);
+            return Ok(TypeOfJewellery.toTypeOfJewelleryDTO());
         }
 
         [HttpPost]

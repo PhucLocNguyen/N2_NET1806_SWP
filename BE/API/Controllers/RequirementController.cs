@@ -1,12 +1,8 @@
 ﻿using API.Model.DesignModel;
 using API.Model.RequirementModel;
-using API.Model.RequirementModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Repository;
-using Repository.Entity;
-using System.Drawing;
+using Repositories;
 using System.Linq.Expressions;
 
 namespace API.Controllers

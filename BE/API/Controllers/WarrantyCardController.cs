@@ -1,6 +1,6 @@
 ﻿using API.Model.WarrantyCardModel;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
+using Repositories;
 
 namespace API.Controllers
 {

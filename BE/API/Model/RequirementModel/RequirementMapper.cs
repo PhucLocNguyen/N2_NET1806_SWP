@@ -1,11 +1,10 @@
-﻿using Repository.Entity;
-using System.Runtime.CompilerServices;
+﻿using Repositories;
 
 namespace API.Model.RequirementModel
 {
-     public static class RequirementMapper
+    public static class RequirementMapper
     {
-         public static Requirement toRequirementEntity(this RequestCreateRequirementModel requestCreateRequirementModel)
+        public static Requirement toRequirementEntity(this RequestCreateRequirementModel requestCreateRequirementModel)
         {
             return new Requirement()
             {
@@ -30,6 +29,33 @@ namespace API.Model.RequirementModel
                 CustomerNote = requestCreateRequirementModel.CustomerNote,
 
                 StaffNote = requestCreateRequirementModel.StaffNote,
+            };
+        }
+        public static RequirementDTO toRequirementDTO(this Requirement requirement)
+        {
+            return new RequirementDTO()
+            {
+                Status = requirement.Status,
+
+                ExpectedDelivery = requirement.ExpectedDelivery,
+
+                Size = requirement.Size,
+
+                DesignId = requirement.DesignId,
+
+                Design3D = requirement.Design3D,
+
+                GoldPriceAtMoment = requirement.GoldPriceAtMoment,
+
+                StonePriceAtMoment = requirement.StonePriceAtMoment,
+
+                MachiningFee = requirement.MachiningFee,
+
+                TotalMoney = requirement.TotalMoney,
+
+                CustomerNote = requirement.CustomerNote,
+
+                StaffNote = requirement.StaffNote,
             };
         }
     }

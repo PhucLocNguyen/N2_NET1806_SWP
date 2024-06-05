@@ -1,6 +1,4 @@
-﻿using Repository.Entity;
-
-namespace API.Model.MaterialModel
+﻿namespace API.Model.MaterialModel
 {
     public class RequestCreateMaterialModel
     {
@@ -8,6 +6,6 @@ namespace API.Model.MaterialModel
 
         public decimal Price { get; set; }
 
-        public int ManagerId { get; set; }
+        public string ManagerId { get; set; }
     }
 }

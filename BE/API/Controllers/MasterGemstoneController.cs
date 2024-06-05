@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Repository;
-using Repository.Entity;
 using API.Model.MasterGemstoneModel;
-using Microsoft.AspNetCore.Http.HttpResults;
-using API.Model.DesignModel;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using Repositories;
 
 namespace API.Controllers
 {
@@ -52,10 +48,10 @@ namespace API.Controllers
             var reponseDesign = _unitOfWork.MasterGemstoneRepository.Get(
                 filter,
                 orderBy,
-                includeProperties: "",
                 pageIndex: requestSearchMasterGemstoneModel.pageIndex,
-                pageSize: requestSearchMasterGemstoneModel.pageSize
-                );
+                pageSize: requestSearchMasterGemstoneModel.pageSize,
+                x=>x.Designs
+                ).Select(x=>x.toMasterGemstonesDTO());
             return Ok(reponseDesign);
         }
 
@@ -67,7 +63,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return Ok(MasterGemstone);
+            return Ok(MasterGemstone.toMasterGemstonesDTO());
         }
 
         [HttpPost]

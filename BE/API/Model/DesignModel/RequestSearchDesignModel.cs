@@ -9,17 +9,18 @@
         public string? DesignName { get; set; }
 
         public decimal? FromWeightOfMaterial { get; set; } = decimal.Zero;
+
         public decimal? ToWeightOfMaterial { get; set; }
 
-        public int? StoneId { get; set; }
+        public string? Stone { get; set; }
 
-        public int? MasterGemstoneId { get; set; }
+        public string? MasterGemstone { get; set; }
 
-        public int? ManagerId { get; set; }
+        public string? ManagerId { get; set; }
 
-        public int? TypeOfJewelleryId { get; set; }
+        public string? TypeOfJewellery { get; set; }
 
-        public int? MaterialId { get; set; }
+        public string? Material { get; set; }
 
         public SortContent? SortContent { get; set; }
 

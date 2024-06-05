@@ -1,10 +1,7 @@
-﻿using API.Model.DesignModel;
-using API.Model.MaterialModel;
-using API.Model.PaymentModel;
+﻿using API.Model.PaymentModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Repository;
-using Repository.Entity;
+using Repositories;
 using System.Linq.Expressions;
 
 namespace API.Controllers
@@ -86,7 +83,7 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            ExistPayment.Amount = requestCreatePaymentModel.Amount;
+            ExistPayment.Amount = (decimal)requestCreatePaymentModel.Amount;
             ExistPayment.Method = requestCreatePaymentModel.Method;
             ExistPayment.CustomerId = requestCreatePaymentModel.CustomerId;
             ExistPayment.RequirementsId = requestCreatePaymentModel.RequirementsId;

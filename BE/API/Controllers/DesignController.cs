@@ -1,12 +1,8 @@
-﻿using API.Model.BlogModel;
-using API.Model.DesignModel;
-using Microsoft.AspNetCore.Http;
+﻿using API.Model.DesignModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Repository;
-using Repository.Entity;
+using Repositories;
 using System.Linq.Expressions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace API.Controllers
 {
@@ -20,7 +16,6 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-
         [HttpGet]
         public IActionResult SearchBlog([FromQuery] RequestSearchDesignModel requestSearchDesignModel)
         {
@@ -29,11 +24,11 @@ namespace API.Controllers
             Expression<Func<Design, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchDesignModel.DesignName) || x.DesignName.Contains(requestSearchDesignModel.DesignName)) &&
                 (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null) &&
-                (x.StoneId == requestSearchDesignModel.StoneId || requestSearchDesignModel.StoneId == null) &&
-                (x.MasterGemstoneId == requestSearchDesignModel.MasterGemstoneId || requestSearchDesignModel.MasterGemstoneId == null) &&
+                (string.IsNullOrEmpty(requestSearchDesignModel.Stone) || x.Stone.Kind.Contains(requestSearchDesignModel.Stone)) &&
+                (string.IsNullOrEmpty(requestSearchDesignModel.MasterGemstone) || x.MasterGemstone.Kind.Contains(requestSearchDesignModel.MasterGemstone)) &&
                 (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
-                (x.TypeOfJewelleryId == requestSearchDesignModel.TypeOfJewelleryId || requestSearchDesignModel.TypeOfJewelleryId == null) &&
-                (x.MaterialId == requestSearchDesignModel.MaterialId || requestSearchDesignModel.MaterialId == null) &&
+                (string.IsNullOrEmpty(requestSearchDesignModel.TypeOfJewellery) || x.TypeOfJewellery.Name.Contains(requestSearchDesignModel.TypeOfJewellery)) &&
+                (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material)) &&
                 x.WeightOfMaterial >= requestSearchDesignModel.FromWeightOfMaterial &&
                 (x.WeightOfMaterial <= requestSearchDesignModel.ToWeightOfMaterial || requestSearchDesignModel.ToWeightOfMaterial == null);
             Func<IQueryable<Design>, IOrderedQueryable<Design>> orderBy = null;
@@ -52,23 +47,25 @@ namespace API.Controllers
             var reponseDesign = _unitOfWork.DesignRepository.Get(
                 filter,
                 orderBy,
-                includeProperties: "",
+                /*includeProperties: "",*/
                 pageIndex: requestSearchDesignModel.pageIndex,
-                pageSize: requestSearchDesignModel.pageSize
-                );
+                pageSize: requestSearchDesignModel.pageSize,
+                m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery
+                ).Select(d => d.toDesignDTO());
+
             return Ok(reponseDesign);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetDesignById(int id)
         {
-            var Design = _unitOfWork.DesignRepository.GetByID(id);
+            var Design = _unitOfWork.DesignRepository.GetByID(id, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery);
             if (Design == null)
             {
                 return NotFound();
             }
 
-            return Ok(Design);
+            return Ok(Design.toDesignDTO());
         }
 
         [HttpPost]

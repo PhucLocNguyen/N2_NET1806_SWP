@@ -9,10 +9,30 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import XIcon from "@mui/icons-material/X";
 import { color } from "framer-motion";
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import ForumIcon from '@mui/icons-material/Forum';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 function Footer() {
   return (
     <>
+      {/* Label */}
+      <div className="flex justify-around items-center bg-[#fdf9f2] h-[100px] w-full">
+        <div className="w-fit">
+          <LocalShippingIcon style={{}}/> <span className="font-light text-xl">Free Delivery</span>
+        </div>
+        <div className="w-fit">
+          <MonetizationOnIcon/> <span className="font-light text-xl">Money Back Guarantee</span>
+        </div>
+        <div className="w-fit">
+          <ForumIcon/> <span className="font-light text-xl">24/7 Support</span>
+        </div>
+        <div className="w-fit">
+          <WorkspacePremiumIcon/> <span className="font-light text-xl">High Quality</span>
+        </div>
+      </div>
+
       <footer className="h-[400px] w-full bg-black">
         {/* container */}
         <div className="flex justify-around pt-12 pb-9">

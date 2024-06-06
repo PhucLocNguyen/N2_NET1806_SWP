@@ -69,8 +69,9 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDesign(RequestCreateDesignModel requestCreateDesignModel)
+        public IActionResult CreateDesign([FromRoute] int parentId,RequestCreateDesignModel requestCreateDesignModel)
         {
+            /*var parentDesign = _unitOfWork.DesignRepository.GetByID()*/
             var Design = requestCreateDesignModel.toDesignEntity();
             _unitOfWork.DesignRepository.Insert(Design);
             _unitOfWork.Save();

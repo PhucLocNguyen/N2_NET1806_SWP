@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|c:\\users\\admin\\desktop\\n2_net1806_swp\\be\\api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|c:\\users\\admin\\desktop\\n2_net1806_swp\\be\\api\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,6 +23,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "DesignController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\DesignController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeToolTip": "API\\Controllers\\DesignController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwEkAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T00:58:49.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "BlogController.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\API\\Controllers\\BlogController.cs",
               "RelativeDocumentMoniker": "API\\Controllers\\BlogController.cs",
@@ -26,8 +43,7 @@
               "RelativeToolTip": "API\\Controllers\\BlogController.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T11:19:07.45Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T11:19:07.45Z"
             }
           ]
         }

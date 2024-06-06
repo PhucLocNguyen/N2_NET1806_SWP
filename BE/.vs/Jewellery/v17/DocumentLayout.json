@@ -1,0 +1,183 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E3082F-0A5F-4AD3-9A73-4F93E0A72909}|Repositories\\Repositories.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2E3082F-0A5F-4AD3-9A73-4F93E0A72909}|Repositories\\Repositories.csproj|solutionrelative:repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\model\\designmodel\\designmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\model\\designmodel\\designmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\mastergemstonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\controllers\\mastergemstonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E3082F-0A5F-4AD3-9A73-4F93E0A72909}|Repositories\\Repositories.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\repositories\\entity\\requirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2E3082F-0A5F-4AD3-9A73-4F93E0A72909}|Repositories\\Repositories.csproj|solutionrelative:repositories\\entity\\requirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\requirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\controllers\\requirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{C2C54E6D-1316-4F31-8369-34551C49AA66}|API\\API.csproj|solutionrelative:api\\api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Repositories\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Repositories\\UnitOfWork.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Repositories\\UnitOfWork.cs",
+              "RelativeToolTip": "Repositories\\UnitOfWork.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T04:01:21.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DesignMapper.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Model\\DesignModel\\DesignMapper.cs",
+              "RelativeDocumentMoniker": "API\\Model\\DesignModel\\DesignMapper.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Model\\DesignModel\\DesignMapper.cs",
+              "RelativeToolTip": "API\\Model\\DesignModel\\DesignMapper.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACcAAABnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T03:53:56.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DesignController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\DesignController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeToolTip": "API\\Controllers\\DesignController.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAowC8AAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T14:15:24.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Requirement.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Repositories\\Entity\\Requirement.cs",
+              "RelativeDocumentMoniker": "Repositories\\Entity\\Requirement.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Repositories\\Entity\\Requirement.cs",
+              "RelativeToolTip": "Repositories\\Entity\\Requirement.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T13:45:08.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RequirementController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\RequirementController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\RequirementController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\RequirementController.cs",
+              "RelativeToolTip": "API\\Controllers\\RequirementController.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T13:44:48.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "API",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\API.csproj",
+              "RelativeDocumentMoniker": "API\\API.csproj",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\API.csproj",
+              "RelativeToolTip": "API\\API.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-06-05T13:25:24.886Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Program.cs",
+              "RelativeDocumentMoniker": "API\\Program.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Program.cs",
+              "RelativeToolTip": "API\\Program.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAgwDMAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T13:17:32.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MasterGemstoneController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\MasterGemstoneController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\MasterGemstoneController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\MasterGemstoneController.cs",
+              "RelativeToolTip": "API\\Controllers\\MasterGemstoneController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T13:52:44.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\appsettings.json",
+              "RelativeDocumentMoniker": "API\\appsettings.json",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\appsettings.json",
+              "RelativeToolTip": "API\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-05T13:14:36.131Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BlogController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\BlogController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\BlogController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\BlogController.cs",
+              "RelativeToolTip": "API\\Controllers\\BlogController.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAQwBcAAABTAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T11:19:07.45Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

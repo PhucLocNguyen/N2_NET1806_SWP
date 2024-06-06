@@ -1,4 +1,4 @@
-﻿using Repository.Entity;
+﻿using Repositories;
 
 namespace API.Model.PaymentModel
 {
@@ -8,7 +8,7 @@ namespace API.Model.PaymentModel
         {
             return new Payment
             {
-                Amount = requestCreatePaymentModel.Amount,
+                Amount = (decimal)requestCreatePaymentModel.Amount,
                 Method = requestCreatePaymentModel.Method,
                 CustomerId = requestCreatePaymentModel.CustomerId,
                 RequirementsId = requestCreatePaymentModel.RequirementsId,

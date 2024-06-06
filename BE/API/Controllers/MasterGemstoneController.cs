@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Repository;
-using Repository.Entity;
 using API.Model.MasterGemstoneModel;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using Repositories;
 
 namespace API.Controllers
 {
@@ -18,6 +17,44 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet]
+        public IActionResult SearchBlog([FromQuery] RequestSearchMasterGemstoneModel requestSearchMasterGemstoneModel)
+        {
+            var sortBy = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneBy.ToString() : null;
+            var sortType = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneType.ToString() : null;
+            Expression<Func<MasterGemstone, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Kind) || x.Kind.Contains(requestSearchMasterGemstoneModel.Kind)) &&
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Size) || x.Size.Contains(requestSearchMasterGemstoneModel.Size)) &&
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Clarity) || x.Clarity.Contains(requestSearchMasterGemstoneModel.Clarity)) &&
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Cut) || x.Cut.Contains(requestSearchMasterGemstoneModel.Cut)) &&
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Shape) || x.Shape.Contains(requestSearchMasterGemstoneModel.Shape)) &&
+                x.Price >= requestSearchMasterGemstoneModel.FromPrice &&
+                (x.Price <= requestSearchMasterGemstoneModel.ToPrice|| requestSearchMasterGemstoneModel.ToPrice == null)&&
+                x.Weight >= requestSearchMasterGemstoneModel.FromWeight &&
+                (x.Weight <= requestSearchMasterGemstoneModel.ToWeight || requestSearchMasterGemstoneModel.ToWeight == null);
+            Func<IQueryable<MasterGemstone>, IOrderedQueryable<MasterGemstone>> orderBy = null;
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortType == SortMasterGemstoneTypeEnum.Ascending.ToString())
+                {
+                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                }
+                else if (sortType == SortMasterGemstoneTypeEnum.Descending.ToString())
+                {
+                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                }
+            }
+            var reponseDesign = _unitOfWork.MasterGemstoneRepository.Get(
+                filter,
+                orderBy,
+                pageIndex: requestSearchMasterGemstoneModel.pageIndex,
+                pageSize: requestSearchMasterGemstoneModel.pageSize,
+                x=>x.Designs
+                ).Select(x=>x.toMasterGemstonesDTO());
+            return Ok(reponseDesign);
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetMasterGemstoneById(int id)
         {
@@ -26,7 +63,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            return Ok(MasterGemstone);
+            return Ok(MasterGemstone.toMasterGemstonesDTO());
         }
 
         [HttpPost]

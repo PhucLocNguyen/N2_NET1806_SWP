@@ -22,6 +22,7 @@ namespace API.Controllers
         {
             var sortBy = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneBy.ToString() : null;
             var sortType = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneType.ToString() : null;
+            var groupBy = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.groupBy.ToString() : null ;
             Expression<Func<MasterGemstone, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Kind) || x.Kind.Contains(requestSearchMasterGemstoneModel.Kind)) &&
                 (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Size) || x.Size.Contains(requestSearchMasterGemstoneModel.Size)) &&
@@ -32,7 +33,13 @@ namespace API.Controllers
                 (x.Price <= requestSearchMasterGemstoneModel.ToPrice|| requestSearchMasterGemstoneModel.ToPrice == null)&&
                 x.Weight >= requestSearchMasterGemstoneModel.FromWeight &&
                 (x.Weight <= requestSearchMasterGemstoneModel.ToWeight || requestSearchMasterGemstoneModel.ToWeight == null);
+
             Func<IQueryable<MasterGemstone>, IOrderedQueryable<MasterGemstone>> orderBy = null;
+
+            if (!string.IsNullOrEmpty(groupBy))
+            {
+                orderBy = query => (IOrderedQueryable<MasterGemstone>)query.GroupBy(p => EF.Property<object>(p, sortBy));
+            }
 
             if (!string.IsNullOrEmpty(sortBy))
             {
@@ -45,14 +52,17 @@ namespace API.Controllers
                     orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
                 }
             }
-            var reponseDesign = _unitOfWork.MasterGemstoneRepository.Get(
+
+
+
+            var reponseGemStone = _unitOfWork.MasterGemstoneRepository.Get(
                 filter,
                 orderBy,
                 pageIndex: requestSearchMasterGemstoneModel.pageIndex,
                 pageSize: requestSearchMasterGemstoneModel.pageSize,
-                x=>x.Designs
-                ).Select(x=>x.toMasterGemstonesDTO());
-            return Ok(reponseDesign);
+                x => x.Designs
+                ).Select(x => x.toMasterGemstonesDTO());
+            return Ok(reponseGemStone);
         }
 
         [HttpGet("{id}")]

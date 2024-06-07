@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "We23QRt+X+3n/1iZiraVA3EJS3r8AKi62SO/jGv1myVR6bI5v0aKpfi2BxTUOrNejuvVdM7sB6tPo2zkFIpeUA==",
+  "dgSpecHash": "Lx/QbzIl7OmYKu98QSl34Ky7jJ7qK2AcLBg5O0a6ue3QOS297ACk4U5SGI/YpCInAS+P6pRba7Xm3D3QVQ492w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\source\\repos\\Jewellery\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

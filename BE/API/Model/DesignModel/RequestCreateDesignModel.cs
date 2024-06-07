@@ -8,6 +8,8 @@
 
         public string? DesignName { get; set; }
 
+        public string? Description { get; set; }
+
         public decimal? WeightOfMaterial { get; set; }
 
         public int? StoneId { get; set; }

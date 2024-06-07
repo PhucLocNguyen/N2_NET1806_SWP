@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Repositories
-build_property.ProjectDir = C:\Users\Admin\Desktop\N2_NET1806_SWP\BE\Repositories\
+build_property.ProjectDir = C:\Users\Admin\source\repos\Jewellery\Repositories\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

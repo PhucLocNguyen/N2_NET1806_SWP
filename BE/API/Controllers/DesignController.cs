@@ -69,13 +69,39 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDesign([FromRoute] int parentId,RequestCreateDesignModel requestCreateDesignModel)
+        public IActionResult CreateDesign(RequestCreateDesignModel requestCreateDesignModel, int parentId)
         {
-            /*var parentDesign = _unitOfWork.DesignRepository.GetByID()*/
-            var Design = requestCreateDesignModel.toDesignEntity();
-            _unitOfWork.DesignRepository.Insert(Design);
-            _unitOfWork.Save();
-            return Ok();
+            var parentDesign = _unitOfWork.DesignRepository.GetByID(parentId);
+            int childDesignId = 0;
+            var listDesign = _unitOfWork.DesignRepository.Get();
+            foreach (var item in listDesign)
+            {
+                if(item.StoneId == requestCreateDesignModel.StoneId && item.MasterGemstoneId == requestCreateDesignModel.MasterGemstoneId 
+                    && item.MaterialId == requestCreateDesignModel.MaterialId) 
+                {
+                    childDesignId = item.DesignId;
+                    break;
+                }
+            }
+            if(childDesignId==0)
+            {
+                var Design = requestCreateDesignModel.toDesignEntity(parentId);
+                Design.DesignName = parentDesign.DesignName;
+                Design.Image =  parentDesign.Image;
+                Design.TypeOfJewelleryId = parentDesign.TypeOfJewelleryId;
+                Design.Description = parentDesign.Description;
+                Design.WeightOfMaterial = parentDesign.WeightOfMaterial;
+                _unitOfWork.DesignRepository.Insert(Design);
+                _unitOfWork.Save();
+                return Ok(Design);
+            }
+            else
+            {
+                var Design = _unitOfWork.DesignRepository.GetByID(childDesignId);
+                return Ok(Design);
+            }
+            
+            
         }
 
         [HttpPut]

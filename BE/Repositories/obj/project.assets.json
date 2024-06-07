@@ -4236,11 +4236,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\Repositories\\Repositories.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Jewellery\\Repositories\\Repositories.csproj",
       "projectName": "Repositories",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\Repositories\\Repositories.csproj",
+      "projectPath": "C:\\Users\\Admin\\source\\repos\\Jewellery\\Repositories\\Repositories.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\Repositories\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\source\\repos\\Jewellery\\Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

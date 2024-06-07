@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Repositories.Entity;
 
 namespace Repositories;
 
@@ -36,10 +37,7 @@ public partial class MyDbContext : IdentityDbContext<AppUser>
     public virtual DbSet<UsersRequirement> UsersRequirements { get; set; }
 
     public virtual DbSet<WarrantyCard> WarrantyCards { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=MSI;uid=sa;pwd=12345;database=Jewellery;TrustServerCertificate=True");
+    public virtual DbSet<DesignRule> DesignRules { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -242,6 +240,7 @@ public partial class MyDbContext : IdentityDbContext<AppUser>
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.Title).HasMaxLength(100);
         });
+
 
         OnModelCreatingPartial(modelBuilder);
         base.OnModelCreating(modelBuilder);

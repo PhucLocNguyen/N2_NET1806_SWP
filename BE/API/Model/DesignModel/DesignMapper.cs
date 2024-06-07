@@ -8,18 +8,14 @@ namespace API.Model.DesignModel
 {
     public static class DesignMapper
     {
-        public static Design toDesignEntity(this RequestCreateDesignModel requestCreateDesignModel)
+        public static Design toDesignEntity(this RequestCreateDesignModel requestCreateDesignModel, int parentId)
         {
             return new Design()
             {
-                ParentId = requestCreateDesignModel.ParentId,
-                Image = requestCreateDesignModel.Image,
-                DesignName = requestCreateDesignModel.DesignName,
-                WeightOfMaterial = requestCreateDesignModel.WeightOfMaterial,
+                ParentId = parentId,
                 StoneId = requestCreateDesignModel.StoneId,
                 MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId,
                 ManagerId = requestCreateDesignModel.ManagerId,
-                TypeOfJewelleryId = requestCreateDesignModel.TypeOfJewelleryId,
                 MaterialId = requestCreateDesignModel.MaterialId,
             };
         }
@@ -33,11 +29,11 @@ namespace API.Model.DesignModel
                 Image = design.Image,
                 DesignName = design.DesignName,
                 WeightOfMaterial = design.WeightOfMaterial,
-                Stone = StonesMapper.toCreateStones(design.Stone),
-                MasterGemstone = MasterGemstoneMapper.toCreateMasterGemstones(design.MasterGemstone),
+                Stone = design.Stone!=null? StonesMapper.toCreateStones(design.Stone):null,
+                MasterGemstone = design.MasterGemstone!=null? MasterGemstoneMapper.toCreateMasterGemstones(design.MasterGemstone):null,
                 Manager = design.Manager,
                 TypeOfJewellery = new RequestCreateTypeOfJewelleryModel() { Name = design.TypeOfJewellery.Name},
-                Material = MaterialMapper.toCreateMaterial(design.Material),
+                Material = design.Material!=null? MaterialMapper.toCreateMaterial(design.Material):null,
             };
         }
 

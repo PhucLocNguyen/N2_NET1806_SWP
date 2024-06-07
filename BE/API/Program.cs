@@ -51,7 +51,7 @@ namespace API
             });
             builder.Services.AddDbContext<MyDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
             {

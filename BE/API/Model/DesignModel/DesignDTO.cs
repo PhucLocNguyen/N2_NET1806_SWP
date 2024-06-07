@@ -14,6 +14,8 @@ namespace API.Model.DesignModel
 
         public string? Image { get; set; }
 
+        public string? Description { get; set; }
+
         public string? DesignName { get; set; }
 
         public decimal? WeightOfMaterial { get; set; }

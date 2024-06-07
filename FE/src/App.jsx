@@ -1,6 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import './App.css'
+import Blog from "./component/blog/Blog.jsx"
+import Footer from "./component/footer/Footer.jsx"
+import Navbar from "./component/nav/Navbar.jsx"
+import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
+
 
 import DesignInfo from './component/order/DesignInfo.jsx'
 import { publicRoutes } from './routes/Route.jsx'

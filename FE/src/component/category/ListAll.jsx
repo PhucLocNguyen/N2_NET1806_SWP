@@ -42,7 +42,6 @@ function ListAll() {
                )
 
             })}
-
             </div>
          </div>
       </div>

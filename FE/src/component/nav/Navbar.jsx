@@ -81,9 +81,9 @@ function Navbar() {
             {/* Navbar */}
             <div className="flex justify-between px-36 mt-4">
 
+
               <div className="relative group">
                 <NavLink to='/' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
-
                   Home
                   <KeyboardArrowUpIcon
                     style={{
@@ -98,7 +98,6 @@ function Navbar() {
 
               <div className="group">
                 <NavLink to='/design' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
-
                   Shop
                   <KeyboardArrowUpIcon
                     style={{
@@ -111,7 +110,6 @@ function Navbar() {
 
               <div className="group">
                 <NavLink to='/blog' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
-
                   Blog
                   <KeyboardArrowUpIcon
                     style={{
@@ -124,7 +122,6 @@ function Navbar() {
 
               <div className="group">
                 <NavLink to='/about' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
-
                   About Us
                   <KeyboardArrowUpIcon
                     style={{

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import Arrow from '../../assets/categoryItem/arrow.svg'
-
 function CategoryItem({design = {}}) {
+
    return (
       <>
          <div className="text-[1rem] leading-[1.3em] font-normal">

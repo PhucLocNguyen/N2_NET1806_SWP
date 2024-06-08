@@ -1,7 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
-using Repository;
-using Repository.Entity;
+using Repositories;
 
 namespace API
 {

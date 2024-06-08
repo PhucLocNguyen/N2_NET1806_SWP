@@ -1,4 +1,4 @@
-﻿using Repository.Entity;
+﻿using Repositories;
 
 namespace API.Model.WarrantyCardModel
 {

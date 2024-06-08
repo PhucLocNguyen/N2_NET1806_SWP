@@ -1,5 +1,4 @@
-﻿using Repository.Entity;
-using System.Runtime.CompilerServices;
+﻿using Repositories;
 
 namespace API.Model.BlogModel
 {

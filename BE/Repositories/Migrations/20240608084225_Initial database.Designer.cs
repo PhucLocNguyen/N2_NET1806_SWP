@@ -12,8 +12,8 @@ using Repositories;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240605110044_database")]
-    partial class database
+    [Migration("20240608084225_Initial database")]
+    partial class Initialdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,19 +54,19 @@ namespace Repositories.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "29695b17-935d-45ab-98c5-7789a8eb51f8",
+                            Id = "8800eace-b248-40f5-8ffd-0b72ba8f0e1e",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "0ab01edf-7004-4171-aba3-c7f938a4d4e0",
+                            Id = "09d7ec5f-f422-4e9d-9f66-dc0c1dbda639",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "fc4c5e26-4b86-4c24-8e0d-dc16240c9904",
+                            Id = "8cfb7db2-fcaf-49b0-8854-48b9c39e68b7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

@@ -33,11 +33,11 @@ namespace API.Model.DesignModel
                 Image = design.Image,
                 DesignName = design.DesignName,
                 WeightOfMaterial = design.WeightOfMaterial,
-                Stone = design.Stone!=null? StonesMapper.toCreateStones(design.Stone):null,
-                MasterGemstone = design.MasterGemstone!=null? MasterGemstoneMapper.toCreateMasterGemstones(design.MasterGemstone):null,
+                Stone = StonesMapper.toCreateStones(design.Stone),
+                MasterGemstone = MasterGemstoneMapper.toCreateMasterGemstones(design.MasterGemstone),
                 Manager = design.Manager,
                 TypeOfJewellery = new RequestCreateTypeOfJewelleryModel() { Name = design.TypeOfJewellery.Name},
-                Material = design.Material!=null? MaterialMapper.toCreateMaterial(design.Material):null,
+                Material = MaterialMapper.toCreateMaterial(design.Material),
             };
         }
 

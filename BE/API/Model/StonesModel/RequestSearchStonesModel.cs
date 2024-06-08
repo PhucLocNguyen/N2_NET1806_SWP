@@ -4,7 +4,7 @@
     {
         public string? Kind { get; set; }
 
-        public string? Size { get; set; }
+        public decimal? Size { get; set; }
 
         public int? FromQuantity { get; set; } = 0;
 

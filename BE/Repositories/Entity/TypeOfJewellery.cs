@@ -1,16 +1,17 @@
-﻿using Repositories.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Repositories;
-
-public partial class TypeOfJewellery
+namespace Repositories
 {
-    public int TypeOfJewelleryId { get; set; }
+    public partial class TypeOfJewellery
+    {
+        public int TypeOfJewelleryId { get; set; }
 
-    public string Name { get; set; } = null!;
+        public string Name { get; set; } = null!;
 
-    public virtual ICollection<Design> Designs { get; set; } = new List<Design>();
+        public virtual ICollection<DesignRule> DesignRules { get; set; } = new List<DesignRule>();
 
-    public virtual DesignRule DesignRule { get; set; }
+        public virtual ICollection<Design> Designs { get; set; } = new List<Design>();
+    }
+
 }

@@ -25,7 +25,7 @@ namespace API.Controllers
             var groupBy = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.groupBy.ToString() : null ;
             Expression<Func<MasterGemstone, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Kind) || x.Kind.Contains(requestSearchMasterGemstoneModel.Kind)) &&
-                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Size) || x.Size.Contains(requestSearchMasterGemstoneModel.Size)) &&
+                (x.Size == requestSearchMasterGemstoneModel.Size || requestSearchMasterGemstoneModel.Size == null) &&
                 (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Clarity) || x.Clarity.Contains(requestSearchMasterGemstoneModel.Clarity)) &&
                 (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Cut) || x.Cut.Contains(requestSearchMasterGemstoneModel.Cut)) &&
                 (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Shape) || x.Shape.Contains(requestSearchMasterGemstoneModel.Shape)) &&

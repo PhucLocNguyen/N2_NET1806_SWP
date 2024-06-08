@@ -119,7 +119,7 @@ namespace API.Controllers
             existedDesign.StoneId = requestCreateDesignModel.StoneId;
             existedDesign.MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId;
             existedDesign.ManagerId = requestCreateDesignModel.ManagerId;
-            existedDesign.TypeOfJewelleryId = requestCreateDesignModel.TypeOfJewelleryId;
+            existedDesign.TypeOfJewelleryId = (int)requestCreateDesignModel.TypeOfJewelleryId;
             existedDesign.MaterialId = requestCreateDesignModel.MaterialId;
             _unitOfWork.DesignRepository.Update(existedDesign);
             _unitOfWork.Save();

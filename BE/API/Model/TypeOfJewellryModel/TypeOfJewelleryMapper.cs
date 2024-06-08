@@ -1,6 +1,7 @@
 ﻿using API.Model.DesignModel;
 using Repositories;
 
+
 namespace API.Model.TypeOfJewellryModel
 {
     public static class TypeOfJewelleryMapper

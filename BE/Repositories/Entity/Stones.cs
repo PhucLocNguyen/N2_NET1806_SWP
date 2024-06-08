@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Repositories;
-
-public partial class Stones
+namespace Repositories
 {
-    public int StoneId { get; set; }
 
-    public string Kind { get; set; } = null!;
+    public partial class Stones
+    {
+        public int StonesId { get; set; }
 
-    public decimal? Size { get; set; }
+        public string Kind { get; set; } = null!;
 
-    public int? Quantity { get; set; }
+        public decimal? Size { get; set; }
 
-    public decimal? Price { get; set; }
+        public int? Quantity { get; set; }
 
-    public virtual ICollection<Design> Designs { get; set; } = new List<Design>();
+        public decimal? Price { get; set; }
+
+        public virtual ICollection<Design> Designs { get; set; } = new List<Design>();
+
+    }
 }
+

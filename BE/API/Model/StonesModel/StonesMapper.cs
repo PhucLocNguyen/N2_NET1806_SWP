@@ -35,7 +35,7 @@ namespace API.Model.StonesModel
                 Kind = stones.Kind,
                 Price = (decimal)stones.Price,
                 Quantity = (int)stones.Quantity,
-                Size = stones.Size,
+                Size = (decimal)stones.Size,
             };
         }
     }

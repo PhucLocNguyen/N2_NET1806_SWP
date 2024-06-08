@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Repositories;
-
-public partial class Have
+﻿namespace Repositories
 {
-    public int WarrantyCardId { get; set; }
 
-    public int RequirementId { get; set; }
+    public partial class Have
+    {
+        public int WarrantyCardId { get; set; }
 
-    public DateTime? DateCreated { get; set; }
+        public int RequirementId { get; set; }
 
-    public DateTime? ExpirationDate { get; set; }
+        public DateOnly? DateCreated { get; set; }
 
-    public virtual Requirement Requirement { get; set; } = null!;
+        public DateOnly? ExpirationDate { get; set; }
 
-    public virtual WarrantyCard WarrantyCard { get; set; } = null!;
+        public virtual Requirement Requirement { get; set; } = null!;
+
+        public virtual WarrantyCard WarrantyCard { get; set; } = null!;
+    }
+
 }

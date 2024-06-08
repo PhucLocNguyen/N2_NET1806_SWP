@@ -1,6 +1,4 @@
-﻿
-using Repositories;
-namespace Repositories
+﻿namespace Repositories
 
 {
     public class UnitOfWork
@@ -8,15 +6,17 @@ namespace Repositories
         private MyDbContext _context;
         private GenericRepository<Blog> _blog;
         private GenericRepository<Design> _design;
+        private GenericRepository<DesignRule> _designRule;
         private GenericRepository<Have> _have;
         private GenericRepository<MasterGemstone> _masterGemstone;
         private GenericRepository<Material> _material;
         private GenericRepository<Payment> _payment;
         private GenericRepository<Requirement> _requirement;
+        private GenericRepository<Role> _role;
         private GenericRepository<Stones> _stone;
         private GenericRepository<TypeOfJewellery> _typeOfJewellry;
-        private GenericRepository<WarrantyCard> _warrantyCard;
         private GenericRepository<AppUser> _user;
+        private GenericRepository<WarrantyCard> _warrantyCard;
 
 
         public UnitOfWork(MyDbContext context)
@@ -45,6 +45,18 @@ namespace Repositories
                     this._design = new GenericRepository<Design>(_context);
                 }
                 return _design;
+            }
+
+        }
+        public GenericRepository<DesignRule> DesignRuleRepository
+        {
+            get
+            {
+                if (_designRule == null)
+                {
+                    this._designRule = new GenericRepository<DesignRule>(_context);
+                }
+                return _designRule;
             }
 
         }
@@ -108,7 +120,18 @@ namespace Repositories
             }
 
         }
-      
+        public GenericRepository<Role> RoleRepository
+        {
+            get
+            {
+                if (_role == null)
+                {
+                    this._role = new GenericRepository<Role>(_context);
+                }
+                return _role;
+            }
+
+        }
         public GenericRepository<Stones> StoneRepository
         {
             get
@@ -133,19 +156,6 @@ namespace Repositories
             }
 
         }
-        public GenericRepository<WarrantyCard> WarrantyCardRepository
-        {
-            get
-            {
-                if (_warrantyCard == null)
-                {
-                    this._warrantyCard = new GenericRepository<WarrantyCard>(_context);
-                }
-                return _warrantyCard;
-            }
-
-        }
-
         public GenericRepository<AppUser> UserRepository
         {
             get
@@ -155,6 +165,18 @@ namespace Repositories
                     this._user = new GenericRepository<AppUser>(_context);
                 }
                 return _user;
+            }
+
+        }
+        public GenericRepository<WarrantyCard> WarrantyCardRepository
+        {
+            get
+            {
+                if (_warrantyCard == null)
+                {
+                    this._warrantyCard = new GenericRepository<WarrantyCard>(_context);
+                }
+                return _warrantyCard;
             }
 
         }

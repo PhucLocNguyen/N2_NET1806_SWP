@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Repositories;
-
-public partial class Payment
+﻿namespace Repositories
 {
-    public int PaymentId { get; set; }
 
-    public decimal Amount { get; set; }
+    public partial class Payment
+    {
+        public int PaymentId { get; set; }
 
-    public string Method { get; set; } = null!;
+        public decimal? Amount { get; set; }
 
-    public DateTime? CompletedAt { get; set; }
+        public string? Method { get; set; }
 
-    public string? CustomerId { get; set; }
+        public DateTime? CompletedAt { get; set; }
 
-    public int? RequirementsId { get; set; }
+        public string? CustomerId { get; set; }
 
-    public virtual AppUser? Customer { get; set; }
+        public int? RequirementsId { get; set; }
 
-    public virtual Requirement? Requirements { get; set; }
+        public virtual AppUser? Customer { get; set; }
+
+        public virtual Requirement? Requirement { get; set; }
+    }
+
 }

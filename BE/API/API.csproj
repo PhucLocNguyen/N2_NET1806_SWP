@@ -24,11 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <Folder Include="Model\RoleModel\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\RoleModel\" />
+    <ProjectReference Include="..\Repositories\Repositories.csproj" />
   </ItemGroup>
 
 </Project>

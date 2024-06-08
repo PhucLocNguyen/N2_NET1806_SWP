@@ -24,7 +24,7 @@ namespace API.Controllers
             var sortType = requestSearchStonesModel.SortContent != null ? requestSearchStonesModel.SortContent?.sortStonesType.ToString() : null;
             Expression<Func<Stones, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchStonesModel.Kind) || x.Kind.Contains(requestSearchStonesModel.Kind)) &&
-                (string.IsNullOrEmpty(requestSearchStonesModel.Size) || x.Size.Contains(requestSearchStonesModel.Size)) &&
+                (x.Size == requestSearchStonesModel.Size || requestSearchStonesModel.Size == null) &&
                 x.Quantity >= requestSearchStonesModel.FromQuantity &&
                 (x.Quantity <= requestSearchStonesModel.ToQuantity || requestSearchStonesModel.ToQuantity == null) &&
                 x.Price >= requestSearchStonesModel.FromPrice &&

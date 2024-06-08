@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories
 {
@@ -17,6 +12,6 @@ namespace Repositories
 
         public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-        public virtual ICollection<UsersRequirement> UsersRequirements { get; set; } = new List<UsersRequirement>();
+        public virtual ICollection<UserRequirement> UsersRequirements { get; set; } = new List<UserRequirement>();
     }
 }

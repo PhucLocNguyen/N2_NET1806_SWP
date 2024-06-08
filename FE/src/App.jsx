@@ -16,6 +16,7 @@ function App() {
     <Suspense>
       <Routes>
         <Route path='/a' element={<DesignInfo></DesignInfo>}></Route>
+        <Route path='/design/1/create-requirement' element={<RequirementOrderSection/>}></Route>
         {publicRoutes.map((route, index) => {
           let Page = route.component
 

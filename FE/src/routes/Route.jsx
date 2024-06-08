@@ -21,7 +21,7 @@ const publicRoutes = [
          { path: 'earring', component: ListAll },
          { path: 'bracelet', component: ListAll },
          { path: 'necklace', component: ListAll },
-         { path: 'ring', component: ListAll }
+         { path: 'ring', component: ListAll },
       ]
    }
 ]

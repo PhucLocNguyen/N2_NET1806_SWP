@@ -9,7 +9,7 @@ export function StepContext({children}) {
         material: null,
         size: 0,
         MasterGemStone: {
-            material: null,
+            kind: null,
             shape: null,
             size: null,
           },

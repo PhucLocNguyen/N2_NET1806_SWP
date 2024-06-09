@@ -5,6 +5,7 @@ import { lazy } from "react"
 const Home = lazy(() => import('../component/home/Home'))
 const Navbar = lazy(() => import('../component/nav/Navbar'))
 const Design = lazy(() => import('../component/category/Category'))
+const BlogList = lazy(() => import('../component/blog_list/blogList'))
 import ListAll from "../component/category/ListAll"
 
 
@@ -23,6 +24,9 @@ const publicRoutes = [
          { path: 'necklace', component: ListAll },
          { path: 'ring', component: ListAll },
       ]
+   },
+   {
+     path: '/blog_list', component: BlogList
    }
 ]
 

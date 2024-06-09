@@ -21,7 +21,7 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel) 
         {
             var sortBy = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
@@ -48,7 +48,7 @@ namespace API.Controllers
                 /*includeProperties: "",*/
                 pageIndex: requestSearchBlogModel.pageIndex,
                 pageSize: requestSearchBlogModel.pageSize, m=>m.Manager
-                );
+                ).Select(x=>x.toBlogDTO());
             return Ok(reponseBlog);
         }
 
@@ -61,7 +61,7 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            return Ok(Blog);
+            return Ok(Blog.toBlogDTO());
         }
 
         [HttpPost]

@@ -74,6 +74,10 @@ namespace API.Controllers
             var parentDesign = _unitOfWork.DesignRepository.GetByID(parentId);
             int childDesignId = 0;
             var listDesign = _unitOfWork.DesignRepository.Get();
+            if(parentDesign == null)
+            {
+                return NotFound("ParentId does not exist");
+            }
             foreach (var item in listDesign)
             {
                 if(item.StoneId == requestCreateDesignModel.StoneId && item.MasterGemstoneId == requestCreateDesignModel.MasterGemstoneId 
@@ -91,9 +95,10 @@ namespace API.Controllers
                 Design.TypeOfJewelleryId = parentDesign.TypeOfJewelleryId;
                 Design.Description = parentDesign.Description;
                 Design.WeightOfMaterial = parentDesign.WeightOfMaterial;
+                Design.ManagerId = null;
                 _unitOfWork.DesignRepository.Insert(Design);
                 _unitOfWork.Save();
-                return Ok(Design);
+                return Ok(Design.toDesignDTO);
             }
             else
             {

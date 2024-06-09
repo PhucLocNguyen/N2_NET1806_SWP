@@ -10,6 +10,7 @@ namespace API.Model.TypeOfJewellryModel
         {
             return new TypeOfJewelleryDTO()
             {
+                TypeOfJewelleryId = typeOfJewellery.TypeOfJewelleryId,
                 Name = typeOfJewellery.Name,
                 Designs = typeOfJewellery.Designs.Select(d => d.toCreateDesign()).ToList(),
             };

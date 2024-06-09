@@ -1,8 +1,9 @@
-﻿using Repositories.Entity;
+﻿using API.Model.UserModel;
+using Repositories.Entity;
 
-namespace Repositories
+namespace API.Model.BlogModel
 {
-    public partial class Blog
+    public class BlogDTO
     {
         public int BlogId { get; set; }
 
@@ -11,10 +12,6 @@ namespace Repositories
         public string? Description { get; set; }
 
         public string? Image { get; set; }
-
-        public string? ManagerId { get; set; }
-
-        public virtual AppUser? Manager { get; set; }
+        public virtual UserDTO? Manager { get; set; }
     }
 }
-

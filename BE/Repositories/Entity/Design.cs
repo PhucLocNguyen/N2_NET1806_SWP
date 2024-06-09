@@ -1,4 +1,6 @@
-﻿namespace Repositories
+﻿using Repositories.Entity;
+
+namespace Repositories
 {
     public partial class Design
     {

@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Repositories.Entity;
 
 namespace Repositories
 {
-    public partial class MyDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public partial class MyDbContext : IdentityDbContext<AppUser>
     {
         public MyDbContext()
         {
@@ -28,8 +31,6 @@ namespace Repositories
         public virtual DbSet<Payment> Payments { get; set; }
 
         public virtual DbSet<Requirement> Requirements { get; set; }
-
-        public virtual DbSet<Role> Roles { get; set; }
 
         public virtual DbSet<Stones> Stones { get; set; }
 
@@ -128,12 +129,12 @@ namespace Repositories
                 entity.Property(e => e.UsersId).HasColumnName("UsersID");
                 entity.Property(e => e.RequirementId).HasColumnName("RequirementID");
 
-                entity.HasOne(d => d.Requirement).WithMany(p => p.UsersRequirements)
+                entity.HasOne(d => d.Requirement).WithMany(p => p.UserRequirements)
                     .HasForeignKey(d => d.RequirementId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__UsersRequ__Requi__52593CB8");
 
-                entity.HasOne(d => d.User).WithMany(p => p.UsersRequirements)
+                entity.HasOne(d => d.User).WithMany(p => p.UserRequirements)
                     .HasForeignKey(d => d.UsersId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__UsersRequ__Users__5165187F");
@@ -214,16 +215,6 @@ namespace Repositories
                     .HasConstraintName("FK__Requireme__Desig__4F7CD00D");
             });
 
-            modelBuilder.Entity<Role>(entity =>
-            {
-                entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE3AA92BD7AC");
-
-                entity.ToTable("Role");
-
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
-                entity.Property(e => e.Name).HasMaxLength(255);
-            });
-
             modelBuilder.Entity<Stones>(entity =>
             {
                 entity.HasKey(e => e.StonesId).HasName("PK__Stones__59F240A0F68BB9CA");
@@ -270,6 +261,23 @@ namespace Repositories
                     .HasConstraintName("FK__DesignRul__TypeO__5EBF139D");
             });
 
+            base.OnModelCreating(modelBuilder);
+            List<IdentityRole> roles = new List<IdentityRole>{
+            new IdentityRole
+            {
+                Name= "Customer",
+                NormalizedName= "CUSTOMER"
+            },new IdentityRole
+            {
+                Name="Manager",
+                NormalizedName = "MANAGER"
+            },new IdentityRole
+            {
+                Name="Admin",
+                NormalizedName = "ADMIN"
+            }
+            };
+            modelBuilder.Entity<IdentityRole>().HasData(roles);
             OnModelCreatingPartial(modelBuilder);
         }
 

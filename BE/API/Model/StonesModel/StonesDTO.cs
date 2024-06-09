@@ -4,6 +4,7 @@ namespace API.Model.StonesModel
 {
     public class StonesDTO
     {
+        public int StonesId { get; set; }
         public string Kind { get; set; } = null!;
 
         public decimal? Size { get; set; }

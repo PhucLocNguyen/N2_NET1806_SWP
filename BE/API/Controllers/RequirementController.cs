@@ -56,7 +56,7 @@ namespace API.Controllers
                 includeProperties: "",
                 pageIndex: requestSearchRequirementModel.pageIndex,
                 pageSize: requestSearchRequirementModel.pageSize
-                );
+                ).Select(x=>x.toRequirementDTO());
             return Ok(reponseDesign);
         }
 
@@ -69,7 +69,7 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            return Ok(Requirement);
+            return Ok(Requirement.toRequirementDTO());
         }
 
         [HttpPost]

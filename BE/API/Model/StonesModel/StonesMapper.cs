@@ -20,6 +20,7 @@ namespace API.Model.StonesModel
         {
             return new StonesDTO()
             {
+                StonesId = stones.StonesId,
                 Kind = stones.Kind,
                 Price = stones.Price,
                 Quantity = stones.Quantity,

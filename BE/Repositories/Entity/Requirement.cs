@@ -33,7 +33,7 @@
 
         public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-        public virtual ICollection<UserRequirement> UsersRequirements { get; set; } = new List<UserRequirement>();
+        public virtual ICollection<UserRequirement> UserRequirements { get; set; } = new List<UserRequirement>();
     }
 
 }

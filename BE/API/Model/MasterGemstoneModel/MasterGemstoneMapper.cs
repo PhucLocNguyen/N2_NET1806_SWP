@@ -22,6 +22,7 @@ namespace API.Model.MasterGemstoneModel
         {
             return new MasterGemstoneDTO()
             {
+                MasterGemstoneId = masterGemstone.MasterGemstoneId,
                 Kind = masterGemstone.Kind,
                 Size = masterGemstone.Size,
                 Price = masterGemstone.Price,

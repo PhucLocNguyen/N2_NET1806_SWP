@@ -19,6 +19,7 @@ namespace API.Model.MaterialModel
         {
             return new MaterialDTO()
             {
+                MaterialId = material.MaterialId,
                 Name = material.Name,
                 Price = material.Price,
                 Designs = material.Designs.Select(x => x.toCreateDesign()).ToList()

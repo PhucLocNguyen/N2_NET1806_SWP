@@ -35,6 +35,7 @@ namespace API.Model.RequirementModel
         {
             return new RequirementDTO()
             {
+                RequirementId = requirement.RequirementId,
                 Status = requirement.Status,
 
                 ExpectedDelivery = requirement.ExpectedDelivery,

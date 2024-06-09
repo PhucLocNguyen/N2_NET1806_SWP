@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import ItemImg from '../../image/categoryItem/item1.jpg'
-import Arrow from '../../image/categoryItem/arrow.svg'
+import ItemImg from '../../assets/categoryItem/item1.jpg'
+import Arrow from '../../assets/categoryItem/arrow.svg'
 
 function CategoryItem() {
    return (

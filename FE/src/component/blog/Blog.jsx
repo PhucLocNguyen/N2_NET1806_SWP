@@ -1,5 +1,5 @@
 import react from "react";
-import picture from "../../image/blog/PictureBlog1.webp";
+import picture from "../../assets/blog/PictureBlog1.webp";
 import ShareIcon from "@mui/icons-material/Share";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -7,17 +7,17 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Avatar from "../../image/blog/Avatar.png";
+import Avatar from "../../assets/blog/Avatar.png";
 import { color } from "framer-motion";
 import SearchIcon from "@mui/icons-material/Search";
-import blogPicture from "../../image/blog/BlogPictue.webp";
-import BlogPicture2 from "../../image/blog/BlogPicture2.webp";
+import blogPicture from "../../assets/blog/BlogPictue.webp";
+import BlogPicture2 from "../../assets/blog/BlogPicture2.webp";
 
 function Blog() {
   return (
     <>
       {/* Container */}
-      <div className="w-full h-3/4 bg-[#fbfbfb] my-10">
+      <div className="w-full h-3/4 bg-[#fbfbfb] mb-10">
         <div className="flex items-center justify-center border-b-[1px] border-[#e1e1e1] w-full h-[130px]">
           <h1 className="text-3xl font-light">
             We Working On New Luxury Collection

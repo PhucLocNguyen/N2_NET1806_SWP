@@ -33,7 +33,7 @@ function CurrentRequirement({steps}) {
             case 1: 
             return <FirstStep handleCompleteStep ={handleCompleteStep}/>
             case 2:
-                return <SecondStep handleCompleteStep ={handleCompleteStep}/>
+                return <SecondStep handleCompleteStep ={handleCompleteStep} completedSteps={completedSteps} />
             case 3:
                 return <ThirdStep handleCompleteStep ={handleCompleteStep}/>
         }

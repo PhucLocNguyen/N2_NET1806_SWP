@@ -10,12 +10,14 @@ import RequirementOrderSection from './component/requirements/Create/Requirement
 import DesignInfo from './component/order/DesignInfo.jsx'
 import { publicRoutes } from './routes/Route.jsx'
 import DefaultLayout from './component/layout/DefaultLayout.jsx'
-
+import Login from './component/login/Login'
 function App() {
   return (
     <Suspense>
       <Routes>
         <Route path='/a' element={<DesignInfo></DesignInfo>}></Route>
+        <Route path='/design/1/create-requirement' element={<RequirementOrderSection/>}></Route>
+        <Route path='/login' element={<Login/>}/>
         {publicRoutes.map((route, index) => {
           let Page = route.component
 

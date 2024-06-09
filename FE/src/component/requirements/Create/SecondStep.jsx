@@ -1,42 +1,15 @@
-import { CheckBox, CheckBoxOutlineBlank } from "@mui/icons-material";
-import { InputLabel, MenuItem, Select } from "@mui/material";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { useCallback, useContext, useState } from "react";
+import { FetchApiMasterGemstone } from "../../../api/Requirements/FetchApiMasterGemstone";
+import { FetchApiStones } from "../../../api/Requirements/FetchApiStones";
 import { CustomButton } from "../../home/Home";
 import { multiStepContext } from "./StepContext";
-function SecondStep({ handleCompleteStep }) {
+function SecondStep({ handleCompleteStep, completedSteps }) {
   const { currentStep, setCurrentStep, requirementData, setRequirementData } =
     useContext(multiStepContext);
     const [isAllowed, setAllowed] = useState(false);
-  const [isMasterGemStoneChecked, setIsMasterGemStoneChecked] = useState(false);
-  const [data, setData] = useState({
-    MasterGemStone: {
-      material: requirementData.MasterGemStone.material,
-      shape: requirementData.MasterGemStone.shape,
-      size: requirementData.MasterGemStone.size,
-    },
-    Stones: {
-      quantity: requirementData.Stones.quantity,
-      size: requirementData.Stones.size,
-    },
-  });
-  useEffect(() => {
-    var output = true;
-    Object.entries(data).forEach(([key, value]) => {
-      if(value!=null){
-        Object.entries(data[key]).forEach(([key,value])=>{
-          if(value==null){
-            output = false;
-            setAllowed(output);
-            return;
-          }         
-        })
-      }
-    });
-    if (output) {
-      setAllowed(true)};
-  }, [data]);
+ 
   const HandleChangeData = (e) => {
     const { name, value } = e.target;
     const dataObject = e.target.getAttribute('data_object');
@@ -59,6 +32,7 @@ function SecondStep({ handleCompleteStep }) {
       }, delay);
     };
   };
+  
   const debouncedOnChange = useCallback(debounce(HandleChangeData, 1000), [
     HandleChangeData,
   ]);
@@ -69,7 +43,6 @@ function SecondStep({ handleCompleteStep }) {
       setRequirementData({...requirementData,...data })
     }
   }
-  console.log(data);
   function ToogleStone(e) {
     var key = e.target.name;
     var isChecked = e.target.checked;
@@ -78,26 +51,18 @@ function SecondStep({ handleCompleteStep }) {
       if (key === "MasterGemStone")
         setData({
           ...data,
-          MasterGemStone: {
-            material: null,
-            shape: null,
-            size: null,
-          },
+          masterGemstoneId: 0,
         });
       if (key === "Stones")
         setData({
           ...data,
-          Stones: {
-            quantity: null,
-            size: null,
-          },
+          stoneId: 0,
         });
         getSection.style.display="block";
     } else {
       setData({ ...data, [key]: null });
       getSection.style.display="none";
     }
-    setIsMasterGemStoneChecked(isChecked);
   }
   return (
     <>
@@ -106,15 +71,13 @@ function SecondStep({ handleCompleteStep }) {
         whileInView={{ opacity: 1, x: 0 }}
         className="mx-16"
       >
-        <h2>Second step</h2>
         <div className="mb-5">
           <div className="flex justify-between content-center">
-            <h2 className="text-[24px] mb-1 mt-3">Loại hạt chủ</h2>
+            <h2 className="text-[24px] mb-1 mt-3">Select MasterGemstone</h2>
             <input
               type="checkbox"
               className="peer"
               name="MasterGemStone"
-             
               onClick={ToogleStone}
             />
           </div>
@@ -122,61 +85,72 @@ function SecondStep({ handleCompleteStep }) {
             <div id="MasterGemStone">
               <div className="mb-3">
                 <h4 className="text-lg">Material</h4>
+                
                 <div className="grid grid-cols-5 gap-x-4 mb-[30px]">
-                  <label htmlFor="material-1" className="rounded-md border border-[#646464] cursor-pointer" >
-                    <div className="shadow-lg relative h-[100px]">
-                      <input type="radio" name="material" id="material-1" value="1" className="hidden peer" data_object="MasterGemStone" onChange={debouncedOnChange} />
-                      <span className="w-[20px] h-[20px] mb-[50px] top-1 left-1 inline-block border-[2px] border-[#e3e3e3] rounded-full relative z-10 peer-checked:bg-primary checkedBoxFormat peer-checked:border-[#3057d5] peer-checked:scale-110 peer-checked:bg-[#3057d5] peer-checked:before:opacity-100"></span>
-                      <img src="https://e7.pngegg.com/pngimages/469/594/png-clipart-two-1000g-gold-bars-gold-bar-bullion-gold-bar-usb-flash-drive-gold.png" className="rounded-md w-full absolute top-0 h-[80px]"/>
-                      <p className="text-center">Vàng</p>
-                    </div>
-                  </label>
-                  <label htmlFor="material-2" className="rounded-md border border-[#646464] cursor-pointer">
-                    <div className="shadow-lg relative h-[100px]">
-                      <input type="radio" name="material" id="material-2" value="2" className="hidden peer" data_object="MasterGemStone" onChange={debouncedOnChange} />
-                      <span className="w-[20px] h-[20px] mb-[50px] top-1 left-1 inline-block border-[2px] border-[#e3e3e3] rounded-full relative z-10 peer-checked:bg-primary checkedBoxFormat peer-checked:border-[#3057d5] peer-checked:scale-110 peer-checked:bg-[#3057d5] peer-checked:before:opacity-100"></span>
-                      <img src="https://cdn.pixabay.com/photo/2021/05/12/06/30/silver-bar-6247498_960_720.jpg" className="rounded-md w-full absolute top-0 h-[80px]"/>
-                      <p className="text-center">Bạc</p>
-                    </div>
-                  </label>
-                  <label htmlFor="material-3" className="rounded-md border border-[#646464] cursor-pointer">
-                    <div className="shadow-lg relative h-[100px]">
-                      <input type="radio" name="material" id="material-3" value="3" className="hidden peer" data_object="MasterGemStone" onChange={debouncedOnChange} />
-                      <span className="w-[20px] h-[20px] mb-[50px] top-1 left-1 inline-block border-[2px] border-[#e3e3e3] rounded-full relative z-10 peer-checked:bg-primary checkedBoxFormat peer-checked:border-[#3057d5] peer-checked:scale-110 peer-checked:bg-[#3057d5] peer-checked:before:opacity-100"></span>
-                      <img src="https://atlas-content-cdn.pixelsquid.com/stock-images/copper-ingots-wrought-iron-3ARoVB0-600.jpg" className="rounded-md w-full absolute top-0 h-[80px]"/>
-                      <p className="text-center">Đồng</p>
-                    </div>
-                  </label>
+    {/* {kind.map((val, index) => {
+        return (
+            <label 
+                key={val + index} 
+                htmlFor={"material-" + index} 
+                className="rounded-md border border-[#646464] cursor-pointer"
+            >
+                <div className="shadow-lg relative h-[100px]">
+                    <input 
+                        type="radio" 
+                        name="kind" 
+                        id={"material-" + index} 
+                        value={val} 
+                        className="hidden peer" 
+                        data_object="MasterGemStone" 
+                        onChange={debouncedOnChange} 
+                    />
+                    <span className="w-[20px] h-[20px] mb-[50px] top-1 left-1 inline-block border-[2px] border-[#e3e3e3] rounded-full relative z-10 peer-checked:bg-primary checkedBoxFormat peer-checked:border-[#3057d5] peer-checked:scale-110 peer-checked:bg-[#3057d5] peer-checked:before:opacity-100"></span>
+                    <img 
+                        src="https://e7.pngegg.com/pngimages/469/594/png-clipart-two-1000g-gold-bars-gold-bar-bullion-gold-bar-usb-flash-drive-gold.png" 
+                        className="rounded-md w-full absolute top-0 h-[80px]"
+                    />
+                    <p className="text-center">{val}</p>
                 </div>
+            </label>
+        );
+    })} */}
+</div>
+
              </div>
              <div className="grid grid-cols-2 gap-x-10">
               <div>
                 <label htmlFor="size" className="text-lg">Size of Mastergemstone</label>
                 <select 
-                label="Size of Mastergemstone"
-                data_object="MasterGemStone"
-                name="size"
-                onChange={HandleChangeData} 
-                
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option value="">--Choose MasterGemStone size--</option>
-                  <option value="10">10 inches</option>
-                  <option value="20">20 inches</option>
-                  <option value="30">30 inches</option>
+                    label="Size of Mastergemstone"
+                    data_object="MasterGemStone"
+                    name="size"
+                    key="mastergemstonesize"
+                    onChange={HandleChangeData} 
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                    <option key="defaultSelect" value="">--Choose MasterGemStone size--</option>
+                    {/* {sizeMasterGemstone.map((items, index) => (
+                        <option key={items + index} value={items}>{items}</option>
+                    ))} */}
                 </select>
+
               </div>
               <div>
               <label htmlFor="shape" className="text-lg">Shape of MasterGemstone</label>
-                <select 
-                  data_object="MasterGemStone"
-                  name="shape"
-                  onChange={HandleChangeData}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
-                  <option value="">--Choose MasterGemStone shape--</option>
-                  <option value="rectangle">Rectangle</option>
-                  <option value="circle">Circle</option>
-                  <option value="triangle">Triangle</option>
-                </select>
+              <select 
+                    key="mastergemstoneshape"
+                    data_object="MasterGemStone"
+                    name="shape"
+                    onChange={HandleChangeData}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                    <option key="defaultSelectShape" value="">--Choose MasterGemStone shape--</option>
+                    {/* {
+                        shapeMasterGemstone.map((item, index) => (
+                            <option key={item} value={item}>{item}</option>
+                        ))
+                    } */}
+               </select>
               </div>
              </div>
             </div>
@@ -187,16 +161,16 @@ function SecondStep({ handleCompleteStep }) {
               type="checkbox"
               className="peer"
               name="Stones"
-             
               onClick={ToogleStone}
             />
           </div>
           <div id="Stones">
           <div className="grid grid-cols-2 gap-x-10">
               <div>
-                <label htmlFor="size" className="text-lg">Size of Mastergemstone</label>
+                <label htmlFor="size" className="text-lg">Size</label>
                 <select 
-                label="Size of Mastergemstone"
+                key="sizeOfStones"
+                label="Size of Stones"
                 data_object="Stones"
                 name="size"
                 onChange={HandleChangeData} 
@@ -211,6 +185,7 @@ function SecondStep({ handleCompleteStep }) {
               <div>
                 <label htmlFor="shape" className="text-lg">Quantity of Stones</label>
                 <select 
+                key="quantityStones"
                   data_object="Stones"
                   name="quantity"
                   onChange={HandleChangeData}

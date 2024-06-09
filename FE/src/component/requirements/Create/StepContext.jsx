@@ -6,18 +6,12 @@ export function StepContext({children}) {
     const [currentStep, setCurrentStep] = useState(1);
     const [requirementData, setRequirementData] = useState({
         designParentId: 1,
-        material: null,
+        material: 0,
         size: 0,
-        MasterGemStone: {
-            material: null,
-            shape: null,
-            size: null,
-          },
-          Stones: {
-            quantity: null,
-            size: null,
-          },
-        customerNote:null,
+        stoneId: 0,
+        masterGemstoneId:0,
+        stonesId: 0,
+        customerNote:"",
     });
     const [finalData, setFinalData] = useState([]);
     console.log(requirementData);

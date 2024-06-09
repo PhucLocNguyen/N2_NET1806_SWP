@@ -4,6 +4,7 @@ import InputText from './InputText';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from "framer-motion";
 import axios from 'axios';
+import { LoginApi } from '../../api/ApiLogin';
 
 
 function Login() {
@@ -11,13 +12,19 @@ function Login() {
     const [dataSource, setDataSource] = useState([]);
     
     const [formData, setFormData] = useState({
-        Username: "", Password:"",
+        username: "", password:"",
     });
+    const axiosConfig = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        withCredentials: true // Nếu API của bạn yêu cầu cookie
+    };
     useEffect(()=>{ 
         if(!isToggle){
-            setFormData({ Username: "", Password:""});
+            setFormData({ username: "", password:""});
         }else{
-            setFormData({ Username: "", Email:"" ,Password:"",});
+            setFormData({ username: "", email:"" ,password:"",});
         }
     },[isToggle]);
     console.log(formData); 
@@ -42,17 +49,7 @@ function Login() {
         if(e.target.name==="login"){
             pathReq="login";
         }
-        try {
-            const response = await axios.post(`https://localhost:7169/api/account/${pathReq}`, listState).then((res)=>
-            {
-                if(e.target.name==="login" && res.status === 200) {localStorage.setItem("userInfo",JSON.stringify(res.data))};
-                setDataSource([...dataSource, res.data]);
-               });
-            
-        } catch (error) {
-            console.error('Error during login:', error);
-        }
-
+       var loginApi = LoginApi(pathReq,listState, axiosConfig);
     }
    
    
@@ -85,9 +82,9 @@ function Login() {
                         </div>
                         <span className="text-[13px]">or use your email for registeration</span>
 
-                        <InputText label='Username' type='text'></InputText>
-                        <InputText label='Email' type='email' pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"></InputText>
-                        <InputPassword label='Password' inputCase='register'></InputPassword>
+                        <InputText label='username' type='text'></InputText>
+                        <InputText label='email' type='email' pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"></InputText>
+                        <InputPassword label='password' inputCase='register'></InputPassword>
                         <Button variant="contained" type='submit'>Sign Up</Button>
                     </form>
                 </motion.div>
@@ -120,8 +117,8 @@ function Login() {
 
                         {/* <InputText label='Username' type='text' handleChild={debouncedOnChange} ></InputText>
                         <InputPassword label='Password' handleChild={debouncedOnChange}></InputPassword> */}
-                        <InputText label='Username' type='text' ></InputText>
-                        <InputPassword label='Password' ></InputPassword>
+                        <InputText label='username' type='text' ></InputText>
+                        <InputPassword label='password' ></InputPassword>
                         <a className="text-[#333] text-[13px] mt-[15px] mb-[10px]" href="#">Forget Your Password?</a>
                         <Button variant="contained" type='submit'>Sign In</Button>
                     </form>

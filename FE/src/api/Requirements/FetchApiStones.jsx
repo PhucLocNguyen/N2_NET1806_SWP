@@ -3,7 +3,7 @@ import api from '../instance.jsx'
 
 const FetchApiStones = async () => {
    try {
-      const response = await api.get('/api/Stones');
+      const response = await api.get('/Stones');
       return response.data; // Directly return the data from the response
    } catch (error) {
       console.error(error);

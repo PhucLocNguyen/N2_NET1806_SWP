@@ -5,6 +5,7 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -173,7 +174,6 @@ function Navbar() {
                     </button>
                   </div>
                 </form>
-
                 <div className="relative group inline-block">
                   <div className="absolute rounded-sm top-8 left-[-1rem] group-hover:block hidden w-fit h-fit bg-white border-[1px] border-[#f0f0f0]">
                     <div className="absolute top-[-10px] left-8 h-5 w-7"></div>

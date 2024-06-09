@@ -6,11 +6,28 @@ const Home = lazy(() => import('../component/home/Home'))
 const Navbar = lazy(() => import('../component/nav/Navbar'))
 const Design = lazy(() => import('../component/category/Category'))
 const BlogList = lazy(() => import('../component/blog_list/blogList'))
+import ListAll from "../component/category/ListAll"
+
 
 const publicRoutes = [
-   {path: '/home', component: Home},
-   {path: '/design', component: Design},
-   {path: '/blog_list', component: BlogList}
+   {
+      index: true,
+      component: Home
+   },
+   {
+      path: '/design',
+      component: Design,
+      children: [
+         { index: true, component: ListAll },
+         { path: 'earring', component: ListAll },
+         { path: 'bracelet', component: ListAll },
+         { path: 'necklace', component: ListAll },
+         { path: 'ring', component: ListAll }
+      ]
+   },
+   {
+     path: '/blog_list', component: BlogList
+   }
 ]
 
 const privateRoutes = [

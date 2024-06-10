@@ -1,6 +1,5 @@
 import { Outlet, Link, NavLink } from "react-router-dom"
 
-
 function Category() {
    return (
       <>
@@ -42,12 +41,7 @@ function Category() {
                </div>
             </div>
          </div>
-
-
-
          <Outlet></Outlet>
-
-
       </>
    )
 }

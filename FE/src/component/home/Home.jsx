@@ -31,7 +31,7 @@ import Blog3 from '../../assets/home/blog3.png'
 
 
 
-const CustomButton = styled(Button)({
+export const CustomButton = styled(Button)({
       '&:hover': {
             backgroundColor: '#fff',
             color: '#000',

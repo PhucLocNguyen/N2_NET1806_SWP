@@ -5,7 +5,7 @@ const fetchApiDesign = async () => {
 
    try {
 
-      let design = await api.get('/design')
+      let design = await api.get('/Design')
 
       console.log("Fetch API Design log")
 

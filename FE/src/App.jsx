@@ -2,15 +2,21 @@ import { Routes, Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import './App.css'
 
-import DesignInfo from './component/order/DesignInfo.jsx'
+import AdminLayout from './component/admin/AdminLayout.jsx'
+import StaffList from './component/admin/staffList/StaffList.jsx'
+import StaffPopup from './component/admin/staffList/StaffPopup.jsx'
+import Login from './component/login/Login.jsx'
+
 import { publicRoutes } from './routes/Route.jsx'
 import DefaultLayout from './component/layout/DefaultLayout.jsx'
+
+{/* <AdminLayout> <StaffList/> </AdminLayout> */}
 
 function App() {
   return (
     <Suspense>
       <Routes>
-        <Route path='/a' element={<DesignInfo></DesignInfo>}></Route>
+        <Route path='/a' element={<AdminLayout> <StaffList/> </AdminLayout>}></Route>
         {publicRoutes.map((route, index) => {
           let Page = route.component
 

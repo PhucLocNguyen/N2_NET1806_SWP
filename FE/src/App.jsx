@@ -7,17 +7,27 @@ import Navbar from "./component/nav/Navbar.jsx"
 import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
 
 
-import DesignInfo from './component/order/DesignInfo.jsx'
+import AdminLayout from './component/admin/AdminLayout.jsx'
+import StaffList from './component/admin/staffList/StaffList.jsx'
+import StaffPopup from './component/admin/staffList/StaffPopup.jsx'
+import Login from './component/login/Login.jsx'
+
 import { publicRoutes } from './routes/Route.jsx'
 import DefaultLayout from './component/layout/DefaultLayout.jsx'
+
 import Login from './component/login/Login'
+
 function App() {
   return (
     <Suspense>
       <Routes>
+
+        <Route path='/a' element={<AdminLayout> <StaffList/> </AdminLayout>}></Route>
+
         <Route path='/a' element={<DesignInfo></DesignInfo>}></Route>
         <Route path='/design/1/create-requirement' element={<RequirementOrderSection/>}></Route>
         <Route path='/login' element={<Login/>}/>
+
         {publicRoutes.map((route, index) => {
           let Page = route.component
 

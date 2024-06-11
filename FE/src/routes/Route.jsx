@@ -26,7 +26,7 @@ const publicRoutes = [
       ]
    },
    {
-     path: '/blog_list', component: BlogList
+     path: '/bloglist', component: BlogList
    }
 ]
 

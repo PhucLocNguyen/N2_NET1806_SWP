@@ -28,7 +28,9 @@ function ListAll() {
 
    // Lay ra design thong qua type
    const filter = getTypeFromPath(location.pathname) === 'design' ? 'all' : getTypeFromPath(location.pathname)
-   const filterDesign = filter === 'all' ? design : design.filter(item => item.typeOfJewellery.name === filter)
+   let filterDesign = filter === 'all' ? design : design.filter(item => item.typeOfJewellery.name === filter)
+
+   if (filterDesign === undefined) filterDesign = []
 
    return (
       <div className="px-[6.25rem]">

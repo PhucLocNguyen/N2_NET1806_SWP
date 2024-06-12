@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { multiStepContext } from "./StepContext";
 import { CustomButton } from "../../home/Home";
 import {motion} from "framer-motion";
@@ -10,8 +10,8 @@ function FirstStep({ handleCompleteStep }) {
     useContext(multiStepContext);
   const [isAllowed, setAllowed] = useState(false);
   const [data, setData] = useState({
-    material: requirementData.material,
-    size: requirementData.size,
+    material: requirementData.material ==0 ? null :requirementData.material,
+    size: requirementData.size ==0? null :requirementData.size,
   });
   const [materialList, setMaterialList] = useState([]);
   let from = 1;
@@ -59,6 +59,7 @@ function FirstStep({ handleCompleteStep }) {
       [name]: value,
     });
   };
+  
   return (
     <motion.div initial={{ opacity: 0, x:50 }} whileInView={{opacity:1, x:0}} className="mx-16">
       <h2 className="text-[24px] mb-1 mt-3">Matterial </h2>

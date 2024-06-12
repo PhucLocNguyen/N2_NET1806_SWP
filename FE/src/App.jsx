@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
+import AuthProvider from './context/AuthContext.jsx'
 import './App.css'
 import Blog from "./component/blog/Blog.jsx"
 import Footer from "./component/footer/Footer.jsx"
@@ -17,35 +18,39 @@ import DefaultLayout from './component/layout/DefaultLayout.jsx'
 
 function App() {
   return (
-    <Suspense>
-      <Routes>
+    <AuthProvider>
+      <Suspense>
+        <Routes>
+          {/* Route tự viết để test */}
+          <Route path='/a' element={<AdminLayout> <StaffList /> </AdminLayout>}></Route>
 
-        <Route path='/a' element={<AdminLayout> <StaffList/> </AdminLayout>}></Route>
+          <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
+          <Route path='/login' element={<Login />} />
 
-        <Route path='/design/1/create-requirement' element={<RequirementOrderSection/>}></Route>
-        <Route path='/login' element={<Login/>}/>
+          {/* Route tự viết không ghi qua phần này */}
+          
+          {publicRoutes.map((route, index) => {
+            let Page = route.component
 
-        {publicRoutes.map((route, index) => {
-          let Page = route.component
+            return (
+              // Route cho nhung thanh phan cha
+              <Route key={index} index={route.index ? true : undefined} path={route.index ? undefined : route.path} element={<DefaultLayout> <Page />  </DefaultLayout>}>
 
-          return (
-            // Route cho nhung thanh phan cha
-            <Route key={index} index={route.index ? true : undefined} path={route.index ? undefined : route.path} element={<DefaultLayout> <Page />  </DefaultLayout>}>
+                {/* Route neu co child trong file Route.jsx */}
+                {route.children && route.children.map((childRoute, childIndex) => {
+                  let ChildPage = childRoute.component
+                  return (
+                    <Route key={childIndex} index={childRoute.index ? true : undefined} path={childRoute.index ? undefined : childRoute.path} element={<ChildPage />} />
+                  )
+                })}
 
-              {/* Route neu co child trong file Route.jsx */}
-              {route.children && route.children.map((childRoute, childIndex) => {
-                let ChildPage = childRoute.component
-                return (
-                  <Route key={childIndex} index={childRoute.index ? true : undefined} path={childRoute.index ? undefined : childRoute.path} element={<ChildPage />} />
-                )
-              })}
+              </Route>
+            )
+          })}
 
-            </Route>
-          )
-        })}
-
-      </Routes>
-    </Suspense>
+        </Routes>
+      </Suspense>
+    </AuthProvider>
   )
 }
 

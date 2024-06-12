@@ -18,6 +18,7 @@ import DefaultLayout from './component/layout/DefaultLayout.jsx'
 
 function App() {
   return (
+
     <AuthProvider>
       <Suspense>
         <Routes>
@@ -51,6 +52,7 @@ function App() {
         </Routes>
       </Suspense>
     </AuthProvider>
+
   )
 }
 

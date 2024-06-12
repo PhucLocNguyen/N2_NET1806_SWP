@@ -21,7 +21,7 @@ namespace API.Model.DesignModel
 
         public decimal? WeightOfMaterial { get; set; }
 
-        public virtual Users Manager { get; set; }
+        public virtual Users? Manager { get; set; }
 
         public virtual RequestCreateMasterGemstoneModel? MasterGemstone { get; set; }
 

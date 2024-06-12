@@ -71,7 +71,7 @@ namespace API.Controllers
             var Payment = requestCreatePaymentModel.ToPaymentEntity();
             _unitOfWork.PaymentRepository.Insert(Payment);
             _unitOfWork.Save();
-            return Ok();
+            return Ok("Create successfully");
         }
 
         [HttpPut("{id}")]

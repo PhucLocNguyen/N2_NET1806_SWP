@@ -280,6 +280,7 @@ namespace Repositories
 
                 entity.Property(e => e.UsersId).HasColumnName("UsersID");
                 entity.Property(e => e.Email).HasMaxLength(100);
+                entity.Property(e => e.Image).HasMaxLength(200);
                 entity.Property(e => e.Name).HasMaxLength(100);
                 entity.Property(e => e.Password).HasMaxLength(100);
                 entity.Property(e => e.Phone).HasMaxLength(10);

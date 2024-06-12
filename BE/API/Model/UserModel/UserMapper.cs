@@ -27,7 +27,7 @@ namespace API.Model.UserModel
                 Username = user.Username,
                 Name = user.Name,
                 Email = user.Email,
-                Role = user.Role.Name,
+                
             };
         }
     }

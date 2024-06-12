@@ -17,6 +17,8 @@ public partial class Users
 
     public string? Phone { get; set; }
 
+    public string? Image { get; set; }
+
     public int? RoleId { get; set; }
 
     public virtual ICollection<Blog> Blogs { get; set; } = new List<Blog>();

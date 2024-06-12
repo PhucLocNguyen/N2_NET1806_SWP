@@ -24,7 +24,7 @@ namespace API.Model.BlogModel
             {
                 BlogId = blog.BlogId,
                 Description = blog.Description,
-                Manager = UserMapper.toUserDTO(blog.Manager),
+                Manager = blog.Manager!=null? UserMapper.toUserDTO(blog.Manager):null,
                 Title = blog.Title,
                 Image = blog.Image,
 

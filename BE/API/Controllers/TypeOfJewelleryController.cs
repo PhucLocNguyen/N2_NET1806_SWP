@@ -65,10 +65,11 @@ namespace API.Controllers
             var TypeOfJewellery = new TypeOfJewellery()
             {
                 Name = requestTypeOfJewelleryModel.Name,
+                Image = requestTypeOfJewelleryModel.Image,
             };
             _unitOfWork.TypeOfJewellryRepository.Insert(TypeOfJewellery);
             _unitOfWork.Save();
-            return Ok();
+            return Ok("Create successfully");
         }
 
         [HttpPut]
@@ -94,8 +95,23 @@ namespace API.Controllers
                 return NotFound();
             }
             _unitOfWork.TypeOfJewellryRepository.Delete(existedTypeOfJewellery);
-            _unitOfWork.Save();
-            return Ok();
+            try
+            {
+                _unitOfWork.Save();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (_unitOfWork.IsForeignKeyConstraintViolation(ex))
+                {
+                    return BadRequest("Cannot delete this item because it is referenced by another entity.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok("Delete Successfully");
         }
     }
 }

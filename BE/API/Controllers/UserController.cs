@@ -58,18 +58,25 @@ namespace API.Controllers
         [HttpPost("login")]
         public  async Task<IActionResult> Login(RequestLoginAccount loginDTO)
         {
-            loginDTO.Password = BCrypt.Net.BCrypt.HashPassword(loginDTO.Password);
-            Expression <Func<Users, bool>> filter = x =>
-                (x.Username.Equals(loginDTO.Username));
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var user = _unitOfWork.UserRepository.Get(filter,
-                includes: m=>m.Role
-                ).FirstOrDefault();
-           
-            if (BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) return BadRequest("Username not found and/or password incorrect. loginDTO:+"+ BCrypt.Net.BCrypt.HashPassword(loginDTO.Password)+", passInDB: "+user.Password);
+            try
+            {
+                loginDTO.Password = BCrypt.Net.BCrypt.HashPassword(loginDTO.Password);
+                Expression<Func<Users, bool>> filter = x =>
+                    (x.Username.Equals(loginDTO.Username));
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                var user = _unitOfWork.UserRepository.Get(filter,
+                    includes: m => m.Role
+                    ).FirstOrDefault();
 
-            return Ok(await _tokenService.CreateToken(user));
+                if (BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) return BadRequest("Username not found and/or password incorrect");
+
+                return Ok(await _tokenService.CreateToken(user));
+            }
+            catch (NullReferenceException ex)
+            {
+                return BadRequest("The account does not register");
+            }
         }
     }
 }

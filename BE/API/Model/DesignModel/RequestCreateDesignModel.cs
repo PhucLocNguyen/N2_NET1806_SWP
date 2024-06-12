@@ -4,7 +4,7 @@ namespace API.Model.DesignModel
 {
     public class RequestCreateDesignModel
     {
-        public int? ParentId { get; set; }
+        public int? ParentId { get; set; } = null;
 
         public string? Image { get; set; }
 
@@ -23,10 +23,6 @@ namespace API.Model.DesignModel
         public int? TypeOfJewelleryId { get; set; }
 
         public int? MaterialId { get; set; }
-
-        internal Design toDesignEntity(object value)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

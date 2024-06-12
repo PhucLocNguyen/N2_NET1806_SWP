@@ -17,6 +17,7 @@ namespace API.Model.MasterGemstoneModel
                 Cut = requestCreateMasterGemstoneModel.Cut,
                 Weight = requestCreateMasterGemstoneModel.Weight,
                 Shape = requestCreateMasterGemstoneModel.Shape,
+                Image = requestCreateMasterGemstoneModel.Image,
             };
         }
         public static ReponseMasterGemstone toMasterGemstonesDTO(this MasterGemstone masterGemstone)
@@ -32,6 +33,7 @@ namespace API.Model.MasterGemstoneModel
                 Weight = masterGemstone.Weight,
                 Shape = masterGemstone.Shape,
                 Designs = masterGemstone.Designs.Select(x=>x.toCreateDesign()).ToList(),
+                Image = masterGemstone.Image,
             };
         }
 
@@ -46,6 +48,7 @@ namespace API.Model.MasterGemstoneModel
                 Cut = masterGemstone.Cut,
                 Weight = (decimal)masterGemstone.Weight,
                 Shape = masterGemstone.Shape,
+                Image = masterGemstone.Image,
             };
         }
     }

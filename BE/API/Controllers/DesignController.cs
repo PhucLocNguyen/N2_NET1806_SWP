@@ -1,4 +1,5 @@
 ﻿using API.Model.DesignModel;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -69,7 +70,7 @@ namespace API.Controllers
             return Ok(Design.toDesignDTO());
         }
 
-        [HttpPost]
+        [HttpPost("DesignChild")]
         public IActionResult CreateDesignForRequirement(RequestCreateDesignModel requestCreateDesignModel, int parentId)
         {
             var parentDesign = _unitOfWork.DesignRepository.GetByID(parentId);
@@ -90,7 +91,7 @@ namespace API.Controllers
             }
             if(childDesignId==0)
             {
-                var Design = requestCreateDesignModel.toDesignEntity(parentId);
+                var Design = requestCreateDesignModel.toDesignChildEntity(parentId);
                 Design.DesignName = parentDesign.DesignName;
                 Design.Image =  parentDesign.Image;
                 Design.TypeOfJewelleryId = parentDesign.TypeOfJewelleryId;
@@ -99,24 +100,25 @@ namespace API.Controllers
                 Design.ManagerId = null;
                 _unitOfWork.DesignRepository.Insert(Design);
                 _unitOfWork.Save();
-                return Ok(Design.toDesignDTO);
+                return Ok("Create successfully");
             }
             else
             {
-                var Design = _unitOfWork.DesignRepository.GetByID(childDesignId);
+                var Design = _unitOfWork.DesignRepository.GetByID(childDesignId, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery); ;
                 return Ok(Design.toDesignDTO());
             }
             
             
         }
-/*
-        [HttpPost]
+
+        [HttpPost("DesignParent")]
         public IActionResult CreateDesignForManager(RequestCreateDesignModel requestCreateDesignModel)
         {
-            var Design = requestCreateDesignModel.toDesignEntity(null);
+            var Design = requestCreateDesignModel.toDesignParentEntity();
             _unitOfWork.DesignRepository.Insert(Design);
-            return Ok(Design.toDesignDTO());
-        }*/
+            _unitOfWork.Save();
+            return Ok("Create successfully");
+        }
 
         [HttpPut]
         public IActionResult UpdateDesign(int id, RequestCreateDesignModel requestCreateDesignModel)
@@ -143,6 +145,13 @@ namespace API.Controllers
         [HttpDelete]
         public IActionResult DeleteBlog(int id)
         {
+            Expression<Func<Design, bool>> filter = x =>
+                (x.ParentId == id);
+            var countChild = _unitOfWork.DesignRepository.Count(filter);
+            if(countChild > 0)
+            {
+                return BadRequest("The Design Id is existed in another Design");
+            }
             var existedDesign = _unitOfWork.DesignRepository.GetByID(id);
             if (existedDesign == null)
             {

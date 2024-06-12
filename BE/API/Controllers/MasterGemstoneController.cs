@@ -83,7 +83,7 @@ namespace API.Controllers
             var MasterGemstone = requestCreateMasterGemstone.toMasterGemstonesEntity();
             _unitOfWork.MasterGemstoneRepository.Insert(MasterGemstone);
             _unitOfWork.Save();
-            return Ok();
+            return Ok("Create successfully");
         }
 
         [HttpPut]
@@ -117,8 +117,23 @@ namespace API.Controllers
                 return NotFound();
             }
             _unitOfWork.MasterGemstoneRepository.Delete(ExistedMasterGemstone);
-            _unitOfWork.Save();
-            return Ok();
+            try
+            {
+                _unitOfWork.Save();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (_unitOfWork.IsForeignKeyConstraintViolation(ex))
+                {
+                    return BadRequest("Cannot delete this item because it is referenced by another entity.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok("Delete Successfully");
         }
 
     }

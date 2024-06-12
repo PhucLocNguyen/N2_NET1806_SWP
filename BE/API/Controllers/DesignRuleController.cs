@@ -2,6 +2,7 @@
 using API.Model.DesignRuleModel;
 using API.Model.MasterGemstoneModel;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -77,7 +78,7 @@ namespace API.Controllers
             var DesignRule = requestCreateDesignRuleModel.toDesignRuleEntity();
             _unitOfWork.DesignRuleRepository.Insert(DesignRule);
             _unitOfWork.Save();
-            return Ok();
+            return Ok("Create successfully");
 
         }
 
@@ -106,7 +107,7 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-            _unitOfWork.DesignRepository.Delete(existedDesignRule);
+            _unitOfWork.DesignRuleRepository.Delete(existedDesignRule);
             _unitOfWork.Save();
             return Ok();
         }

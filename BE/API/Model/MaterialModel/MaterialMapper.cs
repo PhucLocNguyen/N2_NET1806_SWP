@@ -13,6 +13,7 @@ namespace API.Model.MaterialModel
                 Name = requestCreateMaterialModel.Name,
                 Price = requestCreateMaterialModel.Price,
                 ManagerId = requestCreateMaterialModel.ManagerId,
+                Image = requestCreateMaterialModel.Image,
             };
         }
 
@@ -23,7 +24,8 @@ namespace API.Model.MaterialModel
                 MaterialId = material.MaterialId,
                 Name = material.Name,
                 Price = material.Price,
-                Designs = material.Designs.Select(x => x.toCreateDesign()).ToList()
+                Designs = material.Designs.Select(x => x.toCreateDesign()).ToList(),
+                Image = material.Image,
             };
         }
 
@@ -33,7 +35,8 @@ namespace API.Model.MaterialModel
             {
                 Name = material.Name,
                 Price = (decimal)material.Price,
-                ManagerId = material.ManagerId
+                ManagerId = material.ManagerId,
+                Image = material.Image,
             };
         }
     }

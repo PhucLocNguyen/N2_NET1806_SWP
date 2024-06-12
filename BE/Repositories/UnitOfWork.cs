@@ -1,4 +1,6 @@
-﻿using Repositories.Entity;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Repositories.Entity;
 
 namespace Repositories
 
@@ -207,6 +209,16 @@ namespace Repositories
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+        public bool IsForeignKeyConstraintViolation(DbUpdateException ex)
+        {
+            if (ex.InnerException is SqlException sqlException)
+            {
+                // Error number 547 corresponds to a foreign key constraint violation in SQL Server
+                return sqlException.Number == 547;
+            }
+
+            return false;
         }
     }
 }

@@ -15,5 +15,7 @@
         public decimal Weight { get; set; }
 
         public string Shape { get; set; }
+
+        public string Image { get; set; }
     }
 }

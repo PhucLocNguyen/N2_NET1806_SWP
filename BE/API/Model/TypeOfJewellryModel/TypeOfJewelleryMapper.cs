@@ -13,6 +13,7 @@ namespace API.Model.TypeOfJewellryModel
                 TypeOfJewelleryId = typeOfJewellery.TypeOfJewelleryId,
                 Name = typeOfJewellery.Name,
                 Designs = typeOfJewellery.Designs.Select(d => d.toCreateDesign()).ToList(),
+                Image = typeOfJewellery.Image,
             };
         }
     }

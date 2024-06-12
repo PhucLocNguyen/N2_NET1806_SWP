@@ -9,7 +9,7 @@ namespace API.Model.DesignModel
 {
     public static class DesignMapper
     {
-        public static Design toDesignEntity(this RequestCreateDesignModel requestCreateDesignModel, int parentId)
+        public static Design toDesignChildEntity(this RequestCreateDesignModel requestCreateDesignModel, int parentId)
         {
             return new Design()
             {
@@ -21,6 +21,23 @@ namespace API.Model.DesignModel
             };
         }
 
+        public static Design toDesignParentEntity(this RequestCreateDesignModel requestCreateDesignModel)
+        {
+            return new Design()
+            {
+                ParentId = null,
+                StoneId = requestCreateDesignModel.StoneId,
+                MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId,
+                ManagerId = requestCreateDesignModel.ManagerId,
+                MaterialId = requestCreateDesignModel.MaterialId,
+                DesignName = requestCreateDesignModel.DesignName,
+                Image = requestCreateDesignModel.Image,
+                TypeOfJewelleryId = requestCreateDesignModel.TypeOfJewelleryId,
+                Description = requestCreateDesignModel.Description,
+                WeightOfMaterial = (decimal)requestCreateDesignModel.WeightOfMaterial,
+            };
+        }
+
         public static ReponseDesign toDesignDTO(this Design design)
         {
             return new ReponseDesign()
@@ -29,12 +46,13 @@ namespace API.Model.DesignModel
                 ParentId = design.ParentId,
                 Image = design.Image,
                 DesignName = design.DesignName,
+                Description = design.Description,
                 WeightOfMaterial = design.WeightOfMaterial,
-                Stone = design.Stone!=null? StonesMapper.toCreateStones(design.Stone):null,
-                MasterGemstone = design.MasterGemstone!=null? MasterGemstoneMapper.toCreateMasterGemstones(design.MasterGemstone):null,
+                Stone = design.Stone != null ? StonesMapper.toCreateStones(design.Stone) : null,
+                MasterGemstone = design.MasterGemstone != null ? MasterGemstoneMapper.toCreateMasterGemstones(design.MasterGemstone) : null,
                 Manager = design.Manager,
-                TypeOfJewellery = new RequestCreateTypeOfJewelleryModel() { Name = design.TypeOfJewellery.Name},
-                Material = design.Material!=null? MaterialMapper.toCreateMaterial(design.Material):null,
+                TypeOfJewellery = new RequestCreateTypeOfJewelleryModel() { Name = design.TypeOfJewellery.Name, Image = design.TypeOfJewellery.Image },
+                Material = design.Material != null ? MaterialMapper.toCreateMaterial(design.Material) : null,
             };
         }
 

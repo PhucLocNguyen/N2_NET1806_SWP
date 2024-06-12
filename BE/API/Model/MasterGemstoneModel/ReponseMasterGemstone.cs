@@ -5,6 +5,7 @@ namespace API.Model.MasterGemstoneModel
     public class ReponseMasterGemstone
     {
         public int MasterGemstoneId { get; set; }
+
         public string Kind { get; set; } = null!;
 
         public decimal? Size { get; set; }
@@ -18,6 +19,8 @@ namespace API.Model.MasterGemstoneModel
         public decimal? Weight { get; set; }
 
         public string? Shape { get; set; }
+
+        public string Image { get; set; }
 
         public virtual ICollection<RequestCreateDesignModel> Designs { get; set; } = new List<RequestCreateDesignModel>();
     }

@@ -14,7 +14,7 @@ namespace API.Model.DesignModel
             return new Design()
             {
                 ParentId = parentId,
-                StoneId = requestCreateDesignModel.StoneId,
+                StonesId = requestCreateDesignModel.StonesId,
                 MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId,
                 ManagerId = requestCreateDesignModel.ManagerId,
                 MaterialId = requestCreateDesignModel.MaterialId,
@@ -26,7 +26,7 @@ namespace API.Model.DesignModel
             return new Design()
             {
                 ParentId = null,
-                StoneId = requestCreateDesignModel.StoneId,
+                StonesId = requestCreateDesignModel.StonesId,
                 MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId,
                 ManagerId = requestCreateDesignModel.ManagerId,
                 MaterialId = requestCreateDesignModel.MaterialId,
@@ -64,7 +64,7 @@ namespace API.Model.DesignModel
                 Image = design.Image,
                 DesignName = design.DesignName,
                 WeightOfMaterial = design.WeightOfMaterial,
-                StoneId = design.StoneId,
+                StonesId = design.StonesId,
                 MasterGemstoneId = design.MasterGemstoneId,
                 ManagerId = design.ManagerId,
                 TypeOfJewelleryId = design.TypeOfJewelleryId,

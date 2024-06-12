@@ -278,6 +278,10 @@ namespace Repositories
             {
                 entity.HasKey(e => e.UsersId).HasName("PK__Users__A349B0427BFFDCB6");
 
+                entity.HasIndex(e => e.Username, "UQ__Users__536C85E463DC7634").IsUnique();
+
+                entity.HasIndex(e => e.Email, "UQ__Users__A9D1053481ED8284").IsUnique();
+
                 entity.Property(e => e.UsersId).HasColumnName("UsersID");
                 entity.Property(e => e.Email).HasMaxLength(100);
                 entity.Property(e => e.Image).HasMaxLength(200);

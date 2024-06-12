@@ -17,7 +17,7 @@ public partial class Design
 
     public decimal WeightOfMaterial { get; set; }
 
-    public int? StoneId { get; set; }
+    public int? StonesId { get; set; }
 
     public int? MasterGemstoneId { get; set; }
 

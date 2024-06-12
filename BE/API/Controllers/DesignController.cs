@@ -82,7 +82,7 @@ namespace API.Controllers
             }
             foreach (var item in listDesign)
             {
-                if(item.StoneId == requestCreateDesignModel.StoneId && item.MasterGemstoneId == requestCreateDesignModel.MasterGemstoneId 
+                if(item.StonesId == requestCreateDesignModel.StonesId && item.MasterGemstoneId == requestCreateDesignModel.MasterGemstoneId 
                     && item.MaterialId == requestCreateDesignModel.MaterialId) 
                 {
                     childDesignId = item.DesignId;
@@ -132,7 +132,7 @@ namespace API.Controllers
             existedDesign.Image = requestCreateDesignModel.Image;
             existedDesign.DesignName = requestCreateDesignModel.DesignName;
             existedDesign.WeightOfMaterial = (decimal)requestCreateDesignModel.WeightOfMaterial;
-            existedDesign.StoneId = requestCreateDesignModel.StoneId;
+            existedDesign.StonesId = requestCreateDesignModel.StonesId;
             existedDesign.MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId;
             existedDesign.ManagerId = requestCreateDesignModel.ManagerId;
             existedDesign.TypeOfJewelleryId = (int)requestCreateDesignModel.TypeOfJewelleryId;

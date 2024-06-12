@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using Repositories;
 using Repositories.Entity;
 using Repositories.Token;
+using System.Text;
 
 namespace API
 {
@@ -26,14 +27,15 @@ namespace API
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext"));
             });
-            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            /*builder.Services.AddIdentity<IdentityRole<>>*/
+            /*builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 12;
-            }).AddEntityFrameworkStores<MyDbContext>();
+            }).AddEntityFrameworkStores<MyDbContext>();*/
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = "https";
@@ -49,7 +51,7 @@ namespace API
                     ValidIssuer = builder.Configuration["JWT:Issuer"],
                     ValidateAudience = true,
                     ValidAudience = builder.Configuration["JWT:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]))
                 };
             });
             builder.Services.AddSwaggerGen(option =>

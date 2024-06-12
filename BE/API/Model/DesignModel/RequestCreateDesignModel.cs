@@ -1,4 +1,6 @@
-﻿namespace API.Model.DesignModel
+﻿using Repositories.Entity;
+
+namespace API.Model.DesignModel
 {
     public class RequestCreateDesignModel
     {
@@ -16,11 +18,15 @@
 
         public int? MasterGemstoneId { get; set; }
 
-        public string? ManagerId { get; set; }
+        public int? ManagerId { get; set; }
 
         public int? TypeOfJewelleryId { get; set; }
 
         public int? MaterialId { get; set; }
 
+        internal Design toDesignEntity(object value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

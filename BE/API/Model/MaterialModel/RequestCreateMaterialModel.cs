@@ -6,6 +6,6 @@
 
         public decimal Price { get; set; }
 
-        public string ManagerId { get; set; }
+        public int ManagerId { get; set; }
     }
 }

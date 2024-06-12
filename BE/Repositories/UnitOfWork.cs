@@ -1,4 +1,6 @@
-﻿namespace Repositories
+﻿using Repositories.Entity;
+
+namespace Repositories
 
 {
     public class UnitOfWork
@@ -12,10 +14,10 @@
         private GenericRepository<Material> _material;
         private GenericRepository<Payment> _payment;
         private GenericRepository<Requirement> _requirement;
-        private GenericRepository<Role> _role;
         private GenericRepository<Stones> _stone;
         private GenericRepository<TypeOfJewellery> _typeOfJewellry;
-        private GenericRepository<AppUser> _user;
+        private GenericRepository<Users> _user;
+        private GenericRepository<Role> _role;
         private GenericRepository<WarrantyCard> _warrantyCard;
 
 
@@ -120,18 +122,6 @@
             }
 
         }
-        public GenericRepository<Role> RoleRepository
-        {
-            get
-            {
-                if (_role == null)
-                {
-                    this._role = new GenericRepository<Role>(_context);
-                }
-                return _role;
-            }
-
-        }
         public GenericRepository<Stones> StoneRepository
         {
             get
@@ -156,15 +146,27 @@
             }
 
         }
-        public GenericRepository<AppUser> UserRepository
+        public GenericRepository<Users> UserRepository
         {
             get
             {
                 if (_user == null)
                 {
-                    this._user = new GenericRepository<AppUser>(_context);
+                    this._user = new GenericRepository<Users>(_context);
                 }
                 return _user;
+            }
+
+        }
+        public GenericRepository<Role> RoleRepository
+        {
+            get
+            {
+                if (_role == null)
+                {
+                    this._role = new GenericRepository<Role>(_context);
+                }
+                return _role;
             }
 
         }

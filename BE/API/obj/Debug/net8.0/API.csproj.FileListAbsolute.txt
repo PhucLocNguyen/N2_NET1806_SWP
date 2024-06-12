@@ -14,7 +14,6 @@ C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\API.GeneratedMSBui
 C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\API.AssemblyInfoInputs.cache
 C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\API.AssemblyInfo.cs
 C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\API.csproj.CoreCompileInputs.cache
-C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\staticwebassets.development.json
@@ -300,3 +299,5 @@ C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\zh-Hans\Microsoft.
 C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\Repositories.dll
 C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\Repositories.pdb
+C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cs

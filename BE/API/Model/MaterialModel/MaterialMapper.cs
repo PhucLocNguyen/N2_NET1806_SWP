@@ -1,5 +1,6 @@
 ﻿using API.Model.DesignModel;
 using Repositories;
+using Repositories.Entity;
 
 namespace API.Model.MaterialModel
 {
@@ -15,10 +16,11 @@ namespace API.Model.MaterialModel
             };
         }
 
-        public static MaterialDTO toMaterialDTO(this Material material)
+        public static ReponseMaterial toMaterialDTO(this Material material)
         {
-            return new MaterialDTO()
+            return new ReponseMaterial()
             {
+                MaterialId = material.MaterialId,
                 Name = material.Name,
                 Price = material.Price,
                 Designs = material.Designs.Select(x => x.toCreateDesign()).ToList()

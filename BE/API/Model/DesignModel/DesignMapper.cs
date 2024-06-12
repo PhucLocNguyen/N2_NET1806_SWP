@@ -3,6 +3,7 @@ using API.Model.MaterialModel;
 using API.Model.StonesModel;
 using API.Model.TypeOfJewellryModel;
 using Repositories;
+using Repositories.Entity;
 
 namespace API.Model.DesignModel
 {
@@ -20,9 +21,9 @@ namespace API.Model.DesignModel
             };
         }
 
-        public static DesignDTO toDesignDTO(this Design design)
+        public static ReponseDesign toDesignDTO(this Design design)
         {
-            return new DesignDTO()
+            return new ReponseDesign()
             {
                 DesignId = design.DesignId,
                 ParentId = design.ParentId,

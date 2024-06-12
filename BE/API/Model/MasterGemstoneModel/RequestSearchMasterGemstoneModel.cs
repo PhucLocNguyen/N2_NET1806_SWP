@@ -24,7 +24,7 @@
 
         public int pageIndex { get; set; } = 1;
 
-        public int pageSize { get; set; } = 10;
+        public int pageSize { get; set; } = int.MaxValue;
     }
     public class SortContent
     {

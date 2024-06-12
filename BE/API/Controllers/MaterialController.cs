@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
+using Repositories.Entity;
 using System.Linq.Expressions;
 
 namespace API.Controllers
@@ -19,7 +20,7 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public IActionResult SearchBlog([FromQuery] RequestSearchMaterialModel requestSearchMaterialModel)
+        public IActionResult SearchMaterial([FromQuery] RequestSearchMaterialModel requestSearchMaterialModel)
         {
             var sortBy = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialBy.ToString() : null;
             var sortType = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialType.ToString() : null;

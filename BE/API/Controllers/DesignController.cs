@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
+using Repositories.Entity;
 using System.Linq.Expressions;
 
 namespace API.Controllers
@@ -17,7 +18,7 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public IActionResult SearchBlog([FromQuery] RequestSearchDesignModel requestSearchDesignModel)
+        public IActionResult SearchDesign([FromQuery] RequestSearchDesignModel requestSearchDesignModel)
         {
             var sortBy = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignBy.ToString() : null;
             var sortType = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignType.ToString() : null;
@@ -69,11 +70,15 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDesign(RequestCreateDesignModel requestCreateDesignModel, int parentId)
+        public IActionResult CreateDesignForRequirement(RequestCreateDesignModel requestCreateDesignModel, int parentId)
         {
             var parentDesign = _unitOfWork.DesignRepository.GetByID(parentId);
             int childDesignId = 0;
             var listDesign = _unitOfWork.DesignRepository.Get();
+            if(parentDesign == null)
+            {
+                return NotFound("ParentId does not exist");
+            }
             foreach (var item in listDesign)
             {
                 if(item.StoneId == requestCreateDesignModel.StoneId && item.MasterGemstoneId == requestCreateDesignModel.MasterGemstoneId 
@@ -91,18 +96,27 @@ namespace API.Controllers
                 Design.TypeOfJewelleryId = parentDesign.TypeOfJewelleryId;
                 Design.Description = parentDesign.Description;
                 Design.WeightOfMaterial = parentDesign.WeightOfMaterial;
+                Design.ManagerId = null;
                 _unitOfWork.DesignRepository.Insert(Design);
                 _unitOfWork.Save();
-                return Ok(Design);
+                return Ok(Design.toDesignDTO);
             }
             else
             {
                 var Design = _unitOfWork.DesignRepository.GetByID(childDesignId);
-                return Ok(Design);
+                return Ok(Design.toDesignDTO());
             }
             
             
         }
+/*
+        [HttpPost]
+        public IActionResult CreateDesignForManager(RequestCreateDesignModel requestCreateDesignModel)
+        {
+            var Design = requestCreateDesignModel.toDesignEntity(null);
+            _unitOfWork.DesignRepository.Insert(Design);
+            return Ok(Design.toDesignDTO());
+        }*/
 
         [HttpPut]
         public IActionResult UpdateDesign(int id, RequestCreateDesignModel requestCreateDesignModel)
@@ -115,7 +129,7 @@ namespace API.Controllers
             existedDesign.ParentId = requestCreateDesignModel.ParentId;
             existedDesign.Image = requestCreateDesignModel.Image;
             existedDesign.DesignName = requestCreateDesignModel.DesignName;
-            existedDesign.WeightOfMaterial = requestCreateDesignModel.WeightOfMaterial;
+            existedDesign.WeightOfMaterial = (decimal)requestCreateDesignModel.WeightOfMaterial;
             existedDesign.StoneId = requestCreateDesignModel.StoneId;
             existedDesign.MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId;
             existedDesign.ManagerId = requestCreateDesignModel.ManagerId;

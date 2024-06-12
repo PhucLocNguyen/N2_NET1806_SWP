@@ -1,5 +1,5 @@
 ﻿using API.Model.DesignModel;
-using Repositories;
+using Repositories.Entity;
 
 namespace API.Model.StonesModel
 {
@@ -16,10 +16,11 @@ namespace API.Model.StonesModel
             };
         }
 
-        public static StonesDTO toStonesDTO( this Stones stones)
+        public static ReponseStones toStonesDTO( this Stones stones)
         {
-            return new StonesDTO()
+            return new ReponseStones()
             {
+                StonesId = stones.StonesId,
                 Kind = stones.Kind,
                 Price = stones.Price,
                 Quantity = stones.Quantity,

@@ -22,61 +22,157 @@ namespace Repositories.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Repositories.AppUser", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                    b.HasKey("Id");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
+                    b.ToTable("AspNetRoles", (string)null);
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasData(
+                        new
+                        {
+                            Id = "0cd7b276-bcfb-46ae-bc04-b300e8218568",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = "5fbb12ed-6fb0-41de-8177-f40557b5ed78",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = "2d35ea14-96ca-4420-8922-faae63959347",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
+                });
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("RoleId")
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("SecurityStamp")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
+                    b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AppUser");
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Repositories.Blog", b =>
@@ -205,6 +301,71 @@ namespace Repositories.Migrations
                     b.HasIndex("TypeOfJewelleryId");
 
                     b.ToTable("DesignRule", (string)null);
+                });
+
+            modelBuilder.Entity("Repositories.Entity.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Repositories.Have", b =>
@@ -395,26 +556,6 @@ namespace Repositories.Migrations
                     b.ToTable("Requirements");
                 });
 
-            modelBuilder.Entity("Repositories.Role", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("RoleID");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("RoleId")
-                        .HasName("PK__Role__8AFACE3AA92BD7AC");
-
-                    b.ToTable("Role", (string)null);
-                });
-
             modelBuilder.Entity("Repositories.Stones", b =>
                 {
                     b.Property<int>("StonesId")
@@ -506,16 +647,60 @@ namespace Repositories.Migrations
                     b.ToTable("WarrantyCard", (string)null);
                 });
 
-            modelBuilder.Entity("Repositories.AppUser", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Repositories.Role", null)
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Repositories.Entity.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Repositories.Entity.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Repositories.Entity.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Repositories.Entity.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Repositories.Blog", b =>
                 {
-                    b.HasOne("Repositories.AppUser", "Manager")
+                    b.HasOne("Repositories.Entity.AppUser", "Manager")
                         .WithMany("Blogs")
                         .HasForeignKey("ManagerId")
                         .HasConstraintName("FK__Blog__ManagerID__3C69FB99");
@@ -525,7 +710,7 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Repositories.Design", b =>
                 {
-                    b.HasOne("Repositories.AppUser", "Manager")
+                    b.HasOne("Repositories.Entity.AppUser", "Manager")
                         .WithMany("Designs")
                         .HasForeignKey("ManagerId")
                         .HasConstraintName("FK__Design__ManagerI__4AB81AF0");
@@ -601,7 +786,7 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Repositories.Material", b =>
                 {
-                    b.HasOne("Repositories.AppUser", "Manager")
+                    b.HasOne("Repositories.Entity.AppUser", "Manager")
                         .WithMany("Materials")
                         .HasForeignKey("ManagerId")
                         .HasConstraintName("FK__Material__Manage__412EB0B6");
@@ -611,7 +796,7 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Repositories.Payment", b =>
                 {
-                    b.HasOne("Repositories.AppUser", "Customer")
+                    b.HasOne("Repositories.Entity.AppUser", "Customer")
                         .WithMany("Payments")
                         .HasForeignKey("CustomerId")
                         .HasConstraintName("FK__Payment__Custome__5BE2A6F2");
@@ -639,13 +824,13 @@ namespace Repositories.Migrations
             modelBuilder.Entity("Repositories.UserRequirement", b =>
                 {
                     b.HasOne("Repositories.Requirement", "Requirement")
-                        .WithMany("UsersRequirements")
+                        .WithMany("UserRequirements")
                         .HasForeignKey("RequirementId")
                         .IsRequired()
                         .HasConstraintName("FK__UsersRequ__Requi__52593CB8");
 
-                    b.HasOne("Repositories.AppUser", "User")
-                        .WithMany("UsersRequirements")
+                    b.HasOne("Repositories.Entity.AppUser", "User")
+                        .WithMany("UserRequirements")
                         .HasForeignKey("UsersId")
                         .IsRequired()
                         .HasConstraintName("FK__UsersRequ__Users__5165187F");
@@ -655,7 +840,14 @@ namespace Repositories.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Repositories.AppUser", b =>
+            modelBuilder.Entity("Repositories.Design", b =>
+                {
+                    b.Navigation("InverseParent");
+
+                    b.Navigation("Requirements");
+                });
+
+            modelBuilder.Entity("Repositories.Entity.AppUser", b =>
                 {
                     b.Navigation("Blogs");
 
@@ -665,14 +857,7 @@ namespace Repositories.Migrations
 
                     b.Navigation("Payments");
 
-                    b.Navigation("UsersRequirements");
-                });
-
-            modelBuilder.Entity("Repositories.Design", b =>
-                {
-                    b.Navigation("InverseParent");
-
-                    b.Navigation("Requirements");
+                    b.Navigation("UserRequirements");
                 });
 
             modelBuilder.Entity("Repositories.MasterGemstone", b =>
@@ -691,12 +876,7 @@ namespace Repositories.Migrations
 
                     b.Navigation("Payments");
 
-                    b.Navigation("UsersRequirements");
-                });
-
-            modelBuilder.Entity("Repositories.Role", b =>
-                {
-                    b.Navigation("Users");
+                    b.Navigation("UserRequirements");
                 });
 
             modelBuilder.Entity("Repositories.Stones", b =>

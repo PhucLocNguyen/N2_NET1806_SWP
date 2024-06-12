@@ -1,9 +1,13 @@
 ﻿using API.Model.UserModel;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
+using Repositories.Entity;
 using Repositories.Token;
+using System.Linq.Expressions;
 
 namespace API.Controllers
 {
@@ -11,68 +15,61 @@ namespace API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UnitOfWork _unitOfWork;
         private readonly IToken _tokenService;
-        private readonly SignInManager<AppUser> _signInManager;
-        public UserController(UserManager<AppUser> userManager, IToken tokenService, SignInManager<AppUser> signInManager)
+        public UserController(UnitOfWork unitOfWork, IToken tokenService)
         {
-            _userManager = userManager;
+            _unitOfWork = unitOfWork;
             _tokenService = tokenService;
-            _signInManager = signInManager;
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RequestCreateUserModel requestCreateUserModel)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                var appUser = new AppUser
-                {
-                    UserName = requestCreateUserModel.Username,
-                    Email = requestCreateUserModel.Email,
-                };
-                var createUser = await _userManager.CreateAsync(appUser, requestCreateUserModel.Password);
-                if (createUser.Succeeded)
-                {
-                    var roleResult = await _userManager.AddToRoleAsync(appUser, "Customer");
-                    if (roleResult.Succeeded)
-                    {
-                        return Ok(_tokenService.CreateToken(appUser));
-
-                    }
-                    else
-                    {
-                        return StatusCode(500, roleResult.Errors);
-                    }
-                }
-                else
-                {
-                    return StatusCode(500, createUser.Errors);
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex);
-            }
-        }
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        public async Task<IActionResult> Register([FromBody] RequestRegisterAccount requestRegisterAccount)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
+            {
+                return BadRequest("PasswordConfirm is not correct");
+            }
+            var roleEntity = _unitOfWork.RoleRepository.Get(filter: x=>x.Name.Equals(RoleConst.Customer)).FirstOrDefault();
+            var registerAccount = requestRegisterAccount.toUserEntity(roleEntity);
+            _unitOfWork.UserRepository.Insert(registerAccount);
+            _unitOfWork.Save();
+            return Ok(registerAccount.toUserDTO());
+        }
 
-            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDTO.Username.ToLower());
+        [HttpPost("registerForAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Role.Customer)]
+        public  IActionResult RegisterForAdmin([FromBody] RequestRegisterAccount requestRegisterAccount, [FromQuery] RoleEnum roleEnum)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
+            {
+                return BadRequest("PasswordConfirm is not correct");
+            }
+            var role = roleEnum.ToString() != "0" ? roleEnum.ToString() : "Customer";
+            var roleEntity = _unitOfWork.RoleRepository.Get(filter: x => x.Name.Equals(role)).FirstOrDefault();
+            var registerAccount = requestRegisterAccount.toUserEntity(roleEntity);
+            _unitOfWork.UserRepository.Insert(registerAccount);
+            _unitOfWork.Save();
+            return Ok(registerAccount.toUserDTO());
+        }
+        [HttpPost("login")]
+        public  async Task<IActionResult> Login(RequestLoginAccount loginDTO)
+        {
+            loginDTO.Password = BCrypt.Net.BCrypt.HashPassword(loginDTO.Password);
+            Expression <Func<Users, bool>> filter = x =>
+                (x.Username.Equals(loginDTO.Username));
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var user = _unitOfWork.UserRepository.Get(filter,
+                includes: m=>m.Role
+                ).FirstOrDefault();
+           
+            if (BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) return BadRequest("Username not found and/or password incorrect. loginDTO:+"+ BCrypt.Net.BCrypt.HashPassword(loginDTO.Password)+", passInDB: "+user.Password);
 
-            if (user == null) return Unauthorized("Invalid username!");
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
-
-            if (!result.Succeeded) return Unauthorized("Username not found and/or password incorrect");
-
-            return Ok(_tokenService.CreateToken(user));
+            return Ok(await _tokenService.CreateToken(user));
         }
     }
 }

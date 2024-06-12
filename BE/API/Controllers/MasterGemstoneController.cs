@@ -3,6 +3,7 @@ using API.Model.MasterGemstoneModel;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Repositories;
+using Repositories.Entity;
 
 namespace API.Controllers
 {
@@ -18,7 +19,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchBlog([FromQuery] RequestSearchMasterGemstoneModel requestSearchMasterGemstoneModel)
+        public IActionResult SearchMasterGemstone([FromQuery] RequestSearchMasterGemstoneModel requestSearchMasterGemstoneModel)
         {
             var sortBy = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneBy.ToString() : null;
             var sortType = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneType.ToString() : null;
@@ -108,7 +109,7 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteMasterGemstones(int id)
+        public IActionResult DeleteMasterGemstone(int id)
         {
             var ExistedMasterGemstone = _unitOfWork.MasterGemstoneRepository.GetByID(id);
             if (ExistedMasterGemstone == null)

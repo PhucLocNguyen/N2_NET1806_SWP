@@ -1,5 +1,6 @@
 ﻿using API.Model.DesignModel;
 using Repositories;
+using Repositories.Entity;
 
 namespace API.Model.MasterGemstoneModel
 {
@@ -18,10 +19,11 @@ namespace API.Model.MasterGemstoneModel
                 Shape = requestCreateMasterGemstoneModel.Shape,
             };
         }
-        public static MasterGemstoneDTO toMasterGemstonesDTO(this MasterGemstone masterGemstone)
+        public static ReponseMasterGemstone toMasterGemstonesDTO(this MasterGemstone masterGemstone)
         {
-            return new MasterGemstoneDTO()
+            return new ReponseMasterGemstone()
             {
+                MasterGemstoneId = masterGemstone.MasterGemstoneId,
                 Kind = masterGemstone.Kind,
                 Size = masterGemstone.Size,
                 Price = masterGemstone.Price,

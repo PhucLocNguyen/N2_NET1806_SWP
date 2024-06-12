@@ -3,6 +3,7 @@ using API.Model.MaterialModel;
 using API.Model.StonesModel;
 using API.Model.TypeOfJewellryModel;
 using Repositories;
+using Repositories.Entity;
 
 namespace API.Model.DesignModel
 {

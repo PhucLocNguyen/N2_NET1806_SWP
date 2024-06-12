@@ -50,6 +50,7 @@ function Login() {
             pathReq="login";
         }
        var loginApi = LoginApi(pathReq,listState, axiosConfig);
+       console.log(loginApi);
     }
    
    

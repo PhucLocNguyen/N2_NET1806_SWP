@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import api from './instance.jsx'
 
 const fetchApiDesign = async () => {
@@ -16,4 +15,17 @@ const fetchApiDesign = async () => {
 
 }
 
-export { fetchApiDesign }
+const fetchApiDesignById = async (id) => {
+
+   try {
+
+      let design = await api.get(`/Design/${id}`)
+      console.log('Fetch API Design by ID')
+      return design.data
+
+   } catch (error) {
+      console.log(error)
+   }
+}
+
+export { fetchApiDesign, fetchApiDesignById }

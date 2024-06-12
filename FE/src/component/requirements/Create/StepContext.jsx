@@ -8,7 +8,6 @@ export function StepContext({children}) {
         designParentId: 1,
         material: 0,
         size: 0,
-        stoneId: 0,
         masterGemstoneId:0,
         stonesId: 0,
         customerNote:"",

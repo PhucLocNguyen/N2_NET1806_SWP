@@ -24,6 +24,7 @@ const publicRoutes = [
          { path: 'necklace', component: ListAll },
          { path: 'ring', component: ListAll }
       ]
+
    },
    {
       path: '/design/:id',

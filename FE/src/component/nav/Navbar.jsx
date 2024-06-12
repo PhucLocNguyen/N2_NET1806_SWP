@@ -5,7 +5,7 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -120,16 +120,54 @@ function Navbar() {
                 </NavLink>
               </div>
 
-              <div className="group">
-                <NavLink to='/about' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
-                  About Us
-                  <KeyboardArrowUpIcon
-                    style={{
-                      transition: "transform 0.4s ease",
-                    }}
-                    className="group-hover:transform group-hover:rotate-180"
-                  />
-                </NavLink>
+              {/* Navbar */}
+              <div className="flex justify-between px-36 mt-4">
+                <div className="relative group">
+                  <Link to='/' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+                    Home
+                    <KeyboardArrowUpIcon
+                      style={{
+                        transition: "transform 0.4s ease",
+                      }}
+                      className="group-hover:transform group-hover:rotate-180"
+                    />
+                  </Link>
+                  <div className="absolute top-4 left-4 h-6 w-10"></div>
+                  <div className="absolute top-10 group-hover:block hidden w-[200px] h-[200px] bg-white border-[1px] border-black"></div>
+                </div>
+                <div className="group">
+                  <Link to='/design' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+                    Shop
+                    <KeyboardArrowUpIcon
+                      style={{
+                        transition: "transform 0.4s ease",
+                      }}
+                      className="group-hover:transform group-hover:rotate-180"
+                    />
+                  </Link>
+                </div>
+                <div className="group">
+                  <Link to='/bloglist' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+                    Blog
+                    <KeyboardArrowUpIcon
+                      style={{
+                        transition: "transform 0.4s ease",
+                      }}
+                      className="group-hover:transform group-hover:rotate-180"
+                    />
+                  </Link>
+                </div>
+                <div className="group">
+                  <Link to='#' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
+                    About Us
+                    <KeyboardArrowUpIcon
+                      style={{
+                        transition: "transform 0.4s ease",
+                      }}
+                      className="group-hover:transform group-hover:rotate-180"
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -163,12 +201,42 @@ function Navbar() {
                       />
                     </svg>
                   </div>
-                  <input
-                    type="search"
-                    id="default-search"
-                    className="block w-3/4 px-2 py-1 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-[#f0cd8c] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#f0cd8c] dark:focus:border-[#f0cd8c]"
-                    placeholder="Search..."
-                    required
+
+                </form>
+
+                <div className="relative group inline-block">
+                  <div className="absolute rounded-sm top-8 left-[-1rem] group-hover:block hidden w-fit h-fit bg-white border-[1px] border-[#f0f0f0]">
+                    <div className="absolute top-[-10px] left-8 h-5 w-7"></div>
+                    <ul className="flex flex-col">
+                      <li className="w-36">
+                        <a
+                          href=""
+                          className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
+                        >
+                          Tài khoản của tôi
+                        </a>
+                      </li>
+                      <li className="w-36">
+                        <a
+                          href=""
+                          className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
+                        >
+                          Đơn mua
+                        </a>
+                      </li>
+                      <li className="w-36">
+                        <a
+                          href=""
+                          className="block box-border text-left  hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100"
+                        >
+                          Đăng xuất
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <PermIdentityIcon
+                    style={{ marginLeft: "1rem", fontSize: "1.4rem" }}
+                    className="hover:text-[#f0cd8c]"
                   />
                   <button
                     type="submit"   

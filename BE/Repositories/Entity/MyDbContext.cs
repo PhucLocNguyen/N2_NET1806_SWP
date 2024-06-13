@@ -78,7 +78,7 @@ namespace Repositories
                 entity.Property(e => e.MasterGemstoneId).HasColumnName("MasterGemstoneID");
                 entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
                 entity.Property(e => e.ParentId).HasColumnName("ParentID");
-                entity.Property(e => e.StoneId).HasColumnName("StoneID");
+                entity.Property(e => e.StonesId).HasColumnName("StoneID");
                 entity.Property(e => e.TypeOfJewelleryId).HasColumnName("TypeOfJewelleryID");
                 entity.Property(e => e.WeightOfMaterial).HasColumnType("decimal(18, 2)");
 
@@ -95,7 +95,7 @@ namespace Repositories
                     .HasConstraintName("FK__Design__Material__4AB81AF0");
 
                 entity.HasOne(d => d.Stone).WithMany(p => p.Designs)
-                    .HasForeignKey(d => d.StoneId)
+                    .HasForeignKey(d => d.StonesId)
                     .HasConstraintName("FK__Design__StoneID__47DBAE45");
 
                 entity.HasOne(d => d.TypeOfJewellery).WithMany(p => p.Designs)

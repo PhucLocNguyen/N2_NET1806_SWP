@@ -42,6 +42,13 @@ namespace API.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Role.Customer)]
         public  IActionResult RegisterForAdmin([FromBody] RequestRegisterAccount requestRegisterAccount, [FromQuery] RoleEnum roleEnum)
         {
+            /*try
+            {
+                
+            }catch (InvalidE ex)
+            {
+
+            }*/
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
@@ -69,6 +76,7 @@ namespace API.Controllers
                     includes: m => m.Role
                     ).FirstOrDefault();
 
+                if (user == null) { return BadRequest("Invalid Username"); }
                 if (BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) return BadRequest("Username not found and/or password incorrect");
 
                 return Ok(await _tokenService.CreateToken(user));

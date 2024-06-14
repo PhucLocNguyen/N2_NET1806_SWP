@@ -8,10 +8,6 @@
 
         public int? DesignId { get; set; }
 
-        public DateOnly? FromExpectedDelivery { get; set; } 
-
-        public DateOnly? ToExpectedDelivery { get; set; } = DateOnly.FromDateTime(DateTime.Now);
-
         public decimal? FromMaterialPriceAtMoment { get; set; } = decimal.Zero;
 
         public decimal? ToMaterialPriceAtMoment { get; set; }

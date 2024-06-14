@@ -67,19 +67,21 @@ namespace API.Controllers
         {
             try
             {
-                loginDTO.Password = BCrypt.Net.BCrypt.HashPassword(loginDTO.Password);
+                /*loginDTO.Password = BCrypt.Net.BCrypt.HashPassword(loginDTO.Password);*/
                 Expression<Func<Users, bool>> filter = x =>
                     (x.Username.Equals(loginDTO.Username));
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                /*if (!ModelState.IsValid)
+                    return BadRequest(ModelState);*/
                 var user = _unitOfWork.UserRepository.Get(filter,
                     includes: m => m.Role
                     ).FirstOrDefault();
 
                 if (user == null) { return BadRequest("Invalid Username"); }
-                if (BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) return BadRequest("Username not found and/or password incorrect");
+
+                if (!BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) { return BadRequest("Password incorrect"); }
 
                 return Ok(await _tokenService.CreateToken(user));
+                //return Ok("Login Successfully");
             }
             catch (NullReferenceException ex)
             {

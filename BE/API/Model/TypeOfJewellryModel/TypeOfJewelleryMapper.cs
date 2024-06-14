@@ -16,5 +16,15 @@ namespace API.Model.TypeOfJewellryModel
                 Image = typeOfJewellery.Image,
             };
         }
+
+        public static RequestCreateTypeOfJewelleryModel toCreateTypeOfJewellery(this TypeOfJewellery typeOfJewellery)
+        {
+            return new RequestCreateTypeOfJewelleryModel()
+            {
+                TypeOfJewelleryId = typeOfJewellery.TypeOfJewelleryId,
+                Name = typeOfJewellery.Name,
+                Image = typeOfJewellery.Image,
+            };
+        }
     }
 }

@@ -33,6 +33,7 @@ namespace API.Model.StonesModel
         {
             return new RequestCreateStonesModel()
             {
+                StonesId = stones.StonesId,
                 Kind = stones.Kind,
                 Price = (decimal)stones.Price,
                 Quantity = (int)stones.Quantity,

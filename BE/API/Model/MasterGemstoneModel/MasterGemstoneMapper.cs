@@ -41,6 +41,7 @@ namespace API.Model.MasterGemstoneModel
         {
             return new RequestCreateMasterGemstoneModel()
             {
+                MasterGemstoneId = masterGemstone.MasterGemstoneId,
                 Kind = masterGemstone.Kind,
                 Size = (decimal)masterGemstone.Size,
                 Price = (decimal)masterGemstone.Price,

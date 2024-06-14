@@ -3,6 +3,7 @@
     public class ReponseRequirement
     {
         public int RequirementId { get; set; }
+
         public string? Status { get; set; }
 
         public DateOnly? ExpectedDelivery { get; set; }

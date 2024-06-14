@@ -33,6 +33,7 @@ namespace API.Model.MaterialModel
         {
             return new RequestCreateMaterialModel()
             {
+                MaterialId = material.MaterialId,
                 Name = material.Name,
                 Price = (decimal)material.Price,
                 ManagerId = material.ManagerId,

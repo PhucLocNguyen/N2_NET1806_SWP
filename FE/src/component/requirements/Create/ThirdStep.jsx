@@ -5,27 +5,25 @@ import { useContext, useState } from "react";
 import { CustomButton } from "../../home/Home";
 import { multiStepContext } from "./StepContext";
 function ThirdStep() {
-    const { currentStep, setCurrentStep, requirementData, setRequirementData } =
+    const { currentStep, setCurrentStep, requirementData, setRequirementData , SubmitDesignFromCustomer} =
     useContext(multiStepContext);
     const [design, setDesign] = useState(0);
     const [masterGemstone, setMasterGemstone] = useState({});
     const [stones, setStones] = useState({});
-    const [data, setData]= useState({customerNote:''});
-    const SubmitRequirement = ()=>{
-        // setRequirementData({...data,...requirementData});
+    const [data, setData]= useState({});
+    const SubmitRequirement = (e)=>{
+       setRequirementData({...requirementData, ...data});
+       SubmitDesignFromCustomer();
     }
-    console.log(requirementData);
 
+    // technique input value data
     const HandleChangeData = (e) => {
         const { name, value } = e.target;
-        setData({
-          ...data,
-          [name]: value,
-        });
+        var object = {...data,
+          [name]: value,};
+        setData(object);
       };
-    useEffect(()=>{
-
-    },[])
+      
     const debounce = (func, delay) => {
         let timeoutId;
         return (...args) => {
@@ -63,7 +61,7 @@ function ThirdStep() {
         <div className="pb-3 px-3">
         <h3 className="text-[20px] mb-1 mt-3">Stones: </h3>
         <ul className="px-3">
-            <li>Kind: </li>
+            <li>Kind:{} </li>
             <li>Size: </li>
             <li>Quantity:</li>
         </ul>

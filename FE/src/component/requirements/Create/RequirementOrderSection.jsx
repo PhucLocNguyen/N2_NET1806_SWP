@@ -5,15 +5,18 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import CurrentRequirement from "./CurrentRequirement";
+import { useParams } from "react-router-dom";
+
 function RequirementOrderSection() {
+  const { id } = useParams();
   const steps = [
     "Choose option to jewellry",
     "Choose stones and Master gemstone",
     "Send your requirement",
   ];
-
+ 
   return (
     <>
       <div className="bg-[#c9d6ff] w-full h-screen bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">
@@ -22,7 +25,7 @@ function RequirementOrderSection() {
             Your requirement
           </h2>
           
-          <StepContext>
+          <StepContext designId={id}>
             <CurrentRequirement steps={steps} />
           </StepContext>
         </div>

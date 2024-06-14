@@ -8,7 +8,7 @@ import { multiStepContext } from "./StepContext";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { IconButton, Tooltip } from "@mui/material";
 function SecondStep({ handleCompleteStep, completedSteps }) {
-  const { currentStep, setCurrentStep, requirementData, setRequirementData } =
+  const { currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState } =
     useContext(multiStepContext);
     const [isAllowed, setAllowed] = useState(false);
     const [dataApiMasterGemStone, setDataApiMasterGemStone] = useState([]);
@@ -44,10 +44,9 @@ const [dataSelected, setDataSelected] = useState({
   const [masterGemstoneObject, setMasterGemstoneObject]= useState({});
   const [stonesObject, setStonesObject] = useState({});
 
-    //initial api value when reload
+  //initial api value when reload
     useEffect(()=>{
-      
-      const dataMaster = FetchApiMasterGemstone().then((res)=>{
+      const dataMaster = FetchApiMasterGemstone(designRuleState.MinSizeMasterGemstone,designRuleState.MaxSizeMasterGemstone).then((res)=>{
         setDataApiMasterGemStone(res);
         setFilterMasterGemStone(res);
         const selectKind = new Set(res.map(item => item.kind));
@@ -124,7 +123,6 @@ const [dataSelected, setDataSelected] = useState({
         isSelectedBefore = true;
       }
       if(isSelectedBefore){
-        console.log("chaythu2");
         setDataSelected({...dataSelected, ...objectChange});
       }
       
@@ -357,7 +355,7 @@ const HandleChangeData = (e) => {
               className="peer"
               name="MasterGemstone"
               onClick={ToogleStone}
-              defaultChecked={(requirementData.masterGemstoneId!==null &&requirementData.masterGemstoneId>0) || !completedSteps[currentStep-1]? true : false}
+              defaultChecked={(requirementData.masterGemstoneId!==null &&requirementData.masterGemstoneId>0) || (requirementData.masterGemstoneId!==null&& !completedSteps[currentStep-1])? true : false}
             />
           </div>
           <div>
@@ -445,7 +443,7 @@ const HandleChangeData = (e) => {
               className="peer"
               name="Stones"
               onClick={ToogleStone}
-              defaultChecked={(requirementData.stonesId!==null &&requirementData.stonesId>0) || !completedSteps[currentStep-1]? true : false}
+              defaultChecked={(requirementData.stonesId>0 || !completedSteps[currentStep-1]) && requirementData.stonesId!==null? true : false}
               
             />
           </div>

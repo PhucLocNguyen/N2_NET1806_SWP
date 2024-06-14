@@ -6,7 +6,7 @@ import Blog from "./component/blog/Blog.jsx"
 import Footer from "./component/footer/Footer.jsx"
 import Navbar from "./component/nav/Navbar.jsx"
 import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
-
+import PlanningList from './component/designProduct_plan/PlanningList.jsx'
 
 import AdminLayout from './component/admin/AdminLayout.jsx'
 import StaffList from './component/admin/staffList/StaffList.jsx'
@@ -25,11 +25,12 @@ function App() {
           {/* Route tự viết để test */}
           <Route path='/a' element={<AdminLayout> <StaffList /> </AdminLayout>}></Route>
 
-          <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
-          <Route path='/login' element={<Login />} />
 
-          {/* Route tự viết không ghi qua phần này */}
-          
+           <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
+           <Route path='/login' element={<Login />} />
+
+           {/* Route tự viết không ghi qua phần này */}
+         
           {publicRoutes.map((route, index) => {
             let Page = route.component
 
@@ -52,7 +53,6 @@ function App() {
         </Routes>
       </Suspense>
     </AuthProvider>
-
   )
 }
 

@@ -39,7 +39,7 @@ const publicRoutes = [
       component: Blog
    },
    {
-      path: '/design/:id/create-requirement',
+      path: '/design/create-requirement/:id',
       component: RequirementOrderSection
    }
 ]

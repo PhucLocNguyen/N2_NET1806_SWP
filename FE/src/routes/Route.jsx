@@ -2,10 +2,10 @@ import { lazy } from "react"
 
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
-const BlogList = lazy(() => import('../component/blog_list/blogList'));
+// const BlogList = lazy(() => import('../component/blog_list/blogList'));
 const ListAll = lazy(() => import('../component/category/ListAll'));
-const DesignInfo = lazy(() => import('../component/order/DesignInfo'));
-const Blog = lazy(() => import('../component/blog/Blog'));
+ const DesignInfo = lazy(() => import('../component/order/DesignInfo'));
+// const Blog = lazy(() => import('../component/blog/Blog'));
 const RequirementOrderSection = lazy(() => import('../component/requirements/Create/RequirementOrderSection'));
 
 
@@ -30,14 +30,14 @@ const publicRoutes = [
       path: '/design/:id',
       component: DesignInfo
    },
-   {
-      path: '/blog',
-      component: BlogList
-   },
-   {
-      path: '/blog/:id',
-      component: Blog
-   },
+   // {
+   //    path: '/blog',
+   //    component: BlogList
+   // },
+   // {
+   //    path: '/blog/:id',
+   //    component: Blog
+   // },
    {
       path: '/design/:id/create-requirement',
       component: RequirementOrderSection

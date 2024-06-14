@@ -100,7 +100,8 @@ namespace API.Controllers
                 Design.ManagerId = null;
                 _unitOfWork.DesignRepository.Insert(Design);
                 _unitOfWork.Save();
-                return Ok("Create successfully");
+                return Ok(Design.toDesignDTO());
+                /*return Ok("Create successfully");*/
             }
             else
             {

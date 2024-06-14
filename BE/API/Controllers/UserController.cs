@@ -67,11 +67,8 @@ namespace API.Controllers
         {
             try
             {
-                /*loginDTO.Password = BCrypt.Net.BCrypt.HashPassword(loginDTO.Password);*/
                 Expression<Func<Users, bool>> filter = x =>
                     (x.Username.Equals(loginDTO.Username));
-                /*if (!ModelState.IsValid)
-                    return BadRequest(ModelState);*/
                 var user = _unitOfWork.UserRepository.Get(filter,
                     includes: m => m.Role
                     ).FirstOrDefault();

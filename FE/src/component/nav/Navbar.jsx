@@ -112,10 +112,8 @@ function Navbar() {
                   </Link>
                 </div>
                 <div className="group">
-                  <Link
-                    to="/blog"
-                    className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200"
-                  >
+
+                  <Link to='/blog' className="font-normal text-sm hover:text-[#C6AD8A] hover:duration-200">
                     Blog
                     <KeyboardArrowUpIcon
                       style={{

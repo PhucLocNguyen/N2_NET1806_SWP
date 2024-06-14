@@ -19,10 +19,10 @@ const fetchApiDesignById = async (id) => {
 
    try {
 
-      let design = await api.get(`/Design/${id}`)
-      console.log('Fetch API Design by ID')
-      return design.data
-
+      let response = await api.get(`/Design/${id}`)
+         const dataGetById = response.data;
+         return dataGetById;
+    
    } catch (error) {
       console.log(error)
    }

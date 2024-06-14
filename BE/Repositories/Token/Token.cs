@@ -43,7 +43,7 @@ namespace Repositories.Token
             ( _config["JWT:Issuer"],
             _config["JWT:Audience"],
             authClaims,
-            DateTime.Now.AddHours(1),
+            expires: DateTime.Now.AddHours(1),
             signingCredentials: creds
             );
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);

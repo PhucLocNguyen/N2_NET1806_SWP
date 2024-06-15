@@ -1,4 +1,5 @@
-﻿using API.Model.UserModel;
+﻿using API.Model.TypeOfJewellryModel;
+using API.Model.UserModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -27,6 +28,10 @@ namespace API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            if (checkDuplicateUsername(requestRegisterAccount.Username))
+            {
+                return BadRequest("Username is existed");
+            }
             if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
             {
                 return BadRequest("PasswordConfirm is not correct");
@@ -42,15 +47,12 @@ namespace API.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Role.Customer)]
         public  IActionResult RegisterForAdmin([FromBody] RequestRegisterAccount requestRegisterAccount, [FromQuery] RoleEnum roleEnum)
         {
-            /*try
-            {
-                
-            }catch (InvalidE ex)
-            {
-
-            }*/
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            if (checkDuplicateUsername(requestRegisterAccount.Username))
+            {
+                return BadRequest("Username is existed");
+            }
             if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
             {
                 return BadRequest("PasswordConfirm is not correct");
@@ -84,6 +86,40 @@ namespace API.Controllers
             {
                 return BadRequest("The account does not register");
             }
+        }
+
+        [HttpGet]
+        public IActionResult GetAll([FromQuery] string RoleFromInput = null)
+        {
+            Expression<Func<Users, bool>> filter = x =>
+                (string.IsNullOrEmpty(RoleFromInput) || x.Role.Name.Contains(RoleFromInput));
+            var Users = _unitOfWork.UserRepository.Get(filter);
+            return Ok(Users);
+        }
+
+        [HttpGet("{username}")]
+        public IActionResult GetByUsername([FromRoute]string username)
+        {
+            Expression<Func<Users, bool>> filter = x =>
+                (string.IsNullOrEmpty(username) || x.Username.Equals(username));
+            var Users = _unitOfWork.UserRepository.Get(filter);
+            return Ok(Users);
+        }
+
+        private bool checkDuplicateUsername(string username)
+        {
+            bool check = true;
+            var existedAccount = _unitOfWork.UserRepository.Get();
+            foreach (var item in existedAccount)
+            {
+                if (!item.Username.Equals(username)) 
+                {
+                    check = false;
+                    break;
+                }
+            }
+            if (existedAccount == null) { return false;}
+            return true;
         }
     }
 }

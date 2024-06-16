@@ -1,4 +1,4 @@
-﻿using Repository.Entity;
+﻿using Repositories.Entity;
 
 namespace API.Model.WarrantyCardModel
 {
@@ -10,6 +10,16 @@ namespace API.Model.WarrantyCardModel
             {
                 Title = requestWarrantyCardModel.Title,
                 Description = requestWarrantyCardModel.Description
+            };
+        }
+
+        public static WarrantyCardDTO ToWarrantyCardDTO(this WarrantyCard warrantyCard)
+        {
+            return new WarrantyCardDTO
+            {
+                WarrantyCardId = warrantyCard.WarrantyCardId,
+                Title = warrantyCard.Title,
+                Description = warrantyCard.Description
             };
         }
     }

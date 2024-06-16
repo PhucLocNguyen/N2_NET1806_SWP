@@ -17,7 +17,7 @@ function Blog() {
   return (
     <>
       {/* Container */}
-      <div className="w-full h-3/4 bg-[#fbfbfb] mb-10">
+      <div className="w-full h-3/4 bg-[#fbfbfb] my-10">
         <div className="flex items-center justify-center border-b-[1px] border-[#e1e1e1] w-full h-[130px]">
           <h1 className="text-3xl font-light">
             We Working On New Luxury Collection

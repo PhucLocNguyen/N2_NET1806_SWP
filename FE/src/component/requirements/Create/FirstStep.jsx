@@ -6,7 +6,7 @@ import "./style.css";
 import { TextField } from "@mui/material";
 import { FetchApiMaterial } from "../../../api/Requirements/FetchApiMaterial";
 function FirstStep({ handleCompleteStep }) {
-  const { currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState } =
+  const { currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState , animate} =
     useContext(multiStepContext);
   const [isAllowed, setAllowed] = useState(false);
   const [data, setData] = useState({
@@ -20,8 +20,8 @@ function FirstStep({ handleCompleteStep }) {
     const materialApi = FetchApiMaterial().then((res)=>{
       setMaterialList([...res]);
     })
+    
   },[])
-  console.log(materialList);
   useEffect(() => {
     var output = true;
     Object.entries(data).forEach(([key, value]) => {

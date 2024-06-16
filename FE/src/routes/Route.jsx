@@ -7,6 +7,9 @@ const ListAll = lazy(() => import('../component/category/ListAll'));
 const DesignInfo = lazy(() => import('../component/order/DesignInfo'));
 const Blog = lazy(() => import('../component/blog/Blog'));
 const RequirementOrderSection = lazy(() => import('../component/requirements/Create/RequirementOrderSection'));
+const Login = lazy(() => import('../component/login/Login'));
+const PageError = lazy(() => import('../component/pageerror/PageError'));
+
 
 
 const publicRoutes = [
@@ -38,13 +41,21 @@ const publicRoutes = [
       component: Blog
    },
    {
-      path: '/design/:id/create-requirement',
-      component: RequirementOrderSection
+      path: '/login',
+      component: Login
+   },
+   {
+      path: '/error',
+      component: PageError
    }
 ]
 
 const privateRoutes = [
-
+   {
+      path: '/design/:id/create-requirement',
+      component: RequirementOrderSection,
+      role: 'nguyenduchung'
+   }
 ]
 
 export { publicRoutes, privateRoutes }

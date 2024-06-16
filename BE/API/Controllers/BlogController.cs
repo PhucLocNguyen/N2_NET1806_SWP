@@ -61,7 +61,7 @@ namespace API.Controllers
             var Blog = _unitOfWork.BlogRepository.GetByID(id, m => m.Manager);
             if (Blog == null)
             {
-                return NotFound();
+                return NotFound("");
             }
 
             return Ok(Blog.toBlogDTO());

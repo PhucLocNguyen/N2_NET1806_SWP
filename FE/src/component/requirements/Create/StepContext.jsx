@@ -6,9 +6,10 @@ import { PostApiDesign } from "../../../api/Requirements/PostApiDesign";
 import { PostApiRequirement } from "../../../api/Requirements/PostRequirement";
 
 export const multiStepContext = createContext();
-export function StepContext({children, designId}) {
+export function StepContext({children, designId, animate, scope}) {
     const [currentStep, setCurrentStep] = useState(1);
     const [designRuleState, setDesignRule] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
     const [requirementData, setRequirementData] = useState({
         designParentId: designId,
         material: 0,
@@ -17,6 +18,14 @@ export function StepContext({children, designId}) {
         stonesId: 0,
         customerNote:"",
     });
+    useEffect(()=>{
+var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
+        if(requirementData.masterGemstoneId==0 || requirementData.masterGemstoneId==null){
+            target.style.display="none";
+        }else{
+            target.style.display="block";
+        }
+    },[requirementData])
     useEffect(()=>{
         // dang bi loi khong thay doi duoc type ò jewellryid truoc khi chay ham thu 2
         const reachingData = async ()=>{
@@ -50,34 +59,6 @@ export function StepContext({children, designId}) {
             materialId: requirementData.material};
 
             const postDesignChild = await PostApiDesign(dataToSubmit);
-            console.log(postDesignChild);
-            // {
-            //     "designId": 20,
-            //     "parentId": 1,
-            //     "designName": "Ban thiet ke nhan van",
-            //     "image": "https://miro.medium.com/v2/resize:fit:1400/0*ClQ5m7NiTxNPatgf.jpg",
-            //     "description": "Day la mo ta cho ban thiet ke nhan van",
-            //     "weightOfMaterial": 150,
-            //     "stonesId": 7,
-            //     "masterGemstoneId": 17,
-            //     "managerId": null,
-            //     "materialId": 7,
-            //     "typeOfJewelleryId": 1,
-            //     "manager": null,
-            //     "masterGemstone": null,
-            //     "material": null,
-            //     "requirements": [],
-            //     "stone": null,
-            //     "typeOfJewellery": null
-            // }
-            
-            //Data post requirement
-            // {
-            //     "status": "open",
-            //     "size": "20",
-            //     "designId":20,
-            //     "customerNote": "abc",
-            //   }
         const dataToSendRequirement = {
             status: "1",
             size:requirementData.size,
@@ -87,10 +68,14 @@ export function StepContext({children, designId}) {
         const PostRequirementCustomer = await PostApiRequirement(dataToSendRequirement);
         console.log(PostRequirementCustomer);
     }
-   
+   useEffect(()=>{
+    if(isSubmit){
+        SubmitDesignFromCustomer();
+    }
+   })
     console.log(requirementData);
     return (  <>
-    <multiStepContext.Provider value={{currentStep, setCurrentStep, requirementData, setRequirementData, SubmitDesignFromCustomer, designRuleState}}>
+    <multiStepContext.Provider value={{currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState, setIsSubmit, animate, scope}}>
         {children}
     </multiStepContext.Provider>
     </>);

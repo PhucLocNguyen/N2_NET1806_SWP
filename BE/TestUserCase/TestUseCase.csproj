@@ -27,6 +27,9 @@
     <None Update="TestData\dataTest.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TestData\dataTestMaterGemStone.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestData\dataTestRegist.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

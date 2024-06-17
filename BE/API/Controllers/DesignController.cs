@@ -69,7 +69,7 @@ namespace API.Controllers
             var Design = _unitOfWork.DesignRepository.GetByID(id, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery);
             if (Design == null)
             {
-                return NotFound();
+                return NotFound("Design is not existed");
             }
 
             return Ok(Design.toDesignDTO());
@@ -130,7 +130,7 @@ namespace API.Controllers
             var existedDesign = _unitOfWork.DesignRepository.GetByID(id);
             if (existedDesign == null)
             {
-                return NotFound();
+                return NotFound("Design is not existed");
             }
             existedDesign.ParentId = requestCreateDesignModel.ParentId;
             existedDesign.Image = requestCreateDesignModel.Image;
@@ -159,7 +159,7 @@ namespace API.Controllers
             var existedDesign = _unitOfWork.DesignRepository.GetByID(id);
             if (existedDesign == null)
             {
-                return NotFound();
+                return NotFound("Design is not existed");
             }
             _unitOfWork.DesignRepository.Delete(existedDesign);
             _unitOfWork.Save();

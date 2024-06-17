@@ -184,3 +184,4 @@ C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\obj\Debug\net8.0\TestUseCa
 C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\obj\Debug\net8.0\TestUseCase.genruntimeconfig.cache
 C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\obj\Debug\net8.0\ref\TestUseCase.dll
 C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\TestData\dataTestRegist.csv
+C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\TestData\dataTestMaterGemStone.csv

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
-using static TestUseCase.TestLogin;
+using static TestUseCase.TestLoginForStaff;
 using System.Globalization;
 using API.Model.UserModel;
 using Microsoft.AspNetCore.Mvc;
@@ -68,7 +68,7 @@ namespace TestUseCase
 
         [TestCaseSource(nameof(TestDataFromCSV))]
         [Test]
-        public async Task Login_ValidCredentials_ReturnsExpectedValue(RegisterTest regist)
+        public async Task Regist_ValidCredentials_ReturnsExpectedValue(RegisterTest regist)
         {
             // Arrange
             var registerAccount = new RequestRegisterAccount()

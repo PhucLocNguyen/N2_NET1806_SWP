@@ -82,7 +82,8 @@ namespace API.Controllers
                 var registerAccount = requestRegisterAccount.toUserEntity(roleEntity);
                 _unitOfWork.UserRepository.Insert(registerAccount);
                 _unitOfWork.Save();
-                return Ok(registerAccount.toUserDTO());
+                //return Ok(registerAccount.toUserDTO());
+                return Ok("Regist Successfully");
             }
             catch (DbUpdateException ex)
             {

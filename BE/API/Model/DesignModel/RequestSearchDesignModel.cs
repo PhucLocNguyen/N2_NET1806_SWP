@@ -16,7 +16,7 @@
 
         public string? MasterGemstone { get; set; }
 
-        public string? ManagerId { get; set; }
+        public int? ManagerId { get; set; }
 
         public string? TypeOfJewellery { get; set; }
 
@@ -26,7 +26,7 @@
 
         public int pageIndex { get; set; } = 1;
 
-        public int pageSize { get; set; } = 10;
+        public int pageSize { get; set; } = int.MaxValue;
     }
     public class SortContent
     {

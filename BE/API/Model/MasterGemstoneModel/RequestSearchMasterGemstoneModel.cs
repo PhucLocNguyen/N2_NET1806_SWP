@@ -4,7 +4,7 @@
     {
         public string? Kind { get; set; } = null!;
 
-        public string? Size { get; set; }
+        public decimal? Size { get; set; }
        
         public string? Clarity { get; set; }
 
@@ -24,12 +24,14 @@
 
         public int pageIndex { get; set; } = 1;
 
-        public int pageSize { get; set; } = 10;
+        public int pageSize { get; set; } = int.MaxValue;
     }
     public class SortContent
     {
         public SortMasterGemstoneByEnum sortMasterGemstoneBy { get; set; }
         public SortMasterGemstoneTypeEnum sortMasterGemstoneType { get; set; }
+
+        public GroupBy groupBy { get; set; }
     }
 
     public enum SortMasterGemstoneByEnum
@@ -46,5 +48,10 @@
     {
         Ascending = 1,
         Descending = 2,
+    }
+
+    public enum GroupBy
+    {
+        True = 1,
     }
 }

@@ -12,9 +12,9 @@
 
         public DateOnly? ToExpectedDelivery { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
-        public decimal? FromGoldPriceAtMoment { get; set; } = decimal.Zero;
+        public decimal? FromMaterialPriceAtMoment { get; set; } = decimal.Zero;
 
-        public decimal? ToGoldPriceAtMoment { get; set; }
+        public decimal? ToMaterialPriceAtMoment { get; set; }
 
         public decimal? FromStonePriceAtMoment { get; set; } = decimal.Zero;
 
@@ -32,7 +32,7 @@
 
         public int pageIndex { get; set; } = 1;
 
-        public int pageSize { get; set; } = 10;
+        public int pageSize { get; set; } = int.MaxValue;
     }
     public class SortContent
     {

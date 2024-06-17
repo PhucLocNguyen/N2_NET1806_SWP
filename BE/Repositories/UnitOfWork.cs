@@ -1,5 +1,7 @@
-﻿
-using Repositories;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Repositories.Entity;
+
 namespace Repositories
 
 {
@@ -8,6 +10,7 @@ namespace Repositories
         private MyDbContext _context;
         private GenericRepository<Blog> _blog;
         private GenericRepository<Design> _design;
+        private GenericRepository<DesignRule> _designRule;
         private GenericRepository<Have> _have;
         private GenericRepository<MasterGemstone> _masterGemstone;
         private GenericRepository<Material> _material;
@@ -15,8 +18,9 @@ namespace Repositories
         private GenericRepository<Requirement> _requirement;
         private GenericRepository<Stones> _stone;
         private GenericRepository<TypeOfJewellery> _typeOfJewellry;
+        private GenericRepository<Users> _user;
+        private GenericRepository<Role> _role;
         private GenericRepository<WarrantyCard> _warrantyCard;
-        private GenericRepository<AppUser> _user;
 
 
         public UnitOfWork(MyDbContext context)
@@ -45,6 +49,18 @@ namespace Repositories
                     this._design = new GenericRepository<Design>(_context);
                 }
                 return _design;
+            }
+
+        }
+        public GenericRepository<DesignRule> DesignRuleRepository
+        {
+            get
+            {
+                if (_designRule == null)
+                {
+                    this._designRule = new GenericRepository<DesignRule>(_context);
+                }
+                return _designRule;
             }
 
         }
@@ -108,7 +124,6 @@ namespace Repositories
             }
 
         }
-      
         public GenericRepository<Stones> StoneRepository
         {
             get
@@ -133,6 +148,30 @@ namespace Repositories
             }
 
         }
+        public GenericRepository<Users> UserRepository
+        {
+            get
+            {
+                if (_user == null)
+                {
+                    this._user = new GenericRepository<Users>(_context);
+                }
+                return _user;
+            }
+
+        }
+        public GenericRepository<Role> RoleRepository
+        {
+            get
+            {
+                if (_role == null)
+                {
+                    this._role = new GenericRepository<Role>(_context);
+                }
+                return _role;
+            }
+
+        }
         public GenericRepository<WarrantyCard> WarrantyCardRepository
         {
             get
@@ -142,19 +181,6 @@ namespace Repositories
                     this._warrantyCard = new GenericRepository<WarrantyCard>(_context);
                 }
                 return _warrantyCard;
-            }
-
-        }
-
-        public GenericRepository<AppUser> UserRepository
-        {
-            get
-            {
-                if (_user == null)
-                {
-                    this._user = new GenericRepository<AppUser>(_context);
-                }
-                return _user;
             }
 
         }
@@ -183,6 +209,16 @@ namespace Repositories
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+        public bool IsForeignKeyConstraintViolation(DbUpdateException ex)
+        {
+            if (ex.InnerException is SqlException sqlException)
+            {
+                // Error number 547 corresponds to a foreign key constraint violation in SQL Server
+                return sqlException.Number == 547;
+            }
+
+            return false;
         }
     }
 }

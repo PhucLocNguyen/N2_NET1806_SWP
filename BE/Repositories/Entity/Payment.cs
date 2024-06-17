@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Repositories;
+namespace Repositories.Entity;
 
 public partial class Payment
 {
@@ -13,11 +13,11 @@ public partial class Payment
 
     public DateTime? CompletedAt { get; set; }
 
-    public string? CustomerId { get; set; }
+    public int? CustomerId { get; set; }
 
     public int? RequirementsId { get; set; }
 
-    public virtual AppUser? Customer { get; set; }
+    public virtual Users? Customer { get; set; }
 
     public virtual Requirement? Requirements { get; set; }
 }

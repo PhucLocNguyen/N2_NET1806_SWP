@@ -2,9 +2,10 @@
 {
     public class RequestCreateMasterGemstoneModel
     {
+        public int Id { get; set; }
         public string Kind { get; set; } = null!;
 
-        public string Size { get; set; }
+        public decimal Size { get; set; }
 
         public decimal Price { get; set; }
 
@@ -15,5 +16,7 @@
         public decimal Weight { get; set; }
 
         public string Shape { get; set; }
+
+        public string Image { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Repositories;
+namespace Repositories.Entity;
 
 public partial class Blog
 {
@@ -9,11 +9,11 @@ public partial class Blog
 
     public string Title { get; set; } = null!;
 
-    public string? Description { get; set; }
+    public string Description { get; set; } = null!;
 
-    public string? Image { get; set; }
+    public string Image { get; set; } = null!;
 
-    public string? ManagerId { get; set; }
+    public int? ManagerId { get; set; }
 
-    public virtual AppUser? Manager { get; set; }
+    public virtual Users? Manager { get; set; }
 }

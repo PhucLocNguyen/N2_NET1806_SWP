@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "UphPObf/zQfdk2kCifZnVSE4WtFMDDKxvlcroD2wcwmEj8bfPKA6bQ4t4Uc6sdT3BzJ7Du/RunTvgF3ciAaCYg==",
+  "dgSpecHash": "7CQhYprDqhB/fbtljjQgjYYp1VOxTTVC9GFiYIF/oY+sIDxfKTxdzxf4cABlTuEmCyA/S6V3WArvFZoGcmTbFw==",
   "success": true,
-  "projectFilePath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj",
+  "projectFilePath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.6\\microsoft.aspnetcore.authentication.jwtbearer.8.0.6.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.6\\microsoft.aspnetcore.cryptography.internal.8.0.6.nupkg.sha512",

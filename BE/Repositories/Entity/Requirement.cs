@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Repositories;
+namespace Repositories.Entity;
 
 public partial class Requirement
 {
@@ -15,7 +15,7 @@ public partial class Requirement
 
     public string? Design3D { get; set; }
 
-    public decimal? GoldPriceAtMoment { get; set; }
+    public decimal? MaterialPriceAtMoment { get; set; }
 
     public decimal? StonePriceAtMoment { get; set; }
 
@@ -27,13 +27,13 @@ public partial class Requirement
 
     public string? StaffNote { get; set; }
 
-    public int? DesignId { get; set; }
+    public int DesignId { get; set; }
 
-    public virtual Design? Design { get; set; }
+    public virtual Design Design { get; set; } = null!;
 
     public virtual ICollection<Have> Haves { get; set; } = new List<Have>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    public virtual ICollection<UsersRequirement> UsersRequirements { get; set; } = new List<UsersRequirement>();
+    public virtual ICollection<UserRequirement> UserRequirements { get; set; } = new List<UserRequirement>();
 }

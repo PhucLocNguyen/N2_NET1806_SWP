@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Repositories;
+namespace Repositories.Entity;
 
 public partial class Have
 {

@@ -27,9 +27,7 @@ namespace API.Model.DesignRuleModel
                 MaxSizeMasterGemstone = designRule.MaxSizeMasterGemstone,
                 MinSizeJewellery = designRule.MinSizeJewellery,
                 MaxSizeJewellery = designRule.MaxSizeJewellery,
-                TypeOfJewellery = new RequestCreateTypeOfJewelleryModel() {Id = designRule.DesignRuleId,
-                    Name = designRule.TypeOfJewellery.Name,
-                                                                            Image = designRule.TypeOfJewellery.Image},
+                TypeOfJewellery = TypeOfJewelleryMapper.toCreateTypeOfJewellery(designRule.TypeOfJewellery),
             };
         }
     }

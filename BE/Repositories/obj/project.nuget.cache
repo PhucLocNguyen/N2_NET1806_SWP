@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pP6I+UNE6w5bKXmR7AbMxYZRab8DpBAagvpaStgfsfH6uhEiDAUxDPPbW708GlSaE+EbFeFFkgIUblJ12W+pAw==",
+  "dgSpecHash": "atN8PpaO0W1mzxOAKHtpIbbPOpq8JRLurhi6B5vK3xS5xVWeP6zyQwN7ZRSrKoNQJWRcA49em3mtofLc3KYKVA==",
   "success": true,
-  "projectFilePath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Repositories\\Repositories.csproj",
+  "projectFilePath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

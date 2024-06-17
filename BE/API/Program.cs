@@ -81,6 +81,7 @@ namespace API
         }
     });
             });
+            builder.Services.AddAuthorization();
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -97,15 +98,14 @@ namespace API
                 app.UseSwaggerUI();
             }
 
-
             app.UseHttpsRedirection();
 
             app.UseCors(x => x
-                 .AllowAnyMethod()
-                 .AllowAnyHeader()
-                 .AllowCredentials()
-                  //.WithOrigins("https://localhost:44351))
-                  .SetIsOriginAllowed(origin => true));
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+                //.WithOrigins("https://localhost:44351))
+                .SetIsOriginAllowed(origin => true));
 
             app.UseAuthentication();
             app.UseAuthorization();

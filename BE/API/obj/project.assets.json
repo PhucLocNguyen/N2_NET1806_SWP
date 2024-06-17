@@ -1741,6 +1741,21 @@
         "runtime": {
           "bin/placeholder/Repositories.dll": {}
         }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "Repositories": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "7.1.2"
+        },
+        "compile": {
+          "bin/placeholder/Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Services.dll": {}
+        }
       }
     }
   },
@@ -4702,6 +4717,11 @@
       "type": "project",
       "path": "../Repositories/Repositories.csproj",
       "msbuildProject": "../Repositories/Repositories.csproj"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4715,6 +4735,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.6",
       "Microsoft.Extensions.Identity.Core >= 8.0.6",
       "Repositories >= 1.0.0",
+      "Services >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -4724,11 +4745,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\API.csproj",
+      "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\API.csproj",
+      "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\obj\\",
+      "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4745,8 +4766,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Repositories\\Repositories.csproj": {
-              "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Repositories\\Repositories.csproj"
+            "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
+              "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj"
+            },
+            "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj": {
+              "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj"
             }
           }
         }

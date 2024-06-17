@@ -17,6 +17,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "8.0.6",
           "Microsoft.Extensions.Identity.Core": "8.0.6",
           "Repositories": "1.0.0",
+          "Services": "1.0.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
@@ -1030,6 +1031,16 @@
         "runtime": {
           "Repositories.dll": {}
         }
+      },
+      "Services/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "Repositories": "1.0.0",
+          "System.IdentityModel.Tokens.Jwt": "7.1.2"
+        },
+        "runtime": {
+          "Services.dll": {}
+        }
       }
     }
   },
@@ -1663,6 +1674,11 @@
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
     "Repositories/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

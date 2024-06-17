@@ -28,8 +28,6 @@ namespace API.Controllers
                 (string.IsNullOrEmpty(requestSearchRequirementModel.Status) || x.Status.Contains(requestSearchRequirementModel.Status)) &&
                 (string.IsNullOrEmpty(requestSearchRequirementModel.Size) || x.Size.Contains(requestSearchRequirementModel.Size)) &&
                 (x.DesignId == requestSearchRequirementModel.DesignId || requestSearchRequirementModel.DesignId == null) &&
-                x.ExpectedDelivery <= requestSearchRequirementModel.ToExpectedDelivery &&
-                (x.ExpectedDelivery >= requestSearchRequirementModel.FromExpectedDelivery || requestSearchRequirementModel.FromExpectedDelivery == null) && 
                 x.MaterialPriceAtMoment >= requestSearchRequirementModel.FromMaterialPriceAtMoment &&
                 (x.MaterialPriceAtMoment <= requestSearchRequirementModel.ToMaterialPriceAtMoment || requestSearchRequirementModel.ToMaterialPriceAtMoment == null) &&
                 x.StonePriceAtMoment >= requestSearchRequirementModel.FromStonePriceAtMoment &&

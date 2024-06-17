@@ -2,7 +2,7 @@
 {
     public class RequestCreateMasterGemstoneModel
     {
-        public int Id { get; set; }
+        public int MasterGemstoneId { get; set; }
         public string Kind { get; set; } = null!;
 
         public decimal Size { get; set; }

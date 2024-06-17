@@ -42,6 +42,13 @@ namespace API.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Role.Customer)]
         public  IActionResult RegisterForAdmin([FromBody] RequestRegisterAccount requestRegisterAccount, [FromQuery] RoleEnum roleEnum)
         {
+            /*try
+            {
+                
+            }catch (InvalidE ex)
+            {
+
+            }*/
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
@@ -60,18 +67,21 @@ namespace API.Controllers
         {
             try
             {
-                loginDTO.Password = BCrypt.Net.BCrypt.HashPassword(loginDTO.Password);
+                /*loginDTO.Password = BCrypt.Net.BCrypt.HashPassword(loginDTO.Password);*/
                 Expression<Func<Users, bool>> filter = x =>
                     (x.Username.Equals(loginDTO.Username));
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                /*if (!ModelState.IsValid)
+                    return BadRequest(ModelState);*/
                 var user = _unitOfWork.UserRepository.Get(filter,
                     includes: m => m.Role
                     ).FirstOrDefault();
 
-                if (BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) return BadRequest("Username not found and/or password incorrect");
+                if (user == null) { return BadRequest("Invalid Username"); }
+
+                if (!BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) { return BadRequest("Password incorrect"); }
 
                 return Ok(await _tokenService.CreateToken(user));
+                //return Ok("Login Successfully");
             }
             catch (NullReferenceException ex)
             {

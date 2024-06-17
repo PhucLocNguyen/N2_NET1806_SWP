@@ -23,7 +23,6 @@ namespace API.Controllers
         {
             var sortBy = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneBy.ToString() : null;
             var sortType = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneType.ToString() : null;
-            var groupBy = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.groupBy.ToString() : null ;
             Expression<Func<MasterGemstone, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Kind) || x.Kind.Contains(requestSearchMasterGemstoneModel.Kind)) &&
                 (x.Size == requestSearchMasterGemstoneModel.Size || requestSearchMasterGemstoneModel.Size == null) &&
@@ -37,10 +36,6 @@ namespace API.Controllers
 
             Func<IQueryable<MasterGemstone>, IOrderedQueryable<MasterGemstone>> orderBy = null;
 
-            if (!string.IsNullOrEmpty(groupBy))
-            {
-                orderBy = query => (IOrderedQueryable<MasterGemstone>)query.GroupBy(p => EF.Property<object>(p, sortBy));
-            }
 
             if (!string.IsNullOrEmpty(sortBy))
             {

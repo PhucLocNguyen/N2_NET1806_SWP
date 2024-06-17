@@ -4,7 +4,7 @@ namespace API.Model.StonesModel
 {
     public class RequestCreateStonesModel
     {
-        public int Id { get; set; }
+        public int StonesId { get; set; }
         public string Kind { get; set; }
         public decimal Size { get; set; }
         public int Quantity { get; set; }

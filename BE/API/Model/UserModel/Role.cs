@@ -7,7 +7,6 @@
         DesignStaff = 3,
         ProductStaff = 4,
         Sale = 5,
-
     }
 
     public static class RoleConst

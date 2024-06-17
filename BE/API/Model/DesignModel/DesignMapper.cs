@@ -51,7 +51,7 @@ namespace API.Model.DesignModel
                 Stone = design.Stone != null ? StonesMapper.toCreateStones(design.Stone) : null,
                 MasterGemstone = design.MasterGemstone != null ? MasterGemstoneMapper.toCreateMasterGemstones(design.MasterGemstone) : null,
                 Manager = design.Manager,
-                TypeOfJewellery = new RequestCreateTypeOfJewelleryModel() {Id = design.TypeOfJewellery.TypeOfJewelleryId, Name = design.TypeOfJewellery.Name, Image = design.TypeOfJewellery.Image },
+                TypeOfJewellery = TypeOfJewelleryMapper.toCreateTypeOfJewellery(design.TypeOfJewellery),
                 Material = design.Material != null ? MaterialMapper.toCreateMaterial(design.Material) : null,
             };
         }

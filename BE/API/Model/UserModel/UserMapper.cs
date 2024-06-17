@@ -1,6 +1,8 @@
 ﻿using Repositories.Entity;
 using System.Security.Cryptography;
 using BCrypt.Net;
+using static Services.BusinessModel.LoginGoogle;
+using System.Data;
 
 namespace API.Model.UserModel
 {
@@ -28,6 +30,18 @@ namespace API.Model.UserModel
                 Name = user.Name,
                 Email = user.Email,
                 
+            };
+        }
+        public static Users FromUserInfoGoogleToUserEntity(this UserInfo user, Role role) {
+
+            return new Users() { 
+                Username = user.Email,
+            Email = user.Email,
+            Name = user.FamilyName+" " +user.GivenName,
+            Image = user.Picture,
+            Password = BCrypt.Net.BCrypt.HashPassword(user.Password),
+            RoleId = user.RoleId,
+            Role = role
             };
         }
     }

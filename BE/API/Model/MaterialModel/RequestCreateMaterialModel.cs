@@ -2,7 +2,8 @@
 {
     public class RequestCreateMaterialModel
     {
-        public int Id { get; set; }
+        public int MaterialId { get; set; }
+
         public string Name { get; set; } = null!;
 
         public decimal Price { get; set; }

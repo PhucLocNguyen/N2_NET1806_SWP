@@ -29,8 +29,6 @@ import Blog2 from '../../assets/home/blog2.png'
 import Blog3 from '../../assets/home/blog3.png'
 
 
-
-
 export const CustomButton = styled(Button)({
       '&:hover': {
             backgroundColor: '#fff',
@@ -40,6 +38,7 @@ export const CustomButton = styled(Button)({
 })
 
 function Home() {
+
       return (
             <>
                   <div className='px-[1.5rem] pt-[5rem]'>

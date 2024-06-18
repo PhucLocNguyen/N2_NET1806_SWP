@@ -7,21 +7,26 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import FormHelperText from '@mui/material/FormHelperText';
+
+import ApiCreateUser from '../../../api/admin/ApiCreateUser';
 
 function StaffPopup({ setIsOpenPopup }) {
 
    const [formData, setFormData] = useState({
-      name: '',
       username: '',
+      email: '',
       password: '',
+      passwordConfirm: '',
       role: ''
    });
 
    // Validation field
    const [errors, setErrors] = useState({
-      name: '',
       username: '',
+      email: '',
       password: '',
+      passwordConfirm: '',
       role: ''
    });
 
@@ -39,6 +44,9 @@ function StaffPopup({ setIsOpenPopup }) {
          case 'username':
             if (value.trim() === '') error = 'Username field cannot be blank'
             break
+         case 'email':
+            if (!value.match("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")) error = 'Invalid email'
+            break
          case 'password':
             if (value.trim() === '') {
                error = 'Password field cannot be blank'
@@ -53,6 +61,9 @@ function StaffPopup({ setIsOpenPopup }) {
             } else if (value.length < 12) {
                error = 'Password must be at least 12 characters long!'
             }
+            break
+         case 'confirm':
+            if (value.trim() === '') error = 'Confirm Password field cannot be blank'
             break
          case 'role':
             if (value === '') {
@@ -75,18 +86,40 @@ function StaffPopup({ setIsOpenPopup }) {
          ...formData,
          [name]: value
       });
+
    }
 
    const handleSubmit = (e) => {
       e.preventDefault();
       let isValid = true;
-      Object.keys(formData).forEach((name) => {
-         validateField(name, formData[name]);
-         if (values[name] === '') isValid = false;
+      let newError = {}
+
+      Object.keys(formData).forEach((key) => {
+
+         if (formData[key] === '') {
+            console.log(key)
+            newError[key] = 'Field cannot be blank'
+            isValid = false
+         }
+
       });
+
+      setErrors(newError);
+
+      if (isValid) {
+         const accessToken = localStorage.getItem('userInfo')
+         console.log(accessToken)
+         // Call Api
+         const CallApi = async () => {
+            const respone = await ApiCreateUser({ formData, accessToken })
+         }
+         CallApi()
+         console.log("Success")
+      }
+
    }
 
-   console.log(formData)
+
 
    return (
       <>
@@ -101,23 +134,37 @@ function StaffPopup({ setIsOpenPopup }) {
                </div>
                {/* Body */}
                <div className='px-[1rem] py-[1rem]'>
-                  <h2 className='text-[1.1rem] font-medium pb-[3px]'>Name</h2>
+                  {/* <h2 className='text-[1.1rem] font-medium pb-[3px]'>Name</h2>
                   <div>
                      <TextField name='name' value={formData.name} onChange={handleFormChange} onBlur={handleBlur} error={!!errors.name} helperText={errors.name} style={{ width: '100%' }} placeholder='NguyenDucHung' id="outlined-basic" variant="outlined" size='small' sx={{ minHeight: '4rem' }} />
+                  </div> */}
+
+                  {/* THem Email */}
+
+                  <h2 className='text-[1.1rem] font-medium pb-[3px]'>Email</h2>
+                  <div>
+                     <TextField name='email' value={formData.name} onChange={handleFormChange} onBlur={handleBlur} error={!!errors.email} helperText={errors.email} style={{ width: '100%' }} placeholder='hung@gmail.com' id="outlined-basic" variant="outlined" size='small' sx={{ minHeight: '4rem' }} />
+                  </div>
+
+                  {/* Ket thuc */}
+
+                  <h2 className='text-[1.1rem] font-medium pb-[3px]'>Username</h2>
+                  <div>
+                     <TextField name='username' onChange={handleFormChange} onBlur={handleBlur} error={!!errors.username} helperText={errors.username} style={{ width: '100%' }} placeholder='hungnd' id="outlined-basic" variant="outlined" size='small' sx={{ minHeight: '5.5rem' }} />
                   </div>
 
                   <div className='flex items-center justify-between'>
                      <div className='w-[47%]'>
-                        <h2 className='text-[1.1rem] font-medium pb-[3px]'>Username</h2>
+                        <h2 className='text-[1.1rem] font-medium pb-[3px]'>Password</h2>
                         <div>
-                           <TextField name='username' onChange={handleFormChange} onBlur={handleBlur} error={!!errors.username} helperText={errors.username} style={{ width: '100%' }} placeholder='hungnd' id="outlined-basic" variant="outlined" size='small' sx={{ minHeight: '5.5rem' }} />
+                           <TextField name='password' onChange={handleFormChange} onBlur={handleBlur} error={!!errors.password} helperText={errors.password} style={{ width: '100%' }} placeholder='hungnd' id="outlined-basic" variant="outlined" size='small' sx={{ minHeight: '5.5rem' }} />
                         </div>
                      </div>
 
                      <div className='w-[47%]'>
-                        <h2 className='text-[1.1rem] font-medium pb-[3px]'>Password</h2>
+                        <h2 className='text-[1.1rem] font-medium pb-[3px]'>Confirm Password</h2>
                         <div>
-                           <TextField name='password' onChange={handleFormChange} onBlur={handleBlur} error={!!errors.password} helperText={errors.password} style={{ width: '100%' }} id="outlined-basic" variant="outlined" size='small' sx={{ minHeight: '5.5rem' }} />
+                           <TextField name='passwordConfirm' onChange={handleFormChange} onBlur={handleBlur} error={!!errors.passwordConfirm} helperText={errors.passwordConfirm} style={{ width: '100%' }} id="outlined-basic" variant="outlined" size='small' sx={{ minHeight: '5.5rem' }} />
                         </div>
                      </div>
 
@@ -125,7 +172,7 @@ function StaffPopup({ setIsOpenPopup }) {
                   {/* Select Role */}
                   <div className='w-[100%]'>
                      <h2 className='text-[1.1rem] font-medium pb-[3px]'>Role</h2>
-                     <FormControl sx={{ minWidth: 120, width: '100%' }} size='small' error={!!errors.role}>
+                     <FormControl sx={{ minWidth: 120, width: '100%', minHeight: '4rem' }} size='small' error={!!errors.role}>
                         <Select
                            value={formData.role}
                            name='role'
@@ -137,11 +184,12 @@ function StaffPopup({ setIsOpenPopup }) {
                            <MenuItem value=''>
                               <em>None</em>
                            </MenuItem>
-                           <MenuItem value={1}>Manager</MenuItem>
-                           <MenuItem value={2}>Sale Staff</MenuItem>
-                           <MenuItem value={3}>Production Staff</MenuItem>
-                           <MenuItem value={4}>Design Staff</MenuItem>
+                           <MenuItem value={2}>Manager</MenuItem>
+                           <MenuItem value={5}>Sale Staff</MenuItem>
+                           <MenuItem value={4}>Production Staff</MenuItem>
+                           <MenuItem value={3}>Design Staff</MenuItem>
                         </Select>
+                        {errors.role && <FormHelperText>{errors.role}</FormHelperText>}
                      </FormControl>
                   </div>
                   <div className='mt-[1rem]'>

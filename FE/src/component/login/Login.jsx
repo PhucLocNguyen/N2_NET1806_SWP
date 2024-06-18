@@ -6,11 +6,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from "framer-motion";
 import { LoginApi, LoginWithGoogle } from '../../api/ApiLogin';
 import useAuth from '../../hooks/useAuth.jsx'
-import { useLocation } from 'react-router-dom';
+
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function Login() {
-    const { setAuth } = useAuth();
+    const { auth, setAuth } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     let [isToggle, setIsToggle] = useState(false);
     const [dataSource, setDataSource] = useState([]);
@@ -56,9 +60,11 @@ function Login() {
         if(e.target.name==="login"){
             pathReq="login";
         }
-       var loginApi = LoginApi(pathReq,listState, axiosConfig);
-       const { role , accessToken } = loginApi
+        const { role, accessToken } = await LoginApi(pathReq,listState, axiosConfig);
+        console.log('>>>' , role , accessToken)
         setAuth( {role, accessToken} )
+        console.log(auth.accessToken)
+        navigate(from, { replace: true })
     }
    
    

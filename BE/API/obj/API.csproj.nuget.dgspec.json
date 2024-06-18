@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj": {}
+    "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj": {
+    "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj",
+        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj",
+        "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj",
         "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\obj\\",
+        "outputPath": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj"
+              "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\Repositories.csproj": {
+                "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -117,14 +117,14 @@
         }
       }
     },
-    "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj": {
+    "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj",
+        "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\Repositories.csproj",
         "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\obj\\",
+        "outputPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",

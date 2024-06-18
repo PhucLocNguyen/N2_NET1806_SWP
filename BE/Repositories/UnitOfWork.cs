@@ -19,8 +19,8 @@ namespace Repositories
         private GenericRepository<Stones> _stone;
         private GenericRepository<TypeOfJewellery> _typeOfJewellry;
         private GenericRepository<Users> _user;
-        private GenericRepository<UserRequirement> _userRequirement;
         private GenericRepository<Role> _role;
+        private GenericRepository<UserRequirement> _userRequiremt;
         private GenericRepository<WarrantyCard> _warrantyCard;
 
 
@@ -165,14 +165,15 @@ namespace Repositories
         {
             get
             {
-                if (_userRequirement == null)
+                if (_userRequiremt == null)
                 {
-                    this._userRequirement = new GenericRepository<UserRequirement>(_context);
+                    this._userRequiremt = new GenericRepository<UserRequirement>(_context);
                 }
-                return _userRequirement;
+                return _userRequiremt;
             }
 
         }
+
         public GenericRepository<Role> RoleRepository
         {
             get

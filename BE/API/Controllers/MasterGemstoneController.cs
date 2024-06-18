@@ -18,6 +18,32 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("GetTotalRecords")]
+        public IActionResult GetTotalMasterGemstoneRecords([FromQuery] RequestSearchMasterGemstoneModel requestSearchMasterGemstoneModel)
+        {
+            var sortBy = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneBy.ToString() : null;
+            var sortType = requestSearchMasterGemstoneModel.SortContent != null ? requestSearchMasterGemstoneModel.SortContent?.sortMasterGemstoneType.ToString() : null;
+            Expression<Func<MasterGemstone, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Kind) || x.Kind.Contains(requestSearchMasterGemstoneModel.Kind)) &&
+                (x.Size == requestSearchMasterGemstoneModel.Size || requestSearchMasterGemstoneModel.Size == null) &&
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Clarity) || x.Clarity.Contains(requestSearchMasterGemstoneModel.Clarity)) &&
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Cut) || x.Cut.Contains(requestSearchMasterGemstoneModel.Cut)) &&
+                (string.IsNullOrEmpty(requestSearchMasterGemstoneModel.Shape) || x.Shape.Contains(requestSearchMasterGemstoneModel.Shape)) &&
+                x.Price >= requestSearchMasterGemstoneModel.FromPrice &&
+                (x.Price <= requestSearchMasterGemstoneModel.ToPrice || requestSearchMasterGemstoneModel.ToPrice == null) &&
+                x.Weight >= requestSearchMasterGemstoneModel.FromWeight &&
+                (x.Weight <= requestSearchMasterGemstoneModel.ToWeight || requestSearchMasterGemstoneModel.ToWeight == null);
+
+            var totalRecords = _unitOfWork.MasterGemstoneRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
+
         [HttpGet]
         public IActionResult SearchMasterGemstone([FromQuery] RequestSearchMasterGemstoneModel requestSearchMasterGemstoneModel)
         {
@@ -49,8 +75,6 @@ namespace API.Controllers
                 }
             }
 
-
-
             var reponseGemStone = _unitOfWork.MasterGemstoneRepository.Get(
                 filter,
                 orderBy,
@@ -67,7 +91,7 @@ namespace API.Controllers
             var MasterGemstone = _unitOfWork.MasterGemstoneRepository.GetByID(id, p => p.Designs);
             if (MasterGemstone == null)
             {
-                return NotFound();
+                return NotFound("MasterGemstone is not existed");
             }
             return Ok(MasterGemstone.toMasterGemstonesDTO());
         }
@@ -88,7 +112,7 @@ namespace API.Controllers
             var ExistedMasterGemstone = _unitOfWork.MasterGemstoneRepository.GetByID(id);
             if (ExistedMasterGemstone == null)
             {
-                return NotFound();
+                return NotFound("MasterGemstone is not existed");
             }
 
             ExistedMasterGemstone.Kind = requestCreateMasterGemstone.Kind;

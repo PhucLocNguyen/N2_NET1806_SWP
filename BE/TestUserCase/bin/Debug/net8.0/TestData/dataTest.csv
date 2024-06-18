@@ -1,4 +1,4 @@
 ﻿Username,Password,ExpectedValue
-ngan,Nganiuoi@0912,Login Successfully
-badat,Nganiuoi@0912,Invalid Username
-ngan,hksdhfskfbc,Password incorrect
+PhucLok,phucloc123!!@@,Login Successfully
+badat,phucloc123!!@@,Invalid Username
+PhucLok,badat,Password incorrect

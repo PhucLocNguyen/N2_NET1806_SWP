@@ -33,10 +33,11 @@ namespace Repositories
         public virtual DbSet<Payment> Payments { get; set; }
 
         public virtual DbSet<Requirement> Requirements { get; set; }
-        
+
         public virtual DbSet<Stones> Stones { get; set; }
 
         public virtual DbSet<TypeOfJewellery> TypeOfJewelleries { get; set; }
+
 
         public virtual DbSet<WarrantyCard> WarrantyCards { get; set; }
 
@@ -255,7 +256,7 @@ namespace Repositories
 
             modelBuilder.Entity<UserRequirement>(entity =>
             {
-                entity.HasKey(e => new { e.UsersId, e.RequirementId }).HasName("PK__UsersReq__6496A1A5AF3D6C6E");
+                entity.HasKey(e => new { e.UsersId, e.RequirementId }).HasName("PK__UsersReq__6496A1A5D8BA4CC5");
 
                 entity.ToTable("UsersRequirements");
 
@@ -304,7 +305,8 @@ namespace Repositories
                 entity.Property(e => e.Title).HasMaxLength(100);
             });
 
-            OnModelCreatingPartial(modelBuilder);           
+            OnModelCreatingPartial(modelBuilder);
+            
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

@@ -18,6 +18,24 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("GetTotalRecords")]
+        public IActionResult GetTotalJewelleryRecords([FromQuery] RequestSearchTypeOfJewelleryModel requestSearchTypeOfJewelleryModel)
+        {
+
+            var sortBy = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryBy.ToString() : null;
+            var sortType = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryType.ToString() : null;
+            Expression<Func<TypeOfJewellery, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchTypeOfJewelleryModel.Name) || x.Name.Contains(requestSearchTypeOfJewelleryModel.Name));
+            var totalRecords = _unitOfWork.TypeOfJewellryRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
+
         [HttpGet]
         public IActionResult SearchJewellery([FromQuery] RequestSearchTypeOfJewelleryModel requestSearchTypeOfJewelleryModel)
         {
@@ -53,7 +71,7 @@ namespace API.Controllers
             var TypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.GetByID(id,p=>p.Designs);
             if (TypeOfJewellery == null)
             {
-                return NotFound();
+                return NotFound("Type of jewellery is not existed");
             }
 
             return Ok(TypeOfJewellery.toTypeOfJewelleryDTO());
@@ -78,7 +96,7 @@ namespace API.Controllers
             var existedTypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.GetByID(id);
             if (existedTypeOfJewellery == null)
             {
-                return NotFound();
+                return NotFound("Type of jewellery is not existed");
             }
             existedTypeOfJewellery.Name = requestTypeOfJewelleryModel.Name;
             _unitOfWork.TypeOfJewellryRepository.Update(existedTypeOfJewellery);
@@ -92,7 +110,7 @@ namespace API.Controllers
             var existedTypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.GetByID(id);
             if (existedTypeOfJewellery == null)
             {
-                return NotFound();
+                return NotFound("Type of jewellery is not existed");
             }
             _unitOfWork.TypeOfJewellryRepository.Delete(existedTypeOfJewellery);
             try

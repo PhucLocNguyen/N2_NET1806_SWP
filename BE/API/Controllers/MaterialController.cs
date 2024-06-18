@@ -19,6 +19,25 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("GetTotalRecords")]
+        public IActionResult GetTotalMaterialRecords([FromQuery] RequestSearchMaterialModel requestSearchMaterialModel)
+        {
+            var sortBy = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialBy.ToString() : null;
+            var sortType = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialType.ToString() : null;
+            Expression<Func<Material, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchMaterialModel.Name) || x.Name.Contains(requestSearchMaterialModel.Name)) &&
+                (x.ManagerId == requestSearchMaterialModel.ManagerId || requestSearchMaterialModel.ManagerId == null) &&
+                x.Price >= requestSearchMaterialModel.FromPrice &&
+                (x.Price <= requestSearchMaterialModel.ToPrice || requestSearchMaterialModel.ToPrice == null);
+            var totalRecords = _unitOfWork.MaterialRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
 
         [HttpGet]
         public IActionResult SearchMaterial([FromQuery] RequestSearchMaterialModel requestSearchMaterialModel)
@@ -60,7 +79,7 @@ namespace API.Controllers
 
             if (Material == null)
             {
-                return NotFound();
+                return NotFound("Maretrial is not existed");
             }
 
             return Ok(Material.toMaterialDTO());
@@ -81,7 +100,7 @@ namespace API.Controllers
             var existedMaterial = _unitOfWork.MaterialRepository.GetByID(id);
             if (existedMaterial == null)
             {
-                return NotFound();
+                return NotFound("Maretrial is not existed");
             }
             existedMaterial.Name = requestCreateMaterialModel.Name;
             existedMaterial.Price = requestCreateMaterialModel.Price;
@@ -97,7 +116,7 @@ namespace API.Controllers
             var existedMaterial = _unitOfWork.MaterialRepository.GetByID(id);
             if (existedMaterial == null)
             {
-                return NotFound();
+                return NotFound("Maretrial is not existed");
             }
             _unitOfWork.MaterialRepository.Delete(existedMaterial);
             try

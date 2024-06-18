@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\TestUserCase.csproj": {}
+    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\TestUserCase.csproj": {}
   },
   "projects": {
-    "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj"
+              "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -117,17 +117,17 @@
         }
       }
     },
-    "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -219,17 +219,17 @@
         }
       }
     },
-    "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\TestUserCase.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\TestUserCase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\TestUserCase.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\TestUserCase.csproj",
         "projectName": "TestUserCase",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\TestUserCase.csproj",
-        "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\TestUserCase.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -243,11 +243,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\API.csproj"
+              "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj"
               },
-              "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj"
+              "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj"
               }
             }
           }

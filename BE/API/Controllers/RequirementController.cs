@@ -19,6 +19,33 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("GetTotalRecords")]
+        public IActionResult GetTotalRequirementRecord([FromQuery] RequestSearchRequirementModel requestSearchRequirementModel)
+        {
+            var sortBy = requestSearchRequirementModel.SortContent != null ? requestSearchRequirementModel.SortContent?.sortRequirementBy.ToString() : null;
+            var sortType = requestSearchRequirementModel.SortContent != null ? requestSearchRequirementModel.SortContent?.sortRequirementType.ToString() : null;
+            Expression<Func<Requirement, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchRequirementModel.Status) || x.Status.Contains(requestSearchRequirementModel.Status)) &&
+                (string.IsNullOrEmpty(requestSearchRequirementModel.Size) || x.Size.Contains(requestSearchRequirementModel.Size)) &&
+                (x.DesignId == requestSearchRequirementModel.DesignId || requestSearchRequirementModel.DesignId == null) &&
+                x.MaterialPriceAtMoment >= requestSearchRequirementModel.FromMaterialPriceAtMoment &&
+                (x.MaterialPriceAtMoment <= requestSearchRequirementModel.ToMaterialPriceAtMoment || requestSearchRequirementModel.ToMaterialPriceAtMoment == null) &&
+                x.StonePriceAtMoment >= requestSearchRequirementModel.FromStonePriceAtMoment &&
+                (x.StonePriceAtMoment <= requestSearchRequirementModel.ToStonePriceAtMoment || requestSearchRequirementModel.ToStonePriceAtMoment == null) &&
+                x.MachiningFee >= requestSearchRequirementModel.FromMachiningFee &&
+                (x.MachiningFee <= requestSearchRequirementModel.ToMachiningFee || requestSearchRequirementModel.ToMachiningFee == null) &&
+                x.TotalMoney >= requestSearchRequirementModel.FromTotalMoney &&
+                (x.TotalMoney <= requestSearchRequirementModel.ToTotalMoney || requestSearchRequirementModel.ToTotalMoney == null);
+            var totalRecords = _unitOfWork.RequirementRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
+
         [HttpGet]
         public IActionResult SearchBlog([FromQuery] RequestSearchRequirementModel requestSearchRequirementModel)
         {
@@ -65,7 +92,7 @@ namespace API.Controllers
             var Requirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (Requirement == null)
             {
-                return NotFound();
+                return NotFound("Requiremnet is not existed");
             }
 
             return Ok(Requirement.toRequirementDTO());
@@ -86,7 +113,7 @@ namespace API.Controllers
             var existedRequirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (existedRequirement == null)
             {
-                return NotFound();
+                return NotFound("Requiremnet is not existed");
             }
             existedRequirement.Status = requestCreateRequirementModel.Status;
             existedRequirement.ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery;
@@ -110,7 +137,7 @@ namespace API.Controllers
             var existedRequirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (existedRequirement == null)
             {
-                return NotFound();
+                return NotFound("Requiremnet is not existed");
             }
             _unitOfWork.RequirementRepository.Delete(existedRequirement);
             _unitOfWork.Save();

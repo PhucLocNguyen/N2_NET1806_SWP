@@ -22,6 +22,26 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
+        [HttpGet("GetTotalRecords")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer)]
+        public IActionResult SearchBlogRecords([FromQuery] RequestSearchBlogModel requestSearchBlogModel)
+        {
+            var sortBy = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
+            var sortType = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
+            Expression<Func<Blog, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchBlogModel.Title) || x.Title.Contains(requestSearchBlogModel.Title)) &&
+                (x.ManagerId == requestSearchBlogModel.ManagerId || requestSearchBlogModel.ManagerId == null);
+            var totalRecords = _unitOfWork.BlogRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
+
         [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer )]
         public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel) 
@@ -51,6 +71,7 @@ namespace API.Controllers
                 pageIndex: requestSearchBlogModel.pageIndex,
                 pageSize: requestSearchBlogModel.pageSize, m=>m.Manager
                 ).Select(x=>x.toBlogDTO());
+            var totalPage = _unitOfWork.BlogRepository.Count(filter);
             return Ok(reponseBlog);
         }
 
@@ -61,7 +82,7 @@ namespace API.Controllers
             var Blog = _unitOfWork.BlogRepository.GetByID(id, m => m.Manager);
             if (Blog == null)
             {
-                return NotFound();
+                return NotFound("Blog is not existed");
             }
 
             return Ok(Blog.toBlogDTO());
@@ -82,7 +103,7 @@ namespace API.Controllers
             var existedBlog = _unitOfWork.BlogRepository.GetByID(id);
             if (existedBlog == null)
             {
-                return NotFound();
+                return NotFound("Blog is not existed");
             }
             existedBlog.Description = requestCreateBlogModel.Description;
             existedBlog.ManagerId = requestCreateBlogModel.ManagerId;
@@ -99,7 +120,7 @@ namespace API.Controllers
             var existedBlog = _unitOfWork.BlogRepository.GetByID(id);
             if (existedBlog==null)
             {
-                return NotFound();
+                return NotFound("Blog is not existed");
             }
             _unitOfWork.BlogRepository.Delete(existedBlog);
             _unitOfWork.Save();

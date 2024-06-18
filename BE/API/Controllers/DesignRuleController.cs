@@ -22,14 +22,65 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("GetTotalRecords")]
+        public IActionResult GetTotalDesignRuleRecords([FromQuery] RequestSearchDesignRuleModel requestSearchDesignRuleModel)
+        {
+            var sortBy = requestSearchDesignRuleModel.SortContent != null ? requestSearchDesignRuleModel.SortContent?.sortDesignRuleBy.ToString() : null;
+            var sortType = requestSearchDesignRuleModel.SortContent != null ? requestSearchDesignRuleModel.SortContent?.sortDesignRuleType.ToString() : null;
+            Expression<Func<DesignRule, bool>> filter = x =>
+
+            (x.TypeOfJewelleryId == requestSearchDesignRuleModel.TypeOfJewelleryId || requestSearchDesignRuleModel.TypeOfJewelleryId == null);
+            var totalRecords = _unitOfWork.DesignRuleRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
+
+        /*[HttpGet]
+        public IActionResult SearchDesignRule([FromQuery] RequestSearchDesignRuleModel requestSearchDesignRuleModel)
+        {
+            var sortBy = requestSearchDesignRuleModel.SortContent != null ? requestSearchDesignRuleModel.SortContent?.sortDesignRuleBy.ToString() : null;
+            var sortType = requestSearchDesignRuleModel.SortContent != null ? requestSearchDesignRuleModel.SortContent?.sortDesignRuleType.ToString() : null;
+            Expression<Func<DesignRule, bool>> filter = x =>
+
+            (x.TypeOfJewelleryId == requestSearchDesignRuleModel.TypeOfJewelleryId || requestSearchDesignRuleModel.TypeOfJewelleryId == null);
+            Func<IQueryable<DesignRule>, IOrderedQueryable<DesignRule>> orderBy = null;
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                if (sortType == SortDesignTypeEnum.Ascending.ToString())
+                {
+                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                }
+                else if (sortType == SortDesignTypeEnum.Descending.ToString())
+                {
+                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                }
+            }
+            var reponseDesign = _unitOfWork.DesignRuleRepository.Get(
+                filter,
+                orderBy,
+                *//*includeProperties: "",*//*
+                pageIndex: requestSearchDesignRuleModel.pageIndex,
+                pageSize: requestSearchDesignRuleModel.pageSize,
+                m => m.TypeOfJewellery
+                ).Select(d => d.toDesignRuleDTO());
+
+            return Ok(reponseDesign);
+        }*/
+
         [HttpGet]
         public IActionResult SearchDesignRule([FromQuery] RequestSearchDesignRuleModel requestSearchDesignRuleModel)
         {
             var sortBy = requestSearchDesignRuleModel.SortContent != null ? requestSearchDesignRuleModel.SortContent?.sortDesignRuleBy.ToString() : null;
             var sortType = requestSearchDesignRuleModel.SortContent != null ? requestSearchDesignRuleModel.SortContent?.sortDesignRuleType.ToString() : null;
             Expression<Func<DesignRule, bool>> filter = x =>
-                
-                (x.TypeOfJewelleryId == requestSearchDesignRuleModel.TypeOfJewelleryId || requestSearchDesignRuleModel.TypeOfJewelleryId == null) ;
+
+                (x.TypeOfJewelleryId == requestSearchDesignRuleModel.TypeOfJewelleryId || requestSearchDesignRuleModel.TypeOfJewelleryId == null);
             Func<IQueryable<DesignRule>, IOrderedQueryable<DesignRule>> orderBy = null;
 
             if (!string.IsNullOrEmpty(sortBy))
@@ -49,7 +100,7 @@ namespace API.Controllers
                 /*includeProperties: "",*/
                 pageIndex: requestSearchDesignRuleModel.pageIndex,
                 pageSize: requestSearchDesignRuleModel.pageSize,
-                m=>m.TypeOfJewellery
+                m => m.TypeOfJewellery
                 ).Select(d => d.toDesignRuleDTO());
 
             return Ok(reponseDesign);

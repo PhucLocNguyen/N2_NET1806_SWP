@@ -18,6 +18,24 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("GetTotalRecords")]
+        public IActionResult GetTotalHaveRecords([FromQuery] RequestSearchHaveModel requestSearchHaveModel)
+        {
+            var sortBy = requestSearchHaveModel.SortContent != null ? requestSearchHaveModel.SortContent?.sortHaveBy.ToString() : null;
+            var sortType = requestSearchHaveModel.SortContent != null ? requestSearchHaveModel.SortContent?.sortHaveType.ToString() : null;
+            Expression<Func<Have, bool>> filter = x =>
+                (x.RequirementId == requestSearchHaveModel.RequirementId || requestSearchHaveModel.RequirementId == null) &&
+                (x.WarrantyCardId == requestSearchHaveModel.WarrantyCardId || requestSearchHaveModel.WarrantyCardId == null);
+            var totalRecords = _unitOfWork.HaveRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
+
         [HttpGet]
         public IActionResult SearchHave([FromQuery] RequestSearchHaveModel requestSearchHaveModel)
         {

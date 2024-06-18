@@ -1,58 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\",
+  "WorkspaceRootPath": "D:\\Slide\\Sem_5\\SWP\\BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\be\\api\\controllers\\typeofjewellerycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\typeofjewellerycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUserCase.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\testusercase\\testlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUserCase.csproj|solutionrelative:testusercase\\testlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\be\\api\\controllers\\designrulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\designrulecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUserCase.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\testusercase\\testdata\\datatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUserCase.csproj|solutionrelative:testusercase\\testdata\\datatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\controllers\\userrequirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\userrequirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\controllers\\havecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\havecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\model\\userrequirementmodel\\userrequirementmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\model\\userrequirementmodel\\userrequirementmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\model\\userrequirementmodel\\requestcreateuserrequirementmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\model\\userrequirementmodel\\requestcreateuserrequirementmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\model\\havemodel\\havemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\model\\havemodel\\havemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\model\\userrequirementmodel\\responseuserrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\model\\userrequirementmodel\\responseuserrequirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C94754F6-301F-435C-8B6E-4D1501053988}|Repositories\\Repositories.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\repositories\\entity\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C94754F6-301F-435C-8B6E-4D1501053988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\entity\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\model\\userrequirementmodel\\requestsearchuserrequirementmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\model\\userrequirementmodel\\requestsearchuserrequirementmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\api\\model\\havemodel\\requestcreatehavemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\model\\havemodel\\requestcreatehavemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C94754F6-301F-435C-8B6E-4D1501053988}|Repositories\\Repositories.csproj|d:\\slide\\sem_5\\swp\\cuadat\\be\\repositories\\entity\\requirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C94754F6-301F-435C-8B6E-4D1501053988}|Repositories\\Repositories.csproj|solutionrelative:repositories\\entity\\requirement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\be\\api\\model\\designrulemodel\\designrulemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\model\\designrulemodel\\designrulemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -67,159 +27,41 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Controllers\\UserController.cs",
-              "RelativeToolTip": "API\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAEEAAAAAAAAAAAA3wE8AAAAQAAAA",
+              "Title": "TypeOfJewelleryController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\TypeOfJewelleryController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\TypeOfJewelleryController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\TypeOfJewelleryController.cs",
+              "RelativeToolTip": "API\\Controllers\\TypeOfJewelleryController.cs",
+              "ViewState": "AQIAAIcAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T10:33:54.878Z",
+              "WhenOpened": "2024-06-18T01:22:56.342Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "dataTest.csv",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\TestData\\dataTest.csv",
-              "RelativeDocumentMoniker": "TestUserCase\\TestData\\dataTest.csv",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\TestData\\dataTest.csv",
-              "RelativeToolTip": "TestUserCase\\TestData\\dataTest.csv",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2024-06-16T10:29:56.174Z"
+              "Title": "DesignRuleMapper.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Model\\DesignRuleModel\\DesignRuleMapper.cs",
+              "RelativeDocumentMoniker": "API\\Model\\DesignRuleModel\\DesignRuleMapper.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Model\\DesignRuleModel\\DesignRuleMapper.cs",
+              "RelativeToolTip": "API\\Model\\DesignRuleModel\\DesignRuleMapper.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAASwB8AAABsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T01:13:22.94Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TestLogin.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\TestLogin.cs",
-              "RelativeDocumentMoniker": "TestUserCase\\TestLogin.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\TestUserCase\\TestLogin.cs",
-              "RelativeToolTip": "TestUserCase\\TestLogin.cs",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAswGUAAAABAAAA",
+              "Title": "DesignRuleController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\DesignRuleController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\DesignRuleController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\DesignRuleController.cs",
+              "RelativeToolTip": "API\\Controllers\\DesignRuleController.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAYwGcAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T10:28:15.438Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "RequestCreateUserRequirementModel.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\UserRequirementModel\\RequestCreateUserRequirementModel.cs",
-              "RelativeDocumentMoniker": "API\\Model\\UserRequirementModel\\RequestCreateUserRequirementModel.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\UserRequirementModel\\RequestCreateUserRequirementModel.cs",
-              "RelativeToolTip": "API\\Model\\UserRequirementModel\\RequestCreateUserRequirementModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T07:15:08.917Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "HaveMapper.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\HaveModel\\HaveMapper.cs",
-              "RelativeDocumentMoniker": "API\\Model\\HaveModel\\HaveMapper.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\HaveModel\\HaveMapper.cs",
-              "RelativeToolTip": "API\\Model\\HaveModel\\HaveMapper.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAuwBAAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T16:36:47.458Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RequestCreateHaveModel.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\HaveModel\\RequestCreateHaveModel.cs",
-              "RelativeDocumentMoniker": "API\\Model\\HaveModel\\RequestCreateHaveModel.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\HaveModel\\RequestCreateHaveModel.cs",
-              "RelativeToolTip": "API\\Model\\HaveModel\\RequestCreateHaveModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T16:35:33.224Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HaveController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Controllers\\HaveController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\HaveController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Controllers\\HaveController.cs",
-              "RelativeToolTip": "API\\Controllers\\HaveController.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAYwDkAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T16:31:20.098Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RequestSearchUserRequirementModel.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\UserRequirementModel\\RequestSearchUserRequirementModel.cs",
-              "RelativeDocumentMoniker": "API\\Model\\UserRequirementModel\\RequestSearchUserRequirementModel.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\UserRequirementModel\\RequestSearchUserRequirementModel.cs",
-              "RelativeToolTip": "API\\Model\\UserRequirementModel\\RequestSearchUserRequirementModel.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAQwBwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T16:10:03.881Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserRequirementMapper.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\UserRequirementModel\\UserRequirementMapper.cs",
-              "RelativeDocumentMoniker": "API\\Model\\UserRequirementModel\\UserRequirementMapper.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\UserRequirementModel\\UserRequirementMapper.cs",
-              "RelativeToolTip": "API\\Model\\UserRequirementModel\\UserRequirementMapper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T16:03:11.658Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserRequirementController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Controllers\\UserRequirementController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\UserRequirementController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Controllers\\UserRequirementController.cs",
-              "RelativeToolTip": "API\\Controllers\\UserRequirementController.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAYwD0AAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T15:02:41.832Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Requirement.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Entity\\Requirement.cs",
-              "RelativeDocumentMoniker": "Repositories\\Entity\\Requirement.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Entity\\Requirement.cs",
-              "RelativeToolTip": "Repositories\\Entity\\Requirement.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAADwvyUAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T14:38:06.474Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MyDbContext.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Entity\\MyDbContext.cs",
-              "RelativeDocumentMoniker": "Repositories\\Entity\\MyDbContext.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Entity\\MyDbContext.cs",
-              "RelativeToolTip": "Repositories\\Entity\\MyDbContext.cs",
-              "ViewState": "AQIAAB4BAAAAAAAAAADwvzgBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T14:24:18.188Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ResponseUserRequirement.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\UserRequirementModel\\ResponseUserRequirement.cs",
-              "RelativeDocumentMoniker": "API\\Model\\UserRequirementModel\\ResponseUserRequirement.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\API\\Model\\UserRequirementModel\\ResponseUserRequirement.cs",
-              "RelativeToolTip": "API\\Model\\UserRequirementModel\\ResponseUserRequirement.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T14:17:43.578Z"
+              "WhenOpened": "2024-06-18T01:08:51.895Z",
+              "EditorCaption": ""
             }
           ]
         }

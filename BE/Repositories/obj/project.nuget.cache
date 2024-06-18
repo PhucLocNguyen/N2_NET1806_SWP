@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1umzfTfkgtN/Xk0S/QeOHmn9BnLytTO8yIaX7kW6nbcX+P23a4wSBGzCG7AdBWOB2nvZUQOT7JwgFdoZ0geiJg==",
+  "dgSpecHash": "InxK0ikSsAdUioMJ0aEQbO+VgOIYr7lnq8021yzqa3TLJnX14dv+S/qs4pFFVECNU7pWRFf2ymtS1VPNMCP0IQ==",
   "success": true,
-  "projectFilePath": "D:\\Slide\\Sem_5\\SWP\\CuaDat\\BE\\Repositories\\Repositories.csproj",
+  "projectFilePath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

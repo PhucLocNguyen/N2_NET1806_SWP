@@ -14,6 +14,10 @@ import Footer from "./component/footer/Footer.jsx"
 import Navbar from "./component/nav/Navbar.jsx"
 import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
 
+import ListRequirement from './component/manager/ListRequirement.jsx'
+import RequirementDetail from './component/manager/RequirementDetail.jsx'
+import ManagerLayout from './component/manager/layout/ManagerLayout.jsx'
+
 
 import ListRequirement from './component/manager/ListRequirement.jsx'
 import RequirementDetail from './component/manager/RequirementDetail.jsx'
@@ -36,20 +40,10 @@ function App() {
       <Suspense>
         <Routes>
           {/* Route tự viết để test */}
-          <Route path='/a' element={<AdminLayout> <StaffList /> </AdminLayout>}></Route>
-
-          <Route path='/b' element={ <ManagerLayout> <RequirementDetail /> </ManagerLayout> }></Route>
-          <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
-          <Route path='/login' element={<Login />} />
 
 
+          {/* Route tự viết không ghi qua phần này */}
 
-
-           <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
-           <Route path='/login' element={<Login />} />
-
-           {/* Route tự viết không ghi qua phần này */}
-         
 
           {publicRoutes.map((route, index) => {
             let Page = route.component

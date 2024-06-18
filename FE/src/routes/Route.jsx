@@ -33,18 +33,19 @@ const publicRoutes = [
       path: '/design/:id',
       component: DesignInfo
    },
-   // {
-   //    path: '/blog',
-   //    component: BlogList
-   // },
-   // {
-   //    path: '/blog/:id',
-   //    component: Blog
-   // },
+    {
+       path: '/blog',
+       component: BlogList
+    },
+    {
+       path: '/blog/:id',
+       component: Blog
+   },
    {
       path: '/login',
       component: Login
    },
+   
    {
       path: '/error',
       component: PageError
@@ -53,7 +54,7 @@ const publicRoutes = [
 
 const privateRoutes = [
    {
-      path: '/design/:id/create-requirement',
+      path: '/design/create-requirement/:id',
       component: RequirementOrderSection,
       role: 'nguyenduchung'
    }

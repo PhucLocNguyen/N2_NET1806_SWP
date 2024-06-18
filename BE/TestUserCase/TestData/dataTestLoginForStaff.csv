@@ -1,5 +1,0 @@
-﻿Username,Password,Role,ExpectedValue
-PhucLok,phucloc123!!@@,Staff,Login Successfully
-badat,phucloc123!!@@,Staff,Invalid Username
-PhucLok,badat,Staff,Password incorrect
-Dat,123,Customer ,You do not have permission to access this page

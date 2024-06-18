@@ -6,12 +6,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from "framer-motion";
 import axios from 'axios';
 import { LoginApi } from '../../api/ApiLogin';
-import useAuth from '../../hooks/useAuth.jsx'
 import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function Login() {
-    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -59,8 +57,6 @@ function Login() {
         }
         const { role, accessToken } = await LoginApi(pathReq,listState, axiosConfig);
         console.log('>>>' , role , accessToken)
-        setAuth( {role, accessToken} )
-        console.log(auth.accessToken)
         navigate(from, { replace: true })
     }
    

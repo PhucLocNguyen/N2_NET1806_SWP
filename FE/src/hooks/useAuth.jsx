@@ -1,8 +1,11 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
-   return useContext(AuthContext);
+   const accessToken = localStorage.getItem('userInfo');
+   const role = jwtDecode(accessToken).Role
+
+
+   return { accessToken, role }
 }
 
 export default useAuth;

@@ -27,6 +27,7 @@ const publicRoutes = [
          { path: 'necklace', component: ListAll },
          { path: 'ring', component: ListAll }
       ]
+
    },
    {
       path: '/design/:id',
@@ -52,9 +53,9 @@ const publicRoutes = [
 
 const privateRoutes = [
    {
-      path: '/design/:id/create-requirement',
+      path: '/design/create-requirement/:id',
       component: RequirementOrderSection,
-      role: 'nguyenduchung'
+      role: 'Customer'
    }
 ]
 

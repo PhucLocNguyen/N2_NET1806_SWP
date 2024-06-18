@@ -75,7 +75,7 @@ function DesignInfo() {
                      </div>
 
                      {/* Button custom */}
-                     <Link to={`/design/${id}/create-requirement`} style={{ width: '100%' }}>
+                     <Link to={`/design/create-requirement/${id}`} style={{ width: '100%' }}>
                         <CustomButton variant='contained' sx={{ color: '#fff', bgcolor: '#000', letterSpacing: 4, padding: '0.7rem 2.375rem', fontSiz: '1rem', fontWeight: 400, lineHeight: '1.5rem', width: '100%' }} >
                            CUSTOM DESIGN
                         </CustomButton>

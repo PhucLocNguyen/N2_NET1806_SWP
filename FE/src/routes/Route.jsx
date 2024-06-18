@@ -27,6 +27,7 @@ const publicRoutes = [
          { path: 'necklace', component: ListAll },
          { path: 'ring', component: ListAll }
       ]
+
    },
    {
       path: '/design/:id',
@@ -40,10 +41,10 @@ const publicRoutes = [
       path: '/blog/:id',
       component: Blog
    },
-   {
+    {
       path: '/login',
       component: Login
-   },
+    },
    {
       path: '/error',
       component: PageError
@@ -52,7 +53,7 @@ const publicRoutes = [
 
 const privateRoutes = [
    {
-      path: '/design/:id/create-requirement',
+      path: '/design/create-requirement/:id',
       component: RequirementOrderSection,
       role: 'nguyenduchung'
    }

@@ -1,5 +1,4 @@
 import { px } from "framer-motion";
-import picBlog from "../../assets/blogList/bannerPicBlog1-2022.jpg";
 
 const BoxContent = ({data}) => {
 
@@ -11,7 +10,7 @@ const BoxContent = ({data}) => {
         <div className="mb-4">
           <div className="h-[175px]  overflow-hidden">
             <img
-              src={new URL(data.image, window.location.origin).href}
+              src="https://raw.githubusercontent.com/PhucLocNguyen/N2_NET1806_SWP/d3aea75f8807950444c170170b340772eebc8bd5/FE/src/assets/blogList/bannerPicBlog1-2022.jpg"
               style={{
                 transition: "transform 8s cubic-bezier(.25,.46,.45,.94)",
               }}

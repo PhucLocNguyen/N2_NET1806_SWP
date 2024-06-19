@@ -19,9 +19,7 @@ import ListRequirement from './component/manager/ListRequirement.jsx'
 import RequirementDetail from './component/manager/RequirementDetail.jsx'
 import ManagerLayout from './component/manager/layout/ManagerLayout.jsx'
 import StaffLogin from './component/login/StaffLogin.jsx'
-
-
-
+import BlogCreate from './component/manager/BlogCreate.jsx'
 
 import AdminLayout from './component/admin/AdminLayout.jsx'
 import StaffList from './component/admin/staffList/StaffList.jsx'
@@ -36,7 +34,7 @@ function App() {
       <Suspense>
         <Routes>
           {/* Route tự viết để test */}
-          <Route path='/a' element={<StaffLogin/>}></Route>
+          <Route path='/a' element={<BlogCreate/>}></Route>
 
           <Route path='/b' element={<ManagerLayout> <ListRequirement/> </ManagerLayout>}></Route>
           <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>

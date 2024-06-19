@@ -8,7 +8,6 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DesignImage from '../../assets/designInfo/jewelry.png'
 import Arrow from '../../assets/designInfo/arrow.svg'
 import Design1 from '../../assets/designInfo/design1.png'
-import useAuth from '../../hooks/useAuth';
 
 const CustomButton = styled(Button)({
    '&:hover': {
@@ -22,8 +21,6 @@ function DesignInfo() {
    const [designInfo, setDesignInfo] = useState({});
    const { id } = useParams()
 
-   const { auth } = useAuth()
-
    useEffect(() => {
       const fetchAPI = async () => {
          const respone = await fetchApiDesignById(id)
@@ -32,8 +29,6 @@ function DesignInfo() {
 
       fetchAPI()
    }, [])
-
-   console.log(auth?.role)
 
    return (
       <>

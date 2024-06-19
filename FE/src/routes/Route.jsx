@@ -56,7 +56,7 @@ const privateRoutes = [
    {
       path: '/design/create-requirement/:id',
       component: RequirementOrderSection,
-      role: 'nguyenduchung'
+      role: 'Customer'
    }
 ]
 

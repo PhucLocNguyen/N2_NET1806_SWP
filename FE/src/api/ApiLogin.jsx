@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import api from './instance.jsx'
 import { jwtDecode } from 'jwt-decode'
+import axiosConfigHeader from './AxiosConfigHeader.jsx'
 
 const LoginApi = async (pathReq, formData, axiosConfig) => {
     try {
@@ -30,4 +31,17 @@ const LoginApi = async (pathReq, formData, axiosConfig) => {
         return {role : null, accessToken: null}
     }
 }
-export { LoginApi }
+const LoginWithGoogle = async (token)=>{
+    try{
+        const response = await api.post(`/LoginGoogle/login`,{token});
+        const accessToken = response.data;
+        console.log(accessToken);
+        const role = jwtDecode(res.data).given_name
+        return { role, accessToken }
+
+    }catch(e){
+console.error("Error during login with Google : "+ e);
+
+    }
+}
+export { LoginApi, LoginWithGoogle }

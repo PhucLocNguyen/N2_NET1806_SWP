@@ -23,7 +23,7 @@ const LoginApi = async (pathReq, formData, axiosConfig) => {
             localStorage.setItem("userInfo", JSON.stringify(response.data))
             const accessToken = response.data;
             console.log(jwtDecode(response.data))
-            const role = jwtDecode(response.data).given_name
+            const role = jwtDecode(response.data).Role
             return { role, accessToken }
         }
     } catch (e) {

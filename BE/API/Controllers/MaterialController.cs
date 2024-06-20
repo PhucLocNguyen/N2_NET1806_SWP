@@ -1,4 +1,6 @@
-﻿using API.Model.MaterialModel;
+﻿using API.Model.BlogModel;
+using API.Model.MaterialModel;
+using API.Model.UserModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -60,7 +62,7 @@ namespace API.Controllers
 
             if (Material == null)
             {
-                return NotFound();
+                return NotFound("Maretrial is not existed");
             }
 
             return Ok(Material.toMaterialDTO());
@@ -69,6 +71,11 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateMaterial(RequestCreateMaterialModel requestCreateMaterialModel)
         {
+            var user = _unitOfWork.UserRepository.GetByID(requestCreateMaterialModel.ManagerId, m => m.Role);
+            if (user.Role.Name != RoleConst.Manager)
+            {
+                return BadRequest("Manager Id is not valid");
+            }
             var Material = requestCreateMaterialModel.toMaterialEntity();
             _unitOfWork.MaterialRepository.Insert(Material);
             _unitOfWork.Save();
@@ -81,7 +88,7 @@ namespace API.Controllers
             var existedMaterial = _unitOfWork.MaterialRepository.GetByID(id);
             if (existedMaterial == null)
             {
-                return NotFound();
+                return NotFound("Maretrial is not existed");
             }
             existedMaterial.Name = requestCreateMaterialModel.Name;
             existedMaterial.Price = requestCreateMaterialModel.Price;
@@ -97,7 +104,7 @@ namespace API.Controllers
             var existedMaterial = _unitOfWork.MaterialRepository.GetByID(id);
             if (existedMaterial == null)
             {
-                return NotFound();
+                return NotFound("Maretrial is not existed");
             }
             _unitOfWork.MaterialRepository.Delete(existedMaterial);
             try

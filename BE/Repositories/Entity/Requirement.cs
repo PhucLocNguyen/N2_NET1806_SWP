@@ -34,6 +34,6 @@ public partial class Requirement
     public virtual ICollection<Have> Haves { get; set; } = new List<Have>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
     public virtual ICollection<UserRequirement> UserRequirements { get; set; } = new List<UserRequirement>();
+    /*public virtual ICollection<Users> Users { get; set; } = new List<Users>();*/
 }

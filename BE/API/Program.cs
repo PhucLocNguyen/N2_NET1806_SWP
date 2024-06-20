@@ -1,12 +1,17 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repositories;
 using Repositories.Entity;
 using Repositories.Token;
+using Swashbuckle.AspNetCore.Filters;
+using SWP391Project.Services.ChatSystem;
+using SWP391Project.Services.ChatSystem.Hubs;
 using System.Text;
 
 namespace API
@@ -36,6 +41,33 @@ namespace API
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 12;
             }).AddEntityFrameworkStores<MyDbContext>();*/
+            builder.Services.AddSwaggerGen(option =>
+            {
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+                option.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+                option.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = "https";
@@ -51,43 +83,23 @@ namespace API
                     ValidIssuer = builder.Configuration["JWT:Issuer"],
                     ValidateAudience = true,
                     ValidAudience = builder.Configuration["JWT:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])),
+                    RoleClaimType = CustomeClaimType.Role,
                 };
             });
-            builder.Services.AddSwaggerGen(option =>
-            {
-                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
-                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Please enter a valid token",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "Bearer"
-                });
-                option.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
-                }
-            },
-            new string[]{}
-        }
-    });
-            });
-            builder.Services.AddAuthorization();
+
+            //builder.Services.AddAuthentication().AddJwtBearer();
+            //builder.Services.AddAuthorization();
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             builder.Services.AddTransient<UnitOfWork>();
             builder.Services.AddScoped<IToken, Token>();
+            builder.Services.AddScoped<IChatService, ChatService>();
+            builder.Services.AddScoped<IConversationService, ConversationService>();
+            builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
@@ -97,7 +109,7 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.MapHub<ChatHub>("/Chat");
             app.UseHttpsRedirection();
 
             app.UseCors(x => x

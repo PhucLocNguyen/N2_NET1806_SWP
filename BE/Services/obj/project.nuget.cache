@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZyD8ccWdOt+AUSmV6duuNzmMC704jnCSCvtlTV/Oba3A7uvwqh3Y+g/skKAV9E9spS6I312x/yvMj8Qv7vKngA==",
+  "dgSpecHash": "ZRXeZUum72BIsabbYfJd36nv0RPhmAh1g9sgSbPRtioIPY6rgJ5TjngaqdjtBvXaeB9ejZeqJQyd4tcdFJ2elQ==",
   "success": true,
-  "projectFilePath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj",
+  "projectFilePath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\SWP391Project.Services.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ACER\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",

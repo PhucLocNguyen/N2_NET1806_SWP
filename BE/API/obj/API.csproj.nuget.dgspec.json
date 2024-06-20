@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj": {}
+    "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj": {
+    "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj",
+        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj",
+        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\API\\API.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\obj\\",
+        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj"
+              "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj"
               },
-              "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj": {
-                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj"
+              "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\SWP391Project.Services.csproj": {
+                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\SWP391Project.Services.csproj"
               }
             }
           }
@@ -91,6 +91,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "Swashbuckle.AspNetCore.Filters": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
@@ -116,14 +120,14 @@
         }
       }
     },
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
+    "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj",
-        "projectName": "Repositories",
-        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj",
+        "projectName": "SWP391Project.Repositories",
+        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\obj\\",
+        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -218,14 +222,14 @@
         }
       }
     },
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj": {
+    "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\SWP391Project.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj",
-        "projectName": "Services",
-        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj",
+        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\SWP391Project.Services.csproj",
+        "projectName": "SWP391Project.Services",
+        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\SWP391Project.Services.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\obj\\",
+        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -242,8 +246,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj"
+              "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj"
               }
             }
           }
@@ -263,13 +267,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Newtonsoft.Json": {
+            "AutoMapper": {
               "target": "Package",
-              "version": "[13.0.3, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[7.1.2, )"
+              "version": "[13.0.1, )"
             }
           },
           "imports": [

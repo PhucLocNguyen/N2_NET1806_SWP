@@ -5,7 +5,7 @@ using Repositories.Entity;
 
 namespace API.Model.DesignRuleModel
 {
-    public static class DesignRuleMapper
+    public static class ConversationMapper
     {
         public static DesignRule toDesignRuleEntity(this RequestCreateDesignRuleModel requestCreateDesignRuleModel)
         {
@@ -27,7 +27,8 @@ namespace API.Model.DesignRuleModel
                 MaxSizeMasterGemstone = designRule.MaxSizeMasterGemstone,
                 MinSizeJewellery = designRule.MinSizeJewellery,
                 MaxSizeJewellery = designRule.MaxSizeJewellery,
-                TypeOfJewellery = TypeOfJewelleryMapper.toCreateTypeOfJewellery(designRule.TypeOfJewellery),
+                TypeOfJewellery = new RequestCreateTypeOfJewelleryModel() { Name = designRule.TypeOfJewellery.Name,
+                                                                            Image = designRule.TypeOfJewellery.Image},
             };
         }
     }

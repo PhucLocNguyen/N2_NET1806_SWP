@@ -1,4 +1,6 @@
-﻿using API.Model.DesignModel;
+﻿using API.Model.BlogModel;
+using API.Model.DesignModel;
+using API.Model.UserModel;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +27,6 @@ namespace API.Controllers
             var sortType = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignType.ToString() : null;
             Expression<Func<Design, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchDesignModel.DesignName) || x.DesignName.Contains(requestSearchDesignModel.DesignName)) &&
-                (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null) &&
                 (string.IsNullOrEmpty(requestSearchDesignModel.Stone) || x.Stone.Kind.Contains(requestSearchDesignModel.Stone)) &&
                 (string.IsNullOrEmpty(requestSearchDesignModel.MasterGemstone) || x.MasterGemstone.Kind.Contains(requestSearchDesignModel.MasterGemstone)) &&
                 (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
@@ -46,6 +47,13 @@ namespace API.Controllers
                     orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
                 }
             }
+            if(requestSearchDesignModel.SortContent?.isParent == null)
+            {
+                filter = x => (x.ParentId == null);
+            }else
+            {
+                filter = x => (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null);
+            }
             var reponseDesign = _unitOfWork.DesignRepository.Get(
                 filter,
                 orderBy,
@@ -54,7 +62,6 @@ namespace API.Controllers
                 pageSize: requestSearchDesignModel.pageSize,
                 m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery
                 ).Select(d => d.toDesignDTO());
-
             return Ok(reponseDesign);
         }
 
@@ -64,7 +71,7 @@ namespace API.Controllers
             var Design = _unitOfWork.DesignRepository.GetByID(id, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery);
             if (Design == null)
             {
-                return NotFound();
+                return NotFound("Design is not existed");
             }
 
             return Ok(Design.toDesignDTO());
@@ -100,22 +107,24 @@ namespace API.Controllers
                 Design.ManagerId = null;
                 _unitOfWork.DesignRepository.Insert(Design);
                 _unitOfWork.Save();
-                /* return Ok("Create successfully");*/
-                return CreatedAtAction(nameof(GetDesignById), new { id = Design }, Design);
-
+                return Ok(Design.toDesignDTO());
+                /*return Ok("Create successfully");*/
             }
             else
             {
                 var Design = _unitOfWork.DesignRepository.GetByID(childDesignId, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery); ;
                 return Ok(Design.toDesignDTO());
             }
-            
-            
         }
 
         [HttpPost("DesignParent")]
         public IActionResult CreateDesignForManager(RequestCreateDesignModel requestCreateDesignModel)
         {
+            var user = _unitOfWork.UserRepository.GetByID((int)requestCreateDesignModel.ManagerId, m => m.Role);
+            if (user.Role.Name != RoleConst.Manager)
+            {
+                return BadRequest("Manager Id is not valid");
+            }
             var Design = requestCreateDesignModel.toDesignParentEntity();
             _unitOfWork.DesignRepository.Insert(Design);
             _unitOfWork.Save();
@@ -128,7 +137,7 @@ namespace API.Controllers
             var existedDesign = _unitOfWork.DesignRepository.GetByID(id);
             if (existedDesign == null)
             {
-                return NotFound();
+                return NotFound("Design is not existed");
             }
             existedDesign.ParentId = requestCreateDesignModel.ParentId;
             existedDesign.Image = requestCreateDesignModel.Image;
@@ -157,7 +166,7 @@ namespace API.Controllers
             var existedDesign = _unitOfWork.DesignRepository.GetByID(id);
             if (existedDesign == null)
             {
-                return NotFound();
+                return NotFound("Design is not existed");
             }
             _unitOfWork.DesignRepository.Delete(existedDesign);
             _unitOfWork.Save();

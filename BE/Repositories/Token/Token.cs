@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Repositories.Entity;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories.Token
 {
@@ -30,10 +25,10 @@ namespace Repositories.Token
 
             var authClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UsersId.ToString()),
+                new Claim(CustomeClaimType.UserId, user.UsersId.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.Name  ?? string.Empty),
-                new Claim(ClaimTypes.Role, user.Role.Name  ?? string.Empty),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(CustomeClaimType.Role, user.Role.Name),
             };
             
 
@@ -43,10 +38,16 @@ namespace Repositories.Token
             ( _config["JWT:Issuer"],
             _config["JWT:Audience"],
             authClaims,
-            DateTime.Now.AddHours(1),
+            expires: DateTime.Now.AddHours(1),
             signingCredentials: creds
             );
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
+    }
+
+    public static class CustomeClaimType
+    {
+        public const string Role = "Role";
+        public const string UserId = "UserId";
     }
 }

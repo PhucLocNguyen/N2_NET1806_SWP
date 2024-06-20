@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\TestUserCase\\TestUserCase.csproj": {}
+    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\TestUserCase.csproj": {}
   },
   "projects": {
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj"
-              },
-              "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj": {
-                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj"
+              "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -91,6 +88,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "Swashbuckle.AspNetCore.Filters": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
@@ -116,17 +117,17 @@
         }
       }
     },
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -218,91 +219,17 @@
         }
       }
     },
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\TestUserCase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj",
-        "projectName": "Services",
-        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
-            "projectReferences": {
-              "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        }
-      },
-      "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "dependencies": {
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.3, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[7.1.2, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\TestUserCase\\TestUserCase.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\TestUserCase\\TestUserCase.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\TestUserCase.csproj",
         "projectName": "TestUserCase",
-        "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\TestUserCase\\TestUserCase.csproj",
-        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\TestUserCase\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\TestUserCase.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\TestUserCase\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -316,11 +243,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj": {
-                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\API\\API.csproj"
+              "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\API\\API.csproj"
               },
-              "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj"
+              "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\Repositories.csproj"
               }
             }
           }

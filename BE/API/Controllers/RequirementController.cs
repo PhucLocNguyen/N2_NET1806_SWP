@@ -65,7 +65,7 @@ namespace API.Controllers
             var Requirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (Requirement == null)
             {
-                return NotFound();
+                return NotFound("Requiremnet is not existed");
             }
 
             return Ok(Requirement.toRequirementDTO());
@@ -77,7 +77,7 @@ namespace API.Controllers
             var Requirement = requestCreateRequirementModel.toRequirementEntity();
             _unitOfWork.RequirementRepository.Insert(Requirement);
             _unitOfWork.Save();
-            return Ok("Create successfully");
+            return Ok(Requirement);
         }
 
         [HttpPut]
@@ -86,7 +86,7 @@ namespace API.Controllers
             var existedRequirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (existedRequirement == null)
             {
-                return NotFound();
+                return NotFound("Requiremnet is not existed");
             }
             existedRequirement.Status = requestCreateRequirementModel.Status;
             existedRequirement.ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery;
@@ -110,7 +110,7 @@ namespace API.Controllers
             var existedRequirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (existedRequirement == null)
             {
-                return NotFound();
+                return NotFound("Requiremnet is not existed");
             }
             _unitOfWork.RequirementRepository.Delete(existedRequirement);
             _unitOfWork.Save();

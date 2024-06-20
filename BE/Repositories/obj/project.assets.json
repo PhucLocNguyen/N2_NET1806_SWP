@@ -4283,11 +4283,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj",
-      "projectName": "Repositories",
-      "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj",
+      "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj",
+      "projectName": "SWP391Project.Repositories",
+      "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\obj\\",
+      "outputPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",

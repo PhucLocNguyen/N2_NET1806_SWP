@@ -1,0 +1,15 @@
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\bin\Debug\net8.0\SWP391Project.Services.deps.json
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\bin\Debug\net8.0\SWP391Project.Services.dll
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\bin\Debug\net8.0\SWP391Project.Services.pdb
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\bin\Debug\net8.0\SWP391Project.Repositories.dll
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\bin\Debug\net8.0\SWP391Project.Repositories.pdb
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\SWP391Project.Services.csproj.AssemblyReference.cache
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\SWP391Project.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\SWP391Project.Services.AssemblyInfoInputs.cache
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\SWP391Project.Services.AssemblyInfo.cs
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\SWP391Project.Services.csproj.CoreCompileInputs.cache
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\SWP391Pr.73AA9B44.Up2Date
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\SWP391Project.Services.dll
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\refint\SWP391Project.Services.dll
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\SWP391Project.Services.pdb
+D:\HocTap\AspDotNet_Practice\SwpWorking\ChatSystem\BE\Services\obj\Debug\net8.0\ref\SWP391Project.Services.dll

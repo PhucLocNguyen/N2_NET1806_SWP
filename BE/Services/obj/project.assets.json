@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AutoMapper/13.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Azure.Core/1.35.0": {
         "type": "package",
         "dependencies": {
@@ -1120,7 +1136,7 @@
           }
         }
       },
-      "Repositories/1.0.0": {
+      "SWP391Project.Repositories/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
@@ -1133,15 +1149,30 @@
           "Microsoft.Extensions.Identity.Core": "8.0.6"
         },
         "compile": {
-          "bin/placeholder/Repositories.dll": {}
+          "bin/placeholder/SWP391Project.Repositories.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Repositories.dll": {}
+          "bin/placeholder/SWP391Project.Repositories.dll": {}
         }
       }
     }
   },
   "libraries": {
+    "AutoMapper/13.0.1": {
+      "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "type": "package",
+      "path": "automapper/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.13.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net6.0/AutoMapper.dll",
+        "lib/net6.0/AutoMapper.xml"
+      ]
+    },
     "Azure.Core/1.35.0": {
       "sha512": "hENcx03Jyuqv05F4RBEPbxz29UrM3Nbhnr6Wl6NQpoU9BCIbL3XLentrxDCTrH54NLS11Exxi/o8MYgT/cnKFA==",
       "type": "package",
@@ -2926,17 +2957,16 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Repositories/1.0.0": {
+    "SWP391Project.Repositories/1.0.0": {
       "type": "project",
-      "path": "../Repositories/Repositories.csproj",
-      "msbuildProject": "../Repositories/Repositories.csproj"
+      "path": "../Repositories/SWP391Project.Repositories.csproj",
+      "msbuildProject": "../Repositories/SWP391Project.Repositories.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Newtonsoft.Json >= 13.0.3",
-      "Repositories >= 1.0.0",
-      "System.IdentityModel.Tokens.Jwt >= 7.1.2"
+      "AutoMapper >= 13.0.1",
+      "SWP391Project.Repositories >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2945,11 +2975,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj",
-      "projectName": "Services",
-      "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\Services.csproj",
+      "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\SWP391Project.Services.csproj",
+      "projectName": "SWP391Project.Services",
+      "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\SWP391Project.Services.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Services\\obj\\",
+      "outputPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2966,8 +2996,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj": {
-              "projectPath": "D:\\HocTap\\AspDotNet_Practice\\NET1806_SWP391_Project\\BE\\Repositories\\Repositories.csproj"
+            "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+              "projectPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\ChatSystem\\BE\\Repositories\\SWP391Project.Repositories.csproj"
             }
           }
         }
@@ -2987,13 +3017,9 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "Newtonsoft.Json": {
+          "AutoMapper": {
             "target": "Package",
-            "version": "[13.0.3, )"
-          },
-          "System.IdentityModel.Tokens.Jwt": {
-            "target": "Package",
-            "version": "[7.1.2, )"
+            "version": "[13.0.1, )"
           }
         },
         "imports": [

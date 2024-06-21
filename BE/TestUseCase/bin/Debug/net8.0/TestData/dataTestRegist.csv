@@ -1,0 +1,5 @@
+Username,Email,Password,PasswordConfirm,ExpectedValue
+loc,Badat@gmail.com,123,123,Username is existed
+badat,badat@gmail.com,123,1234,PasswordConfirm is not correct
+badat,loc@example.com,123,123,Email has already been registered
+badat,badat@gmail.com,123,123,Regist Successfully

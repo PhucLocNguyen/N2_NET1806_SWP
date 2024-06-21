@@ -1,0 +1,4 @@
+﻿Username,Password,ExpectedValue
+loc,Loc12345678,Login Successfully
+badat,phucloc123!!@@,Invalid Username
+PhucLok,badat,Password incorrect

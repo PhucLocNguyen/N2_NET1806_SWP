@@ -115,7 +115,8 @@ namespace API.Controllers
 
                 if(user.Role.Name == RoleConst.Customer)
                 {
-                    return Ok(await _tokenService.CreateToken(user));
+                    return Ok("Login Successfully");
+                    /*return Ok(await _tokenService.CreateToken(user));*/
                 }
                 return BadRequest("You do not have permission to access this page");
             }
@@ -143,7 +144,8 @@ namespace API.Controllers
 
                 if (user.Role.Name != RoleConst.Customer)
                 {
-                    return Ok(await _tokenService.CreateToken(user));
+                    return Ok("Login Successfully");
+                    /*return Ok(await _tokenService.CreateToken(user));*/
                 }
                 return BadRequest("You do not have permission to access this page");
             }

@@ -2,6 +2,7 @@
 using API.Model.StonesModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Repositories;
 using Repositories.Entity;
 using System.Linq.Expressions;
@@ -88,18 +89,22 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateStones(RequestCreateStonesModel requestCreateStonesModel)
         {
-            if (requestCreateStonesModel.Size < 1 || requestCreateStonesModel.Size > 3)
+            if (requestCreateStonesModel.Size <= 0)
             {
-                return BadRequest("Size must be between 1-3");
+                return BadRequest("Size cannot be less than 0 or null");
             }
-
-            if (requestCreateStonesModel.Quantity != 20 && requestCreateStonesModel.Quantity != 36 && requestCreateStonesModel.Quantity != 40)
+            if (requestCreateStonesModel.Quantity <= 0)
             {
-                return BadRequest("Quantity must be 20, 36 or 40");
+                return BadRequest("Quantity cannot be less than 0 or null");
             }
             if (requestCreateStonesModel.Price <= 0)
             {
-                return BadRequest("Price cannot be less than 0");
+                return BadRequest("Price cannot be less than 0 or null");
+            }
+            var getStoneSize = _unitOfWork.StoneRepository.Get(filter: x => (x.Size == requestCreateStonesModel.Size) && (x.Quantity == requestCreateStonesModel.Quantity)).FirstOrDefault();
+            if (getStoneSize != null)
+            {
+                return BadRequest("Stone with this size and quantity had existed");
             }
             /*if (!ModelState.IsValid)
             {
@@ -120,18 +125,54 @@ namespace API.Controllers
         [HttpPut]
         public IActionResult UpdateStones(int id, RequestCreateStonesModel requestCreateStonesModel)
         {
-            var existedStonesUpdate = _unitOfWork.StoneRepository.GetByID(id);
-            if (existedStonesUpdate == null)
+            if (requestCreateStonesModel.Size <= 0)
             {
-                return NotFound("Stones is not existed");
+                return BadRequest("Size cannot be less than 0 or null");
             }
-            existedStonesUpdate.Kind = requestCreateStonesModel.Kind;
-            existedStonesUpdate.Price = requestCreateStonesModel.Price;
-            existedStonesUpdate.Quantity = requestCreateStonesModel.Quantity;
-            existedStonesUpdate.Size = requestCreateStonesModel.Size;
-            _unitOfWork.StoneRepository.Update(existedStonesUpdate);
-            _unitOfWork.Save();
-            return Ok();
+            if (requestCreateStonesModel.Quantity <= 0)
+            {
+                return BadRequest("Quantity cannot be less than 0 or null");
+            }
+            if (requestCreateStonesModel.Price <= 0)
+            {
+                return BadRequest("Price cannot be less than 0 or null");
+            }
+
+            var existingStone = _unitOfWork.StoneRepository.GetByID(id);
+            if (existingStone == null)
+            {
+                return NotFound("Stone not found");
+            }
+
+            var duplicateStone = _unitOfWork.StoneRepository
+                .Get(filter: x => x.Size == requestCreateStonesModel.Size && x.Quantity == requestCreateStonesModel.Quantity && x.StonesId != id)
+                .FirstOrDefault();
+
+            if (duplicateStone != null)
+            {
+                return BadRequest("Stone with this size and quantity already exists");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                existingStone.Kind = requestCreateStonesModel.Kind;
+                existingStone.Size = requestCreateStonesModel.Size;
+                existingStone.Quantity = requestCreateStonesModel.Quantity;
+                existingStone.Price = requestCreateStonesModel.Price;
+
+                _unitOfWork.StoneRepository.Update(existingStone);
+                _unitOfWork.Save();
+                return Ok("Update successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Update failed: " + ex.Message);
+            }
         }
         [HttpDelete]
         public IActionResult DeleteStones(int id)

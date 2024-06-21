@@ -10,7 +10,7 @@ namespace SWP391Project.Services.ChatSystem
     public interface IConversationService
     {
         public Conversation CreateConversation(Conversation conversation);
-        public Task<Conversation> GetById(int id);
+        public Conversation GetById(int id);
         public bool CheckValidConversation(int userId1, int userId2);
 
         public IEnumerable<Conversation> GetAllByCurrentUser(int userId);

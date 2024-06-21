@@ -3,7 +3,7 @@ using Repositories.Entity;
 
 namespace API.Model.ConversationModel
 {
-    public static class MessageMapper
+    public static class ConversationMapper
     {
         public static Conversation ToConversationEntity(this RequestCreateConversation requestCreateConversation)
         {
@@ -14,16 +14,15 @@ namespace API.Model.ConversationModel
             };
         }
 
-        public static ConversationDto ToConversationDTO(this Conversation conversation)
-        {
-            return new ConversationDto()
+            public static ConversationDto ToConversationDto(this Conversation conversation, int userId)
             {
-                ConversationId = conversation.ConversationId,
-                User1Id = conversation.User1Id,
-                User2Id = conversation.User2Id,
-                User1 = conversation.User1.toUserDTO(),
-                User2 = conversation.User2.toUserDTO(),
-            };
-        }
+                var user = conversation.User1Id == userId ? conversation.User2 : conversation.User1;
+                return new ConversationDto()
+                {
+                    ConversationId = conversation.ConversationId,
+                    Messages = conversation.Messages,
+                    User = UserMapper.toUserDTO(user),
+                };
+            }
     }
 }

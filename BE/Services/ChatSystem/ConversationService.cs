@@ -1,12 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Repositories;
 using Repositories.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace SWP391Project.Services.ChatSystem.Hubs
 {
     public class ConversationService : IConversationService
@@ -37,9 +30,9 @@ namespace SWP391Project.Services.ChatSystem.Hubs
             }
         }
 
-        public async Task<Conversation> GetById(int id)
+        public Conversation GetById(int id)
         {
-            var conversation = await _context.Conversations.FirstOrDefaultAsync(x=> x.ConversationId == id);
+            var conversation = _context.Conversations.Include(x => x.User1).Include(x => x.User2).FirstOrDefault(x=> x.ConversationId == id);
             return conversation;
         }
         public bool CheckValidConversation(int userId1, int userId2)
@@ -59,8 +52,16 @@ namespace SWP391Project.Services.ChatSystem.Hubs
 
         public IEnumerable<Conversation> GetAllByCurrentUser(int userId)
         {
-            var getCoversationsByUser = _context.Conversations.Where(x=>x.User1Id==userId|| x.User2Id == userId).ToList();
-            return getCoversationsByUser;
+            var conversations = 
+                _context.Conversations
+        .Where(x => x.User1Id == userId || x.User2Id == userId)
+        .Include(x => x.User1)
+        .Include(x => x.User2)
+                .ToList();
+
+            return conversations;
         }
+
+       
     }
 }

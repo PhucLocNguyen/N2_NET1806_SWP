@@ -21,9 +21,9 @@ namespace API.Controllers
         }
         [HttpGet("{id}")]
 
-        public IActionResult GetById([FromRoute]int id)
+        public IActionResult GetById([FromRoute]int id,[FromQuery] int userId)
         {
-            var conversation = _conversationService.GetById(id);
+            var conversation = _conversationService.GetById(id).ToConversationDto(userId);
             
             return Ok(conversation);
         }
@@ -37,7 +37,8 @@ namespace API.Controllers
             }
             else
             {
-                var getConversationList = _conversationService.GetAllByCurrentUser(userId);
+                var getConversationList = _conversationService.GetAllByCurrentUser(userId).Select(conversation=> conversation.ToConversationDto(userId)).ToList();
+
                 return Ok(getConversationList);
             }
         }

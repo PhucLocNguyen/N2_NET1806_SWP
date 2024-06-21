@@ -98,7 +98,6 @@ namespace API
             builder.Services.AddScoped<IToken, Token>();
             builder.Services.AddScoped<IChatService, ChatService>();
             builder.Services.AddScoped<IConversationService, ConversationService>();
-            builder.Services.AddAutoMapper(typeof(Program));
             builder.Services.AddSignalR();
 
             var app = builder.Build();
@@ -117,7 +116,8 @@ namespace API
                 .AllowAnyHeader()
                 .AllowCredentials()
                 //.WithOrigins("https://localhost:44351))
-                .SetIsOriginAllowed(origin => true));
+                .SetIsOriginAllowed(origin => 
+                true));
 
             app.UseAuthentication();
             app.UseAuthorization();

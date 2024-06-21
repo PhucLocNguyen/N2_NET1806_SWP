@@ -15,5 +15,8 @@ namespace API.Model.UserModel
         [Required]
         public string? PasswordConfirm { get; set; }
 
+        public string? VerifyEmail { get; set; }
+        public DateTime? Duration {  get; set; } 
+
     }
 }

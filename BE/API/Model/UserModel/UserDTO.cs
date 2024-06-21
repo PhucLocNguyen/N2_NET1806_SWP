@@ -1,4 +1,7 @@
-﻿namespace API.Model.UserModel
+﻿using Newtonsoft.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
+
+namespace API.Model.UserModel
 {
     public class UserDTO
     {

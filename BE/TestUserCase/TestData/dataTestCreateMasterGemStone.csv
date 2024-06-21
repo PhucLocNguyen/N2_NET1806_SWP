@@ -1,4 +1,5 @@
 Kind,Size,Price,Clarity,Cut,Weight,Shape,Image,ExpectedValue
-Ryby,8,1298.7,VVS2,EX,1.29,Oval,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2jyWQP-qaThFhZPPRycV7CawwamQ1el3yDw&s,Create successfully
-123,8,1298.7,VVS2,EX,1.29,Oval,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2jyWQP-qaThFhZPPRycV7CawwamQ1el3yDw&s,"Kind is string"""
-123,-8,1298.7,VVS2,EX,1.29,Oval,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2jyWQP-qaThFhZPPRycV7CawwamQ1el3yDw&s,Size must be positive number
+,4,890,VVS1,EX,0.2,Round,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWHUscJPTURmqG413RW3IUoQFaWE_ypeDRQ&s,Kind must be not plank
+Diamond,-4,890,VVS1,EX,0.2,Round,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWHUscJPTURmqG413RW3IUoQFaWE_ypeDRQ&s,Size must be positive number
+Diamond,4,890,VVS1,EX,0.2,Round,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWHUscJPTURmqG413RW3IUoQFaWE_ypeDRQ&s,Master Gemstone is not existed
+Diamond,5,890,VVS1,EX,0.2,Round,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWHUscJPTURmqG413RW3IUoQFaWE_ypeDRQ&s,Create successfully

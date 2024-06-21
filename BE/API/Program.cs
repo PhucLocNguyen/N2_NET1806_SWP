@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repositories;
+using Repositories.Email;
 using Repositories.Entity;
 using Repositories.Token;
 using Swashbuckle.AspNetCore.Filters;
@@ -81,6 +82,7 @@ namespace API
                     ValidAudience = builder.Configuration["JWT:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"])),
                     RoleClaimType = CustomeClaimType.Role,
+
                 };
             });
 
@@ -92,6 +94,9 @@ namespace API
             });
             builder.Services.AddTransient<UnitOfWork>();
             builder.Services.AddScoped<IToken, Token>();
+            builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSetting"));
+            builder.Services.AddTransient<IEmailService, EmailService>();
+            builder.Services.AddMemoryCache();
 
             var app = builder.Build();
 

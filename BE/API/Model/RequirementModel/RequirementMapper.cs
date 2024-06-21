@@ -10,6 +10,8 @@ namespace API.Model.RequirementModel
             {
                 Status = requestCreateRequirementModel.Status,
 
+                CreatedDate = requestCreateRequirementModel.CreatedDate,
+
                 ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery,
 
                 Size = requestCreateRequirementModel.Size,
@@ -36,7 +38,10 @@ namespace API.Model.RequirementModel
             return new ReponseRequirement()
             {
                 RequirementId = requirement.RequirementId,
+
                 Status = requirement.Status,
+
+                CreatedDate = requirement.CreatedDate, 
 
                 ExpectedDelivery = requirement.ExpectedDelivery,
 

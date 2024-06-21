@@ -75,6 +75,47 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateMasterGemstone(RequestCreateMasterGemstoneModel requestCreateMasterGemstone)
         {
+            var error = "";
+            var properties = typeof(RequestCreateMasterGemstoneModel).GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (property.PropertyType == typeof(decimal))
+                {
+                    var value = property.GetValue(requestCreateMasterGemstone);
+                    if ((decimal)value <0)
+                    {
+                        error = property.Name +" must be positive number";
+                        break;
+                    }
+                }
+                if (property.PropertyType == typeof(string))
+                {
+                    var value = property.GetValue(requestCreateMasterGemstone);
+                    if (string.IsNullOrEmpty((string)value))
+                    {
+                        error = property.Name + " must be not plank";
+                        break;
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(error))
+            {
+                return BadRequest(error);
+            }
+            Expression<Func<MasterGemstone, bool>> filter = x =>
+                ( x.Kind.Equals(requestCreateMasterGemstone.Kind)) &&
+                (x.Size == requestCreateMasterGemstone.Size) &&
+                (x.Clarity.Equals(requestCreateMasterGemstone.Clarity)) &&
+                (x.Cut.Equals(requestCreateMasterGemstone.Cut)) &&
+                (x.Shape.Equals(requestCreateMasterGemstone.Shape)) &&
+                x.Price == requestCreateMasterGemstone.Price &&
+                x.Weight == requestCreateMasterGemstone.Weight;
+            var existedMasterGemstone = _unitOfWork.MasterGemstoneRepository.Get(filter);
+            if( existedMasterGemstone.Count()>0)
+            {
+                return BadRequest("Master Gemstone is exist");
+            }
             var MasterGemstone = requestCreateMasterGemstone.toMasterGemstonesEntity();
             _unitOfWork.MasterGemstoneRepository.Insert(MasterGemstone);
             _unitOfWork.Save();
@@ -130,6 +171,6 @@ namespace API.Controllers
 
             return Ok("Delete Successfully");
         }
-
+        
     }
 }

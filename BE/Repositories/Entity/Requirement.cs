@@ -9,6 +9,8 @@ public partial class Requirement
 
     public string Status { get; set; } = null!;
 
+    public DateOnly? CreatedDate { get; set; }
+
     public DateOnly? ExpectedDelivery { get; set; }
 
     public string? Size { get; set; }

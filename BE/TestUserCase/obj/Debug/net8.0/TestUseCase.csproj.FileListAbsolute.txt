@@ -186,3 +186,8 @@ C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\obj\Debug\net8.0\ref\TestU
 C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\TestData\dataTestRegist.csv
 C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\TestData\dataTestMaterGemStone.csv
 C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\TestData\dataTestCreateMasterGemStone.csv
+C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\MailKit.dll
+C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\MimeKit.dll
+C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\SendGrid.dll
+C:\Users\Admin\source\repos\SWP391Poject\TestUserCase\bin\Debug\net8.0\StarkbankEcdsa.dll

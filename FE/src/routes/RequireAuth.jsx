@@ -9,6 +9,7 @@ function RequireAuth({ allowedRole }) {
    console.log('>>> Allowed: ', allowedRole)
 
    if (!role) {
+
       return (<Navigate to='/login' state={{ from: location }} replace />)
 
    } else {

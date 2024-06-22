@@ -22,7 +22,7 @@ const navigate = useNavigate();
     navigate("/");
   }
   const [isCompleted,setIsCompleted]= useState(false);
-  
+
   return (
     <>
       <div  ref={scope} className="bg-[#c9d6ff] w-full h-full min-h-screen py-10 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">

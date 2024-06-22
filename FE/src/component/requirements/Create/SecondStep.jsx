@@ -307,24 +307,14 @@ const HandleChangeData = (e) => {
     }
   }
   };
-  const handleReset = (name) => {
-    if(name=="MasterGemstone"){
-      setDataSelected((prevData) => ({
-        ...prevData,
-        ["MasterGemstone"]: {
-          ...prevData["MasterGemstone"],
-          ["kind"]: '',
-        },
-      }));
-    }else{
-      setDataSelected((prevData) => ({
-        ...prevData,
-        ["Stones"]: {
-          ...prevData["Stones"],
-          ["kind"]: '',
-        },
-      }));
-    }
+  const handleReset = () => {
+    setDataSelected((prevData) => ({
+      ...prevData,
+      ["MasterGemstone"]: {
+        ...prevData["MasterGemstone"],
+        ["kind"]: '',
+      },
+    }));
     
     setFilterMasterGemStone(dataApiMasterGemStone);
 };
@@ -405,7 +395,7 @@ const HandleChangeData = (e) => {
               <div className="mb-3 px-3">
                 <div className="flex justify-between items-center">
                 <h4 className="text-lg">Material</h4>
-                <Tooltip title="Reset material" onClick={()=>handleReset("MasterGemstone")}>
+                <Tooltip title="Reset material" onClick={handleReset}>
                   <IconButton>
                   <RestartAltIcon />
                   </IconButton>
@@ -493,7 +483,7 @@ const HandleChangeData = (e) => {
           <div className="mb-3 px-3">
                 <div className="flex justify-between items-center">
                   <h4 className="text-lg">Material</h4>
-                  <Tooltip title="Reset material"  onClick={()=>handleReset("Stones")}>
+                  <Tooltip title="Reset material" onClick={handleReset}>
                     <IconButton>
                     <RestartAltIcon />
                     </IconButton>

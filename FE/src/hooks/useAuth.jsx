@@ -4,6 +4,7 @@ const useAuth = () => {
    var role = '';
    var accessToken = '';
    var UserId = null;
+
       try {
          if (typeof localStorage !== 'undefined') {
             const token = localStorage.getItem('userInfo');
@@ -17,8 +18,6 @@ const useAuth = () => {
       } catch (error) {
          console.error(error);
       }
-
-
 
    return { accessToken, role , UserId}
 }

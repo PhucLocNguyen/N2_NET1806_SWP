@@ -36,7 +36,7 @@ function Login() {
     console.log(formData); 
     const HandleSubmit = async (e)=>{
         e.preventDefault();
-        let pathReq = "register";
+        let pathReq = "registerForCustomer";
         //reset cac field trong form
         const form = e.target;
         var data = new FormData(form);
@@ -53,7 +53,7 @@ function Login() {
             }
         })
         if(e.target.name==="login"){
-            pathReq="login";
+            pathReq="loginForCustomer";
         }
         const { role, accessToken } = await LoginApi(pathReq,listState, axiosConfig);
         console.log('>>>' , role , accessToken)

@@ -34,17 +34,9 @@ function App() {
       <Suspense>
         <Routes>
           {/* Route tự viết để test */}
-          <Route path='/a' element={<BlogCreate/>}></Route>
 
-          <Route path='/b' element={<ManagerLayout> <ListRequirement/> </ManagerLayout>}></Route>
-          <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
-          <Route path='/login' element={<Login />} />
-
-
-
-
-           <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
-           <Route path='/login' element={<Login />} />
+          <Route path='/a' element={<ManagerLayout> <ListRequirement/> </ManagerLayout>}></Route>
+          <Route path='/b' element={<AdminLayout> <StaffList/> </AdminLayout>}></Route>
 
            {/* Route tự viết không ghi qua phần này */}
          

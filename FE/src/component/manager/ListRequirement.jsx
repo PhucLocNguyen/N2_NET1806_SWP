@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
@@ -9,6 +8,7 @@ import useAuth from '../../hooks/useAuth'
 
 function ListRequirement() {
    const pageSize = 6;
+   const status = 1;
    const [page, setPage] = useState(1);
    const [data, setData] = useState([]);
    const [dataSize, setDataSize] = useState(0);
@@ -20,24 +20,25 @@ function ListRequirement() {
 
    useEffect(() => {
 
-      const fetchApi = async () => {
-         const respone = await ApiListRequirement(accessToken, pageSize, page);
-         setData(respone)
-      }
+      try {
+         const fetchApi = async () => {
+            const respone = await ApiListRequirement({ accessToken, pageSize, page, status });
+            setData(respone)
+         }
 
-      const fetchApiTotal = async () => {
-         const respone = await ApiListRequirement(accessToken);
-         setDataSize(respone.length)
-         console.log('>>> Count : ', respone)
-      }
+         const fetchApiTotal = async () => {
+            const respone = await ApiListRequirement({ accessToken, status });
+            setDataSize(respone?.length)
+         }
 
-      fetchApiTotal();
-      fetchApi();
+         fetchApiTotal();
+         fetchApi();
+
+      } catch (error) {
+         setData([])
+      }
 
    }, [page])
-
-   // Chi lay 1 va 3 
-   let filterStatus = data.filter(item => item.status == 1 || item.status == 3);
 
    return (
 
@@ -50,13 +51,13 @@ function ListRequirement() {
                </div>
 
                {/* Header row */}
-               <div className="bg-[#f7f9fc] grid grid-cols-5 gap-x-[1rem] py-[1rem] px-[2.25rem] border-t-[1px] border-solid border-[#e9eaf3]">
+               <div className="bg-[#f7f9fc] grid grid-cols-4 gap-x-[1rem] py-[1rem] px-[2.25rem] border-t-[1px] border-solid border-[#e9eaf3]">
                   <div className="flex items-center">
                      <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Order ID</h2>
                   </div>
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                      <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Staff Name</h2>
-                  </div>
+                  </div> */}
                   <div className="flex items-center">
                      <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Status</h2>
                   </div>
@@ -68,7 +69,7 @@ function ListRequirement() {
                   </div>
                </div>
 
-               {filterStatus.map((item, index) => {
+               {data?.map((item, index) => {
                   return (
                      <RowRequirement key={index} data={item} />
                   )
@@ -79,7 +80,7 @@ function ListRequirement() {
          </div>
          <div className='flex justify-center items-center'>
             <Stack>
-               <Pagination count={Math.ceil(dataSize / 6)} page={page} onChange={handleChange} />
+               <Pagination count={(Math.ceil(dataSize / 6)) || 0} page={page} onChange={handleChange} />
             </Stack>
          </div>
       </div>

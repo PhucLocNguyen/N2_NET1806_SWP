@@ -9,8 +9,7 @@ const Blog = lazy(() => import('../component/blog/Blog'));
 const RequirementOrderSection = lazy(() => import('../component/requirements/Create/RequirementOrderSection'));
 const Login = lazy(() => import('../component/login/Login'));
 const PageError = lazy(() => import('../component/pageerror/PageError'));
-
-
+const RequirementDetail = lazy(() => import('../component/manager/RequirementDetail'));
 
 const publicRoutes = [
    {
@@ -48,6 +47,10 @@ const publicRoutes = [
    {
       path: '/error',
       component: PageError
+   },
+   {
+      path: '/manager/price-quote/:id',
+      component: RequirementDetail
    }
 ]
 

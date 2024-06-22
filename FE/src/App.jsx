@@ -9,28 +9,9 @@ import DefaultLayout from './component/layout/DefaultLayout.jsx'
 
 
 // Import test viết bên dưới
-import Blog from "./component/blog/Blog.jsx"
-import Footer from "./component/footer/Footer.jsx"
-import Navbar from "./component/nav/Navbar.jsx"
+
+
 import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
-
-
-import ListRequirement from './component/manager/ListRequirement.jsx'
-import RequirementDetail from './component/manager/RequirementDetail.jsx'
-import ManagerLayout from './component/manager/layout/ManagerLayout.jsx'
-import StaffLogin from './component/login/StaffLogin.jsx'
-import BlogCreate from './component/manager/BlogCreate.jsx'
-
-import ListRequirement from './component/manager/ListRequirement.jsx'
-import RequirementDetail from './component/manager/RequirementDetail.jsx'
-import ManagerLayout from './component/manager/layout/ManagerLayout.jsx'
-
-
-import PlanningList from './component/designProduct_plan/PlanningList.jsx'
-
-
-import AdminLayout from './component/admin/AdminLayout.jsx'
-import StaffList from './component/admin/staffList/StaffList.jsx'
 
 import Login from './component/login/Login.jsx'
 
@@ -41,18 +22,10 @@ function App() {
     <AuthProvider>
       <Suspense>
         <Routes>
-          {/* Route tự viết để test */}
-
-
-
-
-
-           <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
-           <Route path='/login' element={<Login />} />
+          {/* Route tự viết để test */} 
 
            {/* Route tự viết không ghi qua phần này */}
          
-
 
           {publicRoutes.map((route, index) => {
             let Page = route.component

@@ -1,9 +1,12 @@
+
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
+
 
 import { fetchApiDesignById } from '../../api/FetchApiDesign';
 import ApiRequirementById from '../../api/manager/FetchApiRequirementById';
@@ -36,6 +39,7 @@ function RequirementDetail() {
    console.log(requirement)
    console.log(design)
 
+
    return (
       <>
          <div className="py-[3rem] px-[3rem] min-h-[100vh] bg-[#f7f9fc]">
@@ -46,6 +50,7 @@ function RequirementDetail() {
 
                      <div>
                         <h2 className="text-[32px] font-bold ">Order #{id}</h2>
+
                         <Chip label="Đang đợi báo giá" color='warning' variant="outlined" sx={{ fontWeight: 700 }} />
                      </div>
 
@@ -78,9 +83,11 @@ function RequirementDetail() {
                            </thead>
                            <tbody>
                               <tr>
+
                                  <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.typeOfJewellery?.name}</td>
                                  <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{requirement?.size}</td>
                                  <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.material?.name}</td>
+
                               </tr>
                            </tbody>
                         </table>

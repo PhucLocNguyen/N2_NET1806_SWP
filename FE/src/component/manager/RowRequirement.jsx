@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Chip from '@mui/material/Chip';
 import { Link } from 'react-router-dom';
@@ -42,6 +43,7 @@ function RowRequirement({ data }) {
                </div>
             </div>
          </Link>
+
       </>
    )
 }

@@ -9,7 +9,9 @@ import useAuth from "../../../hooks/useAuth";
 
 export const multiStepContext = createContext();
 export function StepContext({children, designId, animate, scope}) {
+
     const { UserId, role } = useAuth();
+
     const [currentStep, setCurrentStep] = useState(1);
     const [designRuleState, setDesignRule] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -77,6 +79,7 @@ var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
     if(isSubmit){
         SubmitDesignFromCustomer();
     }
+
    })
     console.log(requirementData);
     return (  <>

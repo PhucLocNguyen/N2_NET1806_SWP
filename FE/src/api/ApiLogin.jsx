@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import api from './instance.jsx'
 import { jwtDecode } from 'jwt-decode'
+import axiosConfigHeader from './AxiosConfigHeader.jsx'
 
 const LoginApi = async (pathReq, formData, axiosConfig) => {
     try {
@@ -19,6 +20,7 @@ const LoginApi = async (pathReq, formData, axiosConfig) => {
         // })
 
         if(pathReq === 'loginForCustomer' && response.status === 200){
+
             localStorage.setItem("userInfo", JSON.stringify(response.data))
             const accessToken = response.data;
             console.log(jwtDecode(response.data))
@@ -28,6 +30,7 @@ const LoginApi = async (pathReq, formData, axiosConfig) => {
     } catch (e) {
         console.error('Error during login:', e);
         return {role : null, accessToken: null}
+
     }
 }
 

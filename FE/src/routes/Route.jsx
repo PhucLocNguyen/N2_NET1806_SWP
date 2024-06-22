@@ -10,7 +10,11 @@ const Blog = lazy(() => import('../component/blog/Blog'));
 const RequirementOrderSection = lazy(() => import('../component/requirements/Create/RequirementOrderSection'));
 const Login = lazy(() => import('../component/login/Login'));
 const PageError = lazy(() => import('../component/pageerror/PageError'));
+const BlogList = lazy(() => import('../component/blog_list/blogList'));
+const Blog = lazy(() => import('../component/blog/Blog'));
+const Staff = lazy(() => import('../component/designProductPlan/PlanningList'));
 const RequirementDetail = lazy(() => import('../component/manager/RequirementDetail'));
+
 
 const publicRoutes = [
    {
@@ -32,6 +36,10 @@ const publicRoutes = [
    {
       path: '/design/:id',
       component: DesignInfo
+   },
+   {
+      path: '/Staff',
+      component: Staff
    },
    {
       path: '/blog',

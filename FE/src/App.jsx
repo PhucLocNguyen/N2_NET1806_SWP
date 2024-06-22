@@ -6,18 +6,23 @@ import './App.css'
 import RequireAuth from './routes/RequireAuth.jsx'
 import { publicRoutes, privateRoutes } from './routes/Route.jsx'
 import DefaultLayout from './component/layout/DefaultLayout.jsx'
-
-
-// Import test viết bên dưới
-
+import Blog from "./component/blog/Blog.jsx"
+import Footer from "./component/footer/Footer.jsx"
+import Navbar from "./component/nav/Navbar.jsx"
+import ManagerLayout from './component/manager/layout/ManagerLayout.jsx'
+import StaffLogin from './component/login/StaffLogin.jsx'
+import BlogCreate from './component/manager/BlogCreate.jsx'
+import PlanningList from './component/designProductPlan/PlanningList.jsx'
+import AdminLayout from './component/admin/AdminLayout.jsx'
+import StaffList from './component/admin/staffList/StaffList.jsx'
+import OrderCustomer from './component/orderCustomer/OrderCustomer.jsx'
 import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
-
-
 import Login from './component/login/Login.jsx'
 
 
 function App() {
   return (
+
 
     <AuthProvider>
       <Suspense>
@@ -64,6 +69,7 @@ function App() {
         </Routes>
       </Suspense>
     </AuthProvider>
+
   )
 }
 

@@ -1,6 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
+
    var role = '';
    var accessToken = '';
    var UserId = null;
@@ -20,6 +21,7 @@ const useAuth = () => {
       }
 
    return { accessToken, role , UserId}
+
 }
 
 export default useAuth;

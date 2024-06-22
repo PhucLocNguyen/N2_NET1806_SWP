@@ -1,6 +1,7 @@
 import api from '../instance'
 
-const ApiListRequirement = async (accessToken, pageSize, page) => {
+const ApiListRequirement = async ({ accessToken, pageSize, page, status }) => {
+
    try {
       const response = await api.get('/Requirement', {
          headers: {
@@ -8,7 +9,8 @@ const ApiListRequirement = async (accessToken, pageSize, page) => {
          },
          params: {
             pageIndex: page,
-            pageSize: pageSize
+            pageSize: pageSize,
+            Status: status
          }
       })
 

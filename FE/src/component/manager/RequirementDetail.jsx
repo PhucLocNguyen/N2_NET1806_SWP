@@ -1,8 +1,45 @@
+
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 
+
+import { fetchApiDesignById } from '../../api/FetchApiDesign';
+import ApiRequirementById from '../../api/manager/FetchApiRequirementById';
+
 function RequirementDetail() {
+
+   const { id } = useParams(); // requirement id
+   const [requirement, setRequirement] = useState();
+   const [design, setDesign] = useState();
+   const designId = requirement?.designId; // Design id children
+
+   useEffect(() => {
+
+      const fetchData = async () => {
+
+         const requirementRespone = await ApiRequirementById(id);
+         setRequirement(requirementRespone)
+
+         const dataDesignId = requirementRespone?.designId;
+
+         const designRespone = await fetchApiDesignById(dataDesignId);
+         setDesign(designRespone)
+
+      }
+
+      fetchData();
+
+   }, [])
+
+   console.log(requirement)
+   console.log(design)
+
+
    return (
       <>
          <div className="py-[3rem] px-[3rem] min-h-[100vh] bg-[#f7f9fc]">
@@ -12,17 +49,20 @@ function RequirementDetail() {
                   <div className="py-[2.5rem] px-[2.5rem] rounded-[30px] border-[1px] border-[#e9eaf3] border-solid bg-[white]" >
 
                      <div>
-                        <h2 className="text-[32px] font-bold ">Order #1</h2>
+                        <h2 className="text-[32px] font-bold ">Order #{id}</h2>
+
                         <Chip label="Đang đợi báo giá" color='warning' variant="outlined" sx={{ fontWeight: 700 }} />
                      </div>
 
                      <div className="h-[1.5px] bg-[#e9eaf3] my-[1.5rem]"></div>
 
                      <div>
-                        <h2 className="text-[22px] mb-[1rem] font-bold leading-[1.273em]">Tên của bản thiết kế</h2>
+                        <h2 className="text-[22px] mb-[1rem] font-bold leading-[1.273em]">{design?.designName}</h2>
                         <div className="flex ">
-                           <img className="w-[15rem] h-[15rem]" src="https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/item1.jpg?alt=media&token=aa586840-29a7-46c3-ab75-6db6302bb1ca" />
-                           <p className="ml-[1rem] text-[#6f7182]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur qui enim facilis maiores, voluptatem amet eaque dolores odit asperiores exercitationem minus itaque id dolorem minima eum assumenda. Dolores, veritatis animi.</p>
+                           <img className="w-[15rem] h-[15rem]" src={design?.image} />
+                           <p className="ml-[1rem] text-[#6f7182]">
+                              {design?.description}
+                           </p>
                         </div>
                      </div>
 
@@ -43,9 +83,11 @@ function RequirementDetail() {
                            </thead>
                            <tbody>
                               <tr>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>Ring</td>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>20</td>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>Gold</td>
+
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.typeOfJewellery?.name}</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{requirement?.size}</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.material?.name}</td>
+
                               </tr>
                            </tbody>
                         </table>

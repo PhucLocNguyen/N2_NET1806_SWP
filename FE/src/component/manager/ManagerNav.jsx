@@ -8,7 +8,7 @@ function ManagerNav() {
             <div className="relative w-[100%] py-[1.7rem]">
                <div className="w-[100%] cursor-pointer group flex items-center ">
                   <ListAltIcon className="group-hover:text-[rgb(66,133,244)]" />
-                  <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Requirement</h2>
+                  <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Price quote</h2>
                </div>
                <div className="mt-[1.5rem] w-[100%] cursor-pointer group flex items-center ">
                   <MonetizationOnIcon className="group-hover:text-[rgb(66,133,244)]" />

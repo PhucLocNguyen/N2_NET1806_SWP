@@ -1,24 +1,22 @@
 import { Button, SvgIcon, Icon } from '@mui/material';
-import { jwtDecode } from 'jwt-decode';
 import InputPassword from './InputPassword';
 import InputText from './InputText';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from "framer-motion";
 
-import axios from 'axios';
-import { LoginApi, LoginWithGoogle } from '../../api/ApiLogin';
-import useAuth from '../../hooks/useAuth.jsx'
 
+import { LoginApi, LoginWithGoogle } from '../../api/ApiLogin';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-
 function Login() {
-    const location = useLocation();
     const navigate = useNavigate();
+    const location = useLocation();
+
     const from = location.state?.from?.pathname || '/';
 
     let [isToggle, setIsToggle] = useState(false);
     const [dataSource, setDataSource] = useState([]);
+
     const [formData, setFormData] = useState({
         username: "", password:"",
     });
@@ -41,7 +39,7 @@ function Login() {
     console.log(formData); 
     const HandleSubmit = async (e)=>{
         e.preventDefault();
-        let pathReq = "register";
+        let pathReq = "registerForCustomer";
         //reset cac field trong form
         const form = e.target;
         var data = new FormData(form);
@@ -58,9 +56,10 @@ function Login() {
             }
         })
         if(e.target.name==="login"){
-            pathReq="login";
+            pathReq="loginForCustomer";
         }
-        const { role, accessToken } = await LoginApi(pathReq,listState, axiosConfig);
+        const { role, accessToken } = await LoginApi(pathReq,listState);
+
         console.log('>>>' , role , accessToken)
         navigate(from, { replace: true })
     }

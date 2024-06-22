@@ -19,7 +19,8 @@ const LoginApi = async (pathReq, formData, axiosConfig) => {
 
         // })
 
-        if(pathReq === 'login' && response.status === 200){
+        if(pathReq === 'loginForCustomer' && response.status === 200){
+
             localStorage.setItem("userInfo", JSON.stringify(response.data))
             const accessToken = response.data;
             console.log(jwtDecode(response.data))
@@ -29,14 +30,16 @@ const LoginApi = async (pathReq, formData, axiosConfig) => {
     } catch (e) {
         console.error('Error during login:', e);
         return {role : null, accessToken: null}
+
     }
 }
+
 const LoginWithGoogle = async (token)=>{
     try{
         const response = await api.post(`/LoginGoogle/login`,{token});
+        localStorage.setItem("userInfo", JSON.stringify(response.data))
         const accessToken = response.data;
-        console.log(accessToken);
-        const role = jwtDecode(res.data).given_name
+        const role = jwtDecode(response.data).Role
         return { role, accessToken }
 
     }catch(e){
@@ -45,3 +48,4 @@ console.error("Error during login with Google : "+ e);
     }
 }
 export { LoginApi, LoginWithGoogle }
+

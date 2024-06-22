@@ -4,9 +4,14 @@ import { fetchApiDesignById } from "../../../api/FetchApiDesign";
 import { FetchApiDesignRuleById } from "../../../api/Requirements/FetchApiDesignRule";
 import { PostApiDesign } from "../../../api/Requirements/PostApiDesign";
 import { PostApiRequirement } from "../../../api/Requirements/PostRequirement";
+import { PostUsersRequirement } from "../../../api/Requirements/PostUsersRequirement";
+import useAuth from "../../../hooks/useAuth";
 
 export const multiStepContext = createContext();
 export function StepContext({children, designId, animate, scope}) {
+
+    const { UserId, role } = useAuth();
+
     const [currentStep, setCurrentStep] = useState(1);
     const [designRuleState, setDesignRule] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -66,12 +71,15 @@ var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
             customerNote:requirementData.customerNote
         }
         const PostRequirementCustomer = await PostApiRequirement(dataToSendRequirement);
-        console.log(PostRequirementCustomer);
+        const requirementId = PostRequirementCustomer.requirementId;
+        const UserJoinTheRequirement = await PostUsersRequirement(requirementId,UserId);
+        console.log(UserJoinTheRequirement);
     }
    useEffect(()=>{
     if(isSubmit){
         SubmitDesignFromCustomer();
     }
+
    })
     console.log(requirementData);
     return (  <>

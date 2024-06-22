@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams,useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
@@ -29,8 +29,6 @@ function DesignInfo() {
 
       fetchAPI()
    }, [])
-
-   console.log(designInfo)
 
    return (
       <>

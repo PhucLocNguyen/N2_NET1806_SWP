@@ -1,34 +1,53 @@
 import { Routes, Route } from 'react-router-dom'
-import { lazy, Suspense } from 'react'
+import { Suspense } from 'react'
 import AuthProvider from './context/AuthContext.jsx'
 import './App.css'
+
+import RequireAuth from './routes/RequireAuth.jsx'
+import { publicRoutes, privateRoutes } from './routes/Route.jsx'
+import DefaultLayout from './component/layout/DefaultLayout.jsx'
+
+
+// Import test viết bên dưới
 import Blog from "./component/blog/Blog.jsx"
 import Footer from "./component/footer/Footer.jsx"
 import Navbar from "./component/nav/Navbar.jsx"
 import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
-import PlanningList from './component/designProduct_plan/PlanningList.jsx'
+
+
+import ListRequirement from './component/manager/ListRequirement.jsx'
+import RequirementDetail from './component/manager/RequirementDetail.jsx'
+import ManagerLayout from './component/manager/layout/ManagerLayout.jsx'
+import StaffLogin from './component/login/StaffLogin.jsx'
+import BlogCreate from './component/manager/BlogCreate.jsx'
+
+import PlanningList from './component/designProductPlan/PlanningList.jsx'
 
 import AdminLayout from './component/admin/AdminLayout.jsx'
 import StaffList from './component/admin/staffList/StaffList.jsx'
-import StaffPopup from './component/admin/staffList/StaffPopup.jsx'
+
 import Login from './component/login/Login.jsx'
 
-import { publicRoutes } from './routes/Route.jsx'
-import DefaultLayout from './component/layout/DefaultLayout.jsx'
+import OrderCustomer from './component/orderCustomer/OrderCustomer.jsx'
+
 
 function App() {
   return (
+
     // <AuthProvider>
     //   <Suspense>
     //     <Routes>
     //       {/* Route tự viết để test */}
-    //       <Route path='/a' element={<AdminLayout> <StaffList /> </AdminLayout>}></Route>
 
-    //       <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
-    //       <Route path='/login' element={<Login />} />
 
-    //       {/* Route tự viết không ghi qua phần này */}
-          
+
+    //        <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
+    //        <Route path='/login' element={<Login />} />
+
+    //        {/* Route tự viết không ghi qua phần này */}
+         
+
+
     //       {publicRoutes.map((route, index) => {
     //         let Page = route.component
 
@@ -48,11 +67,24 @@ function App() {
     //         )
     //       })}
 
+    //       {/* Private route */}
+
+    //       {privateRoutes.map((route, index) => {
+    //         let Page = route.component;
+
+    //         return (
+    //           <Route key={index} element={<RequireAuth allowedRole={route.role} />}>
+    //             <Route path={route.path} element={<Page />} />
+    //           </Route>
+    //         )
+    //       })}
+
+
     //     </Routes>
     //   </Suspense>
     // </AuthProvider>
     <>
-      <PlanningList />
+      <OrderCustomer />
     </>
   )
 }

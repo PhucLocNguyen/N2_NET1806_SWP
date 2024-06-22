@@ -6,7 +6,7 @@ import "./style.css";
 import { TextField } from "@mui/material";
 import { FetchApiMaterial } from "../../../api/Requirements/FetchApiMaterial";
 function FirstStep({ handleCompleteStep }) {
-  const { currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState } =
+  const { currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState , animate} =
     useContext(multiStepContext);
   const [isAllowed, setAllowed] = useState(false);
   const [data, setData] = useState({
@@ -20,8 +20,8 @@ function FirstStep({ handleCompleteStep }) {
     const materialApi = FetchApiMaterial().then((res)=>{
       setMaterialList([...res]);
     })
+    
   },[])
-  console.log(materialList);
   useEffect(() => {
     var output = true;
     Object.entries(data).forEach(([key, value]) => {
@@ -69,7 +69,7 @@ function FirstStep({ handleCompleteStep }) {
           <div className="shadow-lg relative h-[100px]">
           <input type="radio" name="material" id={"material-"+index} defaultChecked={requirementData.material==item.materialId} value={item.materialId} className="hidden peer" onChange={HandleChangeData} />
           <span className="w-[20px] h-[20px] mb-[50px] top-1 left-1 inline-block border-[2px] border-[#e3e3e3] rounded-full relative z-10 peer-checked:bg-primary checkedBoxFormat peer-checked:border-[#3057d5] peer-checked:scale-110 peer-checked:bg-[#3057d5] peer-checked:before:opacity-100"></span>
-          <img src="https://e7.pngegg.com/pngimages/469/594/png-clipart-two-1000g-gold-bars-gold-bar-bullion-gold-bar-usb-flash-drive-gold.png" className="rounded-md w-full absolute top-0 h-[80px]"/>
+          <img src={item.image} className="rounded-md w-full absolute top-0 h-[80px]"/>
           <p className="text-center">{item.name}</p>
           </div>
       </label>

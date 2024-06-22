@@ -7,6 +7,12 @@ const ListAll = lazy(() => import('../component/category/ListAll'));
  const DesignInfo = lazy(() => import('../component/order/DesignInfo'));
 // const Blog = lazy(() => import('../component/blog/Blog'));
 const RequirementOrderSection = lazy(() => import('../component/requirements/Create/RequirementOrderSection'));
+const Login = lazy(() => import('../component/login/Login'));
+const PageError = lazy(() => import('../component/pageerror/PageError'));
+const BlogList = lazy(() => import('../component/blog_list/blogList'));
+const Blog = lazy(() => import('../component/blog/Blog'));
+const Staff = lazy(() => import('../component/designProductPlan/PlanningList'));
+
 
 
 const publicRoutes = [
@@ -30,22 +36,34 @@ const publicRoutes = [
       path: '/design/:id',
       component: DesignInfo
    },
-   // {
-   //    path: '/blog',
-   //    component: BlogList
-   // },
-   // {
-   //    path: '/blog/:id',
-   //    component: Blog
-   // },
+    {
+       path: '/blog',
+       component: BlogList
+    },
+    {
+       path: '/blog/:id',
+       component: Blog
+   },
    {
-      path: '/design/create-requirement/:id',
-      component: RequirementOrderSection
+      path: '/login',
+      component: Login
+   },
+   {
+      path: '/Staff',
+      component: Staff
+   },
+   {
+      path: '/error',
+      component: PageError
    }
 ]
 
 const privateRoutes = [
-
+   {
+      path: '/design/create-requirement/:id',
+      component: RequirementOrderSection,
+      role: 'Customer'
+   }
 ]
 
 export { publicRoutes, privateRoutes }

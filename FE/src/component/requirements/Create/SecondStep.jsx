@@ -1,22 +1,22 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { useCallback, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { FetchApiMasterGemstone, FetchApiMasterGemstoneById } from "../../../api/Requirements/FetchApiMasterGemstone";
 import { FetchApiStones, FetchApiStonesById } from "../../../api/Requirements/FetchApiStones";
 import { CustomButton } from "../../home/Home";
 import { multiStepContext } from "./StepContext";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { IconButton, Tooltip } from "@mui/material";
+import ShowMasterGemStone from "./ShowMasterGemStone";
 function SecondStep({ handleCompleteStep, completedSteps }) {
-  const { currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState } =
+  const { currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState, animate, scope } =
     useContext(multiStepContext);
     const [isAllowed, setAllowed] = useState(false);
     const [dataApiMasterGemStone, setDataApiMasterGemStone] = useState([]);
     const [filterMasterGemStone, setFilterMasterGemStone] = useState([]);
-
     const [dataApiStones, setDataApiStones] = useState([]);
     const [filterStones, setFilterStones] = useState([]);
-    
+    const [isToggle, setIsToggle] = useState(false);
 const [dataSelected, setDataSelected] = useState({
   MasterGemstone:{
     kind: null,
@@ -43,7 +43,6 @@ const [dataSelected, setDataSelected] = useState({
   // Result after select
   const [masterGemstoneObject, setMasterGemstoneObject]= useState({});
   const [stonesObject, setStonesObject] = useState({});
-
   //initial api value when reload
     useEffect(()=>{
       const dataMaster = FetchApiMasterGemstone(designRuleState.MinSizeMasterGemstone,designRuleState.MaxSizeMasterGemstone).then((res)=>{
@@ -109,6 +108,8 @@ const [dataSelected, setDataSelected] = useState({
       });
       let objectChange = {};
       var isSelectedBefore = false;
+
+      // toogle master gemstone & stones  visible or hidden
       if(requirementData.masterGemstoneId==null){
         objectChange = {...objectChange, MasterGemstone: null};
         var getSection = document.getElementById("MasterGemstone");
@@ -126,9 +127,9 @@ const [dataSelected, setDataSelected] = useState({
         setDataSelected({...dataSelected, ...objectChange});
       }
       
+    
     },[]);
 
-    console.log(dataSelected);
     // filter the selection list when choose an option to filter
     useEffect(() => {
       var output = true;
@@ -143,9 +144,23 @@ const [dataSelected, setDataSelected] = useState({
           return true;
         })});
         if(dataFilterLastMasterGemstone.length ==1){
-          setMasterGemstoneObject(dataFilterLastMasterGemstone[0])
+          setMasterGemstoneObject(dataFilterLastMasterGemstone[0]);
+          ShowMasterGemStone(dataFilterLastMasterGemstone[0]);
+          var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
+          target.style.display="block";
+          setIsToggle(true);
+        }
+        // animation box mastergemstone
+        if(dataFilterLastMasterGemstone.length == 1 && !isToggle){
+          
+          animate("div#boxRequirement", {x: [0,-150]});
+        animate("div#boxRequirement #MasterGemstoneContainerFloat",{x:[0,"300px"], opacity:[0,1], zIndex: [-1,1]});
+
         }
       }else{
+        setIsToggle(false);
+        animate("div#boxRequirement", {x: 0});
+        animate("div#boxRequirement #MasterGemstoneContainerFloat",{x:["300px",0], opacity:[1,0], zIndex: [1,-1]});
         setMasterGemstoneObject({masterGemstoneId:null});
       }
       // tim ra id cho stones
@@ -191,6 +206,11 @@ const [dataSelected, setDataSelected] = useState({
      if(output){
       setAllowed(true);
      }
+
+     var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
+     if(dataSelected.MasterGemstone==null){
+       target.style.display="none";
+     }
     },[dataSelected]);
     // 2 list thay doi khi show ra FE
 useEffect(()=>{
@@ -201,6 +221,7 @@ useEffect(()=>{
         setSizeMasterGemstone([...selectSize]);
         const selectShape = new Set(filterMasterGemStone.map(item=> item.shape));
         setShapeMasterGemstone([...selectShape]);
+
 },[filterMasterGemStone])
 
 useEffect(()=>{
@@ -286,14 +307,24 @@ const HandleChangeData = (e) => {
     }
   }
   };
-  const handleReset = () => {
-    setDataSelected((prevData) => ({
-      ...prevData,
-      ["MasterGemstone"]: {
-        ...prevData["MasterGemstone"],
-        ["kind"]: '',
-      },
-    }));
+  const handleReset = (name) => {
+    if(name=="MasterGemstone"){
+      setDataSelected((prevData) => ({
+        ...prevData,
+        ["MasterGemstone"]: {
+          ...prevData["MasterGemstone"],
+          ["kind"]: '',
+        },
+      }));
+    }else{
+      setDataSelected((prevData) => ({
+        ...prevData,
+        ["Stones"]: {
+          ...prevData["Stones"],
+          ["kind"]: '',
+        },
+      }));
+    }
     
     setFilterMasterGemStone(dataApiMasterGemStone);
 };
@@ -301,6 +332,8 @@ const HandleChangeData = (e) => {
 
   function NextStep(){
     if(isAllowed){
+      animate("div#boxRequirement", {x: 0});
+      animate("div#boxRequirement #MasterGemstoneContainerFloat",{x:["300px",0], opacity:[1,0], zIndex: [1,-1]});
       setRequirementData({...requirementData,
         masterGemstoneId: masterGemstoneObject.masterGemstoneId,
         stonesId:stonesObject.stonesId,});
@@ -342,7 +375,16 @@ const HandleChangeData = (e) => {
   }
   return (
     <>
-      <motion.div
+      <motion.div 
+      animate={{
+        x: isToggle ? '100%' : 0,
+        opacity: isToggle ? [0, 1] : 0,
+        zIndex: isToggle ? 3 : 1
+    }}
+    transition={{
+        duration: 0.6,
+        ease: 'linear'
+    }}
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         className="mx-16"
@@ -363,7 +405,7 @@ const HandleChangeData = (e) => {
               <div className="mb-3 px-3">
                 <div className="flex justify-between items-center">
                 <h4 className="text-lg">Material</h4>
-                <Tooltip title="Reset material" onClick={handleReset}>
+                <Tooltip title="Reset material" onClick={()=>handleReset("MasterGemstone")}>
                   <IconButton>
                   <RestartAltIcon />
                   </IconButton>
@@ -451,7 +493,7 @@ const HandleChangeData = (e) => {
           <div className="mb-3 px-3">
                 <div className="flex justify-between items-center">
                   <h4 className="text-lg">Material</h4>
-                  <Tooltip title="Reset material" onClick={handleReset}>
+                  <Tooltip title="Reset material"  onClick={()=>handleReset("Stones")}>
                     <IconButton>
                     <RestartAltIcon />
                     </IconButton>

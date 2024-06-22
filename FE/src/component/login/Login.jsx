@@ -4,26 +4,33 @@ import InputPassword from './InputPassword';
 import InputText from './InputText';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from "framer-motion";
+
 import axios from 'axios';
-import { LoginApi } from '../../api/ApiLogin';
+import { LoginApi, LoginWithGoogle } from '../../api/ApiLogin';
 import useAuth from '../../hooks/useAuth.jsx'
+
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function Login() {
-    const { setAuth } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
 
     let [isToggle, setIsToggle] = useState(false);
     const [dataSource, setDataSource] = useState([]);
-    
     const [formData, setFormData] = useState({
         username: "", password:"",
     });
-    const axiosConfig = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true // Nếu API của bạn yêu cầu cookie
-    };
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const code = searchParams.get('code');
+        // Gửi mã xác thực đến API bằng cách sử dụng fetch hoặc axios
+        console.log(JSON.stringify({code}));
+        if (code) {
+         LoginWithGoogle(code);
+        }
+      }, [location.search]);
     useEffect(()=>{ 
         if(!isToggle){
             setFormData({ username: "", password:""});
@@ -53,9 +60,9 @@ function Login() {
         if(e.target.name==="login"){
             pathReq="login";
         }
-       var loginApi = LoginApi(pathReq,listState, axiosConfig);
-       const { role , accessToken } = loginApi
-        setAuth( {role, accessToken} )
+        const { role, accessToken } = await LoginApi(pathReq,listState, axiosConfig);
+        console.log('>>>' , role , accessToken)
+        navigate(from, { replace: true })
     }
    
    
@@ -78,7 +85,8 @@ function Login() {
                     <form method='POST' onSubmit={(e)=>HandleSubmit(e)} className='bg-[#fff] flex items-center justify-center flex-col h-[100%] px-[40px]' name='register'>
                         <h1 className='font-bold text-[35px]'>Create Account</h1>
                         <div className='my-[10px]'>
-                            <motion.a whileHover={{ scale: 1.2 }} href='#' className='border-[2px] border-solid border-[#ccc] rounded-[20%] inline-flex justify-center items-center mx-[4px] w-[40px] h-[40px]'>
+                            <motion.a whileHover={{ scale: 1.2 }} href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:5173/login&response_type=code
+    &client_id=528761239720-ac1sb7qru7cnvmmbddpsi8plsgsqrrg4.apps.googleusercontent.com&approval_prompt=force" className='border-[2px] border-solid border-[#ccc] rounded-[20%] inline-flex justify-center items-center mx-[4px] w-[40px] h-[40px]'>
                                 <SvgIcon>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                         <path d="M386.1 228.5c1.8 9.7 3.1 19.4 3.1 32C389.2 370.2 315.6 448 204.8 448c-106.1 0-192-85.9-192-192s85.9-192 192-192c51.9 0 95.1 18.9 128.6 50.3l-52.1 50c-14.1-13.6-39-29.6-76.5-29.6-65.5 0-118.9 54.2-118.9 121.3 0 67.1 53.4 121.3 118.9 121.3 76 0 104.5-54.7 109-82.8H204.8v-66h181.3zm185.4 6.4V179.2h-56v55.7h-55.7v56h55.7v55.7h56v-55.7H627.2v-56h-55.7z" />
@@ -111,7 +119,8 @@ function Login() {
                     <form method='POST' onSubmit={HandleSubmit} className='bg-[#fff] flex items-center justify-center flex-col h-[100%] px-[40px]' name='login'>
                         <h1 className='font-bold text-[35px]'>Sign In</h1>
                         <div className='my-[10px]'>
-                            <motion.a whileHover={{ scale: 1.2 }} href='#' className='border-[2px] border-solid border-[#ccc] rounded-[20%] inline-flex justify-center items-center mx-[4px] w-[40px] h-[40px]'>
+                            <motion.a whileHover={{ scale: 1.2 }} href='https://accounts.google.com/o/oauth2/auth?scope=openid%20email%20profile&redirect_uri=http://localhost:5173/login&response_type=code
+    &client_id=528761239720-ac1sb7qru7cnvmmbddpsi8plsgsqrrg4.apps.googleusercontent.com&approval_prompt=force' className='border-[2px] border-solid border-[#ccc] rounded-[20%] inline-flex justify-center items-center mx-[4px] w-[40px] h-[40px]'>
                                 <SvgIcon>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                         <path d="M386.1 228.5c1.8 9.7 3.1 19.4 3.1 32C389.2 370.2 315.6 448 204.8 448c-106.1 0-192-85.9-192-192s85.9-192 192-192c51.9 0 95.1 18.9 128.6 50.3l-52.1 50c-14.1-13.6-39-29.6-76.5-29.6-65.5 0-118.9 54.2-118.9 121.3 0 67.1 53.4 121.3 118.9 121.3 76 0 104.5-54.7 109-82.8H204.8v-66h181.3zm185.4 6.4V179.2h-56v55.7h-55.7v56h55.7v55.7h56v-55.7H627.2v-56h-55.7z" />

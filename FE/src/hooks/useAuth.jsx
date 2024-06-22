@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 const useAuth = () => {
    var role = '';
    var accessToken = '';
+   var UserId = null;
 
       try {
          if (typeof localStorage !== 'undefined') {
@@ -11,15 +12,14 @@ const useAuth = () => {
                accessToken=token;
                const decodeToken = jwtDecode(token);
                role = decodeToken.Role;
+               UserId = decodeToken.UserId;
             }
          }
       } catch (error) {
          console.error(error);
       }
 
-
-
-   return { accessToken, role }
+   return { accessToken, role , UserId}
 }
 
 export default useAuth;

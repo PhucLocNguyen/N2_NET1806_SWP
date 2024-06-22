@@ -1,4 +1,5 @@
 import { lazy } from "react"
+import Chat from "../component/chat/Chat";
 
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
@@ -58,8 +59,14 @@ const privateRoutes = [
    {
       path: '/design/create-requirement/:id',
       component: RequirementOrderSection,
-      role: 'Customer'
+      role: ['Customer']
+   },
+   {path:"/chat",
+   component:Chat,
+   role:['Customer','Sale','DesignStaff','ProductStaff','Manager']
+
    }
+   
 ]
 
 export { publicRoutes, privateRoutes }

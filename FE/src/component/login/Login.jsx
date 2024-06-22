@@ -1,13 +1,11 @@
 import { Button, SvgIcon, Icon } from '@mui/material';
-import { jwtDecode } from 'jwt-decode';
 import InputPassword from './InputPassword';
 import InputText from './InputText';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from "framer-motion";
-import axios from 'axios';
-import { LoginApi } from '../../api/ApiLogin';
-import { useNavigate, useLocation } from 'react-router-dom';
 
+import { LoginApi, LoginWithGoogle } from '../../api/ApiLogin';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Login() {
     const navigate = useNavigate();
@@ -16,7 +14,7 @@ function Login() {
 
     let [isToggle, setIsToggle] = useState(false);
     const [dataSource, setDataSource] = useState([]);
-    
+
     const [formData, setFormData] = useState({
         username: "", password:"",
     });
@@ -55,7 +53,7 @@ function Login() {
         if(e.target.name==="login"){
             pathReq="loginForCustomer";
         }
-        const { role, accessToken } = await LoginApi(pathReq,listState, axiosConfig);
+        const { role, accessToken } = await LoginApi(pathReq,listState);
         console.log('>>>' , role , accessToken)
         navigate(from, { replace: true })
     }

@@ -10,6 +10,7 @@ import DefaultLayout from './component/layout/DefaultLayout.jsx'
 
 // Import test viết bên dưới
 
+
 import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
 
 import Login from './component/login/Login.jsx'
@@ -23,16 +24,8 @@ function App() {
         <Routes>
           {/* Route tự viết để test */} 
 
-
-
-
-
-           <Route path='/design/1/create-requirement' element={<RequirementOrderSection />}></Route>
-           <Route path='/login' element={<Login />} />
-
            {/* Route tự viết không ghi qua phần này */}
          
-
 
           {publicRoutes.map((route, index) => {
             let Page = route.component

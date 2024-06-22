@@ -3,12 +3,8 @@ import InputPassword from './InputPassword';
 import InputText from './InputText';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from "framer-motion";
-
 import { LoginApi, LoginWithGoogle } from '../../api/ApiLogin';
-
 import { useNavigate, useLocation } from 'react-router-dom';
-
-
 
 function Login() {
     const navigate = useNavigate();

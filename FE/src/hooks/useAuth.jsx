@@ -1,9 +1,11 @@
 import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
+
    var role = '';
    var accessToken = '';
    var UserId = null;
+
       try {
          if (typeof localStorage !== 'undefined') {
             const token = localStorage.getItem('userInfo');
@@ -18,9 +20,8 @@ const useAuth = () => {
          console.error(error);
       }
 
-
-
    return { accessToken, role , UserId}
+
 }
 
 export default useAuth;

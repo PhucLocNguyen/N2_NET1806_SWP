@@ -6,23 +6,19 @@ import './App.css'
 import RequireAuth from './routes/RequireAuth.jsx'
 import { publicRoutes, privateRoutes } from './routes/Route.jsx'
 import DefaultLayout from './component/layout/DefaultLayout.jsx'
-
-
-// Import test viết bên dưới
-
-
-import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
-
-import Login from './component/login/Login.jsx'
-
+import 'react-toastify/dist/ReactToastify.min.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
 
+
     <AuthProvider>
       <Suspense>
         <Routes>
+
           {/* Route tự viết để test */} 
+
 
            {/* Route tự viết không ghi qua phần này */}
          
@@ -61,7 +57,9 @@ function App() {
 
         </Routes>
       </Suspense>
+      <ToastContainer/>
     </AuthProvider>
+
   )
 }
 

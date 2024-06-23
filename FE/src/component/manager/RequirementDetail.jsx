@@ -14,9 +14,68 @@ import ApiRequirementById from '../../api/manager/FetchApiRequirementById';
 function RequirementDetail() {
 
    const { id } = useParams(); // requirement id
+
    const [requirement, setRequirement] = useState();
    const [design, setDesign] = useState();
-   const designId = requirement?.designId; // Design id children
+
+   // Thong tin form de dang len
+   const [dataForm, setDataForm] = useState({
+      materialWeight: '',
+      machiningFee: ''
+   })
+
+   const [errorForm, setErrorForm] = useState({
+      materialWeight: '',
+      machiningFee: ''
+   })
+
+   const handleFormChange = (e) => {
+      const { name, value } = e.target;
+
+      let isNotValid = true;
+      try {
+         const numberValue = Number(value)
+         if ((numberValue > 0 && !isNaN(numberValue)) || value === '') {
+            console.log('check');
+            isNotValid = false;
+         }
+
+      } catch (error) {
+         isNotValid = true
+      }
+      console.log(isNotValid)
+
+      setDataForm({
+         ...dataForm,
+         [name]: value
+      })
+
+      setErrorForm({
+         ...errorForm,
+         [name]: isNotValid ? 'Input must be number greater than 0' : ''
+      })
+
+   }
+
+   const handleSubmit = () => {
+      let isValid = true
+
+      Object.keys(errorForm).forEach((key) => {
+         if (errorForm[key] !== '') {
+            isValid = false
+         }
+      })
+
+      Object.keys(dataForm).forEach((key) => {
+         if (dataForm[key] === '') {
+            isValid = false
+         }
+      })
+
+      if (isValid) {
+         console.log('Upload price quote success')
+      }
+   }
 
    useEffect(() => {
 
@@ -36,8 +95,10 @@ function RequirementDetail() {
 
    }, [])
 
-   console.log(requirement)
-   console.log(design)
+   // console.log(requirement)
+   // console.log(design)
+   console.log(dataForm)
+
 
 
    return (
@@ -107,10 +168,10 @@ function RequirementDetail() {
                            </thead>
                            <tbody>
                               <tr>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>Ruby</td>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>1.5</td>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>100</td>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>Square</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.masterGemstone?.kind}</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.masterGemstone?.size}</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.masterGemstone?.weight}</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.masterGemstone?.shape}</td>
                               </tr>
                            </tbody>
                         </table>
@@ -129,9 +190,9 @@ function RequirementDetail() {
                            </thead>
                            <tbody>
                               <tr>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>CZ</td>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>0.3</td>
-                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>20</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.stone?.kind}</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.stone?.size}</td>
+                                 <td className='px-[1rem] py-[1rem] border-[1px] border-solid border-[#000]'>{design?.stone?.quantity}</td>
                               </tr>
                            </tbody>
                         </table>
@@ -144,8 +205,7 @@ function RequirementDetail() {
                   <div className=' my-[1.5rem] py-[2.5rem] px-[2.5rem] rounded-[30px] border-[1px] border-[#e9eaf3] border-solid bg-[white]'>
                      <h2 className='text-[22px] mb-[1rem] font-bold leading-[1.273em]'>Customer Note</h2>
                      <p className='text-[#6f7182]'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus laborum reprehenderit corrupti voluptatum exercitationem, cupiditate in assumenda reiciendis, hic quos pariatur vel, harum impedit deserunt nostrum nulla architecto magni odit!
-                        Minus sunt dolorem incidunt harum ut odit optio, animi totam tempora eius, sint mollitia debitis doloremque fugiat ducimus deleniti. Et nemo deleniti ea! Cum rerum eaque neque eligendi minima alias?
+                        {requirement?.customerNote}
                      </p>
                   </div>
 
@@ -153,7 +213,7 @@ function RequirementDetail() {
                   <div className='py-[2.5rem] px-[2.5rem] rounded-[30px] border-[1px] border-[#e9eaf3] border-solid bg-[white]'>
                      <h2 className='text-[22px] mb-[1rem] font-bold leading-[1.273em]'>Sell Staff Note</h2>
                      <p className='text-[#6f7182]'>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit id velit magnam provident consectetur vel dolore doloremque maiores fugiat tempora eaque vitae, dolor, mollitia modi ab cum a! Tenetur, ducimus.
+                        {requirement?.staffNote}
                      </p>
                   </div>
                </div>
@@ -168,19 +228,19 @@ function RequirementDetail() {
                   <div>
                      <h2 className='text-[1rem] font-medium pb-[3px]'>Material Weight (g)</h2>
                      <div>
-                        <TextField variant="outlined" style={{ width: '100%' }} size='small' />
+                        <TextField name='materialWeight' inputProps={{ inputMode: 'numeric' }} onChange={handleFormChange} error={!!errorForm.materialWeight} helperText={errorForm.materialWeight} variant="outlined" style={{ width: '100%' }} size='small' />
                      </div>
 
                      <h2 className='mt-[1rem] text-[1rem] font-medium pb-[3px]'>Machining Fee  (VND)</h2>
                      <div>
-                        <TextField variant="outlined" style={{ width: '100%' }} size='small' />
+                        <TextField name='machiningFee' onChange={handleFormChange} error={!!errorForm.machiningFee} helperText={errorForm.machiningFee} variant="outlined" style={{ width: '100%' }} size='small' />
                      </div>
 
                      <div className='my-[1rem]'></div>
                   </div>
 
                   <div className='mt-[1rem]'>
-                     <Button variant="contained" sx={{ minWidth: '6rem' }}>
+                     <Button onClick={handleSubmit} variant="contained" sx={{ minWidth: '6rem' }}>
                         Add
                      </Button>
                   </div>

@@ -27,7 +27,7 @@ function StaffList() {
 
    return (
       <>
-         <div className="py-[3.5rem] px-[2.5rem] ">
+         <div className="py-[2rem] px-[2rem] ">
             <div className="flex items-center justify-between mb-[3rem]">
                <h4 className="text-[1.5rem] font-bold leading-[1.5]">Staff List</h4>
                <Button onClick={() => setIsOpenPopup(true)} startIcon={<AddIcon />} variant="contained">New Staff</Button>

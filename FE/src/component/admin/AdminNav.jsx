@@ -6,21 +6,23 @@ import { NavLink } from 'react-router-dom';
 function AdminNav() {
    return (
       <>
-         <div className="h-[100%] fixed w-[20%] border-r-[1px] border-solid border-[black] overflow-hidden max-h-[100%] bg-[#f9fafb]">
-            <div className="mt-[2rem] px-[1rem] ">
-               <div className="flex flex-col px-[1rem]">
 
-                  <NavLink to="/dashboard" className={({ isActive }) => `items-center text-[1.3rem] py-[0.8rem] px-[1rem] block rounded-[1rem]  ${isActive ? 'bg-[#a9dcff]' : 'hover:bg-[rgba(145,158,171,0.08)]'}`} >
-                     <span className='mr-[1rem]'><InsertChartIcon fontSize='medium' /></span>
-                     <span>Dashboard</span>
-                  </NavLink>
-                  <div className='pb-[1.5rem]'></div>
-                  <NavLink href="/staff" className={({ isActive }) => `items-center text-[1.3rem] py-[0.8rem] px-[1rem] block rounded-[1rem]  ${isActive ? 'bg-[#a9dcff]' : 'hover:bg-[rgba(145,158,171,0.08)]'}`}>
-                     <span className='mr-[1rem]'><AssignmentIndIcon fontSize='medium' /></span>
-                     <span>Staff</span>
-                  </NavLink>
+         <div className="fixed top-0 bottom-0 left-0 px-[1.7rem] h-[100vh] w-[20%] max-w-[20%] border-r-[1px] border-solid border-[#e9eaf3] bg-[#f7f9fc] pt-[3rem]">
+            <div className="relative w-[100%] py-[1.7rem]">
+               <NavLink to='/admin' end>
+                  <div className="w-[100%] cursor-pointer group flex items-center ">
+                     <InsertChartIcon className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Staff</h2>
+                  </div>
+               </NavLink>
 
-               </div>
+               <NavLink to='dashboard'>
+                  <div className="mt-[1.5rem] w-[100%] cursor-pointer group flex items-center ">
+                     <AssignmentIndIcon className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Dashboard</h2>
+                  </div>
+               </NavLink>
+
             </div>
          </div>
       </>

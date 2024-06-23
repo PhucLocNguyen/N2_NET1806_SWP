@@ -23,6 +23,7 @@ const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAc
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
+
 const publicRoutes = [
    {
       index: true,
@@ -42,6 +43,10 @@ const publicRoutes = [
    {
       path: '/design/:id',
       component: DesignInfo
+   },
+   {
+      path: '/Staff',
+      component: Staff
    },
    {
       path: '/blog',

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Chip from '@mui/material/Chip';
 import { Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ function RowRequirement({ data }) {
 
    return (
       <>
-         <Link to={`/manager/price-quote/${data?.requirementId}`}>
+         <Link to={`price-quote/${data?.requirementId}`}>
             {/* Requirement rows */}
             <div className="grid grid-cols-4 gap-x-[1rem] py-[1rem] px-[2.25rem] border-t-[1px] border-solid border-[#e9eaf3] cursor-pointer">
                <div className="flex items-center">
@@ -42,6 +43,7 @@ function RowRequirement({ data }) {
                </div>
             </div>
          </Link>
+
       </>
    )
 }

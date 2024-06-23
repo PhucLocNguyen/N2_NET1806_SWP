@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react';
+
+import Typography from '@mui/material/Typography';
+
+
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
@@ -9,6 +13,7 @@ import useAuth from '../../hooks/useAuth'
 function ListRequirement() {
    const pageSize = 6;
    const status = 1;
+
    const [page, setPage] = useState(1);
    const [data, setData] = useState([]);
    const [dataSize, setDataSize] = useState(0);
@@ -19,7 +24,6 @@ function ListRequirement() {
    };
 
    useEffect(() => {
-
       try {
          const fetchApi = async () => {
             const respone = await ApiListRequirement({ accessToken, pageSize, page, status });
@@ -70,6 +74,7 @@ function ListRequirement() {
                </div>
 
                {data?.map((item, index) => {
+
                   return (
                      <RowRequirement key={index} data={item} />
                   )
@@ -81,6 +86,7 @@ function ListRequirement() {
          <div className='flex justify-center items-center'>
             <Stack>
                <Pagination count={(Math.ceil(dataSize / 6)) || 0} page={page} onChange={handleChange} />
+
             </Stack>
          </div>
       </div>

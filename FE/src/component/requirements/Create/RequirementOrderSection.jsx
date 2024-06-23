@@ -1,6 +1,12 @@
 import FirstStep from "./FirstStep";
 import { multiStepContext, StepContext } from "./StepContext";
 import { motion, useAnimate } from "framer-motion";
+
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+
 import { useContext, useEffect, useRef, useState } from "react";
 import CurrentRequirement from "./CurrentRequirement";
 import { useParams } from "react-router-dom";
@@ -23,10 +29,12 @@ const navigate = useNavigate();
   }
   const [isCompleted,setIsCompleted]= useState(false);
 
+
   return (
     <>
       <div  ref={scope} className="bg-[#c9d6ff] w-full h-full min-h-screen py-10 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">
         {!isCompleted?<div id="boxRequirement" className="bg-[#fff] shadow-[0_5px_15px_rgba(0,0,0,0.35)] relative z-10  w-[768px] max-w-[100%] min-h-[480px] h-max pb-10">
+
           <h2 className="text-center text-[32px] py-[10px]">
             Your requirement
           </h2>

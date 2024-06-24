@@ -24,7 +24,7 @@ namespace API.Controllers
         }
 
         [HttpGet("GetTotalRecords")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer)]
         public IActionResult SearchBlogRecords([FromQuery] RequestSearchBlogModel requestSearchBlogModel)
         {
             var sortBy = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
@@ -43,7 +43,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer )]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer )]
         public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel) 
         {
             var sortBy = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;

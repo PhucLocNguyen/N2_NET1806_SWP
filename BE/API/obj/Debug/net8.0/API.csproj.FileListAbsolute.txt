@@ -468,3 +468,4 @@ C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\SWP391Project.Repo
 C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\SWP391Project.Services.dll
 C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\SWP391Project.Repositories.pdb
 C:\Users\Admin\source\repos\SWP391Poject\API\bin\Debug\net8.0\SWP391Project.Services.pdb
+C:\Users\Admin\source\repos\SWP391Poject\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cs

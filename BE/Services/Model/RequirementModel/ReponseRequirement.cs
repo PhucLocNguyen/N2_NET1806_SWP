@@ -18,7 +18,7 @@
 
         public decimal? WeightOfMaterial { get; set; }
 
-        public decimal? GoldPriceAtMoment { get; set; }
+        public decimal? MaterialPriceAtMoment { get; set; }
 
         public decimal? StonePriceAtMoment { get; set; }
 

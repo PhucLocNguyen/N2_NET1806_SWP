@@ -10,7 +10,7 @@ namespace API.Model.RequirementModel
             {
                 Status = requestCreateRequirementModel.Status,
 
-                ExpectedDelivery =DateOnly.FromDateTime((DateTime)requestCreateRequirementModel.ExpectedDelivery),
+                ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery!=null? DateOnly.FromDateTime((DateTime)requestCreateRequirementModel.ExpectedDelivery):null,
 
                 Size = requestCreateRequirementModel.Size,
 
@@ -53,7 +53,7 @@ namespace API.Model.RequirementModel
 
                 WeightOfMaterial = requirement.WeightOfMaterial,
 
-                GoldPriceAtMoment = requirement.MaterialPriceAtMoment,
+                MaterialPriceAtMoment = requirement.MaterialPriceAtMoment,
 
                 StonePriceAtMoment = requirement.StonePriceAtMoment,
 

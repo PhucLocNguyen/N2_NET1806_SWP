@@ -236,7 +236,7 @@ GO
 GO
 insert into Role values ('Admin')
 insert into Role values ('Manager')
-insert into Role values ('DesignStaff ')
+insert into Role values ('DesignStaff')
 insert into Role values ('ProductStaff')
 insert into Role values ('Sale')
 insert into Role values ('Customer')
@@ -271,7 +271,7 @@ GO
 GO
 insert into Blog values ('DONT BE CONNED: JEWELLERY MYTHS & MISLEADING MARKETING','Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
 'https://simonewalsh.com/cdn/shop/articles/dont-be-conned-jewellery-myths-misleading-marketing-115234.jpg?v=1709414391&width=800',2)
-insert into Blog values ('AUSTRALIAN FASHION: CHRISTMAS & SUMMER OUTFIT IDEAS','Look dashing as you sleigh this Christmas (and throughout the summer season) in our handmade jewellery. As we do each year, we’ve lined up some of our range with pieces from o As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
+insert into Blog values ('AUSTRALIAN FASHION: CHRISTMAS & SUMMER OUTFIT IDEAS','Look dashing as you sleigh this Christmas (and throughout the summer season) in our handmade jewellery. As we do each year, weÂ’ve lined up some of our range with pieces from o As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
 'https://simonewalsh.com/cdn/shop/articles/australian-fashion-christmas-summer-outfit-ideas-609113.jpg?v=1699886089&width=1000',2)
 insert into Blog values ('ARE GOLD RINGS WORTH THE INVESTMENT?','Gold rings have been a much sought after jewellery accessory for millennia, with some of the oldest rings in gold found to date having been made around 6,500 years ago. The beautyw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
 'https://simonewalsh.com/cdn/shop/articles/are-gold-rings-worth-the-investment-143777.jpg?v=1695245481&width=1000',2)

@@ -45,10 +45,6 @@ const publicRoutes = [
       component: DesignInfo
    },
    {
-      path: '/Staff',
-      component: Staff
-   },
-   {
       path: '/blog',
       component: BlogList
    },
@@ -69,11 +65,6 @@ const publicRoutes = [
    {
       path: '/admin/login',
       component: StaffLogin,
-      layout: null
-   },
-   {
-      path: '/Staff',
-      component: Staff,
       layout: null
    },
    {

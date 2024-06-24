@@ -167,8 +167,7 @@ CREATE TABLE Messages (
 
 GO
 
-select * from MasterGemstone
-
+GO
 insert into MasterGemstone values ('Diamond',4,890.0,'VVS1','EX',0.2,'Round','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWHUscJPTURmqG413RW3IUoQFaWE_ypeDRQ&s')
 insert into MasterGemstone values ('Diamond',5,3150,'VVS2','VG', 0.4,'Marquise','https://5.imimg.com/data5/SELLER/Default/2022/10/QG/QA/DM/70249436/marquise-shape-diamond-500x500.jpg')
 insert into MasterGemstone values ('Diamond',6,8700,'VVS1','EX',0.8,'Round','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWHUscJPTURmqG413RW3IUoQFaWE_ypeDRQ&s')
@@ -208,19 +207,10 @@ insert into MasterGemstone values ('Garnet ',9,267.06,'VVS1','EX',3,'Octagon','h
 insert into MasterGemstone values ('Topaz',6.3,56.28,'VVS2','VG',1.10,'Octagon','https://media.superjeweler.com/Images/Products/700X700/pic61701-1')
 insert into MasterGemstone values ('Topaz',7.5,91.07,'VVS2','VG',1.78,'Princess','https://www.virjewels.com/cdn/shop/files/r12433bt_6_2048x.jpg?v=1689259683')
 insert into MasterGemstone values ('Topaz',8.5,126.37,'VVS2','VG',2.47,'Octagon','https://media.superjeweler.com/Images/Products/700X700/pic61701-1')
+GO
 
+GO
 
-insert into Material values ('Gold 24K',322.71,'https://www.vnsc.vn/wp-content/uploads/2023/02/dac-diem-vang-24k.jpg',2)
-insert into Material values ('Gold 18K',161.07,'https://locphuc.com.vn/Content/Images/San-pham-lan-22/nhan-nam-cz-vang-18k-VRF0531R-LP0618940-g1.jpg',2)
-insert into Material values ('Gold 14K',120.59,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd83gUoQAohdV5cP3c0cYcNaP43of1PXNx5A&s',2)
-insert into Material values ('Gold 10K',109.57,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxSajVLxRxIrhQ89J3jj19GbPo-kw1uxZrew&s',2)
-insert into Material values ('Pink Gold 10K',94.41,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyMKzQHVdWsKX3gRT-x02DooHLUmD8gdegCQ&s',2)
-insert into Material values ('Pink Gold 14K',132.54,'https://www.beawelry.co.th/wp-content/uploads/2020/06/BRA0206-01-01-F-700x700.jpg',2)
-insert into Material values ('Pink Gold 18K',169.77,'https://www.masseysjewelers.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/3/0/30348pkd-18r.jpg',2)
-insert into Material values ('White Gold 10K',133.97,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNilFfKxlpXfjaCqB30BAiXbKKWXW-awFzeA&s',2)
-insert into Material values ('White Gold 14K',158.66,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-8qLGZMrIq17mZFi24z29gK06pAbGZCvNOQ&s',2)
-insert into Material values ('White Gold 18K',212.75,'https://i.ebayimg.com/images/g/OR0AAOSwnAZhSMJy/s-l400.jpg',2)
-select * from Material
 
 insert into Stones values ('CZ',1,20,1)
 insert into Stones values ('CZ',1,36,1.45)
@@ -241,29 +231,47 @@ insert into Stones values ('CZ',2.5,40,2.2)
 insert into Stones values ('CZ',3,20,1.75)
 insert into Stones values ('CZ',3,36,2.15)
 insert into Stones values ('CZ',3,40,2.45)
-select * from Stones
+GO
 
-select * from Users
-insert into Users values ('Tydy','Cctn2003@@@@','nguyentrongthien','thien@gmail.com','0768483823','',1)
-insert into Users values ('PhucLok','phucloc123!!@@','nguyenphuclok','lok@gmail.com','0723421123',2)
-insert into Users values ('Xeko','duchung123!!@@','nguyenduchung','hung@gmail.com','0935322111',3)
-insert into Users values ('Top100','giakhanh123!!@@','hagiakhanh','khanh@gmail.com','0768123823',4)
-insert into Users values ('AEOPAOP','badat123!!@@','nguyenbadat','dat@gmail.com','0764567123',5)
-insert into Users values ('youknowwho','quanghuy123!!@@','lequanghuy','huy@gmail.com','0764567123',6)
-
-select * from Role
+GO
 insert into Role values ('Admin')
 insert into Role values ('Manager')
-insert into Role values ('DesignStaff ')
+insert into Role values ('DesignStaff')
 insert into Role values ('ProductStaff')
 insert into Role values ('Sale')
 insert into Role values ('Customer')
+GO
+GO
+insert into Users values ('Tydy','Cctn2003@@@@','nguyentrongthien','thien@gmail.com','0768483823','',1)
+insert into Users values ('PhucLok','phucloc123!!@@','nguyenphuclok','lok@gmail.com','0723421123','',2)
+insert into Users values ('Xeko','duchung123!!@@','nguyenduchung','hung@gmail.com','0935322111','',3)
+insert into Users values ('Top100','giakhanh123!!@@','hagiakhanh','khanh@gmail.com','0768123823','',4)
+insert into Users values ('AEOPAOP','badat123!!@@','nguyenbadat','dat@gmail.com','0764567123','',5)
+insert into Users values ('youknowwho','quanghuy123!!@@','lequanghuy','huy@gmail.com','0764567123','',6)
+GO
+GO
+insert into Material values ('Gold 24K',322.71,'https://www.vnsc.vn/wp-content/uploads/2023/02/dac-diem-vang-24k.jpg',2)
+insert into Material values ('Gold 18K',161.07,'https://locphuc.com.vn/Content/Images/San-pham-lan-22/nhan-nam-cz-vang-18k-VRF0531R-LP0618940-g1.jpg',2)
+insert into Material values ('Gold 14K',120.59,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd83gUoQAohdV5cP3c0cYcNaP43of1PXNx5A&s',2)
+insert into Material values ('Gold 10K',109.57,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxSajVLxRxIrhQ89J3jj19GbPo-kw1uxZrew&s',2)
+insert into Material values ('Pink Gold 10K',94.41,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyMKzQHVdWsKX3gRT-x02DooHLUmD8gdegCQ&s',2)
+insert into Material values ('Pink Gold 14K',132.54,'https://www.beawelry.co.th/wp-content/uploads/2020/06/BRA0206-01-01-F-700x700.jpg',2)
+insert into Material values ('Pink Gold 18K',169.77,'https://www.masseysjewelers.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/3/0/30348pkd-18r.jpg',2)
+insert into Material values ('White Gold 10K',133.97,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNilFfKxlpXfjaCqB30BAiXbKKWXW-awFzeA&s',2)
+insert into Material values ('White Gold 14K',158.66,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-8qLGZMrIq17mZFi24z29gK06pAbGZCvNOQ&s',2)
+insert into Material values ('White Gold 18K',212.75,'https://i.ebayimg.com/images/g/OR0AAOSwnAZhSMJy/s-l400.jpg',2)
+GO
 
-
-select * from Blog
+GO
+insert into TypeOfJewellery values('Ring','https://mdjluxury.vn/wp-content/uploads/2019/04/NN218-1.jpg')
+insert into TypeOfJewellery values('Bracelet','https://manssion.com/cdn/shop/products/Gold_Rope_Bracelet_FRONT_ff6efdb7-3ecf-4c00-9543-347d0eddebb0.png?v=1666564939')
+insert into TypeOfJewellery values('Earings','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtEDJm5RKeTZVDQWUEYH2O1AFtQbS0hw7dcw&s')
+insert into TypeOfJewellery values('Chain','https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw938e85a3/images/hi-res/502621CDYAA00_1.jpg?sw=640&sh=640')
+GO
+GO
 insert into Blog values ('DONT BE CONNED: JEWELLERY MYTHS & MISLEADING MARKETING','Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
 'https://simonewalsh.com/cdn/shop/articles/dont-be-conned-jewellery-myths-misleading-marketing-115234.jpg?v=1709414391&width=800',2)
-insert into Blog values ('AUSTRALIAN FASHION: CHRISTMAS & SUMMER OUTFIT IDEAS','Look dashing as you sleigh this Christmas (and throughout the summer season) in our handmade jewellery. As we do each year, we’ve lined up some of our range with pieces from o As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
+insert into Blog values ('AUSTRALIAN FASHION: CHRISTMAS & SUMMER OUTFIT IDEAS','Look dashing as you sleigh this Christmas (and throughout the summer season) in our handmade jewellery. As we do each year, weÂ’ve lined up some of our range with pieces from o As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
 'https://simonewalsh.com/cdn/shop/articles/australian-fashion-christmas-summer-outfit-ideas-609113.jpg?v=1699886089&width=1000',2)
 insert into Blog values ('ARE GOLD RINGS WORTH THE INVESTMENT?','Gold rings have been a much sought after jewellery accessory for millennia, with some of the oldest rings in gold found to date having been made around 6,500 years ago. The beautyw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
 'https://simonewalsh.com/cdn/shop/articles/are-gold-rings-worth-the-investment-143777.jpg?v=1695245481&width=1000',2)
@@ -277,8 +285,4 @@ insert into Blog values ('ALL ABOUT OPAL JEWELLERY','Opal is a unique and fascin
 'https://simonewalsh.com/cdn/shop/articles/all-about-opal-jewellery-802946.jpg?v=1681924880&width=600',2)
 insert into Blog values ('MOST POPULAR JEWELLERY THIS CHRISTMAS (2023)','Im always fascinated to see which of our Australian jewellery designs will be popular with our lovely customers in the lead up to Christmas - and this year is no exception and Ive just put togeth Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
 'https://simonewalsh.com/cdn/shop/articles/most-popular-jewellery-this-christmas-2023-348947.jpg?v=1701294149&width=800',2)
-
-insert into TypeOfJewellery values('Ring','https://mdjluxury.vn/wp-content/uploads/2019/04/NN218-1.jpg')
-insert into TypeOfJewellery values('Bracelet','https://manssion.com/cdn/shop/products/Gold_Rope_Bracelet_FRONT_ff6efdb7-3ecf-4c00-9543-347d0eddebb0.png?v=1666564939')
-insert into TypeOfJewellery values('Earings','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtEDJm5RKeTZVDQWUEYH2O1AFtQbS0hw7dcw&s')
-insert into TypeOfJewellery values('Chain','https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw938e85a3/images/hi-res/502621CDYAA00_1.jpg?sw=640&sh=640')
+GO

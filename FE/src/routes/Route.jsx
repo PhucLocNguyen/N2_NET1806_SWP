@@ -1,5 +1,4 @@
-import { lazy } from "react"
-import Chat from "../component/chat/Chat";
+import { lazy } from "react";
 
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
@@ -20,6 +19,9 @@ const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
 const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
+const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
+const Chat = lazy(() => import('../component/chat/Chat'));
+
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
@@ -115,6 +117,15 @@ const privateRoutes = [
       component: PlanningList,
       role: ['DesignStaff', 'ProductStaff'],
       layout: null
+   },
+   {
+      path: '/staff',
+      component: StaffLayout,
+      children: [
+         { index: true, component: WorkingBoard },
+         { path: 'chat', component: Chat }
+      ],
+      role: ['DesignStaff', 'ProductStaff', "Sale"],
    }
 
 ]

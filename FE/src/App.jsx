@@ -7,9 +7,11 @@ const DefaultLayout = lazy(() => import('./component/layout/DefaultLayout.jsx'))
 
 import RequireAuth from './routes/RequireAuth.jsx'
 import { publicRoutes, privateRoutes } from './routes/Route.jsx'
+import DefaultLayout from './component/layout/DefaultLayout.jsx'
 import Blog from "./component/blog/Blog.jsx"
 import Footer from "./component/footer/Footer.jsx"
 import Navbar from "./component/nav/Navbar.jsx"
+import ManagerLayout from './component/manager/layout/ManagerLayout.jsx'
 import StaffLogin from './component/login/StaffLogin.jsx'
 import BlogCreate from './component/manager/BlogCreate.jsx'
 import PlanningList from './component/designProductPlan/PlanningList.jsx'

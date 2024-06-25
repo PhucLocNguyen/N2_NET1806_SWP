@@ -1,4 +1,5 @@
-﻿using API.Model.StonesModel;
+﻿using API.Model.MasterGemstoneModel;
+using API.Model.StonesModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -66,6 +67,34 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateStones(RequestCreateStonesModel requestCreateStonesModel)
         {
+            var error = "";
+            var properties = typeof(RequestCreateStonesModel).GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (property.PropertyType == typeof(decimal))
+                {
+                    var value = property.GetValue(requestCreateStonesModel);
+                    if ((decimal)value < 0)
+                    {
+                        error = property.Name + " must be positive number";
+                        break;
+                    }
+                }
+                if (property.PropertyType == typeof(string))
+                {
+                    var value = property.GetValue(requestCreateStonesModel);
+                    if (string.IsNullOrEmpty((string)value))
+                    {
+                        error = property.Name + " must be not plank";
+                        break;
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(error))
+            {
+                return BadRequest(error);
+            }
             var Stones = requestCreateStonesModel.toStonesEntity();
             _unitOfWork.StoneRepository.Insert(Stones);
             _unitOfWork.Save();

@@ -1,15 +1,15 @@
 
+using API.Model.VnPayModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repositories;
 using Repositories.Email;
 using Repositories.Entity;
 using Repositories.Token;
+using Repositories.VnPay.Config;
+using Repositories.VnPay.Services;
 using Swashbuckle.AspNetCore.Filters;
 using SWP391Project.Services.ChatSystem;
 using SWP391Project.Services.ChatSystem.Hubs;
@@ -100,6 +100,11 @@ namespace API
             builder.Services.AddScoped<IChatService, ChatService>();
             builder.Services.AddScoped<IConversationService, ConversationService>();
             builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSetting"));
+            builder.Services.Configure<VnpayConfig>(
+               builder.Configuration.GetSection("Vnpay"));
+            builder.Services.AddScoped<VnpayService>();
+            builder.Services.AddScoped<VnpayPayResponse>();
+            builder.Services.AddScoped<VnpayPayRequest>();
             builder.Services.AddTransient<IEmailService, EmailService>();
             builder.Services.AddMemoryCache();
 

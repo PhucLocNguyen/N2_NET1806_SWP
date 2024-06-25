@@ -65,14 +65,14 @@ namespace API.Controllers
             return Ok(Payment);
         }
 
-        [HttpPost]
+       /* [HttpPost]
         public IActionResult CreatePayment(RequestCreatePaymentModel requestCreatePaymentModel)
         {
             var Payment = requestCreatePaymentModel.ToPaymentEntity();
             _unitOfWork.PaymentRepository.Insert(Payment);
             _unitOfWork.Save();
             return Ok("Create successfully");
-        }
+        }*/
 
         [HttpPut("{id}")]
         public IActionResult UpdatePayment(int id, RequestCreatePaymentModel requestCreatePaymentModel)

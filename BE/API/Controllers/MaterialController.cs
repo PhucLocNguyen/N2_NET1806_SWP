@@ -1,4 +1,5 @@
 ﻿using API.Model.BlogModel;
+using API.Model.MasterGemstoneModel;
 using API.Model.MaterialModel;
 using API.Model.UserModel;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +72,34 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateMaterial(RequestCreateMaterialModel requestCreateMaterialModel)
         {
+            var error = "";
+            var properties = typeof(RequestCreateMaterialModel).GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (property.PropertyType == typeof(decimal))
+                {
+                    var value = property.GetValue(requestCreateMaterialModel);
+                    if ((decimal)value < 0)
+                    {
+                        error = property.Name + " must be positive number";
+                        break;
+                    }
+                }
+                if (property.PropertyType == typeof(string))
+                {
+                    var value = property.GetValue(requestCreateMaterialModel);
+                    if (string.IsNullOrEmpty((string)value))
+                    {
+                        error = property.Name + " must be not plank";
+                        break;
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(error))
+            {
+                return BadRequest(error);
+            }
             var user = _unitOfWork.UserRepository.GetByID(requestCreateMaterialModel.ManagerId, m => m.Role);
             if (user.Role.Name != RoleConst.Manager)
             {

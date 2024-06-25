@@ -25,7 +25,6 @@ const Chat = lazy(() => import('../component/chat/Chat'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
-
 const publicRoutes = [
    {
       index: true,
@@ -45,10 +44,6 @@ const publicRoutes = [
    {
       path: '/design/:id',
       component: DesignInfo
-   },
-   {
-      path: '/Staff',
-      component: Staff
    },
    {
       path: '/blog',

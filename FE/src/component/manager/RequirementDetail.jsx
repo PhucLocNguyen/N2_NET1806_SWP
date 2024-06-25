@@ -100,7 +100,6 @@ function RequirementDetail() {
    console.log(dataForm)
 
 
-
    return (
       <>
          <div className="py-[3rem] px-[3rem] min-h-[100vh] bg-[#f7f9fc]">

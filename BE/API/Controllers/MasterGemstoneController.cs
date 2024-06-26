@@ -49,8 +49,6 @@ namespace API.Controllers
                 }
             }
 
-
-
             var reponseGemStone = _unitOfWork.MasterGemstoneRepository.Get(
                 filter,
                 orderBy,
@@ -109,17 +107,24 @@ namespace API.Controllers
                 (x.Clarity.Equals(requestCreateMasterGemstone.Clarity)) &&
                 (x.Cut.Equals(requestCreateMasterGemstone.Cut)) &&
                 (x.Shape.Equals(requestCreateMasterGemstone.Shape)) &&
-                x.Price == requestCreateMasterGemstone.Price &&
                 x.Weight == requestCreateMasterGemstone.Weight;
             var existedMasterGemstone = _unitOfWork.MasterGemstoneRepository.Get(filter);
             if (existedMasterGemstone.Count() > 0)
             {
                 return BadRequest("Master Gemstone is existed");
             }
-            var MasterGemstone = requestCreateMasterGemstone.toMasterGemstonesEntity();
-            _unitOfWork.MasterGemstoneRepository.Insert(MasterGemstone);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            try
+            {
+                var MasterGemstone = requestCreateMasterGemstone.toMasterGemstonesEntity();
+                _unitOfWork.MasterGemstoneRepository.Insert(MasterGemstone);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Create failed");
+            }
+           
         }
 
         [HttpPut]

@@ -252,7 +252,7 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.DesignId).HasColumnName("DesignID");
             entity.Property(e => e.MachiningFee).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.MaterialPriceAtMoment).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.Size).HasMaxLength(50);
+            entity.Property(e => e.Size).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.StaffNote).HasColumnType("text");
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.StonePriceAtMoment).HasColumnType("decimal(18, 2)");

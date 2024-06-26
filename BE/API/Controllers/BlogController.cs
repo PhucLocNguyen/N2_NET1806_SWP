@@ -90,32 +90,51 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateBlog(RequestCreateBlogModel requestCreateBlogModel)
         {
-            var user = _unitOfWork.UserRepository.GetByID(requestCreateBlogModel.ManagerId, m=>m.Role);
-            if(user.Role.Name !=  RoleConst.Manager) 
+            try
             {
-                return BadRequest("Manager Id is not valid");
+                var user = _unitOfWork.UserRepository.GetByID(requestCreateBlogModel.ManagerId, m => m.Role);
+                if (user.Role.Name != RoleConst.Manager)
+                {
+                    return BadRequest("Manager Id is not valid");
+                }
+                if (_unitOfWork.BlogRepository.Get(filter: x => x.Title.Equals(requestCreateBlogModel.Title)).FirstOrDefault() != null)
+                {
+                    return BadRequest("This Blog exists");
+                }
+                var Blog = requestCreateBlogModel.toBlogEntity();
+                _unitOfWork.BlogRepository.Insert(Blog);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
             }
-            var Blog = requestCreateBlogModel.toBlogEntity();
-            _unitOfWork.BlogRepository.Insert(Blog);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            catch (Exception ex)
+            {
+                return BadRequest("Create failed");
+            }
         }
 
         [HttpPut]
         public IActionResult UpdateBlog(int id, RequestCreateBlogModel requestCreateBlogModel)
         {
-            var existedBlog = _unitOfWork.BlogRepository.GetByID(id);
-            if (existedBlog == null)
+            try
             {
-                return NotFound("Blog is not existed");
+                var existedBlog = _unitOfWork.BlogRepository.GetByID(id);
+                if (existedBlog == null)
+                {
+                    return NotFound("Blog is not existed");
+                }
+                existedBlog.Description = requestCreateBlogModel.Description;
+                existedBlog.ManagerId = requestCreateBlogModel.ManagerId;
+                existedBlog.Title = requestCreateBlogModel.Title;
+                existedBlog.Image = requestCreateBlogModel.Image;
+                _unitOfWork.BlogRepository.Update(existedBlog);
+                _unitOfWork.Save();
+                return Ok();
             }
-            existedBlog.Description = requestCreateBlogModel.Description;
-            existedBlog.ManagerId = requestCreateBlogModel.ManagerId;
-            existedBlog.Title = requestCreateBlogModel.Title;
-            existedBlog.Image = requestCreateBlogModel.Image;
-            _unitOfWork.BlogRepository.Update(existedBlog);
-            _unitOfWork.Save();
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest("Update failed");
+            }
+           
         }
 
         [HttpDelete]

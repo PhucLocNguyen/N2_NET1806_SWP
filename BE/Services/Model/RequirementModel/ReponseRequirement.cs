@@ -10,7 +10,7 @@
 
         public DateOnly? ExpectedDelivery { get; set; }
 
-        public string? Size { get; set; }
+        public decimal? Size { get; set; }
 
         public int? DesignId { get; set; }
 

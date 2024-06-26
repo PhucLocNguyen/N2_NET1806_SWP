@@ -18,7 +18,26 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+        [HttpGet("GetTotalRecords")]
+        public IActionResult GetTotalRecords([FromQuery] RequestSearchStonesModel requestSearchStonesModel)
+        {
+            Expression<Func<Stones, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchStonesModel.Kind) || x.Kind.Contains(requestSearchStonesModel.Kind)) &&
+                (x.Size == requestSearchStonesModel.Size || requestSearchStonesModel.Size == null) &&
+                x.Quantity >= requestSearchStonesModel.FromQuantity &&
+                (x.Quantity <= requestSearchStonesModel.ToQuantity || requestSearchStonesModel.ToQuantity == null) &&
+                x.Price >= requestSearchStonesModel.FromPrice &&
+                (x.Price <= requestSearchStonesModel.ToPrice || requestSearchStonesModel.ToPrice == null);
 
+            var totalRecords = _unitOfWork.StoneRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
         [HttpGet]
         public IActionResult SearchStones([FromQuery] RequestSearchStonesModel requestSearchStonesModel)
         {
@@ -95,10 +114,22 @@ namespace API.Controllers
             {
                 return BadRequest(error);
             }
-            var Stones = requestCreateStonesModel.toStonesEntity();
-            _unitOfWork.StoneRepository.Insert(Stones);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            var getStoneSize = _unitOfWork.StoneRepository.Get(filter: x => (x.Size == requestCreateStonesModel.Size) && (x.Quantity == requestCreateStonesModel.Quantity)).FirstOrDefault();
+            if (getStoneSize != null)
+            {
+                return BadRequest("Stone with this size and quantity had existed");
+            }
+            try
+            {
+                var stones = requestCreateStonesModel.toStonesEntity();
+                _unitOfWork.StoneRepository.Insert(stones);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Create failed");
+            }
         }
         [HttpPut]
         public IActionResult UpdateStones(int id, RequestCreateStonesModel requestCreateStonesModel)

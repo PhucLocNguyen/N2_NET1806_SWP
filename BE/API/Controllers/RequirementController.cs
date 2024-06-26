@@ -29,7 +29,7 @@ namespace API.Controllers
             var sortType = requestSearchRequirementModel.SortContent != null ? requestSearchRequirementModel.SortContent?.sortRequirementType.ToString() : null;
             Expression<Func<Requirement, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchRequirementModel.Status) || x.Status.Contains(requestSearchRequirementModel.Status)) &&
-                (string.IsNullOrEmpty(requestSearchRequirementModel.Size) || x.Size.Contains(requestSearchRequirementModel.Size)) &&
+                (x.Size == requestSearchRequirementModel.Size) &&
                 (x.DesignId == requestSearchRequirementModel.DesignId || requestSearchRequirementModel.DesignId == null) &&
                 x.MaterialPriceAtMoment >= requestSearchRequirementModel.FromMaterialPriceAtMoment &&
                 (x.MaterialPriceAtMoment <= requestSearchRequirementModel.ToMaterialPriceAtMoment || requestSearchRequirementModel.ToMaterialPriceAtMoment == null) &&
@@ -101,7 +101,7 @@ namespace API.Controllers
             var Requirement = requestCreateRequirementModel.toRequirementEntity();
             _unitOfWork.RequirementRepository.Insert(Requirement);
             _unitOfWork.Save();
-            return Ok(Requirement);
+            return Ok("Create requirement successfully");
         }
 
         

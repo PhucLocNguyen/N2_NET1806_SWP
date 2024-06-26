@@ -87,7 +87,7 @@ CREATE TABLE Requirements (
     Status NVARCHAR(50) NOT NULL,
 	CreatedDate DATE,
     ExpectedDelivery DATE,
-    Size NVARCHAR(50),
+    Size DECIMAL(18,2) NOT NULL,
 	Design3D NVARCHAR(200),
 	WeightOfMaterial DECIMAL(18,2),
     MaterialPriceAtMoment DECIMAL(18,2),

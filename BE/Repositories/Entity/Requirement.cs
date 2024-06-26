@@ -13,7 +13,7 @@ public partial class Requirement
 
     public DateOnly? ExpectedDelivery { get; set; }
 
-    public string? Size { get; set; }
+    public decimal? Size { get; set; }
 
     public string? Design3D { get; set; }
 

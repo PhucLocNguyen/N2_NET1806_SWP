@@ -151,8 +151,8 @@ namespace API.Controllers
             return Ok(Users);
         }
 
-        [HttpGet("{username}")]
-        public IActionResult GetByUsername([FromRoute]string username)
+        [HttpGet]
+        public IActionResult GetByUsername(string username)
         {
             Expression<Func<Users, bool>> filter = x =>
                 (string.IsNullOrEmpty(username) || x.Username.Equals(username));

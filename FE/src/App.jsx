@@ -29,12 +29,12 @@ import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
-
-
     <AuthProvider>
       <Suspense>
         <Routes>
-
+          {/* Route tự viết để test */}
+          {/* <Route path='/a' element={<StaffLayout> <StaffList /> </StaffLayout>}></Route> */}
+          {/* <Route path='/b' element={<ListRequirement />}></Route> */}
           {/* Route tự viết để test */}
           {/* <Route path='/a' element={<StaffLayout> <StaffList /> </StaffLayout>}></Route> */}
           {/* <Route path='/b' element={<ListRequirement />}></Route> */}
@@ -57,15 +57,20 @@ function App() {
               <Route key={index} index={route.index ? true : undefined} path={route.index ? undefined : route.path} element={<Layout> <Page />  </Layout>}>
 
                 {/* Route neu co child trong file Route.jsx */}
-                {route.children && route.children.map((childRoute, childIndex) => {
-                  let ChildPage = childRoute.component
-                  return (
-                    <Route key={childIndex} index={childRoute.index ? true : undefined} path={childRoute.index ? undefined : childRoute.path} element={<ChildPage />} />
-                  )
-                })}
-
+                {route.children &&
+                  route.children.map((childRoute, childIndex) => {
+                    let ChildPage = childRoute.component;
+                    return (
+                      <Route
+                        key={childIndex}
+                        index={childRoute.index ? true : undefined}
+                        path={childRoute.index ? undefined : childRoute.path}
+                        element={<ChildPage />}
+                      />
+                    );
+                  })}
               </Route>
-            )
+            );
           })}
 
           {/* Private route */}
@@ -96,14 +101,14 @@ function App() {
             )
 
           })}
-
-
         </Routes>
       </Suspense>
       <ToastContainer />
     </AuthProvider>
-
-  )
+    // <>
+    //  <OrderDetail />
+    // </>
+  );
 }
 
-export default App
+export default App;

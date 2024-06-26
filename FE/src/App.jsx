@@ -7,7 +7,9 @@ const DefaultLayout = lazy(() => import('./component/layout/DefaultLayout.jsx'))
 
 import RequireAuth from './routes/RequireAuth.jsx'
 import { publicRoutes, privateRoutes } from './routes/Route.jsx'
+
 import DefaultLayout from './component/layout/DefaultLayout.jsx'
+
 import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer } from 'react-toastify';
 

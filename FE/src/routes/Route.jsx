@@ -1,3 +1,4 @@
+
 import { lazy } from "react"
 const ConfirmationAccount = lazy(()=>import("../component/login/ConfirmationAccount"));
 const Home = lazy(() => import('../component/home/Home'));
@@ -19,6 +20,13 @@ const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
+
+const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
+const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
+const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
+const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
+
+
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
 const publicRoutes = [
@@ -98,12 +106,11 @@ const privateRoutes = [
       children: [
          { index: true, component: ListRequirement },
          { path: 'blog-create', component: BlogCreate },
-          {
-      path: "/chat",
-      component: Chat,
-      role: ['Customer', 'Sale', 'DesignStaff', 'ProductStaff', 'Manager']
-
-   },{ path: 'price-quote/:id', component: RequirementDetail }
+         { path: 'price-quote/:id', component: RequirementDetail },
+         { path: 'master-gemstone', component: ListMasterGemstone },
+         { path: 'design-management', component: ListDesign },
+         { path: 'stone-management', component: ListStone },
+         { path: 'price-quote/:id', component: RequirementDetail }
       ],
       role: ['Manager']
    },
@@ -131,7 +138,6 @@ const privateRoutes = [
       role: ['Customer'],
       layout: null
    }
-
 ]
 
 export { publicRoutes, privateRoutes }

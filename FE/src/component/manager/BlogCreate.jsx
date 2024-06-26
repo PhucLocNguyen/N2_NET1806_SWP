@@ -37,7 +37,7 @@ function BlogCreate() {
    console.log(data)
 
    return (
-      <div className="min-h-[100vh] py-[3rem] px-[3rem] bg-[#f7f9fc] w-[80%] ml-[auto]">
+      <div className="min-h-[100vh] py-[3rem] px-[3rem] bg-[#f7f9fc]">
          <div>
 
             <input data-testid='title' name='title' onChange={handleFormChange} placeholder="Title" type="text" className="border-[1px] border-solid border-[black] px-[10px] py-[5px] h-[40px] w-[100%] font-medium leading-[40px] text-[30px]" />

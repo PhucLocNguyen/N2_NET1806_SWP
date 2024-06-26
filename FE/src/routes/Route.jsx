@@ -1,8 +1,4 @@
 import { lazy } from "react"
-import Chat from "../component/chat/Chat";
-const OrderBoard = lazy(()=>import("../component/saleStaff/OrderBoard"));
-const AdminChat = lazy(()=> import("../component/saleStaff/AdminChat"));
-const SaleLayout = lazy(()=>import("../component/saleStaff/layout/AdminLayout"));
 const ConfirmationAccount = lazy(()=>import("../component/login/ConfirmationAccount"));
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
@@ -13,9 +9,17 @@ const Blog = lazy(() => import('../component/blog/Blog'));
 const RequirementOrderSection = lazy(() => import('../component/requirements/Create/RequirementOrderSection'));
 const Login = lazy(() => import('../component/login/Login'));
 const PageError = lazy(() => import('../component/pageerror/PageError'));
-const Staff = lazy(() => import('../component/designProductPlan/PlanningList'));
 const RequirementDetail = lazy(() => import('../component/manager/RequirementDetail'));
 const StaffLogin = lazy(()=>import( "../component/login/StaffLogin"));
+const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"))
+const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
+const Chat = lazy(() => import('../component/chat/Chat'));
+const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
+const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
+const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
+const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
+const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
+const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
 const publicRoutes = [
    {
@@ -32,13 +36,11 @@ const publicRoutes = [
          { path: 'necklace', component: ListAll },
          { path: 'ring', component: ListAll }
       ]
-
    },
    {
       path: '/design/:id',
       component: DesignInfo
    },
-   
    {
       path: '/blog',
       component: BlogList
@@ -49,11 +51,18 @@ const publicRoutes = [
    },
    {
       path: '/login',
-      component: Login
+      component: Login,
+      layout: null
    },
    {
       path: '/error',
-      component: PageError
+      component: PageError,
+      layout: null
+   },
+   {
+      path: '/admin/login',
+      component: StaffLogin,
+      layout: null
    },
    {
       path: '/manager/price-quote/:id',
@@ -64,8 +73,9 @@ const publicRoutes = [
       component: StaffLogin
    },
    {
-      path:'/confirmation-account',
-      component:ConfirmationAccount
+      path: '/confirmation-account',
+      component: ConfirmationAccount,
+      layout: null
    }
 ]
 
@@ -73,31 +83,55 @@ const privateRoutes = [
    {
       path: '/design/create-requirement/:id',
       component: RequirementOrderSection,
-      role: ['Customer']
-   },
-   {path:"/chat",
-   component:Chat,
-   role:['Customer']
-   }
-   ,
-   {
-      path:"/admin",
-      component:SaleLayout,
-      role:['Sale']
-   }
-   , {
-      path:"/admin/chat",
-      component:AdminChat,
-      role:['Sale','DesignStaff','ProductStaff','Manager'],
+      role: ['Customer'],
+      layout: null
    },
    {
-      path:"/admin/board",
-      component:OrderBoard,
-      role:['Sale','DesignStaff','ProductStaff','Manager']
+      path: "/chat",
+      component: Chat,
+      role: ['Customer', 'Sale', 'DesignStaff', 'ProductStaff', 'Manager']
 
+   },
+   {
+      path: '/manager',
+      component: StaffLayout,
+      children: [
+         { index: true, component: ListRequirement },
+         { path: 'blog-create', component: BlogCreate },
+          {
+      path: "/chat",
+      component: Chat,
+      role: ['Customer', 'Sale', 'DesignStaff', 'ProductStaff', 'Manager']
+
+   },{ path: 'price-quote/:id', component: RequirementDetail }
+      ],
+      role: ['Manager']
+   },
+   {
+      path: '/admin',
+      component: StaffLayout,
+      children: [
+         { index: true, component: StaffList },
+         { path: 'dashboard', component: Dashboard }
+      ],
+      role: ['Admin']
+   },
+   {
+      path: '/staff',
+      component: StaffLayout,
+      children: [
+         { index: true, component: WorkingBoard },
+         { path: 'chat', component: ChatStaff }
+      ],
+      role: ['DesignStaff', 'ProductStaff', "Sale"],
+   },
+   {
+      path: '/OrderCustomer',
+      component: OrderCustomer,
+      role: ['Customer'],
+      layout: null
    }
-  
-   
+
 ]
 
 export { publicRoutes, privateRoutes }

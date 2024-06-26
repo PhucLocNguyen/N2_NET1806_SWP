@@ -21,7 +21,9 @@ const PlanningList = lazy(() => import('../component/designProductPlan/PlanningL
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
 const Chat = lazy(() => import('../component/chat/Chat'));
-
+const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
+const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
+const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
@@ -99,7 +101,10 @@ const privateRoutes = [
       children: [
          { index: true, component: ListRequirement },
          { path: 'blog-create', component: BlogCreate },
-         { path: 'price-quote/:id', component: RequirementDetail }
+         { path: 'price-quote/:id', component: RequirementDetail },
+         { path: 'master-gemstone', component: ListMasterGemstone },
+         { path: 'design-management', component: ListDesign },
+         { path: 'stone-management', component: ListStone }
       ],
       role: ['Manager']
    },
@@ -111,12 +116,6 @@ const privateRoutes = [
          { path: 'dashboard', component: Dashboard }
       ],
       role: ['Admin']
-   },
-   {
-      path: '/staff',
-      component: PlanningList,
-      role: ['DesignStaff', 'ProductStaff'],
-      layout: null
    },
    {
       path: '/staff',

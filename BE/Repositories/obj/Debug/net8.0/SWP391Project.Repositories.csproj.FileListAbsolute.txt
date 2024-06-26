@@ -40,17 +40,3 @@ C:\Users\Admin\Desktop\SWP391Poject_VnPay\Repositories\obj\Debug\net8.0\refint\S
 C:\Users\Admin\Desktop\SWP391Poject_VnPay\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.pdb
 C:\Users\Admin\Desktop\SWP391Poject_VnPay\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.genruntimeconfig.cache
 C:\Users\Admin\Desktop\SWP391Poject_VnPay\Repositories\obj\Debug\net8.0\ref\SWP391Project.Repositories.dll
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\bin\Debug\net8.0\SWP391Project.Repositories.deps.json
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\bin\Debug\net8.0\SWP391Project.Repositories.runtimeconfig.json
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\bin\Debug\net8.0\SWP391Project.Repositories.dll
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\bin\Debug\net8.0\SWP391Project.Repositories.pdb
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.csproj.AssemblyReference.cache
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.GeneratedMSBuildEditorConfig.editorconfig
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.AssemblyInfoInputs.cache
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.AssemblyInfo.cs
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.csproj.CoreCompileInputs.cache
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.dll
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\refint\SWP391Project.Repositories.dll
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.pdb
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.genruntimeconfig.cache
-D:\HocTap\AspDotNet_Practice\SwpWorking\BE\Repositories\obj\Debug\net8.0\ref\SWP391Project.Repositories.dll

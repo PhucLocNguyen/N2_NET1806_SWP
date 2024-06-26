@@ -151,7 +151,7 @@ namespace API.Controllers
             return Ok(Users);
         }
 
-        [HttpGet]
+        [HttpGet("Username")]
         public IActionResult GetByUsername(string username)
         {
             Expression<Func<Users, bool>> filter = x =>

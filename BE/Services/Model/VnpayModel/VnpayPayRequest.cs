@@ -13,7 +13,7 @@
             this.vnp_CurrCode = currCode;
             this.vnp_CreateDate = createDate.ToString("yyyyMMddHHmmss");
             this.vnp_TmnCode = tmnCode;
-            this.vnp_Amount = (int)amount * 100;
+            this.vnp_Amount =amount*100;
             this.vnp_Command = "pay";
             this.vnp_OrderType = orderType;
             this.vnp_OrderInfo = orderInfo;

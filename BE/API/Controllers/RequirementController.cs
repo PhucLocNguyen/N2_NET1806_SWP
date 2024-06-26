@@ -29,7 +29,7 @@ namespace API.Controllers
             var sortType = requestSearchRequirementModel.SortContent != null ? requestSearchRequirementModel.SortContent?.sortRequirementType.ToString() : null;
             Expression<Func<Requirement, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchRequirementModel.Status) || x.Status.Contains(requestSearchRequirementModel.Status)) &&
-                (x.Size == requestSearchRequirementModel.Size) &&
+                (x.Size == requestSearchRequirementModel.Size|| requestSearchRequirementModel.Size == null) &&
                 (x.DesignId == requestSearchRequirementModel.DesignId || requestSearchRequirementModel.DesignId == null) &&
                 x.MaterialPriceAtMoment >= requestSearchRequirementModel.FromMaterialPriceAtMoment &&
                 (x.MaterialPriceAtMoment <= requestSearchRequirementModel.ToMaterialPriceAtMoment || requestSearchRequirementModel.ToMaterialPriceAtMoment == null) &&

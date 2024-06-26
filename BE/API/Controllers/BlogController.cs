@@ -71,7 +71,6 @@ namespace API.Controllers
                 pageIndex: requestSearchBlogModel.pageIndex,
                 pageSize: requestSearchBlogModel.pageSize, m=>m.Manager
                 ).Select(x=>x.toBlogDTO());
-            var totalPage = _unitOfWork.BlogRepository.Count(filter);
             return Ok(reponseBlog);
         }
 
@@ -91,6 +90,11 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateBlog(RequestCreateBlogModel requestCreateBlogModel)
         {
+            var user = _unitOfWork.UserRepository.GetByID(requestCreateBlogModel.ManagerId, m=>m.Role);
+            if(user.Role.Name !=  RoleConst.Manager) 
+            {
+                return BadRequest("Manager Id is not valid");
+            }
             var Blog = requestCreateBlogModel.toBlogEntity();
             _unitOfWork.BlogRepository.Insert(Blog);
             _unitOfWork.Save();

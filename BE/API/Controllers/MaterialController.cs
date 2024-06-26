@@ -1,4 +1,6 @@
-﻿using API.Model.MaterialModel;
+﻿using API.Model.BlogModel;
+using API.Model.MaterialModel;
+using API.Model.UserModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -19,25 +21,6 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet("GetTotalRecords")]
-        public IActionResult GetTotalMaterialRecords([FromQuery] RequestSearchMaterialModel requestSearchMaterialModel)
-        {
-            var sortBy = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialBy.ToString() : null;
-            var sortType = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialType.ToString() : null;
-            Expression<Func<Material, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchMaterialModel.Name) || x.Name.Contains(requestSearchMaterialModel.Name)) &&
-                (x.ManagerId == requestSearchMaterialModel.ManagerId || requestSearchMaterialModel.ManagerId == null) &&
-                x.Price >= requestSearchMaterialModel.FromPrice &&
-                (x.Price <= requestSearchMaterialModel.ToPrice || requestSearchMaterialModel.ToPrice == null);
-            var totalRecords = _unitOfWork.MaterialRepository.Count(filter);
-
-            var response = new
-            {
-                TotalRecords = totalRecords
-            };
-
-            return Ok(response);
-        }
 
         [HttpGet]
         public IActionResult SearchMaterial([FromQuery] RequestSearchMaterialModel requestSearchMaterialModel)
@@ -88,6 +71,11 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateMaterial(RequestCreateMaterialModel requestCreateMaterialModel)
         {
+            var user = _unitOfWork.UserRepository.GetByID(requestCreateMaterialModel.ManagerId, m => m.Role);
+            if (user.Role.Name != RoleConst.Manager)
+            {
+                return BadRequest("Manager Id is not valid");
+            }
             var Material = requestCreateMaterialModel.toMaterialEntity();
             _unitOfWork.MaterialRepository.Insert(Material);
             _unitOfWork.Save();

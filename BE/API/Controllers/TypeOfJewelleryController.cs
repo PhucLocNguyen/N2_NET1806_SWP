@@ -18,24 +18,6 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet("GetTotalRecords")]
-        public IActionResult GetTotalJewelleryRecords([FromQuery] RequestSearchTypeOfJewelleryModel requestSearchTypeOfJewelleryModel)
-        {
-
-            var sortBy = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryBy.ToString() : null;
-            var sortType = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryType.ToString() : null;
-            Expression<Func<TypeOfJewellery, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchTypeOfJewelleryModel.Name) || x.Name.Contains(requestSearchTypeOfJewelleryModel.Name));
-            var totalRecords = _unitOfWork.TypeOfJewellryRepository.Count(filter);
-
-            var response = new
-            {
-                TotalRecords = totalRecords
-            };
-
-            return Ok(response);
-        }
-
         [HttpGet]
         public IActionResult SearchJewellery([FromQuery] RequestSearchTypeOfJewelleryModel requestSearchTypeOfJewelleryModel)
         {

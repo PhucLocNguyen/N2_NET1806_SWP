@@ -1,0 +1,149 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|d:\\slide\\sem_5\\swp\\swp\\be\\testusercase\\testdata\\deletedesigndatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|solutionrelative:testusercase\\testdata\\deletedesigndatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\testusercase\\testdeletedesign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|solutionrelative:testusercase\\testdeletedesign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\testusercase\\testdeletestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|solutionrelative:testusercase\\testdeletestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\testusercase\\testdata\\updatedesigndatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|solutionrelative:testusercase\\testdata\\updatedesigndatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\testusercase\\testupdatedesign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|solutionrelative:testusercase\\testupdatedesign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\testusercase\\testdata\\createdesigndatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|solutionrelative:testusercase\\testdata\\createdesigndatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\testusercase\\testcreatedesign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0515ECDB-F746-4464-BCCE-F6CA4AB33058}|TestUserCase\\TestUseCase.csproj|solutionrelative:testusercase\\testcreatedesign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UpdateDesignDataTest.csv",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestData\\UpdateDesignDataTest.csv",
+              "RelativeDocumentMoniker": "TestUserCase\\TestData\\UpdateDesignDataTest.csv",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestData\\UpdateDesignDataTest.csv",
+              "RelativeToolTip": "TestUserCase\\TestData\\UpdateDesignDataTest.csv",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2024-06-24T16:01:19.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TestUpdateDesign.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestUpdateDesign.cs",
+              "RelativeDocumentMoniker": "TestUserCase\\TestUpdateDesign.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestUpdateDesign.cs",
+              "RelativeToolTip": "TestUserCase\\TestUpdateDesign.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T15:45:54.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DesignController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\DesignController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeToolTip": "API\\Controllers\\DesignController.cs",
+              "ViewState": "AQIAAM0AAAAAAAAAAAAgwOAAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T15:06:49.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DeleteDesignDataTest.csv",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestData\\DeleteDesignDataTest.csv",
+              "RelativeDocumentMoniker": "TestUserCase\\TestData\\DeleteDesignDataTest.csv",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestData\\DeleteDesignDataTest.csv",
+              "RelativeToolTip": "TestUserCase\\TestData\\DeleteDesignDataTest.csv",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2024-06-24T16:28:44.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TestDeleteDesign.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestDeleteDesign.cs",
+              "RelativeDocumentMoniker": "TestUserCase\\TestDeleteDesign.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestDeleteDesign.cs",
+              "RelativeToolTip": "TestUserCase\\TestDeleteDesign.cs",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAgwCMAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T16:21:40.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TestDeleteStone.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestDeleteStone.cs",
+              "RelativeDocumentMoniker": "TestUserCase\\TestDeleteStone.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestDeleteStone.cs",
+              "RelativeToolTip": "TestUserCase\\TestDeleteStone.cs",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAwwFoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T16:22:45.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateDesignDataTest.csv",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestData\\CreateDesignDataTest.csv",
+              "RelativeDocumentMoniker": "TestUserCase\\TestData\\CreateDesignDataTest.csv",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestData\\CreateDesignDataTest.csv",
+              "RelativeToolTip": "TestUserCase\\TestData\\CreateDesignDataTest.csv",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAACzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2024-06-24T15:19:56.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TestCreateDesign.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestCreateDesign.cs",
+              "RelativeDocumentMoniker": "TestUserCase\\TestCreateDesign.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestCreateDesign.cs",
+              "RelativeToolTip": "TestUserCase\\TestCreateDesign.cs",
+              "ViewState": "AQIAAFYAAAAAAAAAAAAAAGsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T14:48:34.72Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

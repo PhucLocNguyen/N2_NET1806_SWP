@@ -1,5 +1,0 @@
-﻿Username,Password,Role,ExpectedValue
-hung,Hung12345678,Staff,Login Successfully
-badat,Hung12345678,Staff,Invalid Username
-hung,badat,Staff,Password incorrect
-loc,Loc12345678,Customer ,You do not have permission to access this page

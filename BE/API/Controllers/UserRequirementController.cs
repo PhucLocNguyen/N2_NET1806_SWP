@@ -18,26 +18,6 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet("GetTotalRecords")]
-        public IActionResult GetTotalUserRequirementRecords([FromQuery] RequestSearchUserRequirementModel requestSearchUserRequirementModel)
-        {
-            var sortBy = requestSearchUserRequirementModel.SortContent?.sortUserRequirementBy.ToString();
-            var sortType = requestSearchUserRequirementModel.SortContent?.sortUserRequirementType.ToString();
-
-            Expression<Func<UserRequirement, bool>> filter = x =>
-                (x.UsersId == requestSearchUserRequirementModel.UsersId || requestSearchUserRequirementModel.UsersId == 0) &&
-                (x.RequirementId == requestSearchUserRequirementModel.RequirementId || requestSearchUserRequirementModel.RequirementId == 0);
-
-            var totalRecords = _unitOfWork.UserRequirementRepository.Count(filter);
-
-            var response = new
-            {
-                TotalRecords = totalRecords
-            };
-
-            return Ok(response);
-        }
-
         [HttpGet]
         public IActionResult SearchUserRequirement([FromQuery] RequestSearchUserRequirementModel requestSearchUserRequirementModel)
         {

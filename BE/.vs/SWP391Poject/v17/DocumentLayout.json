@@ -1,30 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Slide\\Sem_5\\SWP\\BE\\",
+  "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\be\\api\\controllers\\stonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\stonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|d:\\slide\\sem_5\\swp\\be\\testusecase\\testdeletestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|solutionrelative:testusecase\\testdeletestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|d:\\slide\\sem_5\\swp\\be\\testusecase\\testdata\\deletestonedatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|solutionrelative:testusecase\\testdata\\deletestonedatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|d:\\slide\\sem_5\\swp\\be\\testusecase\\testdata\\updatestonedatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|solutionrelative:testusecase\\testdata\\updatestonedatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|d:\\slide\\sem_5\\swp\\be\\testusecase\\testupdatestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|solutionrelative:testusecase\\testupdatestone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|d:\\slide\\sem_5\\swp\\be\\testusecase\\testdata\\stonesdatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{451CDB39-2A6B-4352-BB48-7D14537B63E8}|TestUseCase\\TestUseCase.csproj|solutionrelative:testusecase\\testdata\\stonesdatatest.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|c:\\users\\admin\\desktop\\n2_net1806_swp\\be\\api\\controllers\\mastergemstonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\mastergemstonecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "StonesDataTest.csv",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestData\\StonesDataTest.csv",
-              "RelativeDocumentMoniker": "TestUseCase\\TestData\\StonesDataTest.csv",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestData\\StonesDataTest.csv",
-              "RelativeToolTip": "TestUseCase\\TestData\\StonesDataTest.csv",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2024-06-21T07:14:59.733Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DeleteStoneDataTest.csv",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestData\\DeleteStoneDataTest.csv",
-              "RelativeDocumentMoniker": "TestUseCase\\TestData\\DeleteStoneDataTest.csv",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestData\\DeleteStoneDataTest.csv",
-              "RelativeToolTip": "TestUseCase\\TestData\\DeleteStoneDataTest.csv",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2024-06-20T09:00:47.425Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TestDeleteStone.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestDeleteStone.cs",
-              "RelativeDocumentMoniker": "TestUseCase\\TestDeleteStone.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestDeleteStone.cs",
-              "RelativeToolTip": "TestUseCase\\TestDeleteStone.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAwwD0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T08:58:23.903Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UpdateStoneDataTest.csv",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestData\\UpdateStoneDataTest.csv",
-              "RelativeDocumentMoniker": "TestUseCase\\TestData\\UpdateStoneDataTest.csv",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestData\\UpdateStoneDataTest.csv",
-              "RelativeToolTip": "TestUseCase\\TestData\\UpdateStoneDataTest.csv",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2024-06-20T07:57:56.125Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TestUpdateStone.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestUpdateStone.cs",
-              "RelativeDocumentMoniker": "TestUseCase\\TestUpdateStone.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUseCase\\TestUpdateStone.cs",
-              "RelativeToolTip": "TestUseCase\\TestUpdateStone.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAgwC4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T06:55:09.341Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "StonesController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\StonesController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\StonesController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\StonesController.cs",
-              "RelativeToolTip": "API\\Controllers\\StonesController.cs",
-              "ViewState": "AQIAAK8AAAAAAAAAAAAQwJMAAAAzAAAA",
+              "Title": "MasterGemstoneController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\API\\Controllers\\MasterGemstoneController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\MasterGemstoneController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\N2_NET1806_SWP\\BE\\API\\Controllers\\MasterGemstoneController.cs",
+              "RelativeToolTip": "API\\Controllers\\MasterGemstoneController.cs",
+              "ViewState": "AQIAAF4AAAAAAAAAAAAkwG0AAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T06:47:43.426Z",
+              "WhenOpened": "2024-06-23T03:04:47.424Z",
               "EditorCaption": ""
             }
           ]

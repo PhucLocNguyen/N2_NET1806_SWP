@@ -1,4 +1,6 @@
-﻿using API.Model.DesignModel;
+﻿using API.Model.BlogModel;
+using API.Model.DesignModel;
+using API.Model.UserModel;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,31 +20,6 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-
-        [HttpGet("GetTotalRecords")]
-        public IActionResult SearchDesignRecords([FromQuery] RequestSearchDesignModel requestSearchDesignModel)
-        {
-            var sortBy = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignBy.ToString() : null;
-            var sortType = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignType.ToString() : null;
-            Expression<Func<Design, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchDesignModel.DesignName) || x.DesignName.Contains(requestSearchDesignModel.DesignName)) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.Stone) || x.Stone.Kind.Contains(requestSearchDesignModel.Stone)) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.MasterGemstone) || x.MasterGemstone.Kind.Contains(requestSearchDesignModel.MasterGemstone)) &&
-                (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.TypeOfJewellery) || x.TypeOfJewellery.Name.Contains(requestSearchDesignModel.TypeOfJewellery)) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material)) &&
-                x.WeightOfMaterial >= requestSearchDesignModel.FromWeightOfMaterial &&
-                (x.WeightOfMaterial <= requestSearchDesignModel.ToWeightOfMaterial || requestSearchDesignModel.ToWeightOfMaterial == null);
-            var totalRecords = _unitOfWork.DesignRepository.Count(filter);
-
-            var response = new
-            {
-                TotalRecords = totalRecords
-            };
-
-            return Ok(response);
-        }
-
         [HttpGet]
         public IActionResult SearchDesign([FromQuery] RequestSearchDesignModel requestSearchDesignModel)
         {
@@ -50,14 +27,11 @@ namespace API.Controllers
             var sortType = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignType.ToString() : null;
             Expression<Func<Design, bool>> filter = x =>
                 (string.IsNullOrEmpty(requestSearchDesignModel.DesignName) || x.DesignName.Contains(requestSearchDesignModel.DesignName)) &&
-                (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null) &&
                 (string.IsNullOrEmpty(requestSearchDesignModel.Stone) || x.Stone.Kind.Contains(requestSearchDesignModel.Stone)) &&
                 (string.IsNullOrEmpty(requestSearchDesignModel.MasterGemstone) || x.MasterGemstone.Kind.Contains(requestSearchDesignModel.MasterGemstone)) &&
                 (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
                 (string.IsNullOrEmpty(requestSearchDesignModel.TypeOfJewellery) || x.TypeOfJewellery.Name.Contains(requestSearchDesignModel.TypeOfJewellery)) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material)) &&
-                x.WeightOfMaterial >= requestSearchDesignModel.FromWeightOfMaterial &&
-                (x.WeightOfMaterial <= requestSearchDesignModel.ToWeightOfMaterial || requestSearchDesignModel.ToWeightOfMaterial == null);
+                (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material)) ;
             Func<IQueryable<Design>, IOrderedQueryable<Design>> orderBy = null;
 
             if (!string.IsNullOrEmpty(sortBy))
@@ -71,6 +45,13 @@ namespace API.Controllers
                     orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
                 }
             }
+            if(requestSearchDesignModel.SortContent?.isParent == null)
+            {
+                filter = x => (x.ParentId == null);
+            }else
+            {
+                filter = x => (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null);
+            }
             var reponseDesign = _unitOfWork.DesignRepository.Get(
                 filter,
                 orderBy,
@@ -79,7 +60,6 @@ namespace API.Controllers
                 pageSize: requestSearchDesignModel.pageSize,
                 m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery
                 ).Select(d => d.toDesignDTO());
-
             return Ok(reponseDesign);
         }
 
@@ -121,7 +101,6 @@ namespace API.Controllers
                 Design.Image =  parentDesign.Image;
                 Design.TypeOfJewelleryId = parentDesign.TypeOfJewelleryId;
                 Design.Description = parentDesign.Description;
-                Design.WeightOfMaterial = parentDesign.WeightOfMaterial;
                 Design.ManagerId = null;
                 _unitOfWork.DesignRepository.Insert(Design);
                 _unitOfWork.Save();
@@ -130,7 +109,7 @@ namespace API.Controllers
             }
             else
             {
-                var Design = _unitOfWork.DesignRepository.GetByID(childDesignId, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery); ;
+                var Design = _unitOfWork.DesignRepository.GetByID(childDesignId, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery);
                 return Ok(Design.toDesignDTO());
             }
         }
@@ -138,6 +117,36 @@ namespace API.Controllers
         [HttpPost("DesignParent")]
         public IActionResult CreateDesignForManager(RequestCreateDesignModel requestCreateDesignModel)
         {
+            var user = _unitOfWork.UserRepository.GetByID((int)requestCreateDesignModel.ManagerId, m => m.Role);
+            if (user.Role.Name != RoleConst.Manager)
+            {
+                return BadRequest("Manager Id is not valid");
+            }
+
+            var stone = _unitOfWork.StoneRepository.GetByID((int)requestCreateDesignModel.StonesId);
+            if (stone == null)
+            {
+                return BadRequest("Stone Id is not valid");
+            }
+
+            var masterGemstone = _unitOfWork.MasterGemstoneRepository.GetByID((int)requestCreateDesignModel.MasterGemstoneId);
+            if (masterGemstone == null)
+            {
+                return BadRequest("Master Gemstone Id is not valid");
+            }
+
+            var typeOfJewellry = _unitOfWork.TypeOfJewellryRepository.GetByID((int)requestCreateDesignModel.TypeOfJewelleryId);
+            if (typeOfJewellry == null)
+            {
+                return BadRequest("Type of jewellry Id is not valid");
+            }
+
+            var material = _unitOfWork.MaterialRepository.GetByID((int)requestCreateDesignModel.MaterialId);
+            if (material == null)
+            {
+                return BadRequest("Material Id is not valid");
+            }
+
             var Design = requestCreateDesignModel.toDesignParentEntity();
             _unitOfWork.DesignRepository.Insert(Design);
             _unitOfWork.Save();
@@ -152,10 +161,40 @@ namespace API.Controllers
             {
                 return NotFound("Design is not existed");
             }
+
+            var user = _unitOfWork.UserRepository.GetByID((int)requestCreateDesignModel.ManagerId, m => m.Role);
+            if (user.Role.Name != RoleConst.Manager)
+            {
+                return BadRequest("Manager Id is not valid");
+            }
+
+            var stone = _unitOfWork.StoneRepository.GetByID((int)requestCreateDesignModel.StonesId);
+            if (stone == null)
+            {
+                return BadRequest("Stone Id is not valid");
+            }
+
+            var masterGemstone = _unitOfWork.MasterGemstoneRepository.GetByID((int)requestCreateDesignModel.MasterGemstoneId);
+            if (masterGemstone == null)
+            {
+                return BadRequest("Master Gemstone Id is not valid");
+            }
+
+            var typeOfJewellry = _unitOfWork.TypeOfJewellryRepository.GetByID((int)requestCreateDesignModel.TypeOfJewelleryId);
+            if (typeOfJewellry == null)
+            {
+                return BadRequest("Type of jewellry Id is not valid");
+            }
+
+            var material = _unitOfWork.MaterialRepository.GetByID((int)requestCreateDesignModel.MaterialId);
+            if (material == null)
+            {
+                return BadRequest("Material Id is not valid");
+            }
+
             existedDesign.ParentId = requestCreateDesignModel.ParentId;
             existedDesign.Image = requestCreateDesignModel.Image;
             existedDesign.DesignName = requestCreateDesignModel.DesignName;
-            existedDesign.WeightOfMaterial = (decimal)requestCreateDesignModel.WeightOfMaterial;
             existedDesign.StonesId = requestCreateDesignModel.StonesId;
             existedDesign.MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId;
             existedDesign.ManagerId = requestCreateDesignModel.ManagerId;
@@ -163,11 +202,11 @@ namespace API.Controllers
             existedDesign.MaterialId = requestCreateDesignModel.MaterialId;
             _unitOfWork.DesignRepository.Update(existedDesign);
             _unitOfWork.Save();
-            return Ok();
+            return Ok("Update successfully");
         }
 
         [HttpDelete]
-        public IActionResult DeleteBlog(int id)
+        public IActionResult DeleteDesign(int id)
         {
             Expression<Func<Design, bool>> filter = x =>
                 (x.ParentId == id);
@@ -183,7 +222,7 @@ namespace API.Controllers
             }
             _unitOfWork.DesignRepository.Delete(existedDesign);
             _unitOfWork.Save();
-            return Ok();
+            return Ok("Delete successfully");
         }
     }
 }

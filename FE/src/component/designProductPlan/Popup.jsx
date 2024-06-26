@@ -1,16 +1,14 @@
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { React, useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import Button from "@mui/material/Button";
-import axios from "axios";
+import { FetchApiDesignByDesignId } from "../../api/design/FetchApiDesign";
+import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
+import useAuth from "../../hooks/useAuth.jsx";
 
-function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
+function Popup({ setIsOpenPopup, data, handleStatusChange }) {
   const [selection, setSelection] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [dataDesign, setDataDesign] = useState({});
@@ -30,63 +28,54 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
     { code: 3, label: "Processing completed and ready for handover" },
   ];
 
-  useEffect(() => {
-    setType("design");
-  }, []);
+  const { role } = useAuth();
 
+  useEffect(() => {
+    // This sets the type to "product" after the first render
+    if (role === "DesignStaff") {
+      setType("design");
+    }
+    if (role === "ProductStaff") {
+      setType("product");
+    }
+    getDesign(data.designId);
+  }, [role]);
+  
   const getStatusOptions = (type) => {
     return type === "design" ? statusDesignOptions : statusProductOptions;
   };
 
-  const urlUpdateRequirement = `https://localhost:7103/api/Requirement?id=${data.requirementId}`;
-  const urlForDesign = `https://localhost:7103/api/Design/${data.designId}`;
-
   const dataUpdate = {
     status: selection,
-    expectedDelivery: `${data.expectedDelivery}`,
-    size: `${data.size}`,
+    expectedDelivery: data.expectedDelivery,
+    size: data.size,
     designId: data.designId,
-    design3D: `${data.design3D}`,
+    design3D: data.design3D,
+    weightOfMaterial: data.weightOfMaterial,
     materialPriceAtMoment: data.materialPriceAtMoment,
     stonePriceAtMoment: data.stonePriceAtMoment,
     machiningFee: data.machiningFee,
     totalMoney: data.totalMoney,
-    customerNote: `${data.customerNote}`,
-    staffNote: `${data.staffNote}`,
+
+
+    customerNote: data.customerNote,
+    staffNote: data.staffNote,
   };
 
-  const UpdateRequirement = () => {
-    axios
-      .put(urlUpdateRequirement, dataUpdate)
-      .then((response) => {
-        console.log("Dữ liệu đã được cập nhật thành công:", response.data);
-        handleDataUpdate();
-      })
-      .catch((error) => {
-        console.error("Đã xảy ra lỗi khi cập nhật dữ liệu:", error);
-      });
+  const UpdateRequirement = async (requirementId, updateData) => {
+    await PutApiRequirementByStatus(requirementId, updateData);
   };
 
-  const FetchApiDesign = async () => {
-    try {
-      const response = await axios.get(urlForDesign);
-      const designData = response.data;
-      setDataDesign(designData);
-      if (designData.masterGemstone) {
-        setMasterGemStone(designData.masterGemstone);
-      }
-      if (designData.stone) {
-        setStone(designData.stone);
-      }
-    } catch (error) {
-      console.error(error);
-      return [];
+  const getDesign = async (designId) => {
+    const response = await FetchApiDesignByDesignId(designId);
+    setDataDesign(response);
+    if (response.masterGemstone) {
+      setMasterGemStone(response.masterGemstone);
+    }
+    if (response.stone) {
+      setStone(response.stone);
     }
   };
-
-  useEffect(() => {
-    FetchApiDesign();
-  }, []);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -94,23 +83,15 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
 
   const handleSubmit = () => {
     if (selectedFile) {
-      UpdateRequirement();
+
+      UpdateRequirement(data.requirementId, dataUpdate);
+      handleStatusChange(data.requirementId, selection);
       console.log("Confirmed");
     }
   };
 
   const handleChange = (event) => {
     setSelection(event.target.value);
-  };
-
-  const filterItems = (statusCodes, type) => {
-    const statusOptions =
-      type === "design" ? statusDesignOptions : statusProductOptions;
-    const statusLabels = statusCodes.map(
-      (statusCode) =>
-        statusOptions.find((option) => option.code === statusCode)?.label
-    );
-    return data.filter((item) => statusLabels.includes(item.status));
   };
 
   return (
@@ -129,7 +110,6 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
             Requirement ID: R00{data.requirementId}
           </h1>
 
-          {/* Design detail */}
           <h2 className="text-2xl my-2 font-medium">Design Information</h2>
           <div className="ml-5">
             <img
@@ -137,11 +117,9 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
               className="size-32"
               alt="Design Image"
             />
-            <p>Weight predict: {dataDesign.weightOfMaterial}</p>
             <p>Name Of Design: {dataDesign.designName}</p>
           </div>
 
-          {/* chi tiết về các loại đá */}
           {(masterGemStone || stone) && (
             <h2 className="text-2xl my-2 font-medium">Stones Detail</h2>
           )}
@@ -205,7 +183,6 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
             </FormControl>
           </div>
 
-          {/* Input Hình */}
           <div className="w-full">
             <div className="font-[sans-serif] max-w-md">
               <label className="text-base text-gray-500 font-semibold mb-2 block">
@@ -223,9 +200,8 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
                 !selectedFile && "opacity-50 cursor-not-allowed"
               }`}
               onClick={() => {
-                setIsOpenPopup(false);
                 handleSubmit();
-                UpdateRequirement();
+                setIsOpenPopup(false);
               }}
               disabled={!selectedFile}
             >

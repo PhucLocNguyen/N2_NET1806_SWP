@@ -1,5 +1,6 @@
-import { lazy } from "react";
 
+import { lazy } from "react"
+const ConfirmationAccount = lazy(()=>import("../component/login/ConfirmationAccount"));
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
 const BlogList = lazy(() => import('../component/blog_list/blogList'));
@@ -9,21 +10,22 @@ const Blog = lazy(() => import('../component/blog/Blog'));
 const RequirementOrderSection = lazy(() => import('../component/requirements/Create/RequirementOrderSection'));
 const Login = lazy(() => import('../component/login/Login'));
 const PageError = lazy(() => import('../component/pageerror/PageError'));
-const Staff = lazy(() => import('../component/designProductPlan/PlanningList'));
 const RequirementDetail = lazy(() => import('../component/manager/RequirementDetail'));
-const StaffLogin = lazy(() => import("../component/login/StaffLogin"));
-const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
-const Empty = lazy(() => import('../component/empty/Empty'));
+const StaffLogin = lazy(()=>import( "../component/login/StaffLogin"));
+const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"))
+const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
+const Chat = lazy(() => import('../component/chat/Chat'));
+const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
+const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
+
 const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
-const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
-const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
-const Chat = lazy(() => import('../component/chat/Chat'));
 const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
 const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
+
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
@@ -71,9 +73,12 @@ const publicRoutes = [
       layout: null
    },
    {
-      path: '/Staff',
-      component: Staff,
-      layout: null
+      path: '/manager/price-quote/:id',
+      component: RequirementDetail
+   },
+   {
+      path:'/admin/login',
+      component: StaffLogin
    },
    {
       path: '/confirmation-account',
@@ -104,7 +109,8 @@ const privateRoutes = [
          { path: 'price-quote/:id', component: RequirementDetail },
          { path: 'master-gemstone', component: ListMasterGemstone },
          { path: 'design-management', component: ListDesign },
-         { path: 'stone-management', component: ListStone }
+         { path: 'stone-management', component: ListStone },
+         { path: 'price-quote/:id', component: RequirementDetail }
       ],
       role: ['Manager']
    },
@@ -122,11 +128,16 @@ const privateRoutes = [
       component: StaffLayout,
       children: [
          { index: true, component: WorkingBoard },
-         { path: 'chat', component: Chat }
+         { path: 'chat', component: ChatStaff }
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
+   },
+   {
+      path: '/OrderCustomer',
+      component: OrderCustomer,
+      role: ['Customer'],
+      layout: null
    }
-
 ]
 
 export { publicRoutes, privateRoutes }

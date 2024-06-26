@@ -17,6 +17,7 @@ function RequirementDetail() {
    const navigate = useNavigate();
    const { id } = useParams(); // requirement id
 
+
    const [requirement, setRequirement] = useState();
    const [design, setDesign] = useState();
 
@@ -113,7 +114,6 @@ function RequirementDetail() {
    console.log(requirement)
    // console.log(design)
    console.log(dataForm)
-
 
    return (
       <>

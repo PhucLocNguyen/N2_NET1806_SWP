@@ -160,6 +160,18 @@ namespace API.Controllers
             return Ok(Users);
         }
 
+        [HttpGet]
+        [Route("GetUserByRoleInRequirement")]
+        public IActionResult GetUserByRoleInRequirement([FromQuery] RoleEnum RoleFromInput, [FromQuery] int requirementId)
+        {
+
+            var users = _unitOfWork.UserRequirementRepository
+            .Get(filter: x => x.RequirementId == requirementId, includeProperties: "User")
+            .Select(ur => ur.User).Where(x => x.RoleId == (int)RoleFromInput)
+            .ToList();
+            return Ok(users);
+        }
+
         [HttpPut]
         public IActionResult UpdateProfile(int userId, UserDTO editUser)
         {

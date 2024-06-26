@@ -13,6 +13,7 @@ using Repositories.VnPay.Services;
 using Swashbuckle.AspNetCore.Filters;
 using SWP391Project.Services.ChatSystem;
 using SWP391Project.Services.ChatSystem.Hubs;
+using SWP391Project.Services.WorkingBoard.Hubs;
 using System.Text;
 
 namespace API
@@ -119,6 +120,7 @@ namespace API
                 app.UseSwaggerUI();
             }
             app.MapHub<ChatHub>("/Chat");
+            app.MapHub<WorkingHub>("/Working");
             app.UseHttpsRedirection();
 
             app.UseCors(x => x

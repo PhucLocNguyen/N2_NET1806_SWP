@@ -3,9 +3,11 @@ using API.Model.MasterGemstoneModel;
 using API.Model.RequirementModel;
 using API.Model.UserModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Entity;
+using SWP391Project.Services.WorkingBoard.Hubs;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -16,10 +18,11 @@ namespace API.Controllers
     public class RequirementController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
-
-        public RequirementController(UnitOfWork unitOfWork)
+        private readonly IHubContext<WorkingHub> _hubContext;
+        public RequirementController(UnitOfWork unitOfWork, IHubContext<WorkingHub> hubContext)
         {
             _unitOfWork = unitOfWork;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
@@ -101,6 +104,8 @@ namespace API.Controllers
             var Requirement = requestCreateRequirementModel.toRequirementEntity();
             _unitOfWork.RequirementRepository.Insert(Requirement);
             _unitOfWork.Save();
+            var requirementId = Requirement.RequirementId;
+            _hubContext.Clients.All.SendAsync("ReceiveOrderCreate", requirementId);
             return Ok("Create requirement successfully");
         }
 
@@ -127,6 +132,7 @@ namespace API.Controllers
             existedRequirement.StaffNote = requestCreateRequirementModel.StaffNote;
             _unitOfWork.RequirementRepository.Update(existedRequirement);
             _unitOfWork.Save();
+            _hubContext.Clients.All.SendAsync("ReceiveOrderUpdate", id);
             return Ok("Update Requirement successfully");
         }
 

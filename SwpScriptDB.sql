@@ -143,4 +143,24 @@ CREATE TABLE DesignRule (
     FOREIGN KEY (TypeOfJewelleryID) REFERENCES TypeOfJewellery(TypeOfJewelleryID)
 );
 
+CREATE TABLE Conversations (
+    ConversationId INT PRIMARY KEY IDENTITY(1,1),
+    User1Id INT NOT NULL,
+    User2Id INT NOT NULL,
+    CONSTRAINT FK_User1 FOREIGN KEY (User1Id) REFERENCES Users(UsersId),
+    CONSTRAINT FK_User2 FOREIGN KEY (User2Id) REFERENCES Users(UsersId)
+);
+CREATE TABLE Messages (
+    MessageId INT PRIMARY KEY IDENTITY(1,1),
+    ConversationId INT NOT NULL,
+    SenderId INT NOT NULL,
+    ReceiverId INT NOT NULL,
+    Content NVARCHAR(MAX) NOT NULL,
+    Timestamp DATETIME NOT NULL DEFAULT GETDATE(),
+    IsRead BIT NOT NULL DEFAULT 0,
+    CONSTRAINT FK_Conversation FOREIGN KEY (ConversationId) REFERENCES Conversations(ConversationId),
+    CONSTRAINT FK_Sender FOREIGN KEY (SenderId) REFERENCES Users(UsersId),
+    CONSTRAINT FK_Receiver FOREIGN KEY (ReceiverId) REFERENCES Users(UsersId)
+);
+
 GO

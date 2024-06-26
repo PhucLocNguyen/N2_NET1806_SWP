@@ -56,6 +56,8 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
     stonePriceAtMoment: data.stonePriceAtMoment,
     machiningFee: data.machiningFee,
     totalMoney: data.totalMoney,
+
+
     customerNote: data.customerNote,
     staffNote: data.staffNote,
   };
@@ -81,6 +83,7 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
 
   const handleSubmit = () => {
     if (selectedFile) {
+
       UpdateRequirement(data.requirementId, dataUpdate);
       handleStatusChange(data.requirementId, selection);
       console.log("Confirmed");

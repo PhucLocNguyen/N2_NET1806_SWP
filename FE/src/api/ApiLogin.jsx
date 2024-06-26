@@ -55,11 +55,12 @@ const LoginWithAdmin = async (formData)=>{
     try{
         const response = await api.post(`/User/loginForStaff`, formData);
         toast.success("Login successful!");
+        const accessToken = response.data;
         localStorage.setItem("userInfo", JSON.stringify(response.data))
          role = jwtDecode(accessToken).Role;
         return response.data;
     }catch(e){
-toast.error("Failed: "+ e.response.data);
+toast.error("Failed: "+ e?.response?.data);
     }
     return { role }
 

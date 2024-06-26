@@ -62,7 +62,7 @@ function Chat() {
         if (connection && currentConversationId !== null) {
             const joinConversation = async () => {
                 
-                console.log("Joined conversatio!!!n");
+                console.log("Joined conversation");
                 await connection.invoke("JoinConversation", currentConversationId);
                 setMessages([])
             };
@@ -70,7 +70,7 @@ function Chat() {
 
             return () => {
                 const leaveConversation = async () => {
-                console.log("Leave conversatio22@@@n");
+                console.log("Leave conversation");
                     await connection.invoke("LeaveConversation", currentConversationId);
                 };
                 leaveConversation();
@@ -94,6 +94,8 @@ function Chat() {
     }, [currentConversationId]);
 
     const sendMessage = async () => {
+        if(message.trim().length>0){
+
         if (connection) {
             try {
                 // await connection.invoke("SendMessage", currentConversationId, UserId, conversation.user.userId, message);
@@ -112,11 +114,21 @@ function Chat() {
                 console.log('Error sending message:', e);
             }
         }
+    }
+
     };
+
     const handleFilterChange=(e)=>{
         console.log(e.target.value);
         setFilter(e.target.value.trim());
     }
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+          // Gọi hàm khi nhấn Enter
+          sendMessage();
+        }
+      };
     useEffect(()=>{
         if(filter !=""){
             const filterList = listConversation.filter((current)=>{
@@ -127,7 +139,7 @@ function Chat() {
             setFilterList(listConversation);
         }
     },[filter])
-    const handleInputChange = (e) => {
+    const c = (e) => {
         setMessage(e.target.value);
     };
     return (
@@ -167,6 +179,8 @@ function Chat() {
                                         className="w-[calc(100%-250px)]"
                                         onChange={handleInputChange}
                                         ref={chatRef}
+                                        value={message}
+                                        onKeyDown={handleKeyPress}
                                         autoComplete="off"
                                     />
                                     <Tooltip title="Send" className="w-max px-3" onClick={sendMessage}>

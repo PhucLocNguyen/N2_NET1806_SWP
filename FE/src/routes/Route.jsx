@@ -1,5 +1,8 @@
 import { lazy } from "react"
 import Chat from "../component/chat/Chat";
+const OrderBoard = lazy(()=>import("../component/saleStaff/OrderBoard"));
+const AdminChat = lazy(()=> import("../component/saleStaff/AdminChat"));
+const SaleLayout = lazy(()=>import("../component/saleStaff/layout/AdminLayout"));
 const ConfirmationAccount = lazy(()=>import("../component/login/ConfirmationAccount"));
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
@@ -74,14 +77,26 @@ const privateRoutes = [
    },
    {path:"/chat",
    component:Chat,
-   role:['Customer','Sale','DesignStaff','ProductStaff','Manager']
+   role:['Customer']
    }
    ,
    {
-      path: '/staff',
-      component: Staff,
-      role:['Sale','DesignStaff','ProductStaff','Manager']
+      path:"/admin",
+      component:SaleLayout,
+      role:['Sale']
+   }
+   , {
+      path:"/admin/chat",
+      component:AdminChat,
+      role:['Sale','DesignStaff','ProductStaff','Manager'],
    },
+   {
+      path:"/admin/board",
+      component:OrderBoard,
+      role:['Sale','DesignStaff','ProductStaff','Manager']
+
+   }
+  
    
 ]
 

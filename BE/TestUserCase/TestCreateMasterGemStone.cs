@@ -2,17 +2,11 @@
 using API.Model.MasterGemstoneModel;
 using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Win32;
 using Moq;
 using NUnit.Framework;
 using Repositories;
-using System;
-using System.Collections.Generic;
+using Repositories.Entity;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static TestUseCase.TestFindMasterGemstoneById;
 
 namespace TestUseCase
 {
@@ -36,7 +30,7 @@ namespace TestUseCase
             _controller = new MasterGemstoneController(_mockUnitOfWork.Object);
         }
 
-        public class CreatecreateMasterGemStoneTest
+        public class CreateMasterGemStoneTest
         {
             public string Kind { get; set; }
             public decimal Size { get; set; }
@@ -48,16 +42,16 @@ namespace TestUseCase
             public string Image { get; set; }
             public string ExpectedValue { get; set; }
         }
-        private static CreatecreateMasterGemStoneTest[] ReadTestData(string filePath)
+        private static CreateMasterGemStoneTest[] ReadTestData(string filePath)
         {
             using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                return csv.GetRecords<CreatecreateMasterGemStoneTest>().ToArray();
+                return csv.GetRecords<CreateMasterGemStoneTest>().ToArray();
             }
         }
 
-        private static IEnumerable<CreatecreateMasterGemStoneTest> TestDataFromCSV
+        private static IEnumerable<CreateMasterGemStoneTest> TestDataFromCSV
         {
             get
             {
@@ -68,7 +62,7 @@ namespace TestUseCase
 
         [TestCaseSource(nameof(TestDataFromCSV))]
         [Test]
-        public async Task Create_ValidCredentials_ReturnsExpectedValue(CreatecreateMasterGemStoneTest createMasterGemStoneTest)
+        public async Task Create_ValidCredentials_ReturnsExpectedValue(CreateMasterGemStoneTest createMasterGemStoneTest)
         {
             // Arrange
             var requestCreateMasterGemstone = new RequestCreateMasterGemstoneModel()

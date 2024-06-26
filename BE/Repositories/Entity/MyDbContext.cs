@@ -99,7 +99,6 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.ParentId).HasColumnName("ParentID");
             entity.Property(e => e.StonesId).HasColumnName("StoneID");
             entity.Property(e => e.TypeOfJewelleryId).HasColumnName("TypeOfJewelleryID");
-            entity.Property(e => e.WeightOfMaterial).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Manager).WithMany(p => p.Designs)
                 .HasForeignKey(d => d.ManagerId)
@@ -258,6 +257,7 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.StonePriceAtMoment).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TotalMoney).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.WeightOfMaterial).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Design).WithMany(p => p.Requirements)
                 .HasForeignKey(d => d.DesignId)

@@ -1,9 +1,14 @@
 ﻿using API.Model.DesignModel;
+using API.Model.MasterGemstoneModel;
 using API.Model.RequirementModel;
+using API.Model.UserModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Entity;
+using SWP391Project.Services.WorkingBoard.Hubs;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace API.Controllers
@@ -13,10 +18,11 @@ namespace API.Controllers
     public class RequirementController : ControllerBase
     {
         private readonly UnitOfWork _unitOfWork;
-
-        public RequirementController(UnitOfWork unitOfWork)
+        private readonly IHubContext<WorkingHub> _hubContext;
+        public RequirementController(UnitOfWork unitOfWork, IHubContext<WorkingHub> hubContext)
         {
             _unitOfWork = unitOfWork;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
@@ -30,10 +36,12 @@ namespace API.Controllers
                 (x.DesignId == requestSearchRequirementModel.DesignId || requestSearchRequirementModel.DesignId == null) &&
                 x.MaterialPriceAtMoment >= requestSearchRequirementModel.FromMaterialPriceAtMoment &&
                 (x.MaterialPriceAtMoment <= requestSearchRequirementModel.ToMaterialPriceAtMoment || requestSearchRequirementModel.ToMaterialPriceAtMoment == null) &&
+                x.WeightOfMaterial >= requestSearchRequirementModel.FromWeightOfMaterial &&
+                (x.WeightOfMaterial <= requestSearchRequirementModel.ToWeightOfMaterial || requestSearchRequirementModel.ToWeightOfMaterial == null) &&
                 x.StonePriceAtMoment >= requestSearchRequirementModel.FromStonePriceAtMoment &&
                 (x.StonePriceAtMoment <= requestSearchRequirementModel.ToStonePriceAtMoment || requestSearchRequirementModel.ToStonePriceAtMoment == null) &&
                 x.MachiningFee >= requestSearchRequirementModel.FromMachiningFee &&
-                (x.MachiningFee <= requestSearchRequirementModel.ToMachiningFee || requestSearchRequirementModel.ToMachiningFee == null) && 
+                (x.MachiningFee <= requestSearchRequirementModel.ToMachiningFee || requestSearchRequirementModel.ToMachiningFee == null) &&
                 x.TotalMoney >= requestSearchRequirementModel.FromTotalMoney &&
                 (x.TotalMoney <= requestSearchRequirementModel.ToTotalMoney || requestSearchRequirementModel.ToTotalMoney == null);
             Func<IQueryable<Requirement>, IOrderedQueryable<Requirement>> orderBy = null;
@@ -55,7 +63,7 @@ namespace API.Controllers
                 includeProperties: "",
                 pageIndex: requestSearchRequirementModel.pageIndex,
                 pageSize: requestSearchRequirementModel.pageSize
-                ).Select(x=>x.toRequirementDTO());
+                ).Select(x => x.toRequirementDTO());
             return Ok(reponseDesign);
         }
 
@@ -74,14 +82,36 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateRequirement(RequestCreateRequirementModel requestCreateRequirementModel)
         {
+            var error = "";
+            var properties = typeof(RequestCreateRequirementModel).GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (property.PropertyType == typeof(decimal))
+                {
+                    var value = property.GetValue(requestCreateRequirementModel);
+                    if ((decimal)value < 0)
+                    {
+                        error = property.Name + " must be positive number";
+                        break;
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(error))
+            {
+                return BadRequest(error);
+            }
             var Requirement = requestCreateRequirementModel.toRequirementEntity();
             _unitOfWork.RequirementRepository.Insert(Requirement);
             _unitOfWork.Save();
+            var requirementId = Requirement.RequirementId;
+            _hubContext.Clients.All.SendAsync("ReceiveOrderCreate", requirementId);
             return Ok(Requirement);
         }
 
-        [HttpPut]
-        public IActionResult UpdateRequirement(int id, RequestCreateRequirementModel requestCreateRequirementModel)
+        
+        [HttpPut("{id}")]
+        public IActionResult UpdateRequirement([FromRoute]int id,RequestCreateRequirementModel requestCreateRequirementModel)
         {
             var existedRequirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (existedRequirement == null)
@@ -89,10 +119,11 @@ namespace API.Controllers
                 return NotFound("Requiremnet is not existed");
             }
             existedRequirement.Status = requestCreateRequirementModel.Status;
-            existedRequirement.ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery;
+            existedRequirement.ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery!=null? DateOnly.FromDateTime((DateTime)requestCreateRequirementModel.ExpectedDelivery):null;
             existedRequirement.Size = requestCreateRequirementModel.Size;
             existedRequirement.DesignId = (int)requestCreateRequirementModel.DesignId;
             existedRequirement.Design3D = requestCreateRequirementModel.Design3D;
+            existedRequirement.WeightOfMaterial = requestCreateRequirementModel.WeightOfMaterial;
             existedRequirement.MaterialPriceAtMoment = requestCreateRequirementModel.MaterialPriceAtMoment;
             existedRequirement.StonePriceAtMoment = requestCreateRequirementModel.StonePriceAtMoment;
             existedRequirement.MachiningFee = requestCreateRequirementModel.MachiningFee;
@@ -101,7 +132,8 @@ namespace API.Controllers
             existedRequirement.StaffNote = requestCreateRequirementModel.StaffNote;
             _unitOfWork.RequirementRepository.Update(existedRequirement);
             _unitOfWork.Save();
-            return Ok();
+            _hubContext.Clients.All.SendAsync("ReceiveOrderUpdate", id);
+            return Ok("Update Requirement successfully");
         }
 
         [HttpDelete]
@@ -116,5 +148,17 @@ namespace API.Controllers
             _unitOfWork.Save();
             return Ok();
         }
+
+        [HttpGet("GetRequirementByRole")]
+
+        public IActionResult GetRequirement(int userId, string status)
+        {
+            var RequirementByStatus = _unitOfWork.RequirementRepository.Get(filter: x=>x.Status.Equals(status)).ToList();
+            var UserRequirementByUserId = _unitOfWork.UserRequirementRepository.Get(filter: x=>x.UsersId == userId).Select(x=>x.RequirementId).ToList();
+            var Result = RequirementByStatus.Where(x=>UserRequirementByUserId.Contains(x.RequirementId)).Select(x=>x.toRequirementDTO()).ToList();
+            return Ok(Result);
+        }
+
+        
     }
 }

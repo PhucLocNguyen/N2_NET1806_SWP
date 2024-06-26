@@ -14,6 +14,7 @@ const Staff = lazy(() => import('../component/designProductPlan/PlanningList'));
 const RequirementDetail = lazy(() => import('../component/manager/RequirementDetail'));
 const StaffLogin = lazy(() => import("../component/login/StaffLogin"));
 const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
+const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
@@ -118,6 +119,8 @@ const privateRoutes = [
       role: ['Customer'],
       layout: null
    }
+   }
+
 ]
 
 export { publicRoutes, privateRoutes }

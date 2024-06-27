@@ -31,4 +31,8 @@ const fetchApiRequirement = async () => {
       return [];
     }
   };
+<<<<<<< HEAD
 export { fetchApiRequirement,fetchApiRequirementByStatus,fetchApiRequirementByRequirementId }
+=======
+export { fetchApiRequirement,fetchApiRequirementByStatus,fetchApiRequirementByRequirementId }
+>>>>>>> c35d150864aa354bd8a3a247fc56f371b3884a8a

@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD
+=======
+import { FetchApiDesignByDesignId } from "../../api/design/FetchApiDesign";
+>>>>>>> c35d150864aa354bd8a3a247fc56f371b3884a8a
 import {
   Typography,
   Grid,
@@ -10,7 +14,10 @@ import {
   Paper,
   Button,
 } from "@mui/material";
+<<<<<<< HEAD
 import { fetchApiDesignById } from "../../api/FetchApiDesign";
+=======
+>>>>>>> c35d150864aa354bd8a3a247fc56f371b3884a8a
 
 const OrderDetail = ({ data, onBack }) => {
   const [show3DDesign, setShow3DDesign] = useState(false);
@@ -24,7 +31,11 @@ const OrderDetail = ({ data, onBack }) => {
 
   const getDesign = async (designId) => {
     try {
+<<<<<<< HEAD
       const response = await fetchApiDesignById(designId);
+=======
+      const response = await FetchApiDesignByDesignId(designId);
+>>>>>>> c35d150864aa354bd8a3a247fc56f371b3884a8a
       console.log("Fetched design response:", response);
       setDataDesign(response);
       if (response.masterGemstone) {

@@ -127,7 +127,7 @@ function StaffPopup({ setIsOpenPopup }) {
             <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }} onClick={(e) => e.stopPropagation()} className="bg-[#fff] w-[40rem] rounded-[10px] min-h-[450px]">
                {/* Head */}
                <div className="relative text-center border-b-[1px] border-solid border-[#333] px-[1rem] py-[1rem] ">
-                  <h1 className="font-bold leading-5 text-[1.5rem]">Add new staff</h1>
+                  <h1 className="font-bold leading-5 text-[25px]">Add new staff</h1>
                   <div onClick={() => setIsOpenPopup(false)} className='absolute top-[10px] right-[10px] cursor-pointer'>
                      <CloseIcon />
                   </div>

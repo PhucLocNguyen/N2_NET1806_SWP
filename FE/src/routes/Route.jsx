@@ -102,7 +102,10 @@ const privateRoutes = [
       children: [
          { index: true, component: ListRequirement },
          { path: 'blog-create', component: BlogCreate },
-         { path: 'price-quote/:id', component: RequirementDetail }
+         { path: 'price-quote/:id', component: RequirementDetail },
+         { path: 'master-gemstone', component: ListMasterGemstone },
+         { path: 'design-management', component: ListDesign },
+         { path: 'stone-management', component: ListStone }
       ],
       role: ['Manager']
    },

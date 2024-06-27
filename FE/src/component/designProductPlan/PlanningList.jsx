@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Plan from "./Plan";
 import useAuth from "../../hooks/useAuth.jsx";
-import { fetchApiRequirementByStatus } from "../../api/Requirements/FetchApiRequirement.jsx";
 
 // Status options
 const statusDesignOptions = [
@@ -26,50 +26,42 @@ function PlanningList() {
 
   console.log(data)
   useEffect(() => {
-    // This sets the type to "product" after the first render
-    if (role === "DesignStaff") {
-      setType("design");
-    }
-    if (role === "ProductStaff") {
-      setType("product");
-    }
-  }, [role]);
+    setType("design")
+  }, []);
+  
 
-  useEffect(() => {
-    // Fetch data based on the current type whenever type or dataUpdated changes
-    if (type) {
-      fetchDataByStatus(type);
-    }
-  }, [dataUpdated, type]);
-
-  const fetchDataByStatus = async (currentType) => {
-    const statusOptions = currentType === "design" ? statusDesignOptions : statusProductOptions;
-    const statusLabels = statusOptions.map((option) => option.label);
-
-    const dataPromises = statusLabels.map((label) => fetchApiRequirementByStatus(label));
-    const dataResponses = await Promise.all(dataPromises);
-
-    const combinedData = dataResponses.flat();
-    setData(combinedData);
-  };
-
-  const filterItems = (statusCodes) => {
-    const statusOptions = type === "design" ? statusDesignOptions : statusProductOptions;
+  const filterItems = (statusCodes, type) => {
+    const statusOptions =
+      type === "design" ? statusDesignOptions : statusProductOptions;
     const statusLabels = statusCodes.map(
-      (statusCode) => statusOptions.find((option) => option.code === statusCode)?.label
+      (statusCode) =>
+        statusOptions.find((option) => option.code === statusCode)?.label
     );
     return data.filter((item) => statusLabels.includes(item.status));
   };
 
-  const handleDataUpdate = () => {
-    setDataUpdated(!dataUpdated);
+  const url = "https://localhost:7103/api/Requirement";
+  const headers = {
+    Authorization:
+      "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0aGllbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVHlkeSIsIlJvbGUiOiJBZG1pbiIsImV4cCI6MTcxODc4OTk0MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MTY5LyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NzE2OS8ifQ.W66oliElGHELa2jC9ixxt2FD0tC8sDu7CQ4itv6Jw7Ds0cVPswIyWzSuZeM01ghTjsVOgbxKpj2oe2AQiPHD-Q",
   };
 
-  const handleStatusChange = (itemId, newStatus) => {
-    setData((prevData) =>
-      prevData.map((item) => (item.id === itemId ? { ...item, status: newStatus } : item))
-    );
-    handleDataUpdate();
+  const fetchApiRequirement = async () => {
+    try {
+      const response = await axios.get(url, { headers });
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    fetchApiRequirement();
+  }, [dataUpdated]);
+
+  const handleDataUpdate = () => {
+    setDataUpdated(!dataUpdated);
   };
 
   return (
@@ -91,7 +83,10 @@ function PlanningList() {
           />
         </svg>
         <div className="ml-10">
-          <a className="mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700" href="#">
+          <a
+            className="mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700"
+            href="#"
+          >
             Activity
           </a>
         </div>
@@ -114,15 +109,14 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">To-do</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {filterItems([1]).length}
+                {filterItems([1], type).length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {filterItems([1]).map((item, index) => (
+              {filterItems([1], type).map((item, index) => (
                 <Plan
                   key={index}
                   data={item}
-                  handleStatusChange={handleStatusChange}
                   handleDataUpdate={handleDataUpdate}
                 />
               ))}
@@ -134,15 +128,14 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">In-Progress</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {filterItems([2]).length}
+                {filterItems([2], type).length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {filterItems([2]).map((item, index) => (
+              {filterItems([2], type).map((item, index) => (
                 <Plan
                   key={index}
                   data={item}
-                  handleStatusChange={handleStatusChange}
                   handleDataUpdate={handleDataUpdate}
                 />
               ))}
@@ -154,15 +147,14 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">Done</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {filterItems([3]).length}
+                {filterItems([3], type).length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {filterItems([3]).map((item, index) => (
+              {filterItems([3], type).map((item, index) => (
                 <Plan
                   key={index}
                   data={item}
-                  handleStatusChange={handleStatusChange}
                   handleDataUpdate={handleDataUpdate}
                 />
               ))}

@@ -3,7 +3,6 @@ import InputPassword from './InputPassword';
 import InputText from './InputText';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from "framer-motion";
-
 import { LoginApi, LoginWithGoogle, RegisterApi } from '../../api/ApiLogin';
 import { useNavigate, useLocation } from 'react-router-dom';
 import InputPasswordConfirmation from './InputPasswordConfirmation';
@@ -31,7 +30,6 @@ function Login() {
            navigate(moveNext, { replace: true })
         }
     }
-
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const code = searchParams.get('code');

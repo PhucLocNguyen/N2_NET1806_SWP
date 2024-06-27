@@ -1,5 +1,6 @@
-import { lazy } from "react"
-import Chat from "../component/chat/Chat";
+import { lazy } from "react";
+
+const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
 
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
@@ -10,7 +11,6 @@ const Blog = lazy(() => import('../component/blog/Blog'));
 const RequirementOrderSection = lazy(() => import('../component/requirements/Create/RequirementOrderSection'));
 const Login = lazy(() => import('../component/login/Login'));
 const PageError = lazy(() => import('../component/pageerror/PageError'));
-const Staff = lazy(() => import('../component/designProductPlan/PlanningList'));
 const RequirementDetail = lazy(() => import('../component/manager/RequirementDetail'));
 const StaffLogin = lazy(() => import("../component/login/StaffLogin"));
 const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
@@ -18,11 +18,16 @@ const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
-const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
+
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"))
-const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
+const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
+const Chat = lazy(() => import('../component/chat/Chat'));
+const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
+const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
+const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 
+const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
 const publicRoutes = [
    {
@@ -93,7 +98,10 @@ const privateRoutes = [
       children: [
          { index: true, component: ListRequirement },
          { path: 'blog-create', component: BlogCreate },
-         { path: 'price-quote/:id', component: RequirementDetail }
+         { path: 'price-quote/:id', component: RequirementDetail },
+         { path: 'master-gemstone', component: ListMasterGemstone },
+         { path: 'design-management', component: ListDesign },
+         { path: 'stone-management', component: ListStone }
       ],
       role: ['Manager']
    },
@@ -108,16 +116,19 @@ const privateRoutes = [
    },
    {
       path: '/staff',
-      component: PlanningList,
-      role: ['DesignStaff', 'ProductStaff'],
-      layout: null
-   },
-   {
+      component: StaffLayout,
+      children: [
+         { index: true, component: WorkingBoard },
+         { path: 'chat', component: ChatStaff }
+      ],
+      role: ['DesignStaff', 'ProductStaff', "Sale"],
+   }, 
+     {
       path: '/OrderCustomer',
       component: OrderCustomer,
       role: ['Customer'],
       layout: null
-   }
+     }
 
 ]
 

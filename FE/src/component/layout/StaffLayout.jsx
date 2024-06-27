@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import ManagerNav from "../manager/ManagerNav";
 import AdminNav from "../admin/AdminNav";
+import SaleNav from "../saleStaff/SaleNav";
 
 import useAuth from "../../hooks/useAuth";
 
@@ -13,6 +14,8 @@ function StaffLayout({ children }) {
       Nav = AdminNav;
    } else if (role === 'Manager') {
       Nav = ManagerNav;
+   } else if (role === 'Sale') {
+      Nav = SaleNav;
    }
 
    return (

@@ -1,17 +1,10 @@
 import { React, useState } from "react";
-import Popup from "./Popup";
 
-function Plan({ data, handleDataUpdate })  {
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
-
-  const handleOpenPopup = () => {
-    setIsOpenPopup(true);
-  };
+function OrderCust({ data })  {
 
   return (
     <div>
       <div
-        onClick={handleOpenPopup}
         className="relative flex items-center mt-3 h-28 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100 drop-shadow-lg"
         draggable="true"
       >
@@ -32,20 +25,13 @@ function Plan({ data, handleDataUpdate })  {
               <svg className="w-4 h-4 fill-current text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
               </svg>
-              <span className="leading-none text-red-500">{data.expectedDelivery}</span>
+              <span className="leading-none text-red-500">Expected Date Completed: <span className="font-extrabold">{data.expectedDelivery}</span></span>
             </div>
           </div>
         </div>
       </div>
-      {isOpenPopup && (
-        <Popup
-          setIsOpenPopup={setIsOpenPopup}
-          data={data}
-          handleDataUpdate={handleDataUpdate}
-        />
-      )}
     </div>
   );
 }
 
-export default Plan;
+export default OrderCust;

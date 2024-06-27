@@ -35,6 +35,7 @@ function App() {
 
           {/* Route tự viết để test */}
           <Route path='/a' element={<PlanningList/>}></Route>
+
           {/* <Route path='/b' element={<ListRequirement />}></Route> */}
 
           {/* Route tự viết không ghi qua phần này */}

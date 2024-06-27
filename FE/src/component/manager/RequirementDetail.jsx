@@ -1,6 +1,7 @@
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 import TextField from '@mui/material/TextField';
@@ -10,9 +11,10 @@ import Chip from '@mui/material/Chip';
 
 import { fetchApiDesignById } from '../../api/FetchApiDesign';
 import ApiRequirementById from '../../api/manager/FetchApiRequirementById';
+import ApiUpdateRequirement from '../../api/manager/ApiUpdateRequirement';
 
 function RequirementDetail() {
-
+   const navigate = useNavigate();
    const { id } = useParams(); // requirement id
 
    const [requirement, setRequirement] = useState();
@@ -20,12 +22,12 @@ function RequirementDetail() {
 
    // Thong tin form de dang len
    const [dataForm, setDataForm] = useState({
-      materialWeight: '',
-      machiningFee: ''
+      weightOfMaterial: '',
+      machiningFee: '',
    })
 
    const [errorForm, setErrorForm] = useState({
-      materialWeight: '',
+      weightOfMaterial: '',
       machiningFee: ''
    })
 
@@ -67,12 +69,24 @@ function RequirementDetail() {
       })
 
       Object.keys(dataForm).forEach((key) => {
-         if (dataForm[key] === '') {
-            isValid = false
+         if (key == 'weightOfMaterial' || key == 'machiningFee') {
+            if (dataForm[key] === '') {
+               isValid = false
+            }
          }
       })
 
       if (isValid) {
+         const data = {
+            ...requirement,
+            ...dataForm,
+            status: '3'
+         }
+         const CallApi = async () => {
+            const response = await ApiUpdateRequirement({ data, id });
+         }
+         CallApi()
+         navigate('/manager', { replace: true })
          console.log('Upload price quote success')
       }
    }
@@ -83,6 +97,7 @@ function RequirementDetail() {
 
          const requirementRespone = await ApiRequirementById(id);
          setRequirement(requirementRespone)
+         setDataForm()
 
          const dataDesignId = requirementRespone?.designId;
 
@@ -95,7 +110,7 @@ function RequirementDetail() {
 
    }, [])
 
-   // console.log(requirement)
+   console.log(requirement)
    // console.log(design)
    console.log(dataForm)
 
@@ -227,7 +242,7 @@ function RequirementDetail() {
                   <div>
                      <h2 className='text-[1rem] font-medium pb-[3px]'>Material Weight (g)</h2>
                      <div>
-                        <TextField name='materialWeight' inputProps={{ inputMode: 'numeric' }} onChange={handleFormChange} error={!!errorForm.materialWeight} helperText={errorForm.materialWeight} variant="outlined" style={{ width: '100%' }} size='small' />
+                        <TextField name='weightOfMaterial' inputProps={{ inputMode: 'numeric' }} onChange={handleFormChange} error={!!errorForm.weightOfMaterial} helperText={errorForm.weightOfMaterial} variant="outlined" style={{ width: '100%' }} size='small' />
                      </div>
 
                      <h2 className='mt-[1rem] text-[1rem] font-medium pb-[3px]'>Machining Fee  (VND)</h2>

@@ -12,7 +12,6 @@ import useAuth from '../../hooks/useAuth'
 
 function ListRequirement() {
    const pageSize = 6;
-
    const status = 1;
 
    const [page, setPage] = useState(1);

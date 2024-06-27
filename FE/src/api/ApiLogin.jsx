@@ -3,10 +3,10 @@ import { jwtDecode } from 'jwt-decode'
 import { toast } from 'react-toastify';
 import axiosConfigHeader from './AxiosConfigHeader.jsx';
 const LoginApi = async ( formData) => {
-
     try {
         var role = null;
         const response = await api.post(`/User/loginForCustomer`, formData)
+
         if( response.status === 200){
 
             localStorage.setItem("userInfo", JSON.stringify(response.data))
@@ -54,6 +54,7 @@ const LoginWithAdmin = async (formData)=>{
     var role = null;
     try{
         const response = await api.post(`/User/loginForStaff`, formData);
+        console.log('>>> API login respone: ', response);
         const accessToken = response?.data;
         toast.success("Login successful!");
         localStorage.setItem("userInfo", JSON.stringify(response.data))
@@ -85,4 +86,3 @@ const ResendCode = async ()=>{
     }
 }
 export { LoginApi, LoginWithGoogle, LoginWithAdmin, RegisterApi, VerifyRegister, ResendCode }
-

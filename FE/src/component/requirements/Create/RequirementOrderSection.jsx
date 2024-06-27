@@ -1,13 +1,7 @@
-import FirstStep from "./FirstStep";
-import { multiStepContext, StepContext } from "./StepContext";
+import { StepContext } from "./StepContext";
 import { motion, useAnimate } from "framer-motion";
 
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-
-import { useContext, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import CurrentRequirement from "./CurrentRequirement";
 import { useParams } from "react-router-dom";
 import Lottie from "lottie-react"

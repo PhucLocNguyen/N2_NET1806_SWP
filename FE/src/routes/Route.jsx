@@ -1,5 +1,5 @@
-import { lazy } from "react"
-const ConfirmationAccount = lazy(()=>import("../component/login/ConfirmationAccount"));
+import { lazy } from "react";
+const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
 const BlogList = lazy(() => import('../component/blog_list/blogList'));
@@ -10,15 +10,17 @@ const RequirementOrderSection = lazy(() => import('../component/requirements/Cre
 const Login = lazy(() => import('../component/login/Login'));
 const PageError = lazy(() => import('../component/pageerror/PageError'));
 const RequirementDetail = lazy(() => import('../component/manager/RequirementDetail'));
-const StaffLogin = lazy(()=>import( "../component/login/StaffLogin"));
-const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"))
-const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
-const Chat = lazy(() => import('../component/chat/Chat'));
-const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
+const StaffLogin = lazy(() => import("../component/login/StaffLogin"));
+const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
+const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
-const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
+const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
+const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
+const Chat = lazy(() => import('../component/chat/Chat'));
+
+
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
 const publicRoutes = [
@@ -65,14 +67,6 @@ const publicRoutes = [
       layout: null
    },
    {
-      path: '/manager/price-quote/:id',
-      component: RequirementDetail
-   },
-   {
-      path:'/admin/login',
-      component: StaffLogin
-   },
-   {
       path: '/confirmation-account',
       component: ConfirmationAccount,
       layout: null
@@ -98,12 +92,7 @@ const privateRoutes = [
       children: [
          { index: true, component: ListRequirement },
          { path: 'blog-create', component: BlogCreate },
-          {
-      path: "/chat",
-      component: Chat,
-      role: ['Customer', 'Sale', 'DesignStaff', 'ProductStaff', 'Manager']
-
-   },{ path: 'price-quote/:id', component: RequirementDetail }
+         { path: 'price-quote/:id', component: RequirementDetail }
       ],
       role: ['Manager']
    },
@@ -124,12 +113,6 @@ const privateRoutes = [
          { path: 'chat', component: ChatStaff }
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
-   },
-   {
-      path: '/OrderCustomer',
-      component: OrderCustomer,
-      role: ['Customer'],
-      layout: null
    }
 
 ]

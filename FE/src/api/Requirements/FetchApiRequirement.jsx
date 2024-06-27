@@ -1,34 +1,40 @@
-import { useState, useEffect } from 'react'
 import api from '../instance.jsx'
-import axiosConfigHeader from '../AxiosConfigHeader.jsx'
+import axiosConfigHeader from '../AxiosConfigHeader.jsx';
 
-const fetchApiRequirement = async () => {
-    try {
-      const response = await api.get( "/Requirement", axiosConfigHeader);
-      return response.data;
-    } catch (error) {
+const FetchApiRequirementOpeningOrder= async (id) => {
+   try {
+      const response = await api.get(`/Requirement?Status=${id}`);
+      const requirementWithStatus = response.data;
+      return requirementWithStatus; 
+   } catch (error) {
       console.error(error);
-      return [];
-    }
-  };
+      return []; 
+   }
+}
 
-  const fetchApiRequirementByStatus = async (status) => {
-    try {
-      const response = await api.get( `/Requirement?Status=${status}`, axiosConfigHeader);
-      return response.data;
-    } catch (error) {
+const FetchApiRequirementByStatus = async (currentUserId,statusId) => {
+   try {
+      const response = await api.get(`/Requirement/GetRequirementByRole`,{
+         axiosConfigHeader,params:{
+            status: statusId,
+            userId: currentUserId
+         }
+      });
+      const requirementWithStatus = response.data;
+      return requirementWithStatus; 
+   } catch (error) {
       console.error(error);
-      return [];
-    }
-  };
-
-  const fetchApiRequirementByRequirementId = async (requirementId) => {
-    try {
-      const response = await api.get( `/Requirement/${requirementId}`, axiosConfigHeader);
-      return response.data;
-    } catch (error) {
+      return []; 
+   }
+}
+const FetchApiRequirementById= async (id) => {
+   try {
+      const response = await api.get(`/Requirement/${id}`);
+      const requirementById = response.data;
+      return requirementById; 
+   } catch (error) {
       console.error(error);
-      return [];
-    }
-  };
-export { fetchApiRequirement,fetchApiRequirementByStatus,fetchApiRequirementByRequirementId }
+      return []; 
+   }
+}
+export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById}

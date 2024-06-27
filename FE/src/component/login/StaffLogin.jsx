@@ -2,8 +2,7 @@ import InputText from "./InputText";
 import InputPassword from "./InputPassword";
 import Button from '@mui/material/Button';
 import { LoginWithAdmin } from "../../api/ApiLogin";
-
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 function StaffLogin() {
    const navigate = useNavigate();
 
@@ -11,7 +10,7 @@ function StaffLogin() {
       e.preventDefault();
       //reset cac field trong form
       const form = e.target;
-
+      // console.log(form);
       var data = new FormData(form);
       const listState ={
          username:"",
@@ -27,7 +26,6 @@ function StaffLogin() {
               element.blur();
           }
       })
-
       const role = await LoginWithAdmin(listState);
       console.log('>>> StaffLogin' , role)
       if(role!=null){
@@ -35,11 +33,12 @@ function StaffLogin() {
             navigate('/admin',{ replace: true })
          }else if (role === 'Manager'){
             navigate('/manager', {replace: true})
-         }else if (role === 'DesignStaff' || role === 'ProductStaff' || role ==="Sale") {
+         }else if (role === 'DesignStaff' || role === 'ProductStaff' || role === 'Sale') {
             navigate('/staff', {replace: true})
          }
       }
       
+      // Navigate()
   }
    return (
       <>

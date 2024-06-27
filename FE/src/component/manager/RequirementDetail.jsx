@@ -15,7 +15,6 @@ function RequirementDetail() {
 
    const { id } = useParams(); // requirement id
 
-
    const [requirement, setRequirement] = useState();
    const [design, setDesign] = useState();
 
@@ -95,6 +94,11 @@ function RequirementDetail() {
       fetchData();
 
    }, [])
+
+   // console.log(requirement)
+   // console.log(design)
+   console.log(dataForm)
+
 
    return (
       <>

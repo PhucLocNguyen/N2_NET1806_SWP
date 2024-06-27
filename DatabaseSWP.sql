@@ -91,11 +91,12 @@ CREATE TABLE Requirements (
 	Design3D NVARCHAR(200),
 	WeightOfMaterial DECIMAL(18,2),
     MaterialPriceAtMoment DECIMAL(18,2),
+	MasterGemStonePriceAtMoment DECIMAL(18,2),
     StonePriceAtMoment DECIMAL(18,2),
     MachiningFee DECIMAL(18,2),
     TotalMoney DECIMAL(18,2),
-    CustomerNote TEXT,
-    StaffNote TEXT,
+    CustomerNote NVARCHAR(250),
+    StaffNote NVARCHAR(250),
     DesignID INT NOT NULL,
     FOREIGN KEY (DesignID) REFERENCES Design(DesignID)
 );
@@ -210,6 +211,11 @@ insert into MasterGemstone values ('Topaz',8.5,126.37,'VVS2','VG',2.47,'Octagon'
 GO
 
 GO
+
+insert into DesignRule values (4.0,10.0,14.0,20.0,1)
+insert into DesignRule values (6.0,10.0,360.0,600.0,2)
+insert into DesignRule values (4.0,8.5,6.0,12.0,3)
+insert into DesignRule values (5.5,10.0,300.0,600.0,4)
 
 
 insert into Stones values ('CZ',1,20,1)

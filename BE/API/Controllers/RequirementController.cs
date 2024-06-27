@@ -106,7 +106,7 @@ namespace API.Controllers
             _unitOfWork.Save();
             var requirementId = Requirement.RequirementId;
             _hubContext.Clients.All.SendAsync("ReceiveOrderCreate", requirementId);
-            return Ok("Create requirement successfully");
+            return Ok(Requirement);
         }
 
         

@@ -20,6 +20,7 @@ const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
 
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
+const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"))
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
 const Chat = lazy(() => import('../component/chat/Chat'));
 const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
@@ -121,7 +122,13 @@ const privateRoutes = [
          { path: 'chat', component: ChatStaff }
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
-   }
+   }, 
+     {
+      path: '/OrderCustomer',
+      component: OrderCustomer,
+      role: ['Customer'],
+      layout: null
+     }
 
 ]
 

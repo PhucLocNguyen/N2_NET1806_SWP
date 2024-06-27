@@ -23,6 +23,8 @@ function PlanningList() {
 
   const { role } = useAuth();
 
+
+  console.log(data)
   useEffect(() => {
     setType("design")
   }, []);

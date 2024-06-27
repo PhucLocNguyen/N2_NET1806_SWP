@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
-
 import Typography from '@mui/material/Typography';
-
-
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
 import RowRequirement from "./RowRequirement"
 import ApiListRequirement from '../../api/manager/ListRequirement';
 import useAuth from '../../hooks/useAuth'

@@ -23,6 +23,8 @@ function PlanningList() {
 
   const { role } = useAuth();
 
+
+  console.log(data)
   useEffect(() => {
     // This sets the type to "product" after the first render
     if (role === "DesignStaff") {

@@ -1,8 +1,6 @@
 import { px } from "framer-motion";
 
 const BoxContent = ({data}) => {
-
-  console.log(data)
   return (
     <>
       <div className="flex flex-wrap justify-between mt-10 ">

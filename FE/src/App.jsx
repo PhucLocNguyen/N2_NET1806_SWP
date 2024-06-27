@@ -7,22 +7,6 @@ const DefaultLayout = lazy(() => import('./component/layout/DefaultLayout.jsx'))
 
 import RequireAuth from './routes/RequireAuth.jsx'
 import { publicRoutes, privateRoutes } from './routes/Route.jsx'
-import DefaultLayout from './component/layout/DefaultLayout.jsx'
-import Blog from "./component/blog/Blog.jsx"
-import Footer from "./component/footer/Footer.jsx"
-import Navbar from "./component/nav/Navbar.jsx"
-import ManagerLayout from './component/manager/layout/ManagerLayout.jsx'
-import StaffLogin from './component/login/StaffLogin.jsx'
-import BlogCreate from './component/manager/BlogCreate.jsx'
-import PlanningList from './component/designProductPlan/PlanningList.jsx'
-import AdminLayout from './component/admin/AdminLayout.jsx'
-import StaffList from './component/admin/staffList/StaffList.jsx'
-import OrderCustomer from './component/orderCustomer/OrderCustomer.jsx'
-import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
-import Login from './component/login/Login.jsx'
-import ListRequirement from './component/manager/ListRequirement.jsx'
-import Dashboard from './component/admin/dashboard/Dashboard.jsx'
-import StaffLayout from './component/layout/StaffLayout.jsx'
 import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer } from 'react-toastify'
 

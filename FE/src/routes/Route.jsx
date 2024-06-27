@@ -21,7 +21,6 @@ const ListRequirement = lazy(() => import('../component/manager/ListRequirement'
 const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"))
-
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
 
@@ -118,7 +117,6 @@ const privateRoutes = [
       component: OrderCustomer,
       role: ['Customer'],
       layout: null
-   }
    }
 
 ]

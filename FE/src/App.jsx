@@ -7,35 +7,20 @@ const DefaultLayout = lazy(() => import('./component/layout/DefaultLayout.jsx'))
 
 import RequireAuth from './routes/RequireAuth.jsx'
 import { publicRoutes, privateRoutes } from './routes/Route.jsx'
-import Blog from "./component/blog/Blog.jsx"
-import Footer from "./component/footer/Footer.jsx"
-import Navbar from "./component/nav/Navbar.jsx"
-import StaffLogin from './component/login/StaffLogin.jsx'
-import BlogCreate from './component/manager/BlogCreate.jsx'
-import PlanningList from './component/designProductPlan/PlanningList.jsx'
-import AdminLayout from './component/admin/AdminLayout.jsx'
-import StaffList from './component/admin/staffList/StaffList.jsx'
-import OrderCustomer from './component/orderCustomer/OrderCustomer.jsx'
-import RequirementOrderSection from './component/requirements/Create/RequirementOrderSection.jsx'
-import Login from './component/login/Login.jsx'
-import ListRequirement from './component/manager/ListRequirement.jsx'
-import Dashboard from './component/admin/dashboard/Dashboard.jsx'
-import StaffLayout from './component/layout/StaffLayout.jsx'
 import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer } from 'react-toastify'
 
 
 function App() {
   return (
-
-
     <AuthProvider>
       <Suspense>
         <Routes>
-
           {/* Route tự viết để test */}
-          <Route path='/a' element={<PlanningList/>}></Route>
-
+          {/* <Route path='/a' element={<StaffLayout> <StaffList /> </StaffLayout>}></Route> */}
+          {/* <Route path='/b' element={<ListRequirement />}></Route> */}
+          {/* Route tự viết để test */}
+          {/* <Route path='/a' element={<StaffLayout> <StaffList /> </StaffLayout>}></Route> */}
           {/* <Route path='/b' element={<ListRequirement />}></Route> */}
 
           {/* Route tự viết không ghi qua phần này */}
@@ -56,15 +41,20 @@ function App() {
               <Route key={index} index={route.index ? true : undefined} path={route.index ? undefined : route.path} element={<Layout> <Page />  </Layout>}>
 
                 {/* Route neu co child trong file Route.jsx */}
-                {route.children && route.children.map((childRoute, childIndex) => {
-                  let ChildPage = childRoute.component
-                  return (
-                    <Route key={childIndex} index={childRoute.index ? true : undefined} path={childRoute.index ? undefined : childRoute.path} element={<ChildPage />} />
-                  )
-                })}
-
+                {route.children &&
+                  route.children.map((childRoute, childIndex) => {
+                    let ChildPage = childRoute.component;
+                    return (
+                      <Route
+                        key={childIndex}
+                        index={childRoute.index ? true : undefined}
+                        path={childRoute.index ? undefined : childRoute.path}
+                        element={<ChildPage />}
+                      />
+                    );
+                  })}
               </Route>
-            )
+            );
           })}
 
           {/* Private route */}
@@ -95,14 +85,14 @@ function App() {
             )
 
           })}
-
-
         </Routes>
       </Suspense>
       <ToastContainer />
     </AuthProvider>
-
-  )
+    // <>
+    //  <OrderDetail />
+    // </>
+  );
 }
 
-export default App
+export default App;

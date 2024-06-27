@@ -33,7 +33,7 @@ function RowRequirement({ data }) {
             </div> */}
                <div className="flex items-center">
                   {/* <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data.status}</h2> */}
-                  <Chip label={'Cho bao gia'} color={'warning'} variant='outlined' sx={{ fontSize: '14px', fontWeight: 400 }} />
+                  <Chip label={data.status == 1 ? 'Cho bao gia' : 'Cho xac nhan'} color={data.status == 1 ? 'warning' : 'primary'} variant='outlined' sx={{ fontSize: '14px', fontWeight: 400 }} />
                </div>
                <div className="flex items-center">
                   <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data.orderDate}</h2>

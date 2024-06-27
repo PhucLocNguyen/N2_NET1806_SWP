@@ -72,11 +72,6 @@ const publicRoutes = [
       layout: null
    },
    {
-      path: '/Staff',
-      component: Staff,
-      layout: null
-   },
-   {
       path: '/confirmation-account',
       component: ConfirmationAccount,
       layout: null

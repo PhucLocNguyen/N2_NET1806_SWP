@@ -5,18 +5,16 @@ import SaleNav from "../saleStaff/SaleNav";
 
 import useAuth from "../../hooks/useAuth";
 
-function StaffLayout({ children }) {   
+function StaffLayout({ children }) {
    const { role } = useAuth();
 
-   let Nav = null;
+   let Nav = <></>;
 
    if (role === 'Admin') {
       Nav = AdminNav;
    } else if (role === 'Manager') {
       Nav = ManagerNav;
    } else if (role === 'Sale') {
-      Nav = SaleNav;
-   }else{
       Nav = SaleNav;
    }
 

@@ -1,5 +1,7 @@
 import { lazy } from "react";
+
 const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
+
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
 const BlogList = lazy(() => import('../component/blog_list/blogList'));
@@ -16,10 +18,13 @@ const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
+
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
 const Chat = lazy(() => import('../component/chat/Chat'));
-
+const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
+const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
+const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
@@ -64,6 +69,11 @@ const publicRoutes = [
    {
       path: '/admin/login',
       component: StaffLogin,
+      layout: null
+   },
+   {
+      path: '/Staff',
+      component: Staff,
       layout: null
    },
    {

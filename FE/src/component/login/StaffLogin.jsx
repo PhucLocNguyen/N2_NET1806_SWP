@@ -33,7 +33,7 @@ function StaffLogin() {
             navigate('/admin',{ replace: true })
          }else if (role === 'Manager'){
             navigate('/manager', {replace: true})
-         }else if (role === 'DesignStaff' || role === 'ProductStaff' || role === 'Sale') {
+         }else if (role === 'DesignStaff ' || role === 'ProductStaff' || role === 'Sale') {
             navigate('/staff', {replace: true})
          }
       }

@@ -212,11 +212,6 @@ GO
 
 GO
 
-insert into DesignRule values (4.0,10.0,14.0,20.0,1)
-insert into DesignRule values (6.0,10.0,360.0,600.0,2)
-insert into DesignRule values (4.0,8.5,6.0,12.0,3)
-insert into DesignRule values (5.5,10.0,300.0,600.0,4)
-
 
 insert into Stones values ('CZ',1,20,1)
 insert into Stones values ('CZ',1,36,1.45)
@@ -291,4 +286,13 @@ insert into Blog values ('ALL ABOUT OPAL JEWELLERY','Opal is a unique and fascin
 'https://simonewalsh.com/cdn/shop/articles/all-about-opal-jewellery-802946.jpg?v=1681924880&width=600',2)
 insert into Blog values ('MOST POPULAR JEWELLERY THIS CHRISTMAS (2023)','Im always fascinated to see which of our Australian jewellery designs will be popular with our lovely customers in the lead up to Christmas - and this year is no exception and Ive just put togeth Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
 'https://simonewalsh.com/cdn/shop/articles/most-popular-jewellery-this-christmas-2023-348947.jpg?v=1701294149&width=800',2)
+GO
+
+GO
+
+insert into DesignRule values (4.0,10.0,14.0,20.0,1)
+insert into DesignRule values (6.0,10.0,360.0,600.0,2)
+insert into DesignRule values (4.0,8.5,6.0,12.0,3)
+insert into DesignRule values (5.5,10.0,300.0,600.0,4)
+
 GO

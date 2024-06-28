@@ -119,7 +119,6 @@ const sendMessage = async () => {
 };
 
 const handleFilterChange=(e)=>{
-    console.log(e.target.value);
     setFilter(e.target.value.trim());
 }
 
@@ -132,18 +131,21 @@ const handleKeyPress = (event) => {
 useEffect(()=>{
     if(filter !=""){
         const filterList = listConversation.filter((current)=>{
-            return current.user.name.match(filter);
+            const escapedFilter = filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const nameUser = current.user?.name;
+            return nameUser.toLocaleLowerCase().match(escapedFilter.toLocaleLowerCase());
         })
         setFilterList(filterList);
     }else{
         setFilterList(listConversation);
     }
 },[filter])
-const c = (e) => {
+
+const handleInputChange = (e) => {
     setMessage(e.target.value);
 };
 return (
-    <div className="h-[100vh-100px] mx-10 border overflow-hidden">
+    <div className="h-[100vh-100px] mx-10 border overflow-hidden fixingLayout">
         <div className="grid grid-cols-5 h-max w-full">
             <div className="col-span-1 bg-slate-50 border-r h-full">
                 <div className="border-b p-2">

@@ -65,7 +65,7 @@ var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
 
             const postDesignChild = await PostApiDesign(dataToSubmit);
         const dataToSendRequirement = {
-            status: "1",
+            status: "0",
             size:requirementData.size,
             designId:postDesignChild.designId,
             customerNote:requirementData.customerNote

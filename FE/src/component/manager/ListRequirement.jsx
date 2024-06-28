@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
+
 import Typography from '@mui/material/Typography';
+
+
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+
 import RowRequirement from "./RowRequirement"
 import ApiListRequirement from '../../api/manager/ListRequirement';
 import useAuth from '../../hooks/useAuth'
 
 function ListRequirement() {
    const pageSize = 6;
-
-   const status = 1;
+   const status = 2;
 
    const [page, setPage] = useState(1);
    const [data, setData] = useState([]);
@@ -48,7 +51,7 @@ function ListRequirement() {
             <div className="rounded-[30px] border-[1px] border-solid border-[#e9eaf3] bg-[white]">
 
                <div className="py-[1.75rem] px-[2.25rem] flex items-center">
-                  <h2 className="font-bold text-[1rem] leading-[1.125em]">All Requirement</h2>
+                  <h2 className="font-bold text-[1.5rem] leading-[1.125em]">All Requirement</h2>
                </div>
 
                {/* Header row */}

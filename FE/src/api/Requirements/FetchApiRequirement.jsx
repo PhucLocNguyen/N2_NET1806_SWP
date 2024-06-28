@@ -34,7 +34,8 @@ const FetchApiRequirementById= async (id) => {
       return requirementById; 
    } catch (error) {
       console.error(error);
-      return []; 
-   }
-}
-export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById}
+      return [];
+    }
+  };
+export { fetchApiRequirement,fetchApiRequirementByStatus,fetchApiRequirementByRequirementId }
+

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FetchApiRequirementById } from "../../api/Requirements/FetchApiRequirement";
-import { fetchApiUserRequirementByUserId } from "../../api/userReuirements/FetchApiUsersRequirement";
 import useAuth from "../../hooks/useAuth";
 import Order from "./Order";
 import OrderDetail from "./OrderDetail";

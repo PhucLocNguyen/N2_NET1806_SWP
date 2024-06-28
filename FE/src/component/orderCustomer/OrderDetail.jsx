@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
-=======
+import { useParams } from "react-router-dom";
 import { FetchApiDesignByDesignId } from "../../api/design/FetchApiDesign";
->>>>>>> c35d150864aa354bd8a3a247fc56f371b3884a8a
+import { FetchApiRequirementById } from "../../api/Requirements/FetchApiRequirement";
 import {
   Typography,
   Grid,
@@ -14,16 +13,29 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-<<<<<<< HEAD
-import { fetchApiDesignById } from "../../api/FetchApiDesign";
-=======
->>>>>>> c35d150864aa354bd8a3a247fc56f371b3884a8a
 
-const OrderDetail = ({ data, onBack }) => {
+const OrderDetail = () => {
   const [show3DDesign, setShow3DDesign] = useState(false);
   const [masterGemStone, setMasterGemStone] = useState(null);
   const [stone, setStone] = useState(null);
+  const [data, setData] = useState({});
   const [dataDesign, setDataDesign] = useState({});
+  const { id } = useParams();
+
+  const getRequirementById = async (requirementId) => {
+    try {
+      const response = await FetchApiRequirementById(requirementId);
+      setData(response);
+    } catch (error) {
+      console.error("Failed to fetch requirement:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getRequirementById(id);
+    }
+  }, [id]);
 
   const handleToggle3DDesign = () => {
     setShow3DDesign(!show3DDesign);
@@ -31,11 +43,7 @@ const OrderDetail = ({ data, onBack }) => {
 
   const getDesign = async (designId) => {
     try {
-<<<<<<< HEAD
-      const response = await fetchApiDesignById(designId);
-=======
       const response = await FetchApiDesignByDesignId(designId);
->>>>>>> c35d150864aa354bd8a3a247fc56f371b3884a8a
       console.log("Fetched design response:", response);
       setDataDesign(response);
       if (response.masterGemstone) {
@@ -69,20 +77,19 @@ const OrderDetail = ({ data, onBack }) => {
   return (
     <div className="flex justify-center mt-4">
       <div className="w-3/5" style={{ position: "relative" }}>
-        <Button onClick={onBack} className="mb-4" variant="contained">
-          Back to Orders
-        </Button>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Typography variant="h5" gutterBottom>
             Requirement Details
           </Typography>
-          <Button
-            variant="contained"
-            onClick={handleToggle3DDesign}
-            style={{ marginLeft: "10px" }}
-          >
-            {show3DDesign ? "Hide 3D Design" : "View 3D Design"}
-          </Button>
+          {data.design3D && (
+            <Button
+              variant="contained"
+              onClick={handleToggle3DDesign}
+              style={{ marginLeft: "10px" }}
+            >
+              {show3DDesign ? "Hide 3D Design" : "View 3D Design"}
+            </Button>
+          )}
         </div>
 
         <Grid container spacing={3} className="mb-4">

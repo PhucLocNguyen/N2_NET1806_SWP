@@ -1,5 +1,8 @@
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import DiamondIcon from '@mui/icons-material/Diamond';
+import DesignServicesIcon from '@mui/icons-material/DesignServices';
+import SpokeIcon from '@mui/icons-material/Spoke';
 import { NavLink } from 'react-router-dom';
 
 function ManagerNav() {
@@ -14,11 +17,32 @@ function ManagerNav() {
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Price Quote</h2>
                   </div>
                </NavLink>
-               
+
                <NavLink to='blog-create'>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <ListAltIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Blog Management</h2>
+                  </div>
+               </NavLink>
+
+               <NavLink to='master-gemstone'>
+                  <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
+                     <DiamondIcon className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Master Gemstone</h2>
+                  </div>
+               </NavLink>
+
+               <NavLink to='stone-management'>
+                  <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
+                     <SpokeIcon className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Stone</h2>
+                  </div>
+               </NavLink>
+
+               <NavLink to='design-management'>
+                  <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
+                     <DesignServicesIcon className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Design</h2>
                   </div>
                </NavLink>
 

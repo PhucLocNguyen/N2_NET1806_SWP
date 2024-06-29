@@ -198,7 +198,7 @@ namespace API.Controllers
         }
 
         [HttpPatch("ModifyAccount")]
-        public IActionResult ModifyAccoutn(int userId, JsonPatchDocument ModifyAccount)
+        public IActionResult ModifyAccount(int userId, JsonPatchDocument ModifyAccount)
         {
             try
             {

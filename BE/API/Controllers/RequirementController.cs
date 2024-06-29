@@ -2,6 +2,7 @@
 using API.Model.MasterGemstoneModel;
 using API.Model.RequirementModel;
 using API.Model.UserModel;
+using MailKit.Search;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -68,8 +69,16 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetRequirementById(int id)
+        public IActionResult GetRequirementById(int id, [FromQuery]int? userId)
         {
+            if (userId != null)
+            {
+                var userRequirement = _unitOfWork.UserRequirementRepository.Get(filter: x => x.UsersId == userId && x.RequirementId == id).FirstOrDefault();
+                if (userRequirement == null)
+                {
+                    return BadRequest("You don't not allow to see detail this requirement");
+                }
+            }
             var Requirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (Requirement == null)
             {
@@ -159,6 +168,26 @@ namespace API.Controllers
             return Ok(Result);
         }
 
-        
+        [HttpGet("PriceOfRequirement")]
+        public IActionResult GetPrice(int requirementId)
+        {
+            var requirement = _unitOfWork.RequirementRepository.GetByID(requirementId);
+            var design = _unitOfWork.DesignRepository.Get(
+                filter: x=>x.DesignId ==  requirement.DesignId, null, null,null,
+                x=>x.MasterGemstone, x=>x.Stone, x=>x.Material
+            ).FirstOrDefault();
+
+            var anonymousRequirement = new
+            {
+                RequirementId = requirementId,
+                MaterialPriceAtMoment = design.Material.Price,
+                MasterGemStonePriceAtMoment = design.MasterGemstone.Price,
+                StonePriceAtMoment = design.Stone.Price,
+                MachiningFee = requirement.MachiningFee,
+                TotalMoney = requirement.Design.Material.Price + requirement.Design.MasterGemstone.Price + requirement.Design.Stone.Price + requirement.MachiningFee,
+            };
+
+            return Ok(anonymousRequirement);
+        }
     }
 }

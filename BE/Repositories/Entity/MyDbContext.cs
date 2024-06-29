@@ -90,7 +90,7 @@ public partial class MyDbContext : DbContext
             entity.ToTable("Design");
 
             entity.Property(e => e.DesignId).HasColumnName("DesignID");
-            entity.Property(e => e.Description).HasColumnType("text");
+            entity.Property(e => e.Description).HasMaxLength(250);
             entity.Property(e => e.DesignName).HasMaxLength(100);
             entity.Property(e => e.Image).HasMaxLength(200);
             entity.Property(e => e.ManagerId).HasColumnName("ManagerID");
@@ -229,9 +229,11 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
             entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.CompletedAt).HasColumnType("datetime");
+            entity.Property(e => e.Content).HasMaxLength(200);
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.Method).HasMaxLength(50);
             entity.Property(e => e.RequirementsId).HasColumnName("RequirementsID");
+            entity.Property(e => e.Status).HasMaxLength(50);
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.CustomerId)
@@ -247,13 +249,14 @@ public partial class MyDbContext : DbContext
             entity.HasKey(e => e.RequirementId).HasName("PK__Requirem__7DF11E7D94BF4243");
 
             entity.Property(e => e.RequirementId).HasColumnName("RequirementID");
-            entity.Property(e => e.CustomerNote).HasColumnType("text");
+            entity.Property(e => e.CustomerNote).HasMaxLength(250);
             entity.Property(e => e.Design3D).HasMaxLength(200);
             entity.Property(e => e.DesignId).HasColumnName("DesignID");
             entity.Property(e => e.MachiningFee).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.MasterGemStonePriceAtMoment).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.MaterialPriceAtMoment).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Size).HasColumnType("decimal(18, 2)");
-            entity.Property(e => e.StaffNote).HasColumnType("text");
+            entity.Property(e => e.StaffNote).HasMaxLength(250);
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.StonePriceAtMoment).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TotalMoney).HasColumnType("decimal(18, 2)");

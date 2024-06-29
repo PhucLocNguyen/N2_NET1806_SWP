@@ -22,6 +22,8 @@ namespace API.Model.RequirementModel
 
                 MaterialPriceAtMoment = requestCreateRequirementModel.MaterialPriceAtMoment,
 
+                MasterGemStonePriceAtMoment = requestCreateRequirementModel.MasterGemStonePriceAtMoment,
+
                 StonePriceAtMoment = requestCreateRequirementModel.StonePriceAtMoment,
 
                 MachiningFee = requestCreateRequirementModel.MachiningFee,
@@ -54,6 +56,8 @@ namespace API.Model.RequirementModel
                 WeightOfMaterial = requirement.WeightOfMaterial,
 
                 MaterialPriceAtMoment = requirement.MaterialPriceAtMoment,
+                
+                MasterGemStonePriceAtMoment = requirement.MasterGemStonePriceAtMoment,
 
                 StonePriceAtMoment = requirement.StonePriceAtMoment,
 

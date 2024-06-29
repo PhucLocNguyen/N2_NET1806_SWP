@@ -19,6 +19,8 @@ public partial class Requirement
 
     public decimal? WeightOfMaterial { get; set; }
 
+    public decimal? MasterGemStonePriceAtMoment { get; set; }
+
     public decimal? MaterialPriceAtMoment { get; set; }
 
     public decimal? StonePriceAtMoment { get; set; }

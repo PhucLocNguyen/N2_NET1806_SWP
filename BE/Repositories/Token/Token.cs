@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Repositories.Token
+namespace SWP391Project.Repositories.Token
 {
     public class Token : IToken
     {
@@ -30,12 +30,12 @@ namespace Repositories.Token
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(CustomeClaimType.Role, user.Role.Name),
             };
-            
+
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new JwtSecurityToken
-            ( _config["JWT:Issuer"],
+            (_config["JWT:Issuer"],
             _config["JWT:Audience"],
             authClaims,
             expires: DateTime.Now.AddHours(1),

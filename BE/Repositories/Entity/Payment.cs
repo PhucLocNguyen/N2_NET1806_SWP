@@ -13,6 +13,10 @@ public partial class Payment
 
     public DateTime? CompletedAt { get; set; }
 
+    public string Status { get; set; } = null!;
+
+    public string? Content { get; set; }
+
     public int? CustomerId { get; set; }
 
     public int? RequirementsId { get; set; }

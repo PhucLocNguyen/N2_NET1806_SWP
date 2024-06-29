@@ -141,6 +141,7 @@ namespace Repositories.VnPay.Services
                 return "Valid amount ranges from 5,000 to under 1 billion VND";
             }
             var payment = requestCreateVnpay.ToPaymentEntity((int)requestCreateVnpay.userId, (int)requestCreateVnpay.requirementId);
+            payment.Status = "Pending ";
             _unitOfWork.PaymentRepository.Insert(payment);
             _unitOfWork.Save();
             var resultPayment = _unitOfWork.PaymentRepository.Get(filter: x => x.Equals(payment)).FirstOrDefault();

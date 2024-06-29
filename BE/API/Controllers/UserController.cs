@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Email;
 using Repositories.Entity;
-using Repositories.Token;
+using SWP391Project.Repositories.Token;
 using System.Linq.Expressions;
 using static Repositories.Email.EmailService;
 
@@ -141,7 +141,7 @@ namespace API.Controllers
         public IActionResult GetAll([FromQuery] string RoleFromInput = null)
         {
             Expression<Func<Users, bool>> filter = x =>
-                (string.IsNullOrEmpty(RoleFromInput) || x.Role.Name.Contains(RoleFromInput));
+                (string.IsNullOrEmpty(RoleFromInput) || x.Role.Name.Contains(RoleFromInput)) && x.Role.Name!=RoleConst.Customer;
             var Users = _unitOfWork.UserRepository.Get(filter);
             return Ok(Users);
         }

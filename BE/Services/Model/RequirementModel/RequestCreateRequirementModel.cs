@@ -16,6 +16,8 @@
 
         public decimal? MaterialPriceAtMoment { get; set; } = decimal.Zero;
 
+        public decimal? MasterGemStonePriceAtMoment { get; set; } = decimal.Zero;
+
         public decimal? StonePriceAtMoment { get; set; }= decimal.Zero;
 
         public decimal? MachiningFee { get; set; } = decimal.Zero;

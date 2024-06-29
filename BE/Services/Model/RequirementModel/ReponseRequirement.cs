@@ -20,6 +20,8 @@
 
         public decimal? MaterialPriceAtMoment { get; set; }
 
+        public decimal? MasterGemStonePriceAtMoment { get; set; }
+
         public decimal? StonePriceAtMoment { get; set; }
 
         public decimal? MachiningFee { get; set; }

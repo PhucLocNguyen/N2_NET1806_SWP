@@ -11,6 +11,7 @@ namespace API.Model.PaymentModel
             {
                 Amount = vnpayDTO.RequiredAmount,
                 CompletedAt = vnpayDTO.PaymentDate,
+                Content = vnpayDTO.PaymentContent,
                 Method = "Vnpay",
                 CustomerId = userId,
                 RequirementsId = requirementId,

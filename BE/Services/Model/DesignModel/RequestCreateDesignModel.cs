@@ -18,9 +18,9 @@ namespace API.Model.DesignModel
 
         public int? ManagerId { get; set; }
 
-        public int? TypeOfJewelleryId { get; set; }
+        public int TypeOfJewelleryId { get; set; }
 
-        public int? MaterialId { get; set; }
+        public int MaterialId { get; set; }
      
     }
 }

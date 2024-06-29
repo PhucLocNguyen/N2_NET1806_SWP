@@ -27,6 +27,7 @@ namespace API.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer)]
         public IActionResult SearchBlogRecords([FromQuery] RequestSearchBlogModel requestSearchBlogModel)
         {
+            
             var sortBy = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
             var sortType = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
             Expression<Func<Blog, bool>> filter = x =>
@@ -46,32 +47,40 @@ namespace API.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer )]
         public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel) 
         {
-            var sortBy = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
-            var sortType = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
-            Expression<Func<Blog, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchBlogModel.Title) || x.Title.Contains(requestSearchBlogModel.Title)) &&
-                (x.ManagerId == requestSearchBlogModel.ManagerId || requestSearchBlogModel.ManagerId == null);
-            Func<IQueryable<Blog>, IOrderedQueryable<Blog>> orderBy = null;
-
-            if (!string.IsNullOrEmpty(sortBy))
+            try
             {
-                if (sortType == SortBlogTypeEnum.Ascending.ToString())
+                var sortBy = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
+                var sortType = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
+                Expression<Func<Blog, bool>> filter = x =>
+                    (string.IsNullOrEmpty(requestSearchBlogModel.Title) || x.Title.Contains(requestSearchBlogModel.Title)) &&
+                    (x.ManagerId == requestSearchBlogModel.ManagerId || requestSearchBlogModel.ManagerId == null);
+                Func<IQueryable<Blog>, IOrderedQueryable<Blog>> orderBy = null;
+
+                if (!string.IsNullOrEmpty(sortBy))
                 {
-                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    if (sortType == SortBlogTypeEnum.Ascending.ToString())
+                    {
+                        orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    }
+                    else if (sortType == SortBlogTypeEnum.Descending.ToString())
+                    {
+                        orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                    }
                 }
-                else if (sortType == SortBlogTypeEnum.Descending.ToString())
-                {
-                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
-                }
+                var reponseBlog = _unitOfWork.BlogRepository.Get(
+                    filter,
+                    orderBy,
+                    /*includeProperties: "",*/
+                    pageIndex: requestSearchBlogModel.pageIndex,
+                    pageSize: requestSearchBlogModel.pageSize, m => m.Manager
+                    ).Select(x => x.toBlogDTO());
+                return Ok(reponseBlog);
             }
-            var reponseBlog = _unitOfWork.BlogRepository.Get(
-                filter,
-                orderBy,
-                /*includeProperties: "",*/
-                pageIndex: requestSearchBlogModel.pageIndex,
-                pageSize: requestSearchBlogModel.pageSize, m=>m.Manager
-                ).Select(x=>x.toBlogDTO());
-            return Ok(reponseBlog);
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong appears");
+            }
+            
         }
 
         [HttpGet("{id}")]

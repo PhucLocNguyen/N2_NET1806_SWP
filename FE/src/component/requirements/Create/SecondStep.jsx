@@ -17,7 +17,7 @@ function SecondStep({ handleCompleteStep, completedSteps }) {
     const [dataApiStones, setDataApiStones] = useState([]);
     const [filterStones, setFilterStones] = useState([]);
     const [isToggle, setIsToggle] = useState(false);
-const [dataSelected, setDataSelected] = useState({
+const [ dataSelected, setDataSelected] = useState({
   MasterGemstone:{
     kind: null,
     shape:null,
@@ -43,6 +43,7 @@ const [dataSelected, setDataSelected] = useState({
   // Result after select
   const [masterGemstoneObject, setMasterGemstoneObject]= useState({});
   const [stonesObject, setStonesObject] = useState({});
+  const [index, setIndex] = useState(0);
   //initial api value when reload
     useEffect(()=>{
       const dataMaster = FetchApiMasterGemstone(designRuleState.MinSizeMasterGemstone,designRuleState.MaxSizeMasterGemstone).then((res)=>{
@@ -129,7 +130,7 @@ const [dataSelected, setDataSelected] = useState({
       
     
     },[]);
-
+    console.log(filterMasterGemStone);
     // filter the selection list when choose an option to filter
     useEffect(() => {
       var output = true;
@@ -143,15 +144,19 @@ const [dataSelected, setDataSelected] = useState({
           }
           return true;
         })});
-        if(dataFilterLastMasterGemstone.length ==1){
-          setMasterGemstoneObject(dataFilterLastMasterGemstone[0]);
-          ShowMasterGemStone(dataFilterLastMasterGemstone[0]);
+        if(dataFilterLastMasterGemstone.length >0){
+          console.log(requirementData);
+          console.log(requirementData.selectedIndexMastergemstone);
+          console.log(dataFilterLastMasterGemstone);
+          setMasterGemstoneObject(dataFilterLastMasterGemstone[requirementData.selectedIndexMastergemstone]);
+          
+          ShowMasterGemStone(dataFilterLastMasterGemstone[requirementData.selectedIndexMastergemstone],dataFilterLastMasterGemstone, setMasterGemstoneObject, setIndex, index);
           var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
           target.style.display="block";
           setIsToggle(true);
         }
         // animation box mastergemstone
-        if(dataFilterLastMasterGemstone.length == 1 && !isToggle){
+        if(dataFilterLastMasterGemstone.length >0 && !isToggle){
           
           animate("div#boxRequirement", {x: [0,-150]});
         animate("div#boxRequirement #MasterGemstoneContainerFloat",{x:[0,"300px"], opacity:[0,1], zIndex: [-1,1]});
@@ -336,12 +341,13 @@ const HandleChangeData = (e) => {
       animate("div#boxRequirement #MasterGemstoneContainerFloat",{x:["300px",0], opacity:[1,0], zIndex: [1,-1]});
       setRequirementData({...requirementData,
         masterGemstoneId: masterGemstoneObject.masterGemstoneId,
-        stonesId:stonesObject.stonesId,});
+        stonesId:stonesObject.stonesId,
+        selectedIndexMastergemstone:index,
+      });
       handleCompleteStep(currentStep-1);
       setCurrentStep(currentStep+1);
     }
   }
-
 
   //view or disabled
   function ToogleStone(e) {
@@ -373,6 +379,7 @@ const HandleChangeData = (e) => {
       getSection.style.display="none";
     }
   }
+  
   return (
     <>
       <motion.div 

@@ -18,8 +18,10 @@ const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
-const OrderCustomer = lazy(() => import('../component/orderCustomer/OrderCustomer'));
-const OrderDetail = lazy(() => import('../component/orderCustomer/OrderDetail'));
+
+const OrderDetail = lazy(()=>import("../component/orderCustomer/OrderDetail"));
+const OrderCustomer = lazy(()=>import("../component/orderCustomer/OrderCustomer"));
+const PaymentResponse = lazy(()=>import("../component/payment/PaymentResponse"));
 
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
@@ -79,6 +81,11 @@ const publicRoutes = [
       path: '/confirmation-account',
       component: ConfirmationAccount,
       layout: null
+   },
+   {
+      path: '/payment/response',
+      component: PaymentResponse,
+      layout: null
    }
 ]
 
@@ -125,26 +132,17 @@ const privateRoutes = [
          { path: 'chat', component: ChatStaff }
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
-   },
-   {
-      path: '/OrderCustomer',
-      component: OrderCustomer,
-      layout: null,
-      role: ['Customer']
-   },
-   {
-      path: '/OrderCustomer/:id',
-      component: OrderDetail,
-      role: ['Customer'],
-      layout: null
-   },
-   {
-      path: '/PlanningList',
-      component: PlanningList,
-      layout: null,
-      role: ['DesignStaff', 'ProductStaff']
    }
-
+,
+{
+   path:"/my-order",
+   component:Empty,
+   children:[
+      {index:true, component: OrderCustomer},
+      {path:':id', component: OrderDetail}
+   ],
+   role:['Customer']
+}
 ]
 
 export { publicRoutes, privateRoutes }

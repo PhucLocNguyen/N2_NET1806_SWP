@@ -164,7 +164,6 @@ function ListStone() {
 
          {isOpenPopup && <StonePopup setIsOpenPopup={setIsOpenPopup} />}
          {isOpenUpdatePopup && <UpdateStonePopup setIsOpenUpdatePopup={setIsOpenUpdatePopup} data={itemUpdate} />}
-
       </>
    )
 }

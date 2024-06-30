@@ -54,7 +54,7 @@ function OrderCustomer() {
             {data.map((item, index) => (
               <Link
                 key={item.requirementId}
-                to={`/OrderCustomer/${item.requirementId}`}
+                to={`/my-order/${item.requirementId}`}
               >
                 <Order
                   data={item}

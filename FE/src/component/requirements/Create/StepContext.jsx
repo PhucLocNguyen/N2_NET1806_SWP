@@ -21,6 +21,7 @@ export function StepContext({children, designId, animate, scope}) {
         size: 0,
         masterGemstoneId:0,
         stonesId: 0,
+        selectedIndexMastergemstone:0,
         customerNote:"",
     });
     useEffect(()=>{
@@ -42,6 +43,7 @@ var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
           var objectData = {designParentId: root.designId,
             material: material!=null? material.materialId : null,
             size: 0,
+            selectedIndexMastergemstone:requirementData.selectedIndexMastergemstone,
             masterGemstoneId:masterGemstone!=null? masterGemstone.masterGemstoneId : null,
             stonesId: stone!=null? stone.stonesId : null,
             customerNote: requirementData.customerNote,};

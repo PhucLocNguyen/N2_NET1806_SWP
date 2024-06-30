@@ -81,7 +81,6 @@ function ListMasterGemstone() {
 
       gemPagination()
 
-
    }, [search, searchPage, isOpenUpdatePopup, isDelete])
 
    const handleChange = (event, value) => {

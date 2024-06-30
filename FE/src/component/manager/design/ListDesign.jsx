@@ -8,6 +8,7 @@ import { TextField, InputAdornment } from '@mui/material';
 
 import DesignRow from "./DesignRow";
 import DesignPopup from "./DesignPopup";
+import UpdateDesignPopup from "./UpdateDesignPopup";
 import { ApiGetParentDesign } from '../../../api/manager/ApiDesign'
 
 function ListDesign() {
@@ -22,6 +23,13 @@ function ListDesign() {
    //Pagination
    const [dataSize, setDataSize] = useState(0);
    const [page, setPage] = useState(1);
+
+   //Update
+   const [isOpenUpdatePopup, setIsOpenUpdatePopup] = useState(false);
+   const [itemUpdate, setItemUpdate] = useState();
+
+   //Delete 
+   const [isDelete, setIsDelete] = useState(false);
 
    // Search
    const [searchPage, setSearchPage] = useState(1);
@@ -45,7 +53,7 @@ function ListDesign() {
       }
       fetchApiTotal();
 
-   }, [page])
+   }, [page, isOpenPopup, isDelete, isOpenUpdatePopup])
 
    //Dung cho pagination
    useEffect(() => {
@@ -57,11 +65,11 @@ function ListDesign() {
 
       let designPagination = async () => {
          data = await fetchApiTotal();
-         console.log(data)
+         console.log('>>>', data)
 
          const filteredData = data.filter(item =>
             item.designName.toLowerCase().includes(search.toLowerCase()) ||
-            item.typeOfJewellery.name.toLowerCase().includes(search.toLowerCase())
+            item.typeOfJewellery?.name.toLowerCase().includes(search.toLowerCase())
          );
          const paginatedData = filteredData.slice((searchPage - 1) * pageSize, searchPage * pageSize);
 
@@ -70,7 +78,7 @@ function ListDesign() {
       }
       designPagination()
 
-   }, [search,searchPage])
+   }, [search, searchPage, isDelete, isOpenUpdatePopup])
 
    const handleChange = (event, value) => {
       if (search === '') {
@@ -133,7 +141,7 @@ function ListDesign() {
                   {design?.map((item, index) => {
 
                      return (
-                        <DesignRow key={index} data={item} setIsOpenPopup={setIsOpenPopup} />
+                        <DesignRow key={index} data={item} setIsOpenPopup={setIsOpenPopup} isDelete={isDelete} setIsDelete={setIsDelete} setItemUpdate={setItemUpdate} setIsOpenUpdatePopup={setIsOpenUpdatePopup} />
                      )
                   })}
 
@@ -149,7 +157,7 @@ function ListDesign() {
          </div>
 
          {isOpenPopup && <DesignPopup setIsOpenPopup={setIsOpenPopup} />}
-         {/* {isOpenUpdatePopup && <UpdateMasterGemstonePopup setIsOpenUpdatePopup={setIsOpenUpdatePopup} data={itemUpdate} />} */}
+         {isOpenUpdatePopup && <UpdateDesignPopup setIsOpenUpdatePopup={setIsOpenUpdatePopup} data={itemUpdate} />}
 
       </>
    )

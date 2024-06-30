@@ -37,4 +37,14 @@ const FetchApiRequirementById= async (id) => {
       return []; 
    }
 }
-export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById}
+const FetchApiRequirementByIdSecure= async (id, UserId) => {
+   try {
+      const response = await api.get(`/Requirement/${id}?userId=${UserId}`);
+      const requirementById = response.data;
+      return requirementById; 
+   } catch (error) {
+      console.error(error);
+      return null; 
+   }
+}
+export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure}

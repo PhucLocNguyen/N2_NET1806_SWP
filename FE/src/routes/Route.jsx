@@ -1,4 +1,7 @@
 import { lazy } from "react";
+const OrderDetail = lazy(()=>import("../component/orderCustomer/OrderDetail"));
+const OrderCustomer = lazy(()=>import("../component/orderCustomer/OrderCustomer"));
+const PaymentResponse = lazy(()=>import("../component/payment/PaymentResponse"));
 
 const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
 
@@ -75,6 +78,11 @@ const publicRoutes = [
       path: '/confirmation-account',
       component: ConfirmationAccount,
       layout: null
+   },
+   {
+      path: '/payment/response',
+      component: PaymentResponse,
+      layout: null
    }
 ]
 
@@ -122,7 +130,16 @@ const privateRoutes = [
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
    }
-
+,
+{
+   path:"/my-order",
+   component:Empty,
+   children:[
+      {index:true, component: OrderCustomer},
+      {path:':id', component: OrderDetail}
+   ],
+   role:['Customer']
+}
 ]
 
 export { publicRoutes, privateRoutes }

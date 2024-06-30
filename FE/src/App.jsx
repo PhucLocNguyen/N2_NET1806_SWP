@@ -23,6 +23,7 @@ import Dashboard from './component/admin/dashboard/Dashboard.jsx'
 import StaffLayout from './component/layout/StaffLayout.jsx'
 import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer } from 'react-toastify'
+import PaymentSection from './component/payment/PaymentSection.jsx';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
         <Routes>
 
           {/* Route tự viết để test */}
-          <Route path='/a' element={<PlanningList/>}></Route>
+          <Route path='/a' element={<PaymentSection/>}></Route>
 
           {/* <Route path='/b' element={<ListRequirement />}></Route> */}
 

@@ -1,33 +1,44 @@
-import { px } from "framer-motion";
-import { React, useEffect, useState } from "react";
-import bannerPic from "../../assets/blogList/bannerPic-2022.jpg";
+import { useState, useEffect } from "react";
+import Stack from "@mui/material/Stack";
 import Pagination from "@mui/material/Pagination";
+import bannerPic from "../../assets/blogList/bannerPic-2022.jpg";
+import { FetchApiBlog } from "../../api/blog/FetchApiBlog";
 import BoxContent from "./BoxContent";
-import axios from "axios";
 import "./BlogList.css";
 
-export default function blogList() {
-  const [data, setData] = useState([]); 
+export default function BlogList() {
+  const pageSize = 6;
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+  const [dataSize, setDataSize] = useState(0);
 
-  const headers = {
-    'Authorization':
-      'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InR5ZHkyMzRAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InR5ZHkiLCJuYmYiOjE3MTc5MDUzNDAsImV4cCI6MTcxODUxMDE0MCwiaWF0IjoxNzE3OTA1MzQwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjcxNjkvIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo3MTY5LyJ9.wboKm8JG1nb1W1Jm8Vlkjy7x122CmGrqaTVU1m9mmSAuW1vNB50d8Mltt3lXWfc7mtrBSfup_SPf_AoXCbtt-w',
+  const handleChange = (event, value) => {
+    setPage(value);
   };
 
-  const url = "https://localhost:7286/api/Blog";
-
-  const FetchApiBlog = async () => {
-    try {
-      const response = await axios.get(url,{headers});
-      setData(response.data)
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
   useEffect(() => {
-    FetchApiBlog();
-  }, []);
+    const fetchApi = async () => {
+      try {
+        const response = await FetchApiBlog({ pageSize, page });
+        if (response && Array.isArray(response)) {
+          setData(response); // Ensure response.data is an array of blog objects
+          setDataSize(response.totalCount || 0); // Fallback to 0 if totalCount is undefined
+        } else {
+          setData([]);
+          setDataSize(0);
+          console.error("Unexpected response format:", response);
+        }
+      } catch (error) {
+        console.error(error);
+        setData([]);
+        setDataSize(0);
+      }
+    };
+
+    fetchApi();
+  }, [page]);
+
+  const pageCount = Math.ceil(dataSize / pageSize);
 
   return (
     <>
@@ -50,15 +61,16 @@ export default function blogList() {
         />
       </div>
 
-      {/* content */}
+      {/* Content */}
       <div className="grid grid-cols-3 gap-10 mx-96">
-        {data.map((items, index) => {
-          return (<BoxContent key={index} data={items}/>)
-        })}
+        {Array.isArray(data) &&
+          data.map((item, index) => <BoxContent key={index} data={item} />)}
       </div>
 
-      <div className="flex justify-center my-6">
-        <Pagination count={10} shape="rounded" className="mt-10 scale-150" />
+      <div className="flex justify-center items-center">
+        <Stack>
+          <Pagination count={pageCount} page={page} onChange={handleChange} />
+        </Stack>
       </div>
     </>
   );

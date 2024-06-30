@@ -18,6 +18,8 @@ const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
+const OrderCustomer = lazy(() => import('../component/orderCustomer/OrderCustomer'));
+const OrderDetail = lazy(() => import('../component/orderCustomer/OrderDetail'));
 
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
@@ -27,6 +29,8 @@ const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
+
+const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
 
 const publicRoutes = [
    {
@@ -121,6 +125,24 @@ const privateRoutes = [
          { path: 'chat', component: ChatStaff }
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
+   },
+   {
+      path: '/OrderCustomer',
+      component: OrderCustomer,
+      layout: null,
+      role: ['Customer']
+   },
+   {
+      path: '/OrderCustomer/:id',
+      component: OrderDetail,
+      role: ['Customer'],
+      layout: null
+   },
+   {
+      path: '/PlanningList',
+      component: PlanningList,
+      layout: null,
+      role: ['DesignStaff', 'ProductStaff']
    }
 
 ]

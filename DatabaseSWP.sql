@@ -69,7 +69,7 @@ CREATE TABLE Design (
     ParentID INT,
     DesignName NVARCHAR(100) NOT NULL,
     Image NVARCHAR(200) NOT NULL,
-    Description TEXT ,
+    Description NVARCHAR(250) ,
     StoneID INT,
     MasterGemstoneID INT,
     ManagerID INT,
@@ -114,6 +114,8 @@ CREATE TABLE Payment (
     Amount DECIMAL(18,2) NOT NULL,
     Method NVARCHAR(50) NOT NULL,
     CompletedAt DATETIME,
+	Status NVARCHAR(50) NOT NULL,
+	Content NVARCHAR(200),
     CustomerID INT,
     RequirementsID INT,
     FOREIGN KEY (CustomerID) REFERENCES Users(UsersID),
@@ -210,7 +212,6 @@ insert into MasterGemstone values ('Topaz',7.5,91.07,'VVS2','VG',1.78,'Princess'
 insert into MasterGemstone values ('Topaz',8.5,126.37,'VVS2','VG',2.47,'Octagon','https://media.superjeweler.com/Images/Products/700X700/pic61701-1')
 GO
 
-GO
 
 
 insert into Stones values ('CZ',1,20,1)
@@ -295,43 +296,3 @@ insert into DesignRule values (6.0,10.0,360.0,600.0,2)
 insert into DesignRule values (4.0,8.5,6.0,12.0,3)
 insert into DesignRule values (5.5,10.0,300.0,600.0,4)
 
-GO
-
-GO
-
-insert into Design values('','The Archie Bold Ring','https://oradina.com/cdn/shop/products/RDOM10-2_small.progressive.jpg?v=1671931253',
-'Your classic domed band, now bigger and bolder. The Archie Bold Ring offers a gorgeous curve of solid gold that makes a chic statement on its own, or stacked with other favorites.',
-7,10,2,2,1)
-
-insert into Design values('','TBold Spirah Chain','https://oradina.com/cdn/shop/products/10KHSING035_1024x1024.progressive.jpg?v=1605462156',
-'Our take on the classic Singapore look, our Bold Spirah Chain is the perfect staple piece for every woman�s jewelry box. Made up of a criss cross spiral pattern, it is both versatile and chic. Thicker than our Spirah Classic Chain, you can pair it with your favorite pendant, or wear it solo for understated elegance.',
-null,null,2,4,4)
-
-insert into Design values('','Penthouse Bracelet','https://oradina.com/cdn/shop/files/ROL73-7.5FLC_480ee152-bd11-4e97-bae6-0b54fa74c73e_1024x1024.progressive.jpg?v=1699302771',
-'Theres no stopping you in our Penthouse Link Bracelet. Chunky round rolo links form together to create a dramatic look, for style and class at every turn.',
-null,null,2,3,4)
-
-insert into Design values('','Mystic Mariner Choker','https://oradina.com/cdn/shop/products/TVPC060-18LC_c6af6431-70c1-4825-96a4-f88bd2b9fd14_1024x1024.progressive.jpg?v=1646773381',
-'Get serious about your shine with our Mystic Mariner Choker. This timeless chain features flat, mirror-like links, also referred to as Gucci links, that catch the light from every direction. Adorn it on your neck to add sophistication to any look.',
-null,null,2,3,4)
-
-insert into Design values('','Byzantine Band Ring','https://oradina.com/cdn/shop/products/RBYZ1_1024x1024.progressive.jpg?v=1615756872',
-'This intricately woven style of jewelry dates back centuries, worn as a symbol of status and power. Weve taken this classically intertwined design and given it a modern polished spin. Slip on our Byzantine Band Ring to instantly elevate any look.',
-4,9,2,3,1)
-
-insert into Design values('','Fresco Baguette Ring','https://oradina.com/cdn/shop/products/R26901-GRN_small.progressive.jpg?v=1630957997',
-'Our Fresco Baguette Ring is the pop of sophistication you need this season! Inspired by the vibrant colors of Italian murals, it features a floating sea green zirconia stone enrobed in 14k solid gold. Whether you stack it or wear it solo, its sure to let your inner artist shine!',
-2,7,2,3,1)
-
-insert into Design values('','The One Bold Bangle','https://oradina.com/cdn/shop/files/OFBNG6M_1024x1024.progressive.jpg?v=1695389562',
-'The One Bold Bangle is easy to love. With a sleek hinged design, this bracelet will add polished shine to any wrist stack or stand out solo as your go-to solid gold piece.',
-null,19,2,3,2)
-
-insert into Design values('','Mesh Glamour Stack Bracelet','https://oradina.com/cdn/shop/files/BMSH3-STR_de56e950-e5b9-4479-b64f-86129724cec9_1024x1024.progressive.jpg?v=1700938994',
-'Our Mesh Glamour Stack Bracelet is a testament to the exceptional artistry of the most skilled artisans. Crafted to highlight the intricate beauty & shine of the meshing technique, it is a true labor of love by our skilled craftsmen. Bracelet stretches to fit most wrist sizes.',
-8,null,2,3,2)
-
- insert into Design values('','Park Avenue Bold Herringbone Bracelet','https://oradina.com/cdn/shop/products/10KHB48-7.5_c2f42049-da6e-400f-bc7b-c1f3e480a0d5_1024x1024.progressive.jpg?v=1627840846',
-'A timeless classic, our Park Avenue Bold Herringbone Bracelet will never go out of style. Solid gold lays flat to form this bold chain � known for its elegance and shine.',
-9,null,2,4,2)
-GO

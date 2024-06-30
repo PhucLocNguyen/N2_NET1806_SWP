@@ -30,6 +30,8 @@ const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
+const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
+
 const publicRoutes = [
    {
       index: true,
@@ -135,6 +137,12 @@ const privateRoutes = [
       component: OrderDetail,
       role: ['Customer'],
       layout: null
+   },
+   {
+      path: '/PlanningList',
+      component: PlanningList,
+      layout: null,
+      role: ['DesignStaff', 'ProductStaff']
    }
 
 ]

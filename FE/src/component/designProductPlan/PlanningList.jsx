@@ -1,34 +1,61 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Plan from "./Plan";
 import useAuth from "../../hooks/useAuth.jsx";
+import { fetchApiRequirementByStatus } from "../../api/Requirements/FetchApiRequirement.jsx";
 
 // Status options
 const statusDesignOptions = [
   { code: 1, label: "The sketch is being drafted" },
   { code: 2, label: "Design The Ring" },
-  { code: 3, label: "The sketch is complete" },
+  { code: 3, label: "Design The form" },
+  { code: 4, label: "Design The Stone Place" },
+  { code: 5, label: "Design The Feature" },
+  { code: 6, label: "The sketch is complete" },
 ];
 
 const statusProductOptions = [
   { code: 1, label: "The sketch is ready" },
   { code: 2, label: "Product is being processed" },
-  { code: 3, label: "Processing completed and ready for handover" },
+  { code: 3, label: "Process the form" },
+  { code: 4, label: "Process the Stone Place" },
+  { code: 5, label: "Add Stone" },
+  { code: 6, label: "Polishing" },
+  { code: 7, label: "Processing completed and ready for handover" },
 ];
 
 function PlanningList() {
   const [data, setData] = useState([]);
   const [type, setType] = useState("");
-  const [dataUpdated, setDataUpdated] = useState(false);
-
   const { role } = useAuth();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
-    setType("design")
-  }, []);
-  
+    if (role === "DesignStaff") {
+      setType("design");
+    } else if (role === "ProductStaff") {
+      setType("product");
+    }
+  }, [role]);
 
-  const filterItems = (statusCodes, type) => {
+  useEffect(() => {
+    fetchDataByStatus(type);
+  }, [data]);
+
+  const fetchDataByStatus = async (currentType) => {
+    const statusOptions =
+      currentType === "design" ? statusDesignOptions : statusProductOptions;
+    const statusLabels = statusOptions.map((option) => option.label);
+
+    const dataPromises = statusLabels.map((label) =>
+      fetchApiRequirementByStatus(label)
+    );
+    const dataResponses = await Promise.all(dataPromises);
+
+    const combinedData = dataResponses.flat();
+    setData(combinedData);
+  };
+
+  const filterItems = (statusCodes) => {
     const statusOptions =
       type === "design" ? statusDesignOptions : statusProductOptions;
     const statusLabels = statusCodes.map(
@@ -38,28 +65,21 @@ function PlanningList() {
     return data.filter((item) => statusLabels.includes(item.status));
   };
 
-  const url = "https://localhost:7103/api/Requirement";
-  const headers = {
-    Authorization:
-      "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0aGllbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVHlkeSIsIlJvbGUiOiJBZG1pbiIsImV4cCI6MTcxODc4OTk0MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MTY5LyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NzE2OS8ifQ.W66oliElGHELa2jC9ixxt2FD0tC8sDu7CQ4itv6Jw7Ds0cVPswIyWzSuZeM01ghTjsVOgbxKpj2oe2AQiPHD-Q",
+  const handleStatusChange = (itemId, newStatus) => {
+    setData((prevData) =>
+      prevData.map((item) =>
+        item.id === itemId ? { ...item, status: newStatus } : item
+      )
+    );
   };
 
-  const fetchApiRequirement = async () => {
-    try {
-      const response = await axios.get(url, { headers });
-      setData(response.data);
-    } catch (error) {
-      console.error(error);
-      return [];
+  const handlePopupOpen = (isOpen) => {
+    setIsPopupOpen(isOpen);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
     }
-  };
-
-  useEffect(() => {
-    fetchApiRequirement();
-  }, [dataUpdated]);
-
-  const handleDataUpdate = () => {
-    setDataUpdated(!dataUpdated);
   };
 
   return (
@@ -107,15 +127,17 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">To-do</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {filterItems([1], type).length}
+                {filterItems([1]).length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {filterItems([1], type).map((item, index) => (
+              {filterItems([1]).map((item, index) => (
                 <Plan
                   key={index}
                   data={item}
-                  handleDataUpdate={handleDataUpdate}
+                  handleStatusChange={handleStatusChange}
+                  handlePopupOpen={handlePopupOpen}
+                  isTodo={true}
                 />
               ))}
             </div>
@@ -126,15 +148,22 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">In-Progress</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {filterItems([2], type).length}
+                {
+                  filterItems(
+                    type === "design" ? [2, 3, 4, 5] : [2, 3, 4, 5, 6]
+                  ).length
+                }
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {filterItems([2], type).map((item, index) => (
+              {filterItems(
+                type === "design" ? [2, 3, 4, 5] : [2, 3, 4, 5, 6]
+              ).map((item, index) => (
                 <Plan
                   key={index}
                   data={item}
-                  handleDataUpdate={handleDataUpdate}
+                  handleStatusChange={handleStatusChange}
+                  handlePopupOpen={handlePopupOpen}
                 />
               ))}
             </div>
@@ -145,15 +174,17 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">Done</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {filterItems([3], type).length}
+                {filterItems(type === "design" ? [6] : [7]).length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {filterItems([3], type).map((item, index) => (
+              {filterItems(type === "design" ? [6] : [7]).map((item, index) => (
                 <Plan
                   key={index}
                   data={item}
-                  handleDataUpdate={handleDataUpdate}
+                  handleStatusChange={handleStatusChange}
+                  handlePopupOpen={handlePopupOpen}
+                  isDone={true}
                 />
               ))}
             </div>

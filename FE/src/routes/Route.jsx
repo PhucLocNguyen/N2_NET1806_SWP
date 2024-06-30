@@ -1,7 +1,4 @@
 import { lazy } from "react";
-const OrderDetail = lazy(()=>import("../component/orderCustomer/OrderDetail"));
-const OrderCustomer = lazy(()=>import("../component/orderCustomer/OrderCustomer"));
-const PaymentResponse = lazy(()=>import("../component/payment/PaymentResponse"));
 
 const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
 
@@ -22,6 +19,10 @@ const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
 
+const OrderDetail = lazy(()=>import("../component/orderCustomer/OrderDetail"));
+const OrderCustomer = lazy(()=>import("../component/orderCustomer/OrderCustomer"));
+const PaymentResponse = lazy(()=>import("../component/payment/PaymentResponse"));
+
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
 const Chat = lazy(() => import('../component/chat/Chat'));
@@ -30,6 +31,8 @@ const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
+
+const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
 
 const publicRoutes = [
    {

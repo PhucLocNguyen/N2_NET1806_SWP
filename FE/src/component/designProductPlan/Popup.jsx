@@ -21,21 +21,39 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
   const statusDesignOptions = [
     { code: 1, label: "The sketch is being drafted" },
     { code: 2, label: "Design The Ring" },
-    { code: 3, label: "The sketch is complete" },
+    { code: 3, label: "Design The form" },
+    { code: 4, label: "Design The Stone Place" },
+    { code: 5, label: "Design The Feature" },
+    { code: 6, label: "The sketch is complete" },
   ];
 
   const statusProductOptions = [
     { code: 1, label: "The sketch is ready" },
     { code: 2, label: "Product is being processed" },
-    { code: 3, label: "Processing completed and ready for handover" },
+    { code: 3, label: "Process the form" },
+    { code: 4, label: "Process the Stone Place" },
+    { code: 5, label: "Add Stone" },
+    { code: 6, label: "Polishing" },
+    { code: 7, label: "Processing completed and ready for handover" },
   ];
 
   useEffect(() => {
-    setType("design");
-  }, []);
+    if (role === "DesignStaff") {
+      setType("design");
+    }
+    if (role === "ProductStaff") {
+      setType("product");
+    }
+    getDesign(data.designId);
+  }, [role]);
 
-  const getStatusOptions = (type) => {
-    return type === "design" ? statusDesignOptions : statusProductOptions;
+  const getStatusOptions = (type, currentStatus) => {
+    const options =
+      type === "design" ? statusDesignOptions : statusProductOptions;
+    const currentStatusCode = options.find(
+      (option) => option.label === currentStatus
+    )?.code;
+    return options.filter((option) => option.code > currentStatusCode);
   };
 
   const urlUpdateRequirement = `https://localhost:7103/api/Requirement?id=${data.requirementId}`;
@@ -51,20 +69,13 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
     stonePriceAtMoment: data.stonePriceAtMoment,
     machiningFee: data.machiningFee,
     totalMoney: data.totalMoney,
-    customerNote: `${data.customerNote}`,
-    staffNote: `${data.staffNote}`,
+    customerNote: data.customerNote,
+    staffNote: data.staffNote,
   };
 
-  const UpdateRequirement = () => {
-    axios
-      .put(urlUpdateRequirement, dataUpdate)
-      .then((response) => {
-        console.log("Dữ liệu đã được cập nhật thành công:", response.data);
-        handleDataUpdate();
-      })
-      .catch((error) => {
-        console.error("Đã xảy ra lỗi khi cập nhật dữ liệu:", error);
-      });
+  const UpdateRequirement = async (requirementId, updateData) => {
+    const response = await PutApiRequirementByStatus(requirementId, updateData);
+    return response?.status === 200;
   };
 
   const FetchApiDesign = async () => {
@@ -92,10 +103,16 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (selectedFile) {
-      UpdateRequirement();
-      console.log("Confirmed");
+      const updateSuccess = await UpdateRequirement(
+        data.requirementId,
+        dataUpdate
+      );
+      if (updateSuccess) {
+        handleStatusChange(data.requirementId, selection);
+      }
+      setIsOpenPopup(false);
     }
   };
 
@@ -196,7 +213,7 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
                 label={data.status}
                 onChange={handleChange}
               >
-                {getStatusOptions(type).map((option) => (
+                {getStatusOptions(type, data.status).map((option) => (
                   <MenuItem key={option.code} value={option.label}>
                     {option.label}
                   </MenuItem>
@@ -207,7 +224,7 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
 
           {/* Input Hình */}
           <div className="w-full">
-            <div className="font-[sans-serif] max-w-md">
+            <div className="font-[sans-serif]">
               <label className="text-base text-gray-500 font-semibold mb-2 block">
                 Upload file
               </label>
@@ -222,11 +239,7 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
               className={`mt-4 px-2.5 py-1.5 rounded-lg text-white text-sm tracking-wider font-medium border border-current outline-none bg-green-700 hover:bg-green-800 active:bg-green-700 ${
                 !selectedFile && "opacity-50 cursor-not-allowed"
               }`}
-              onClick={() => {
-                setIsOpenPopup(false);
-                handleSubmit();
-                UpdateRequirement();
-              }}
+              onClick={handleSubmit}
               disabled={!selectedFile}
             >
               Confirmed

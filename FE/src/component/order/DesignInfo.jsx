@@ -33,7 +33,7 @@ function DesignInfo() {
       <>
          <div className="py-[8.125rem]">
             <div className="max-w-[75rem] ml-auto mr-auto flex items-center flex-col">
-               <div className="flex w-[100%] gap-x-[3.5rem] items-center">
+               <div className="flex w-[100%] gap-x-[3.5rem] items-start ">
                   <div className='max-w-[40%]  rounded-lg'>
                      {/* Hinh anh */}
                      <img src={designInfo.image} className='max-w-[100%] w-[30rem] max-h-[30rem] h-[30rem] object-cover rounded-lg' />
@@ -44,11 +44,11 @@ function DesignInfo() {
                         {designInfo.designName}
                      </h1>
                      {/* Description Section */}
-                     <div className='flex flex-col gap-y-[0.5rem] min-h-[9.3rem]'>
+                     <div className='flex flex-col gap-y-[0.5rem] min-h-[9.3rem] group relative'>
                         <h3 className='text-[2rem] font-normal leading-[2.875rem]'>Description</h3>
                         {/* Phan mo ta thiet ke */}
-                        <p className='text-[#000] mb-0 text-[1rem] font-normal leading-[1.5rem]'>
-                          {designInfo.description}
+                        <p className='text-[#000] mb-0 text-[1rem] font-normal leading-[1.5rem] line-clamp-5 group-hover:line-clamp-none'>
+                           {designInfo.description}
                         </p>
                      </div>
 

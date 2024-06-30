@@ -20,9 +20,9 @@ function TargetChat({ conversation, messages }) {
                 <div className="border-b h-[70px] bg-white">
                     <div className="pl-4 py-2 h-full flex gap-4">
                         <img
-                            src={conversation.user.image || "https://cdn.iconscout.com/icon/free/png-256/free-avatar-375-456327.png"}
+                            src={conversation.user?.image!==null?conversation.user?.image: "https://cdn4.iconfinder.com/data/icons/gray-business-1/512/xxx010-512.png"}
                             alt=""
-                            className="h-full"
+                            className="h-full rounded-full"
                         />
                         <div className="flex flex-col">
                             <h3 className="text-[20px]">{conversation.user.name}</h3>

@@ -1,8 +1,8 @@
 function BoxMessage({item, setCurrentConversationId}) {
     console.log(item);
     return ( <div className="flex items-center gap-3 border pl-3 cursor-pointer py-3" onClick={()=>{setCurrentConversationId(item.conversationId)}}>
-        <div>
-        <img src={ item.image||"https://cdn.iconscout.com/icon/free/png-256/free-avatar-375-456327.png"} alt="" className="h-[65px] " />
+        <div className="w-max h-[65px]">
+        <img src={ item.user?.image!==null? item.user?.image:"https://cdn4.iconfinder.com/data/icons/gray-business-1/512/xxx010-512.png"} alt="" className="h-[65px] rounded-full" />
 
 
         </div>

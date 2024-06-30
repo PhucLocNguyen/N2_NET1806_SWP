@@ -34,7 +34,8 @@ function App() {
         <Routes>
 
           {/* Route tự viết để test */}
-          {/* <Route path='/a' element={<StaffLayout> <StaffList /> </StaffLayout>}></Route> */}
+          <Route path='/a' element={<PlanningList/>}></Route>
+
           {/* <Route path='/b' element={<ListRequirement />}></Route> */}
 
           {/* Route tự viết không ghi qua phần này */}

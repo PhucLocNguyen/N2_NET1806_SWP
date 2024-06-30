@@ -4,12 +4,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Popover from '@mui/material/Popover';
 import MenuItem from '@mui/material/MenuItem';
 
-import { ApiDeleteParentDesign } from '../../../api/manager/ApiDesign';
+import { ApiDeleteStone } from '../../../api/manager/ApiStone';
 
-function DesignRow({ data, setIsDelete, isDelete, setIsOpenUpdatePopup, setItemUpdate }) {
+function StoneRow({ data, setItemUpdate, setIsOpenUpdatePopup, setIsDelete, isDelete }) {
 
    const [open, setOpen] = useState(null);
-
 
    const handleOpenMenu = (event) => {
       setOpen(event.currentTarget);
@@ -20,8 +19,8 @@ function DesignRow({ data, setIsDelete, isDelete, setIsOpenUpdatePopup, setItemU
    };
 
    const CallApi = async () => {
-      let id = data?.designId;
-      const respone = await ApiDeleteParentDesign(id);
+      let id = data?.stonesId;
+      const respone = await ApiDeleteStone(id);
    }
 
    const handleDeleteGemstone = () => {
@@ -33,12 +32,18 @@ function DesignRow({ data, setIsDelete, isDelete, setIsOpenUpdatePopup, setItemU
    return (
       <>
 
-         <div className="grid grid-cols-3 gap-x-[1rem] py-[1rem] px-[2.25rem] border-t-[1px] border-solid border-[#e9eaf3] cursor-pointer">
+         <div className="grid grid-cols-5 gap-x-[1rem] py-[1rem] px-[2.25rem] border-t-[1px] border-solid border-[#e9eaf3] cursor-pointer">
             <div className="flex items-center">
-               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.designName}</h2>
+               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.kind}</h2>
             </div>
             <div className="flex items-center">
-               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.typeOfJewellery?.name}</h2>
+               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.size}</h2>
+            </div>
+            <div className="flex items-center">
+               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.quantity}</h2>
+            </div>
+            <div className="flex items-center">
+               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.price}</h2>
             </div>
             <div className="flex items-center justify-center">
                <IconButton onClick={handleOpenMenu}>
@@ -63,7 +68,7 @@ function DesignRow({ data, setIsDelete, isDelete, setIsOpenUpdatePopup, setItemU
                handleCloseMenu();
             }}>
 
-               Update Design
+               Update Price
             </MenuItem>
 
             <MenuItem onClick={handleDeleteGemstone} sx={{ color: 'error.main' }}>
@@ -73,6 +78,7 @@ function DesignRow({ data, setIsDelete, isDelete, setIsOpenUpdatePopup, setItemU
          </Popover>
       </>
    )
+
 }
 
-export default DesignRow;
+export default StoneRow;

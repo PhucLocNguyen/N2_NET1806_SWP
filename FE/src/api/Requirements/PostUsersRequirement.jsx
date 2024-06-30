@@ -1,5 +1,6 @@
 import api from '../instance.jsx'
 import axiosConfigHeader from '../AxiosConfigHeader.jsx'
+import { toast } from 'react-toastify';
 
 const PostUsersRequirement = async ( idRequirement, idUser) => {
     try {
@@ -8,16 +9,13 @@ const PostUsersRequirement = async ( idRequirement, idUser) => {
             "requirementId":idRequirement
           };
         const response = await api.post(`/UserRequirement`, dataToPost, axiosConfigHeader);
-            const requirementReq = response.data;
             if (response.status === 200  || response.status === 201) {
-                console.log("Join Success !!!");
-            }else{
-                console.log("Failed");
+                toast.success("Successful");
             }
-            return requirementReq;
+            return response.status;
         
     } catch (e) {
-        console.error('Error during Post design:', e);
+      toast.error("Failed to join the order")
     }
 }
 export { PostUsersRequirement }

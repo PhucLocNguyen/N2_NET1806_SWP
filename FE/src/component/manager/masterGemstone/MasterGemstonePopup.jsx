@@ -12,7 +12,6 @@ import ApiGetMasterGemstone from "../../../api/manager/ApiGetMasterGemstone";
 import ApiCreateMasterGemstone from '../../../api/manager/ApiCreateMasterGemstone';
 import UploadImage from '../../../utils/UploadImage';
 import DeleteImage from '../../../utils/DeleteImage';
-import { green } from '@mui/material/colors';
 
 function MasterGemstonePopup({ setIsOpenPopup }) {
    const folder = 'MasterGemstone'

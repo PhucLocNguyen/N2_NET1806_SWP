@@ -3,7 +3,6 @@ import PlanningList from "../designProductPlan/PlanningList";
 import SaleBoard from "../saleStaff/SaleBoard";
 function WorkingBoard() {
     const { role } = useAuth();
-
     let Content = null;
 
     if (role === "Sale") {
@@ -12,8 +11,11 @@ function WorkingBoard() {
         Content = PlanningList;
     }
     
-    return (
+    return (    
+        <div>
         <Content/>
+
+        </div>
     );
 }
 

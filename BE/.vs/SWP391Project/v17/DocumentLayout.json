@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\HocTap\\AspDotNet_Practice\\N2_NET1806_SWP\\BE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\n2_net1806_swp\\be\\api\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VnpayController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\N2_NET1806_SWP\\BE\\API\\Controllers\\VnpayController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\VnpayController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\N2_NET1806_SWP\\BE\\API\\Controllers\\VnpayController.cs",
+              "RelativeToolTip": "API\\Controllers\\VnpayController.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAkwEMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-30T10:15:14.421Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

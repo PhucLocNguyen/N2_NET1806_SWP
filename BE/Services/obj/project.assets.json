@@ -3198,19 +3198,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\ACER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Services\\SWP391Project.Services.csproj",
+      "projectUniqueName": "D:\\HocTap\\AspDotNet_Practice\\N2_NET1806_SWP\\BE\\Services\\SWP391Project.Services.csproj",
       "projectName": "SWP391Project.Services",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Services\\SWP391Project.Services.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Services\\obj\\",
+      "projectPath": "D:\\HocTap\\AspDotNet_Practice\\N2_NET1806_SWP\\BE\\Services\\SWP391Project.Services.csproj",
+      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+      "outputPath": "D:\\HocTap\\AspDotNet_Practice\\N2_NET1806_SWP\\BE\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3224,8 +3224,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\SWP391Project.Repositories.csproj": {
-              "projectPath": "C:\\Users\\Admin\\source\\repos\\SWP391Poject\\Repositories\\SWP391Project.Repositories.csproj"
+            "D:\\HocTap\\AspDotNet_Practice\\N2_NET1806_SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+              "projectPath": "D:\\HocTap\\AspDotNet_Practice\\N2_NET1806_SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
             }
           }
         }

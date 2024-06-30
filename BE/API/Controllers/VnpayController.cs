@@ -50,18 +50,22 @@ namespace API.Controllers
         [HttpGet("CheckResponse")]
         public IActionResult CheckResponse()
         {
-             ResponseMessage result = _vnpayService.checkPayment(Request.Query);
+            ResponseMessage result = _vnpayService.checkPayment(Request.Query);
             var ResponseCode = result.ResponseCode;
             if (ResponseCode.Equals("00"))
             {
                 result.Payment.Status = "Paid";
-                
-            }else
+                _unitOfWork.Save();
+                return Ok(result.Payment.RequirementsId);
+            }
+            else
             {
                 result.Payment.Status = "Failed";
+
+                _unitOfWork.Save();
+                return BadRequest(result.Payment.RequirementsId);
             }
-            _unitOfWork.Save();
-            return Ok(result.Message);
+
         }
     }
 }

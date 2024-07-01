@@ -12,6 +12,7 @@ const dataToPut=
         design3D:data.design3D,
         weightOfMaterial: data.weightOfMaterial,
         materialPriceAtMoment: data.materialPriceAtMoment,
+        masterGemStonePriceAtMoment:data.masterGemStonePriceAtMoment,
         stonePriceAtMoment:  data.stonePriceAtMoment,
         machiningFee:  data.machiningFee,
         totalMoney:  data.totalMoney,

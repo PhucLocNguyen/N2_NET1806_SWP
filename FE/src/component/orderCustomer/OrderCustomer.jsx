@@ -1,3 +1,4 @@
+import { Breadcrumbs, Stack, Typography} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FetchApiRequirementById } from "../../api/Requirements/FetchApiRequirement";
@@ -5,12 +6,20 @@ import { fetchApiUserRequirementByUserId } from "../../api/userRequirements/Fetc
 import useAuth from "../../hooks/useAuth";
 import Order from "./Order";
 import OrderDetail from "./OrderDetail";
-
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 function OrderCustomer() {
   const [data, setData] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const { UserId } = useAuth();
 
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" to="/" >
+      Home
+    </Link>,
+    <Typography key="2" color="text.primary">
+     My Order
+    </Typography>,
+  ];
   useEffect(() => {
     if (UserId) {
       fetchUserRequirements(UserId);
@@ -37,6 +46,15 @@ function OrderCustomer() {
   console.log(selectedOrder);
   return (
     <div className="container mx-auto p-4">
+      <div className="mb-4 mt-6">
+        <Stack spacing={2}>
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb">
+          {breadcrumbs}
+        </Breadcrumbs>
+      </Stack>
+        </div>
       <h1 className="text-2xl font-semibold text-gray-700 mb-4">Orders List</h1>
       {selectedOrder ? (
         <OrderDetail />

@@ -54,7 +54,7 @@ function PaymentConfirm() {
                         </motion.div>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    {designDetail.masterGemstone!= null ??<Accordion>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2-content"
@@ -78,8 +78,8 @@ function PaymentConfirm() {
                                     </div>
                             </motion.div>
                         </AccordionDetails>
-                    </Accordion>
-                    <Accordion>
+                    </Accordion>}
+                    {designDetail.stone!= null ??<Accordion>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2-content"
@@ -88,17 +88,14 @@ function PaymentConfirm() {
                         </AccordionSummary>
                         <AccordionDetails>
                             <motion.div initial={{opacity:0, y:15}} transition="ease in" whileInView={{opacity:1, y:0}} className="grid grid-cols-5 w-full gap-3">
-                                <div className="image col-span-1">
-                                    <img src={designDetail.material?.image} className="w-full object-contain h-[100px]" alt={"image "+ designDetail.masterGemstone?.image} />
-                                </div>
-                                <div className="image col-span-4">
+                                <div className="image col-span-5">
                                     <h3 className="text-[24px] font-semibold">{designDetail.stone?.kind}</h3>
                                     <p className="line-clamp-2">Size: {designDetail.stone?.size} mm</p>
                                     <p className="line-clamp-2">Quantity: {designDetail.stone?.quantity}</p>
                                 </div>
                             </motion.div>
                         </AccordionDetails>
-                    </Accordion>
+                    </Accordion>}
                     <Accordion>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}

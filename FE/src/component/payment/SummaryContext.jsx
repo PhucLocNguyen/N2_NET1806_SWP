@@ -4,7 +4,7 @@ import { FetchApiDesignById } from "../../api/Requirements/FetchApiDesign";
 import useAuth from "../../hooks/useAuth";
 
 export const summaryContext = createContext();
-export function SummaryContext({children, requirementData, ChangeToggle}) {
+export function SummaryContext({children, requirementData, ChangeToggle, status, setStatus}) {
     const [total, setTotal] = useState("");
     const [designDetail, setDesignDetail] = useState({});
     const {UserId} = useAuth();
@@ -45,7 +45,7 @@ export function SummaryContext({children, requirementData, ChangeToggle}) {
         setTotal(totalMoney);  
        
     },[designDetail])
-    return (<summaryContext.Provider value={{total, payNow,requirementDetail, designDetail, ChangeToggle }}>
+    return (<summaryContext.Provider value={{total, payNow,requirementDetail, designDetail, ChangeToggle, status,setStatus}}>
         {children}
     </summaryContext.Provider>  );
 }

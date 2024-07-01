@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { summaryContext } from "./SummaryContext";
 
-function CustomerDeposit({moneyWillPay, requirementData}) {
+function CustomerPayButton({moneyWillPay, requirementData}) {
     const { total, requirementDetail, designDetail , payNow} = useContext(summaryContext);
     console.log(requirementDetail);
     return ( <button onClick={(e)=>
@@ -12,4 +12,4 @@ function CustomerDeposit({moneyWillPay, requirementData}) {
 </button> );
 }
 
-export default CustomerDeposit;
+export default CustomerPayButton;

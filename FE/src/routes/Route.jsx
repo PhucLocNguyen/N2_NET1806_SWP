@@ -142,6 +142,12 @@ const privateRoutes = [
       {path:':id', component: OrderDetail}
    ],
    role:['Customer']
+},
+{
+   path: '/PlanningList',
+   component: PlanningList,
+   layout: null,
+   role: ['DesignStaff', 'ProductStaff']
 }
 ]
 

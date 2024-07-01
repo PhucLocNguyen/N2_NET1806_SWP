@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Plan from "./Plan";
 import useAuth from "../../hooks/useAuth.jsx";
+import { FetchApiRequirementByStatus } from "../../api/Requirements/FetchApiRequirement.jsx";
 
 // Status options
 const statusDesignOptions = [
@@ -39,7 +39,7 @@ function PlanningList() {
 
   useEffect(() => {
     fetchDataByStatus(type);
-  }, [data]);
+  }, [type]);
 
   const fetchDataByStatus = async (currentType) => {
     const statusOptions =
@@ -47,7 +47,7 @@ function PlanningList() {
     const statusLabels = statusOptions.map((option) => option.label);
 
     const dataPromises = statusLabels.map((label) =>
-      fetchApiRequirementByStatus(label)
+      FetchApiRequirementByStatus(label)
     );
     const dataResponses = await Promise.all(dataPromises);
 
@@ -127,11 +127,11 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">To-do</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {filterItems([1], type).length}
+                {filterItems([1]).length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {filterItems([1], type).map((item, index) => (
+              {filterItems([1]).map((item, index) => (
                 <Plan
                   key={index}
                   data={item}

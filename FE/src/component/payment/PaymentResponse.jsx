@@ -1,45 +1,82 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { VerifyPaymentApi } from "../../api/payment/PaymentApi";
 import { FetchApiRequirementById } from "../../api/Requirements/FetchApiRequirement";
 import { PutApiRequirement } from "../../api/Requirements/PutApiRequirement";
+import Lottie from "lottie-react";
+import iconSuccess from "../../assets/icon/iconSuccess.json";
+import { CustomButton } from "../home/Home";
 
 function PaymentResponse() {
+  const navigate = useNavigate();
   const [status, setStatus] = useState(false);
   const location = useLocation();
   const [requirementId, setRequirementId] = useState(0);
+  const [hasVerified, setHasVerified] = useState(false); // Add this line
+
   async function verifyPayment(queryString) {
     const verifyApi = await VerifyPaymentApi(queryString);
     const requirementObject = await FetchApiRequirementById(verifyApi.requirementId);
-    console.log(verifyApi);
     if (!verifyApi.isFailed) {
       setStatus(true);
-      PutApiRequirement({...requirementObject,status:"5"},"Deposit Successful", "Deposit Failed")
+      if(requirementObject.status === "4") {
+        PutApiRequirement({...requirementObject, status: "5"}, "Successful", "Deposit Failed");
+      } else {
+        PutApiRequirement({...requirementObject, status: "11"}, "Successful", "Pay the rest Failed");
+      }
     } else {
       setStatus(false);
     }
-    setRequirementId( verifyApi.requirementId);
-    
+    setRequirementId(verifyApi.requirementId);
   }
+
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const queryString = searchParams.toString();
-    verifyPayment(queryString);
-  }, [location.search]);
-  
+    if (!hasVerified) { // Add this condition
+      const searchParams = new URLSearchParams(location.search);
+      const queryString = searchParams.toString();
+      verifyPayment(queryString);
+      setHasVerified(true); // Set the verification flag to true
+    }
+  }, [location.search, hasVerified]); // Include hasVerified as a dependency
+
+  function moveToOrder() {
+    navigate(`/my-order/${requirementId}`, { replace: true });
+  }
+
   return (
-    <div>
-      <h3>Payment Response </h3>
-      {status?<h3>Success payment</h3>:<h3>Failed Payment</h3>}
-      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto mb-4" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-    </svg>
-    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Price Quote Submitted Successfully</h2>
-    <p class="text-gray-600 mb-4">Your price quote has been successfully submitted by the manager.</p>
-    <a href={"/my-order/"+requirementId} class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition duration-200">Go to Dashboard</a>
-  </div>
+    <div className="w-screen flex justify-center h-screen relative">
+      {status ? (
+        <div className="bg-[#fff] rounded-lg px-10 shadow-[0_5px_15px_rgba(0,0,0,0.35)] absolute -translate-y-1/2 top-1/2 z-10 w-[768px] max-w-[100%] pb-10">
+          <div className="">
+            <div className="iconNotification">
+              <Lottie animationData={iconSuccess} style={{ width: "100%", height: "350px" }} loop={false} />
+            </div>
+            <h3 className="text-[32px] text-center">Congratulations,</h3>
+            <h3 className="text-[32px] text-center mb-12">Your payment has been sent successfully</h3>
+            <CustomButton
+              variant="contained"
+              sx={{
+                color: "#fff",
+                bgcolor: "#000",
+                letterSpacing: 4,
+                padding: "0.7rem 2.375rem",
+                fontSize: "1rem",
+                fontWeight: 400,
+                lineHeight: "1.5rem",
+                display: "flex",
+                justifyContent: "justify-center",
+                width: "100%",
+              }}
+              onClick={moveToOrder}
+            >
+              Go to Home Page
+            </CustomButton>
+          </div>
+        </div>
+      ) : (
+        <h3>Failed Payment</h3>
+      )}
     </div>
   );
 }

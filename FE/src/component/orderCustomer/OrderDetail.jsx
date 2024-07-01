@@ -22,11 +22,6 @@ import PaymentSection from "../payment/PaymentSection";
 import useAuth from "../../hooks/useAuth";
 import PageError from "../pageerror/PageError";
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info('You clicked a breadcrumb.');
-}
-
 const OrderDetail = () => {
   const [show3DDesign, setShow3DDesign] = useState(false);
   const [masterGemStone, setMasterGemStone] = useState(null);
@@ -37,12 +32,14 @@ const OrderDetail = () => {
   const {UserId} = useAuth();
     const [toggle,setToggle] = useState(false);
     const [valid, setValid] = useState(false);
+    const [status, setStatus] = useState(0);
   const getRequirementById = async (requirementId, UserId) => {
     try {
       const response = await FetchApiRequirementByIdSecure(requirementId, UserId);
       if(response!=null){
         setValid(true);
         setData(response);
+        setStatus(response.status);
       }else{
         setValid(false);
       }
@@ -51,7 +48,7 @@ const OrderDetail = () => {
     }
   };
   const breadcrumbs = [
-    <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick}>
+    <Link underline="hover" key="1" color="inherit" href="/">
       Home
     </Link>,
     <Link
@@ -114,7 +111,7 @@ const OrderDetail = () => {
 
     return (
       <div>
-        <div className="w-3/5 mx-auto mt-3">
+        <div className="w-3/5 mx-auto mt-6 mb-4">
         <Stack spacing={2}>
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
@@ -310,7 +307,7 @@ const OrderDetail = () => {
           )}
         </div>
       </div>:<div>
-          <PaymentSection requirementDetail={data} ChangeToggle={ChangeToggle}/>
+          <PaymentSection requirementDetail={data} ChangeToggle={ChangeToggle} status={status} setStatus={setStatus}/>
          </div>}
       
    

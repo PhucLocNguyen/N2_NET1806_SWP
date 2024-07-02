@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
+const ChatStaff = lazy(() => import("../component/staff/ChatStaff"));
 
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
@@ -29,6 +29,8 @@ const Chat = lazy(() => import('../component/chat/Chat'));
 const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
 const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
+const Warranty = lazy(() => import('../component/saleStaff/Warranty'));
+const WarrantyDetail = lazy(() => import('../component/saleStaff/WarrantyDetail'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
@@ -129,26 +131,21 @@ const privateRoutes = [
       component: StaffLayout,
       children: [
          { index: true, component: WorkingBoard },
-         { path: 'chat', component: ChatStaff }
+         { path: 'chat', component: ChatStaff },
+         { path: 'warranty', component: Warranty },
+         { path: 'warranty-detail/:id', component: WarrantyDetail}
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
-   }
-,
-{
-   path:"/my-order",
-   component:Empty,
-   children:[
-      {index:true, component: OrderCustomer},
-      {path:':id', component: OrderDetail}
-   ],
-   role:['Customer']
-},
-{
-   path: '/PlanningList',
-   component: PlanningList,
-   layout: null,
-   role: ['DesignStaff', 'ProductStaff']
-}
+   },
+  {
+    path:"/my-order",
+    component:Empty,
+    children:[
+        {index:true, component: OrderCustomer},
+        {path:':id', component: OrderDetail}
+      ],
+    role:['Customer']
+  }
 ]
 
 export { publicRoutes, privateRoutes }

@@ -1,5 +1,6 @@
 import ChatIcon from '@mui/icons-material/Chat';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import { NavLink } from 'react-router-dom';
 
 function SaleNav() {
@@ -19,6 +20,13 @@ function SaleNav() {
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <ChatIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Chat</h2>
+                  </div>
+               </NavLink>
+
+               <NavLink to='warranty'>
+                  <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
+                     <LocalActivityIcon className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Warranty</h2>
                   </div>
                </NavLink>
 

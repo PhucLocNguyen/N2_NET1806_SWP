@@ -1,14 +1,11 @@
 import api from '../instance'
+import axiosConfigHeader from '../AxiosConfigHeader';
 
-const ApiRequirementById = async (id, accessToken) => {
+const ApiRequirementById = async (id) => {
 
    try {
 
-      const respone = await api.get(`/Requirement/${id}`, {
-         headers: {
-            'Authorization': `Bearer ${accessToken}`
-         }
-      });
+      const respone = await api.get(`/Requirement/${id}`, axiosConfigHeader);
 
       return respone.data
 

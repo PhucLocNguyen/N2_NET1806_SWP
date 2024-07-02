@@ -29,7 +29,7 @@ function DonePopup({ setIsOpenPopup, data, handleStatusChange }) {
   }, []);
 
   const getDesign = async (designId) => {
-    const response = await FetchApiDesignByDesignId(designId);
+    const response = await fetchApiDesignById(designId);
     setDataDesign(response);
     if (response.masterGemstone) {
       setMasterGemStone(response.masterGemstone);

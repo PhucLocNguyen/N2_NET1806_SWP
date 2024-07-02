@@ -2,6 +2,7 @@
 using API.Model.MasterGemstoneModel;
 using API.Model.RequirementModel;
 using API.Model.UserModel;
+using MailKit.Search;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -31,8 +32,8 @@ namespace API.Controllers
             var sortBy = requestSearchRequirementModel.SortContent != null ? requestSearchRequirementModel.SortContent?.sortRequirementBy.ToString() : null;
             var sortType = requestSearchRequirementModel.SortContent != null ? requestSearchRequirementModel.SortContent?.sortRequirementType.ToString() : null;
             Expression<Func<Requirement, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchRequirementModel.Status) || x.Status.Contains(requestSearchRequirementModel.Status)) &&
-                (string.IsNullOrEmpty(requestSearchRequirementModel.Size) || x.Size.Contains(requestSearchRequirementModel.Size)) &&
+                (string.IsNullOrEmpty(requestSearchRequirementModel.Status) || x.Status.Equals(requestSearchRequirementModel.Status)) &&
+                (x.Size == requestSearchRequirementModel.Size|| requestSearchRequirementModel.Size == null) &&
                 (x.DesignId == requestSearchRequirementModel.DesignId || requestSearchRequirementModel.DesignId == null) &&
                 x.MaterialPriceAtMoment >= requestSearchRequirementModel.FromMaterialPriceAtMoment &&
                 (x.MaterialPriceAtMoment <= requestSearchRequirementModel.ToMaterialPriceAtMoment || requestSearchRequirementModel.ToMaterialPriceAtMoment == null) &&
@@ -68,8 +69,16 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetRequirementById(int id)
+        public IActionResult GetRequirementById(int id, [FromQuery]int? userId)
         {
+            if (userId != null)
+            {
+                var userRequirement = _unitOfWork.UserRequirementRepository.Get(filter: x => x.UsersId == userId && x.RequirementId == id).FirstOrDefault();
+                if (userRequirement == null)
+                {
+                    return BadRequest("You don't not allow to see detail this requirement");
+                }
+            }
             var Requirement = _unitOfWork.RequirementRepository.GetByID(id);
             if (Requirement == null)
             {
@@ -130,6 +139,7 @@ namespace API.Controllers
             existedRequirement.TotalMoney = requestCreateRequirementModel.TotalMoney;
             existedRequirement.CustomerNote = requestCreateRequirementModel.CustomerNote;
             existedRequirement.StaffNote = requestCreateRequirementModel.StaffNote;
+            existedRequirement.MasterGemStonePriceAtMoment = requestCreateRequirementModel.MasterGemStonePriceAtMoment;
             _unitOfWork.RequirementRepository.Update(existedRequirement);
             _unitOfWork.Save();
             _hubContext.Clients.All.SendAsync("ReceiveOrderUpdate", id);
@@ -159,6 +169,26 @@ namespace API.Controllers
             return Ok(Result);
         }
 
-        
+        [HttpGet("PriceOfRequirement")]
+        public IActionResult GetPrice(int requirementId)
+        {
+            var requirement = _unitOfWork.RequirementRepository.GetByID(requirementId);
+            var design = _unitOfWork.DesignRepository.Get(
+                filter: x=>x.DesignId ==  requirement.DesignId, null, null,null,
+                x=>x.MasterGemstone, x=>x.Stone, x=>x.Material
+            ).FirstOrDefault();
+
+            var anonymousRequirement = new
+            {
+                RequirementId = requirementId,
+                MaterialPriceAtMoment = design.Material.Price,
+                MasterGemStonePriceAtMoment = design.MasterGemstone.Price,
+                StonePriceAtMoment = design.Stone.Price,
+                MachiningFee = requirement.MachiningFee,
+                TotalMoney = requirement.Design.Material.Price + requirement.Design.MasterGemstone.Price + requirement.Design.Stone.Price + requirement.MachiningFee,
+            };
+
+            return Ok(anonymousRequirement);
+        }
     }
 }

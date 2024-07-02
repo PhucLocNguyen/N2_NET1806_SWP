@@ -24,11 +24,11 @@ namespace API.Model.UserModel
         {
             return new UserDTO()
             {
-                UserId = user.UsersId,  
+                UserId = user.UsersId,
                 Username = user.Username,
                 Name = user.Name,
                 Email = user.Email,
-                Image= user.Image,
+                Image = user.Image,
                 Phone = user.Phone,
             };
         }

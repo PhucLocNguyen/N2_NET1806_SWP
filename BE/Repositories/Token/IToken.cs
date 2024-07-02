@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Token
+namespace SWP391Project.Repositories.Token
 {
     public interface IToken
     {

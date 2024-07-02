@@ -6,7 +6,7 @@
 
         public DateTime? ExpectedDelivery { get; set; } 
 
-        public string? Size { get; set; }
+        public decimal? Size { get; set; }
 
         public int? DesignId { get; set; }
 
@@ -15,6 +15,8 @@
         public decimal? WeightOfMaterial { get; set; } = decimal.Zero;
 
         public decimal? MaterialPriceAtMoment { get; set; } = decimal.Zero;
+
+        public decimal? MasterGemStonePriceAtMoment { get; set; } = decimal.Zero;
 
         public decimal? StonePriceAtMoment { get; set; }= decimal.Zero;
 

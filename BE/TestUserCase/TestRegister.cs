@@ -1,7 +1,6 @@
 ﻿using API.Controllers;
 using Moq;
 using NUnit.Framework;
-using Repositories.Token;
 using Repositories;
 using System;
 using System.Collections.Generic;
@@ -15,6 +14,7 @@ using API.Model.UserModel;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Entity;
 using Repositories.Email;
+using SWP391Project.Repositories.Token;
 
 namespace TestUseCase
 {

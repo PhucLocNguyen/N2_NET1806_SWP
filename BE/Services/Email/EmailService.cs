@@ -45,7 +45,7 @@ namespace Repositories.Email
 
         public void SaveInCache(RequestRegisterAccount requestRegisterAccount)
         {
-            string verificationCode = Guid.NewGuid().ToString();
+            string verificationCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6).ToUpper();
             TimeSpan _cacheDuration = TimeSpan.FromMinutes(5);
             requestRegisterAccount.VerifyEmail = verificationCode;
             requestRegisterAccount.Duration = DateTime.Now.AddMinutes(5);

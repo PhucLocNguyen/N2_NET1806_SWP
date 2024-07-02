@@ -105,6 +105,11 @@ namespace API.Controllers
             {
                 return BadRequest("Manager Id is not valid");
             }
+            var ExistedMaterial = _unitOfWork.MaterialRepository.Get(filter: x => x.Name.Equals(requestCreateMaterialModel.Name)).FirstOrDefault();
+            if(ExistedMaterial != null)
+            {
+                return BadRequest("Material exists");
+            }
             var Material = requestCreateMaterialModel.toMaterialEntity();
             _unitOfWork.MaterialRepository.Insert(Material);
             _unitOfWork.Save();

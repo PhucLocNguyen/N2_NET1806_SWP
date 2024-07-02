@@ -117,40 +117,55 @@ namespace API.Controllers
         [HttpPost("DesignParent")]
         public IActionResult CreateDesignForManager(RequestCreateDesignModel requestCreateDesignModel)
         {
-            var user = _unitOfWork.UserRepository.GetByID((int)requestCreateDesignModel.ManagerId, m => m.Role);
-            if (user.Role.Name != RoleConst.Manager)
+            try
             {
-                return BadRequest("Manager Id is not valid");
+                var user = _unitOfWork.UserRepository.GetByID((int)requestCreateDesignModel.ManagerId, m => m.Role);
+                if (user.Role.Name != RoleConst.Manager)
+                {
+                    return BadRequest("Manager Id is not valid");
+                }
+                if (requestCreateDesignModel.TypeOfJewelleryId == 0 || requestCreateDesignModel.MaterialId == 0)
+                {
+                    return BadRequest("Type of Jewellery or Material doesn't allow null");
+                }
+                var Design = requestCreateDesignModel.toDesignParentEntity();
+                _unitOfWork.DesignRepository.Insert(Design);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
             }
-            var Design = requestCreateDesignModel.toDesignParentEntity();
-            _unitOfWork.DesignRepository.Insert(Design);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            catch(Exception ex)
+            {
+                return BadRequest("Something ");
+            }
+            
         }
 
         [HttpPut]
         public IActionResult UpdateDesign(int id, RequestCreateDesignModel requestCreateDesignModel)
         {
-            var existedDesign = _unitOfWork.DesignRepository.GetByID(id);
-            if (existedDesign == null)
+            try
             {
-                return NotFound("Design is not existed");
+                var existedDesign = _unitOfWork.DesignRepository.GetByID(id);
+                if (existedDesign == null)
+                {
+                    return NotFound("Design is not existed");
+                }
+                existedDesign.Image = requestCreateDesignModel.Image;
+                existedDesign.Description = requestCreateDesignModel.Description;
+                existedDesign.ManagerId = requestCreateDesignModel.ManagerId;   
+                _unitOfWork.DesignRepository.Update(existedDesign);
+                _unitOfWork.Save();
+                return Ok("Update successfully");
             }
-            existedDesign.ParentId = requestCreateDesignModel.ParentId;
-            existedDesign.Image = requestCreateDesignModel.Image;
-            existedDesign.DesignName = requestCreateDesignModel.DesignName;
-            existedDesign.StonesId = requestCreateDesignModel.StonesId;
-            existedDesign.MasterGemstoneId = requestCreateDesignModel.MasterGemstoneId;
-            existedDesign.ManagerId = requestCreateDesignModel.ManagerId;
-            existedDesign.TypeOfJewelleryId = (int)requestCreateDesignModel.TypeOfJewelleryId;
-            existedDesign.MaterialId = requestCreateDesignModel.MaterialId;
-            _unitOfWork.DesignRepository.Update(existedDesign);
-            _unitOfWork.Save();
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong when update design");
+            }
+           
         }
 
         [HttpDelete]
-        public IActionResult DeleteBlog(int id)
+        public IActionResult DeleteDesign(int id)
         {
             Expression<Func<Design, bool>> filter = x =>
                 (x.ParentId == id);

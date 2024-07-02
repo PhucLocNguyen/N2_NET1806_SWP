@@ -52,12 +52,20 @@ namespace API.Controllers
         {
              ResponseMessage result = _vnpayService.checkPayment(Request.Query);
             var ResponseCode = result.ResponseCode;
-            if (!ResponseCode.Equals("00"))
+            if (ResponseCode.Equals("00"))
             {
-                _unitOfWork.PaymentRepository.Delete(result.Payment.PaymentId);
+                result.Payment.Status = "Paid";
                 _unitOfWork.Save();
+                return Ok(result.Payment.RequirementsId);
             }
-            return Ok(result.Message);
+            else
+            {
+                result.Payment.Status = "Failed";
+
+                _unitOfWork.Save();
+                return BadRequest(result.Payment.RequirementsId);
+            }
+
         }
     }
 }

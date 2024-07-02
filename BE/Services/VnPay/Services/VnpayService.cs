@@ -135,15 +135,20 @@ namespace Repositories.VnPay.Services
 
         //Create payment (save PaymentDtos to Database with Mapper)
         public string CreatePayment(RequestCreateVnpay requestCreateVnpay)
-        {
+        {   
+            if(requestCreateVnpay.RequiredAmount <5000 || requestCreateVnpay.RequiredAmount > 1000000000)
+            {
+                return "Valid amount ranges from 5,000 to under 1 billion VND";
+            }
             var payment = requestCreateVnpay.ToPaymentEntity((int)requestCreateVnpay.userId, (int)requestCreateVnpay.requirementId);
+            payment.Status = "Pending ";
             _unitOfWork.PaymentRepository.Insert(payment);
             _unitOfWork.Save();
             var resultPayment = _unitOfWork.PaymentRepository.Get(filter: x => x.Equals(payment)).FirstOrDefault();
             var paymentUrl = string.Empty;
             var test = _vnpayConfig;
             _vnpayPayRequest = new VnpayPayRequest(_vnpayConfig.Version,
-            _vnpayConfig.TmnCode, DateTime.Now, "127.0.0.1" ?? string.Empty, requestCreateVnpay.RequiredAmount ?? 0, requestCreateVnpay.PaymentCurrency ?? string.Empty,
+            _vnpayConfig.TmnCode, DateTime.Now, "127.0.0.1" ?? string.Empty, requestCreateVnpay.RequiredAmount , requestCreateVnpay.PaymentCurrency ?? string.Empty,
                             "other", requestCreateVnpay.PaymentContent ?? string.Empty, _vnpayConfig.ReturnUrl, resultPayment.PaymentId!.ToString() ?? string.Empty);
             paymentUrl = GetLink(_vnpayConfig.PaymentUrl, _vnpayConfig.HashSecret);
             return paymentUrl;

@@ -9,8 +9,9 @@ namespace API.Model.PaymentModel
         {
             return new Payment
             {
-                Amount = (decimal)vnpayDTO.PaidAmount,
+                Amount = vnpayDTO.RequiredAmount,
                 CompletedAt = vnpayDTO.PaymentDate,
+                Content = vnpayDTO.PaymentContent,
                 Method = "Vnpay",
                 CustomerId = userId,
                 RequirementsId = requirementId,

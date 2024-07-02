@@ -10,7 +10,7 @@
 
         public DateOnly? ExpectedDelivery { get; set; }
 
-        public string? Size { get; set; }
+        public decimal? Size { get; set; }
 
         public int? DesignId { get; set; }
 
@@ -19,6 +19,8 @@
         public decimal? WeightOfMaterial { get; set; }
 
         public decimal? MaterialPriceAtMoment { get; set; }
+
+        public decimal? MasterGemStonePriceAtMoment { get; set; }
 
         public decimal? StonePriceAtMoment { get; set; }
 

@@ -42,7 +42,6 @@ function DesignPopup({ setIsOpenPopup }) {
       materialId: ''
    });
 
-   //Form loi
    const [errors, setErrors] = useState({
       image: '',
       designName: '',
@@ -363,7 +362,6 @@ function DesignPopup({ setIsOpenPopup }) {
                </div>
                {/* Body */}
                <div className='px-[1rem] py-[1rem]'>
-
                   <div className='flex items-center justify-between'>
                      <div className='w-[47%]'>
                         <h2 className='text-[1.1rem] font-medium pb-[3px]'>Design name</h2>

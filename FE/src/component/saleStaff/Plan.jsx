@@ -30,7 +30,7 @@ function Plan({ data, handleDataUpdate, statusOptions })  {
                     </span> 
 
                     <h4 className="mt-4 text-sm font-medium bg-[#4338d3] text-white px-2 h-fit w-fit rounded-full ml-4">
-                      {statusOptions[Number(data.status)].label}
+                      {statusOptions[Number(data?.status)]?.label}
                     </h4>
               
                   </div>

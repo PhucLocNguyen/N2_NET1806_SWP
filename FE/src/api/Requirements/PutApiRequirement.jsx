@@ -62,5 +62,4 @@ const PutApiRequirementByStatus = async (requirementId, dataUpdate) => {
     }
   }
 };
-
 export { PutApiRequirementByStatus, PutApiRequirement };

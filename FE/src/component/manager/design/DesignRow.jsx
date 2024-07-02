@@ -18,7 +18,6 @@ function DesignRow({ data, setIsDelete, isDelete, setIsOpenUpdatePopup, setItemU
    const handleCloseMenu = () => {
       setOpen(null);
    };
-
    const CallApi = async () => {
       let id = data?.designId;
       const respone = await ApiDeleteParentDesign(id);

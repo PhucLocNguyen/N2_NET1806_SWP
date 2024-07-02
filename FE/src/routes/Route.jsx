@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-const ChatStaff = lazy(()=>import("../component/staff/ChatStaff"));
+const ChatStaff = lazy(() => import("../component/staff/ChatStaff"));
 
 const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
@@ -18,8 +18,10 @@ const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
-const OrderCustomer = lazy(() => import('../component/orderCustomer/OrderCustomer'));
-const OrderDetail = lazy(() => import('../component/orderCustomer/OrderDetail'));
+
+const OrderDetail = lazy(() => import("../component/orderCustomer/OrderDetail"));
+const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"));
+const PaymentResponse = lazy(() => import("../component/payment/PaymentResponse"));
 
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
@@ -27,6 +29,8 @@ const Chat = lazy(() => import('../component/chat/Chat'));
 const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
 const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
+const Warranty = lazy(() => import('../component/saleStaff/Warranty'));
+const WarrantyDetail = lazy(() => import('../component/saleStaff/WarrantyDetail'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
@@ -79,6 +83,11 @@ const publicRoutes = [
       path: '/confirmation-account',
       component: ConfirmationAccount,
       layout: null
+   },
+   {
+      path: '/payment/response',
+      component: PaymentResponse,
+      layout: null
    }
 ]
 
@@ -122,29 +131,22 @@ const privateRoutes = [
       component: StaffLayout,
       children: [
          { index: true, component: WorkingBoard },
-         { path: 'chat', component: ChatStaff }
+         { path: 'chat', component: ChatStaff },
+         { path: 'warranty', component: Warranty },
+         { path: 'warranty-detail/:id', component: WarrantyDetail}
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
-   },
-   {
-      path: '/OrderCustomer',
-      component: OrderCustomer,
-      layout: null,
-      role: ['Customer']
-   },
-   {
-      path: '/OrderCustomer/:id',
-      component: OrderDetail,
-      role: ['Customer'],
-      layout: null
-   },
-   {
-      path: '/PlanningList',
-      component: PlanningList,
-      layout: null,
-      role: ['DesignStaff', 'ProductStaff']
    }
-
+   ,
+   {
+      path: "/my-order",
+      component: Empty,
+      children: [
+         { index: true, component: OrderCustomer },
+         { path: ':id', component: OrderDetail }
+      ],
+      role: ['Customer']
+   }
 ]
 
 export { publicRoutes, privateRoutes }

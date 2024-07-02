@@ -3,7 +3,6 @@ using API.Model.UserModel;
 using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
-using Repositories.Token;
 using Repositories;
 using System.Globalization;
 using Moq;
@@ -12,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Repositories.Entity;
 using Repositories.Email;
+using SWP391Project.Repositories.Token;
 
 namespace TestUseCase
 {

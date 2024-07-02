@@ -1,17 +1,13 @@
-﻿using API.Model.TypeOfJewellryModel;
-using API.Model.UserModel;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using API.Model.UserModel;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Email;
 using Repositories.Entity;
-using Repositories.Token;
+using SWP391Project.Repositories.Token;
 using System.Linq.Expressions;
-using System.Net;
 using static Repositories.Email.EmailService;
 
 namespace API.Controllers
@@ -32,27 +28,27 @@ namespace API.Controllers
         [HttpPost("registerForCustomer")]
         public async Task<IActionResult> Register([FromBody] RequestRegisterAccount requestRegisterAccount)
         {
-            
-                if (checkDuplicateUsername(requestRegisterAccount.Username))
-                {
-                    return BadRequest("Username is existed");
-                }
+
+            if (checkDuplicateUsername(requestRegisterAccount.Username))
+            {
+                return BadRequest("Username is existed");
+            }
             var existUserHaveSameEmail = _unitOfWork.UserRepository.Get(filter: x => x.Email.Equals(requestRegisterAccount.Email));
-                if (existUserHaveSameEmail.Count() >0)
-                {
-                    return BadRequest("Email has already been registered");
-                }
-                if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
-                {
-                    return BadRequest("PasswordConfirm is not correct");
-                }
-                _emailService.SaveInCache(requestRegisterAccount);
-                return Ok("Please check email to verify your email");
+            if (existUserHaveSameEmail.Count() > 0)
+            {
+                return BadRequest("Email has already been registered");
+            }
+            if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
+            {
+                return BadRequest("PasswordConfirm is not correct");
+            }
+            _emailService.SaveInCache(requestRegisterAccount);
+            return Ok("Please check email to verify your email");
         }
 
         [HttpPost("registerForAdmin")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = Role.Customer)]
-        public  IActionResult RegisterForAdmin([FromBody] RequestRegisterAccount requestRegisterAccount, [FromQuery] RoleEnum roleEnum)
+        public IActionResult RegisterForAdmin([FromBody] RequestRegisterAccount requestRegisterAccount, [FromQuery] RoleEnum roleEnum)
         {
             try
             {
@@ -71,7 +67,6 @@ namespace API.Controllers
                 var registerAccount = requestRegisterAccount.toUserEntity(roleEntity);
                 _unitOfWork.UserRepository.Insert(registerAccount);
                 _unitOfWork.Save();
-                //return Ok(registerAccount.toUserDTO());
                 return Ok("Regist Successfully");
             }
             catch (DbUpdateException ex)
@@ -85,10 +80,10 @@ namespace API.Controllers
                     return Problem("Something appear when registing", statusCode: 500);
                 }
             }
-           
+
         }
         [HttpPost("loginForCustomer")]
-        public  async Task<IActionResult> LoginForCustomer(RequestLoginAccount loginDTO)
+        public async Task<IActionResult> LoginForCustomer(RequestLoginAccount loginDTO)
         {
             try
             {
@@ -96,13 +91,13 @@ namespace API.Controllers
                     (x.Username.Equals(loginDTO.Username));
                 var user = _unitOfWork.UserRepository.Get(
                     includes: m => m.Role
-                    ).Where(x=> x.Username.Equals(loginDTO.Username, StringComparison.Ordinal)).FirstOrDefault();
+                    ).Where(x => x.Username.Equals(loginDTO.Username, StringComparison.Ordinal)).FirstOrDefault();
 
                 if (user == null) { return BadRequest("Invalid Username"); }
 
                 if (!BCrypt.Net.BCrypt.Verify(loginDTO.Password, user.Password)) { return BadRequest("Password incorrect"); }
 
-                if(user.Role.Name == RoleConst.Customer)
+                if (user.Role.Name == RoleConst.Customer)
                 {
                     return Ok(await _tokenService.CreateToken(user));
                 }
@@ -146,18 +141,30 @@ namespace API.Controllers
         public IActionResult GetAll([FromQuery] string RoleFromInput = null)
         {
             Expression<Func<Users, bool>> filter = x =>
-                (string.IsNullOrEmpty(RoleFromInput) || x.Role.Name.Contains(RoleFromInput));
+                (string.IsNullOrEmpty(RoleFromInput) || x.Role.Name.Contains(RoleFromInput)) && x.Role.Name!=RoleConst.Customer;
             var Users = _unitOfWork.UserRepository.Get(filter);
             return Ok(Users);
         }
 
-        [HttpGet("{username}")]
-        public IActionResult GetByUsername([FromRoute]string username)
+        [HttpGet("Username")]
+        public IActionResult GetByUsername(string username)
         {
             Expression<Func<Users, bool>> filter = x =>
                 (string.IsNullOrEmpty(username) || x.Username.Equals(username));
             var Users = _unitOfWork.UserRepository.Get(filter);
             return Ok(Users);
+        }
+
+        [HttpGet]
+        [Route("GetUserByRoleInRequirement")]
+        public IActionResult GetUserByRoleInRequirement([FromQuery] RoleEnum RoleFromInput, [FromQuery] int requirementId)
+        {
+
+            var users = _unitOfWork.UserRequirementRepository
+            .Get(filter: x => x.RequirementId == requirementId, includeProperties: "User")
+            .Select(ur => ur.User).Where(x => x.RoleId == (int)RoleFromInput)
+            .ToList();
+            return Ok(users);
         }
 
         [HttpPut]
@@ -190,6 +197,49 @@ namespace API.Controllers
             }
         }
 
+        [HttpPatch("ModifyAccount")]
+        public IActionResult ModifyAccount(int userId, JsonPatchDocument ModifyAccount)
+        {
+            try
+            {
+                var operations = ModifyAccount.Operations;
+                var existedUser = _unitOfWork.UserRepository.GetByID(userId);
+                if (existedUser == null)
+                {
+                    return NotFound("User does not found");
+                }
+                foreach (var operation in operations)
+                {
+                    if (operation.path == "username")
+                    {
+                        var newValue = operation.value;
+
+                        if (_unitOfWork.UserRepository.Get().Where(x => x.Username.Equals((string)newValue, StringComparison.Ordinal)).FirstOrDefault() != null)
+                        {
+                            return BadRequest("Username is existed");
+                        }
+                        //existedUser.Username = (string)newValue;
+                    }
+                    if (operation.path == "password")
+                    {
+                        var newValue = BCrypt.Net.BCrypt.HashPassword((string)operation.value);
+                        operation.value = newValue;
+
+                        //existedUser.Password = BCrypt.Net.BCrypt.HashPassword((string)newValue);
+                    }
+                }
+                ModifyAccount.ApplyTo(existedUser);
+                //_unitOfWork.UserRepository.Update(existedUser);
+                _unitOfWork.Save();
+                return Ok("Modify acount successfully");
+            }
+            catch (DbUpdateException ex)
+            {
+                return BadRequest("Something appear when modify account");
+
+            }
+        }
+
         [HttpPost("VerifyEmail")]
         public async Task<IActionResult> SendEmail([FromBody] string VerifyCodeFromUser)
         {
@@ -198,7 +248,7 @@ namespace API.Controllers
             {
                 var result = _emailService.VerifyCode(VerifyCodeFromUser);
 
-               
+
                 return result switch
                 {
                     VerifyResult.Success => Ok("Regist Successfully"),
@@ -212,13 +262,13 @@ namespace API.Controllers
                 throw;
             }
         }
-            private bool checkDuplicateUsername(string username)
+        private bool checkDuplicateUsername(string username)
         {
             bool check = false;
             var existedAccount = _unitOfWork.UserRepository.Get();
             foreach (var item in existedAccount)
             {
-                if (item.Username.Equals(username)) 
+                if (item.Username.Equals(username))
                 {
                     check = true;
                     break;

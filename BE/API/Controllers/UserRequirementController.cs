@@ -56,10 +56,36 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateUserRequirement(RequestCreateUserRequirementModel requestCreateUserRequirementModel)
         {
-            var UserRequirementModel = requestCreateUserRequirementModel.toUserRequirementEntity();
-            _unitOfWork.UserRequirementRepository.Insert(UserRequirementModel);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            try
+            {
+                
+                var UserWithRole = _unitOfWork.UserRepository.GetByID(requestCreateUserRequirementModel.UsersId, x => x.Role);
+                if (UserWithRole == null)
+                {
+                    return BadRequest("User does not exist");
+                }
+                var RoleIdInRequirement = _unitOfWork.UserRequirementRepository.Get(
+                    filter: x => x.RequirementId == requestCreateUserRequirementModel.RequirementId,
+                    includes: x => x.User).Select(x => x.User.RoleId).ToList();
+                if(RoleIdInRequirement == null)
+                {
+                    return BadRequest("Requirement does not exist");
+                }
+                if (RoleIdInRequirement.Contains(UserWithRole.RoleId))
+                {
+                    return BadRequest("This requirement has another " + UserWithRole.Role.Name + " staff assgin");
+                }
+
+                var UserRequirementModel = requestCreateUserRequirementModel.toUserRequirementEntity();
+                _unitOfWork.UserRequirementRepository.Insert(UserRequirementModel);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Something wrong when create");
+            }
+           
         }
 
     }

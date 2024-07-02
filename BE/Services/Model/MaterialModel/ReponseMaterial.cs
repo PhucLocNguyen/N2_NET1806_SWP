@@ -12,6 +12,8 @@ namespace API.Model.MaterialModel
 
         public string Image { get; set; }
 
+        public int ManagerId { get; set; }
+
         public virtual ICollection<RequestCreateDesignModel> Designs { get; set; } = new List<RequestCreateDesignModel>();
     }
 }

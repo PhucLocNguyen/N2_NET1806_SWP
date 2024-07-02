@@ -64,8 +64,8 @@ namespace API.Model.DesignModel
                 StonesId = design.StonesId,
                 MasterGemstoneId = design.MasterGemstoneId,
                 ManagerId = design.ManagerId,
-                TypeOfJewelleryId = design.TypeOfJewelleryId,
-                MaterialId = design.MaterialId,
+                TypeOfJewelleryId = (int)design.TypeOfJewelleryId,
+                MaterialId = (int)design.MaterialId,
             };
         }
     }

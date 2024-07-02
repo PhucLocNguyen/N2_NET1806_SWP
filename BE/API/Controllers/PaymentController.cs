@@ -65,14 +65,27 @@ namespace API.Controllers
             return Ok(Payment);
         }
 
-        [HttpPost]
-        public IActionResult CreatePayment(RequestCreatePaymentModel requestCreatePaymentModel)
+        [HttpGet("GetAllPaymentByRequirementId")]
+        public IActionResult GetPaymentByRequirementId([FromQuery] int requirementId)
         {
-            var Payment = requestCreatePaymentModel.ToPaymentEntity();
-            _unitOfWork.PaymentRepository.Insert(Payment);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            
+            var Payment = _unitOfWork.PaymentRepository.Get((x)=>x.RequirementsId == requirementId && (x.Status.Equals("Paid")|| x.Status.Equals("Failed"))).ToList();  
+
+            if (Payment == null)
+            {
+                return NotFound("Payment is not existed");
+            }
+
+            return Ok(Payment);
         }
+        /* [HttpPost]
+         public IActionResult CreatePayment(RequestCreatePaymentModel requestCreatePaymentModel)
+         {
+             var Payment = requestCreatePaymentModel.ToPaymentEntity();
+             _unitOfWork.PaymentRepository.Insert(Payment);
+             _unitOfWork.Save();
+             return Ok("Create successfully");
+         }*/
 
         [HttpPut("{id}")]
         public IActionResult UpdatePayment(int id, RequestCreatePaymentModel requestCreatePaymentModel)

@@ -26,6 +26,7 @@ namespace API.Model.MaterialModel
                 Price = material.Price,
                 Designs = material.Designs.Select(x => x.toCreateDesign()).ToList(),
                 Image = material.Image,
+                ManagerId=material.ManagerId,
             };
         }
 

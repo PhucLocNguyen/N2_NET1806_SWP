@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cL8I0YLZDT8PDe/UvK6qBUt1NyoW+pYmsIIK/w5gV4QnmeZeNgaljv9Er6Tc9N9dWE+bwM1ZcoqkI9GjYSFC3A==",
+  "dgSpecHash": "LFTZD0dFwvfZ5uPoo0JyyNH4/UCd+NKmSehOxLhwT7jYqjGO2ovAV/Tgg2cxPaIYnJAhAjeItEOchO8VO6AGMw==",
   "success": true,
-  "projectFilePath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\API.csproj",
+  "projectFilePath": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

@@ -13,11 +13,13 @@ public partial class Requirement
 
     public DateOnly? ExpectedDelivery { get; set; }
 
-    public string? Size { get; set; }
+    public decimal? Size { get; set; }
 
     public string? Design3D { get; set; }
 
     public decimal? WeightOfMaterial { get; set; }
+
+    public decimal? MasterGemStonePriceAtMoment { get; set; }
 
     public decimal? MaterialPriceAtMoment { get; set; }
 
@@ -38,5 +40,6 @@ public partial class Requirement
     public virtual ICollection<Have> Haves { get; set; } = new List<Have>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
     public virtual ICollection<UserRequirement> UserRequirements { get; set; } = new List<UserRequirement>();
 }

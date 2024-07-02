@@ -4,6 +4,7 @@ using Repositories.Entity;
 using Repositories;
 using System.Linq.Expressions;
 using API.Model.HaveModel;
+using API.Model.UserRequirementModel;
 
 namespace API.Controllers
 {
@@ -57,6 +58,18 @@ namespace API.Controllers
             _unitOfWork.Save();
             return Ok("Create successfully");
         }
+        [HttpGet("GetAllWarrantyByRequirementId")]
+        public IActionResult GetWarrantyByRequirementId([FromQuery] int requirementId)
+        {
 
+            var warrantyInHave = _unitOfWork.HaveRepository.Get(filter: x => x.RequirementId == requirementId, includes: x => x.WarrantyCard).ToList();
+
+            if (warrantyInHave == null)
+            {
+                return NotFound("Warranty is not existed");
+            }
+
+            return Ok(warrantyInHave);
+        }
     }
 }

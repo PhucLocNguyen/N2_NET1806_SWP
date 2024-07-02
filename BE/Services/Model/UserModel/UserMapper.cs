@@ -28,6 +28,8 @@ namespace API.Model.UserModel
                 Username = user.Username,
                 Name = user.Name,
                 Email = user.Email,
+                Image = user.Image,
+                Phone = user.Phone,
             };
         }
         public static Users FromUserInfoGoogleToUserEntity(this UserInfo user, Role role)

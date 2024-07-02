@@ -62,28 +62,49 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateTypeOfJewellery(RequestCreateTypeOfJewelleryModel requestTypeOfJewelleryModel)
         {
-            var TypeOfJewellery = new TypeOfJewellery()
+            try
             {
-                Name = requestTypeOfJewelleryModel.Name,
-                Image = requestTypeOfJewelleryModel.Image,
-            };
-            _unitOfWork.TypeOfJewellryRepository.Insert(TypeOfJewellery);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+                var ExistTypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.Get(filter: x => x.Name.Equals(requestTypeOfJewelleryModel.Name)).FirstOrDefault();
+                if (ExistTypeOfJewellery != null)
+                {
+                    return BadRequest("This Jewellery does exist");
+                }
+                var TypeOfJewellery = new TypeOfJewellery()
+                {
+                    Name = requestTypeOfJewelleryModel.Name,
+                    Image = requestTypeOfJewelleryModel.Image,
+                };
+                _unitOfWork.TypeOfJewellryRepository.Insert(TypeOfJewellery);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Create failed");
+            }
+           
         }
 
         [HttpPut]
         public IActionResult UpdateTypeOfJewellery(int id, RequestCreateTypeOfJewelleryModel requestTypeOfJewelleryModel)
         {
-            var existedTypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.GetByID(id);
-            if (existedTypeOfJewellery == null)
+            try
             {
-                return NotFound("Type of jewellery is not existed");
+                var existedTypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.GetByID(id);
+                if (existedTypeOfJewellery == null)
+                {
+                    return NotFound("Type of jewellery is not existed");
+                }
+                existedTypeOfJewellery.Name = requestTypeOfJewelleryModel.Name;
+                _unitOfWork.TypeOfJewellryRepository.Update(existedTypeOfJewellery);
+                _unitOfWork.Save();
+                return Ok();
             }
-            existedTypeOfJewellery.Name = requestTypeOfJewelleryModel.Name;
-            _unitOfWork.TypeOfJewellryRepository.Update(existedTypeOfJewellery);
-            _unitOfWork.Save();
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest("Update failed");
+            }
+            
         }
 
         [HttpDelete]

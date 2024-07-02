@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestUseCase.csproj": {}
+    "D:\\Slide\\Sem_5\\SWP\\BE\\TestUserCase\\TestUseCase.csproj": {}
   },
   "projects": {
-    "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\API.csproj": {
+    "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\API.csproj",
+        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\API.csproj",
+        "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj",
         "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\obj\\",
+        "outputPath": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
+              "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+                "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
               },
-              "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj"
+              "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\SWP391Project.Services.csproj": {
+                "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\SWP391Project.Services.csproj"
               }
             }
           }
@@ -61,6 +61,10 @@
               "version": "[8.0.6, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.AspNetCore.JsonPatch": {
               "target": "Package",
               "version": "[8.0.6, )"
             },
@@ -120,14 +124,14 @@
         }
       }
     },
-    "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+    "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj",
+        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj",
         "projectName": "SWP391Project.Repositories",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj",
+        "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj",
         "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\obj\\",
+        "outputPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -222,14 +226,14 @@
         }
       }
     },
-    "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj": {
+    "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\SWP391Project.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
+        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
         "projectName": "SWP391Project.Services",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
+        "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
         "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\obj\\",
+        "outputPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -246,8 +250,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
+              "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+                "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
               }
             }
           }
@@ -300,14 +304,14 @@
         }
       }
     },
-    "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestUseCase.csproj": {
+    "D:\\Slide\\Sem_5\\SWP\\BE\\TestUserCase\\TestUseCase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestUseCase.csproj",
+        "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUserCase\\TestUseCase.csproj",
         "projectName": "TestUseCase",
-        "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\TestUseCase.csproj",
+        "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUserCase\\TestUseCase.csproj",
         "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-        "outputPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\TestUserCase\\obj\\",
+        "outputPath": "D:\\Slide\\Sem_5\\SWP\\BE\\TestUserCase\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -324,11 +328,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\API.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\API.csproj"
+              "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj": {
+                "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj"
               },
-              "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
-                "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
+              "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+                "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
               }
             }
           }

@@ -1,4 +1,5 @@
-﻿using API.Model.StonesModel;
+﻿using API.Model.MasterGemstoneModel;
+using API.Model.StonesModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -17,7 +18,26 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+        [HttpGet("GetTotalRecords")]
+        public IActionResult GetTotalRecords([FromQuery] RequestSearchStonesModel requestSearchStonesModel)
+        {
+            Expression<Func<Stones, bool>> filter = x =>
+                (string.IsNullOrEmpty(requestSearchStonesModel.Kind) || x.Kind.Contains(requestSearchStonesModel.Kind)) &&
+                (x.Size == requestSearchStonesModel.Size || requestSearchStonesModel.Size == null) &&
+                x.Quantity >= requestSearchStonesModel.FromQuantity &&
+                (x.Quantity <= requestSearchStonesModel.ToQuantity || requestSearchStonesModel.ToQuantity == null) &&
+                x.Price >= requestSearchStonesModel.FromPrice &&
+                (x.Price <= requestSearchStonesModel.ToPrice || requestSearchStonesModel.ToPrice == null);
 
+            var totalRecords = _unitOfWork.StoneRepository.Count(filter);
+
+            var response = new
+            {
+                TotalRecords = totalRecords
+            };
+
+            return Ok(response);
+        }
         [HttpGet]
         public IActionResult SearchStones([FromQuery] RequestSearchStonesModel requestSearchStonesModel)
         {
@@ -66,10 +86,50 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateStones(RequestCreateStonesModel requestCreateStonesModel)
         {
-            var Stones = requestCreateStonesModel.toStonesEntity();
-            _unitOfWork.StoneRepository.Insert(Stones);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            var error = "";
+            var properties = typeof(RequestCreateStonesModel).GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (property.PropertyType == typeof(decimal))
+                {
+                    var value = property.GetValue(requestCreateStonesModel);
+                    if ((decimal)value < 0)
+                    {
+                        error = property.Name + " must be positive number";
+                        break;
+                    }
+                }
+                if (property.PropertyType == typeof(string))
+                {
+                    var value = property.GetValue(requestCreateStonesModel);
+                    if (string.IsNullOrEmpty((string)value))
+                    {
+                        error = property.Name + " must be not plank";
+                        break;
+                    }
+                }
+            }
+            if (!string.IsNullOrEmpty(error))
+            {
+                return BadRequest(error);
+            }
+            var getStoneSize = _unitOfWork.StoneRepository.Get(filter: x => (x.Kind == requestCreateStonesModel.Kind) && (x.Size == requestCreateStonesModel.Size) && (x.Quantity == requestCreateStonesModel.Quantity)).FirstOrDefault();
+            if (getStoneSize != null)
+            {
+                return BadRequest("Stone with this size and quantity had existed");
+            }
+            try
+            {
+                var stones = requestCreateStonesModel.toStonesEntity();
+                _unitOfWork.StoneRepository.Insert(stones);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Create failed");
+            }
         }
         [HttpPut]
         public IActionResult UpdateStones(int id, RequestCreateStonesModel requestCreateStonesModel)

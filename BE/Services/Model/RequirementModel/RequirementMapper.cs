@@ -10,8 +10,7 @@ namespace API.Model.RequirementModel
             {
                 Status = requestCreateRequirementModel.Status,
 
-                /*ExpectedDelivery =DateOnly.FromDateTime((DateTime)requestCreateRequirementModel.ExpectedDelivery)*/
-                ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery != null ? DateOnly.FromDateTime((DateTime)requestCreateRequirementModel.ExpectedDelivery) : null,
+                ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery!=null? DateOnly.FromDateTime((DateTime)requestCreateRequirementModel.ExpectedDelivery):null,
 
                 Size = requestCreateRequirementModel.Size,
 
@@ -22,6 +21,8 @@ namespace API.Model.RequirementModel
                 WeightOfMaterial = requestCreateRequirementModel.WeightOfMaterial,
 
                 MaterialPriceAtMoment = requestCreateRequirementModel.MaterialPriceAtMoment,
+
+                MasterGemStonePriceAtMoment = requestCreateRequirementModel.MasterGemStonePriceAtMoment,
 
                 StonePriceAtMoment = requestCreateRequirementModel.StonePriceAtMoment,
 
@@ -54,7 +55,9 @@ namespace API.Model.RequirementModel
 
                 WeightOfMaterial = requirement.WeightOfMaterial,
 
-                GoldPriceAtMoment = requirement.MaterialPriceAtMoment,
+                MaterialPriceAtMoment = requirement.MaterialPriceAtMoment,
+                
+                MasterGemStonePriceAtMoment = requirement.MasterGemStonePriceAtMoment,
 
                 StonePriceAtMoment = requirement.StonePriceAtMoment,
 

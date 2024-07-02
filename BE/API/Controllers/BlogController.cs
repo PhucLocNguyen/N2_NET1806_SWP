@@ -24,9 +24,10 @@ namespace API.Controllers
         }
 
         [HttpGet("GetTotalRecords")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer)]
         public IActionResult SearchBlogRecords([FromQuery] RequestSearchBlogModel requestSearchBlogModel)
         {
+            
             var sortBy = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
             var sortType = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
             Expression<Func<Blog, bool>> filter = x =>
@@ -43,35 +44,43 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer )]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer )]
         public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel) 
         {
-            var sortBy = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
-            var sortType = requestSearchBlogModel.SortContent!=null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
-            Expression<Func<Blog, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchBlogModel.Title) || x.Title.Contains(requestSearchBlogModel.Title)) &&
-                (x.ManagerId == requestSearchBlogModel.ManagerId || requestSearchBlogModel.ManagerId == null);
-            Func<IQueryable<Blog>, IOrderedQueryable<Blog>> orderBy = null;
-
-            if (!string.IsNullOrEmpty(sortBy))
+            try
             {
-                if (sortType == SortBlogTypeEnum.Ascending.ToString())
+                var sortBy = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
+                var sortType = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
+                Expression<Func<Blog, bool>> filter = x =>
+                    (string.IsNullOrEmpty(requestSearchBlogModel.Title) || x.Title.Contains(requestSearchBlogModel.Title)) &&
+                    (x.ManagerId == requestSearchBlogModel.ManagerId || requestSearchBlogModel.ManagerId == null);
+                Func<IQueryable<Blog>, IOrderedQueryable<Blog>> orderBy = null;
+
+                if (!string.IsNullOrEmpty(sortBy))
                 {
-                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    if (sortType == SortBlogTypeEnum.Ascending.ToString())
+                    {
+                        orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    }
+                    else if (sortType == SortBlogTypeEnum.Descending.ToString())
+                    {
+                        orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                    }
                 }
-                else if (sortType == SortBlogTypeEnum.Descending.ToString())
-                {
-                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
-                }
+                var reponseBlog = _unitOfWork.BlogRepository.Get(
+                    filter,
+                    orderBy,
+                    /*includeProperties: "",*/
+                    pageIndex: requestSearchBlogModel.pageIndex,
+                    pageSize: requestSearchBlogModel.pageSize, m => m.Manager
+                    ).Select(x => x.toBlogDTO());
+                return Ok(reponseBlog);
             }
-            var reponseBlog = _unitOfWork.BlogRepository.Get(
-                filter,
-                orderBy,
-                /*includeProperties: "",*/
-                pageIndex: requestSearchBlogModel.pageIndex,
-                pageSize: requestSearchBlogModel.pageSize, m=>m.Manager
-                ).Select(x=>x.toBlogDTO());
-            return Ok(reponseBlog);
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong appears");
+            }
+            
         }
 
         [HttpGet("{id}")]
@@ -90,32 +99,51 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreateBlog(RequestCreateBlogModel requestCreateBlogModel)
         {
-            var user = _unitOfWork.UserRepository.GetByID(requestCreateBlogModel.ManagerId, m=>m.Role);
-            if(user.Role.Name !=  RoleConst.Manager) 
+            try
             {
-                return BadRequest("Manager Id is not valid");
+                var user = _unitOfWork.UserRepository.GetByID(requestCreateBlogModel.ManagerId, m => m.Role);
+                if (user.Role.Name != RoleConst.Manager)
+                {
+                    return BadRequest("Manager Id is not valid");
+                }
+                if (_unitOfWork.BlogRepository.Get(filter: x => x.Title.Equals(requestCreateBlogModel.Title)).FirstOrDefault() != null)
+                {
+                    return BadRequest("This Blog exists");
+                }
+                var Blog = requestCreateBlogModel.toBlogEntity();
+                _unitOfWork.BlogRepository.Insert(Blog);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
             }
-            var Blog = requestCreateBlogModel.toBlogEntity();
-            _unitOfWork.BlogRepository.Insert(Blog);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            catch (Exception ex)
+            {
+                return BadRequest("Create failed");
+            }
         }
 
         [HttpPut]
         public IActionResult UpdateBlog(int id, RequestCreateBlogModel requestCreateBlogModel)
         {
-            var existedBlog = _unitOfWork.BlogRepository.GetByID(id);
-            if (existedBlog == null)
+            try
             {
-                return NotFound("Blog is not existed");
+                var existedBlog = _unitOfWork.BlogRepository.GetByID(id);
+                if (existedBlog == null)
+                {
+                    return NotFound("Blog is not existed");
+                }
+                existedBlog.Description = requestCreateBlogModel.Description;
+                existedBlog.ManagerId = requestCreateBlogModel.ManagerId;
+                existedBlog.Title = requestCreateBlogModel.Title;
+                existedBlog.Image = requestCreateBlogModel.Image;
+                _unitOfWork.BlogRepository.Update(existedBlog);
+                _unitOfWork.Save();
+                return Ok();
             }
-            existedBlog.Description = requestCreateBlogModel.Description;
-            existedBlog.ManagerId = requestCreateBlogModel.ManagerId;
-            existedBlog.Title = requestCreateBlogModel.Title;
-            existedBlog.Image = requestCreateBlogModel.Image;
-            _unitOfWork.BlogRepository.Update(existedBlog);
-            _unitOfWork.Save();
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest("Update failed");
+            }
+           
         }
 
         [HttpDelete]

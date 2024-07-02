@@ -334,7 +334,7 @@ function RequirementDone({
                         : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
                     }
                     className="w-[150px] rounded-full"
-                    alt="Sale staff image"
+                    alt="production staff image"
                   />
                   <div>
                     <h4 className="text-[20px]">

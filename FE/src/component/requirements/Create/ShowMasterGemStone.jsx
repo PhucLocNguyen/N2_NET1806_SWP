@@ -40,7 +40,7 @@ function ViewDetailMasterGemStone({ initialGemstone, dataFilterLastMasterGemston
         />
         <h4 className="text-center text-[20px]">{masterGemstone.price} VND</h4>
       </div>
-      <div className="absolute -bottom-2 w-full rounded-lg overflow-hidden">
+      <div className="absolute -bottom-2 w-full rounded-lg overflow-hidden" style={filteredData.length>1?{display:"block"}:{display:"none"}}>
         <h3 className="text-[20px] ml-2">Another choices:</h3>
         <ScrollBoxSelection
           setMasterGemstone={setMasterGemstone}

@@ -30,4 +30,14 @@ const VerifyPaymentApi = async (queryString) => {
       return dataVerify;
    }
 }
-export { PostPaymentApi, VerifyPaymentApi}
+const FetchPaymentApiByRequirementId = async (requirementId) => {
+   try {
+      const response = await api.get(`/Payment/GetAllPaymentByRequirementId?requirementId=${requirementId}`, axiosConfigHeader);
+      const paymentResponseUrl = response.data;
+      return paymentResponseUrl; // Directly return the data from the response
+   } catch (error) {
+      console.error(error);
+      return []; // Return an empty array or handle the error as needed
+   }
+}
+export { PostPaymentApi, VerifyPaymentApi, FetchPaymentApiByRequirementId}

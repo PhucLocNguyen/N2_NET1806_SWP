@@ -12,6 +12,7 @@ import RequireAuth from "./routes/RequireAuth.jsx";
 import { publicRoutes, privateRoutes } from "./routes/Route.jsx";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
+const PlanningList = lazy(()=>import("./component/designProductPlan/PlanningList.jsx")) ;
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
       <Suspense>
         <Routes>
           {/* Route tự viết để test */}
-
+          <Route path="/test" element={PlanningList}/>
           {/* Route tự viết không ghi qua phần này */}
 
           {publicRoutes.map((route, index) => {

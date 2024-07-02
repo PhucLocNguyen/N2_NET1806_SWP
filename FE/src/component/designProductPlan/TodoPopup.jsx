@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FetchApiRequirementById } from "../../api/Requirements/FetchApiRequirement";
-import { fetchApiDesignById } from "../../api/FetchApiDesign.jsx";
+import { fetchApiDesignById } from "../../api/FetchApiDesign";
 import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";

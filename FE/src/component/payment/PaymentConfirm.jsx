@@ -24,7 +24,7 @@ function PaymentConfirm() {
             <div className="min-h-[350px] max-h-1/2 max-w-[800px]">
                 <div className="flex gap-3 items-center">
                     <Tooltip title="back" sx={{}} >
-                        <IconButton onClick={()=>{ChangeToggle();console.log("chay1")}}>
+                        <IconButton onClick={()=>{ChangeToggle()}}>
                             <WestIcon sx={{fontSize:"30px"}}  />
                         </IconButton>
                     </Tooltip>
@@ -54,7 +54,7 @@ function PaymentConfirm() {
                         </motion.div>
                         </AccordionDetails>
                     </Accordion>
-                    {designDetail.masterGemstone!= null ??<Accordion>
+                    {designDetail.masterGemstone!= null ?<Accordion>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2-content"
@@ -78,8 +78,8 @@ function PaymentConfirm() {
                                     </div>
                             </motion.div>
                         </AccordionDetails>
-                    </Accordion>}
-                    {designDetail.stone!= null ??<Accordion>
+                    </Accordion>:null}
+                    {designDetail.stone!= null ?<Accordion>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2-content"
@@ -95,7 +95,7 @@ function PaymentConfirm() {
                                 </div>
                             </motion.div>
                         </AccordionDetails>
-                    </Accordion>}
+                    </Accordion>:null}
                     <Accordion>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}

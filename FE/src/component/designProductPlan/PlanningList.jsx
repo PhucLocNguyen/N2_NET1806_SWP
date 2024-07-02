@@ -47,7 +47,7 @@ function PlanningList() {
     const statusLabels = statusOptions.map((option) => option.label);
 
     const dataPromises = statusLabels.map((label) =>
-      FetchApiRequirementByStatus(label)
+      FetchApiRequirementByStatus()
     );
     const dataResponses = await Promise.all(dataPromises);
 

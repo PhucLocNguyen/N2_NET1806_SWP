@@ -3,6 +3,8 @@ import CustomerConfirmation from "./CustomerConfirmation";
 import CustomerPay from "./CustomerPay";
 import CustomerWaiting from "./CustomerWaiting";
 import CustomerWorkingDesignStaff from "./CustomerWorkingDesignStaff";
+import CustomerWorkingProductionStaff from "./CustomerWorkingProductionStaff";
+import RequirementDone from "./RequirementDone";
 import { summaryContext } from "./SummaryContext";
 
 function PaymentSelection() {
@@ -141,6 +143,41 @@ function PaymentSelection() {
             status={status}
           />
         );
+      case "8":
+        return (
+          <CustomerWorkingProductionStaff
+            designDetail={designDetail}
+            title={title}
+            requirementDetail={requirementDetail}
+            total={total}
+            status={status}
+          />
+        );
+      case "9":
+        return (
+          <CustomerWorkingProductionStaff
+            designDetail={designDetail}
+            title={title}
+            requirementDetail={requirementDetail}
+            total={total}
+            status={status}
+          />
+        );
+      case "10":
+        return (
+          <CustomerPay
+            status={status}
+            designDetail={designDetail}
+            title={title}
+            requirementDetail={requirementDetail}
+            total={total}
+          />
+        );
+        case "11":
+          return <RequirementDone status={status}
+          designDetail={designDetail}
+          title={title}
+          requirementDetail={requirementDetail}/>
       default:
         return <div>{/* Add your default payment component here */}</div>;
     }

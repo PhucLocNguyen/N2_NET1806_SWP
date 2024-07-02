@@ -44,7 +44,7 @@ function CustomerConfirmation({
             ? designDetail.masterGemstone?.price
             : 0,
         materialPriceAtMoment: designDetail.material?.price,
-        stonePriceAtMoment:
+        stonePriceAtMoment: 
           designDetail.stone != null ? designDetail.stone?.price : 0,
         totalMoney: total,
       });
@@ -77,41 +77,40 @@ function CustomerConfirmation({
               Summary:
             </h3>
             <div className="bg-gray-200 p-4 rounded-lg w-full px-3 mb-3 ">
-              {designDetail.masterGemstone != null ?? (
+              {designDetail.masterGemstone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Master Gemstone</p>
                   <p>
                     {formatVND(designDetail.masterGemstone?.price)}
-                    <span className="">VND</span>
                   </p>
                 </div>
-              )}
-              {designDetail.stone != null ?? (
+              ):null}
+              {designDetail.stone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Melee Stones</p>
                   <p>
-                    {formatVND(designDetail.stone?.price)} <span className="">VND</span>
+                    {formatVND(designDetail.stone?.price)}
                   </p>
                 </div>
-              )}
+              ):null}
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Material</p>
                 <p>
                   {formatVND(designDetail.material?.price *
                     requirementDetail.weightOfMaterial)}
-                  <span className="">VND</span>
+                 
                 </p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Machining Fee</p>
                 <p>
-                  {formatVND(requirementDetail.machiningFee)} <span className="">VND</span>
+                  {formatVND(requirementDetail.machiningFee)}
                 </p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300">
                 <p className="text-[20px]">Total</p>
                 <p className="text-[20px]">
-                  {formatVND(Math.ceil(total))} <span className="">VND</span>
+                  {formatVND(Math.ceil(total))}
                 </p>
               </div>
             </div>

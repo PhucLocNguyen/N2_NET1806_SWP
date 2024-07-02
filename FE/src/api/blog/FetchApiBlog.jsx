@@ -1,16 +1,16 @@
-import api from '../instance.jsx';
-import axiosConfigHeader from '../AxiosConfigHeader.jsx';
+import api from "../instance.jsx";
+import axiosConfigHeader from "../AxiosConfigHeader.jsx";
 
 const FetchApiBlog = async ({ pageSize, page }) => {
   try {
-    const response = await api.get('/Blog', {
+    const response = await api.get("/Blog", {
       headers: {
-        ...axiosConfigHeader
+        ...axiosConfigHeader,
       },
       params: {
         pageIndex: page,
-        pageSize: pageSize
-      }
+        pageSize: pageSize,
+      },
     });
     return response.data;
   } catch (error) {
@@ -19,13 +19,12 @@ const FetchApiBlog = async ({ pageSize, page }) => {
   }
 };
 
-
-const FetchApiBlogById = async ( id ) => {
+const FetchApiBlogById = async (id) => {
   try {
     const response = await api.get(`/Blog/${id}`, {
       headers: {
-        ...axiosConfigHeader
-      }
+        ...axiosConfigHeader,
+      },
     });
     return response.data;
   } catch (error) {
@@ -34,4 +33,4 @@ const FetchApiBlogById = async ( id ) => {
   }
 };
 
-export { FetchApiBlog,FetchApiBlogById };
+export { FetchApiBlog, FetchApiBlogById };

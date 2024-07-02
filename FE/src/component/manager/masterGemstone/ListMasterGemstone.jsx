@@ -78,6 +78,7 @@ function ListMasterGemstone() {
          setMasterGemstone(paginatedData);
          setDataSize(filteredData?.length);
       }
+
       gemPagination()
 
    }, [search, searchPage, isOpenUpdatePopup, isDelete])

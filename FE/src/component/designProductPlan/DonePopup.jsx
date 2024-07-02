@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FetchApiDesignByDesignId } from "../../api/design/FetchApiDesign";
+import { fetchApiDesignById } from "../../api/FetchApiDesign";
 import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -29,7 +29,7 @@ function DonePopup({ setIsOpenPopup, data }) {
   }, []);
 
   const getDesign = async (designId) => {
-    const response = await FetchApiDesignByDesignId(designId);
+    const response = await fetchApiDesignById(designId);
     setDataDesign(response);
     if (response.masterGemstone) {
       setMasterGemStone(response.masterGemstone);

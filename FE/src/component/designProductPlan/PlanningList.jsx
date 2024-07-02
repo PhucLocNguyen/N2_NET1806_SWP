@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Plan from "./Plan";
 import useAuth from "../../hooks/useAuth.jsx";
-import { fetchApiRequirementByStatus } from "../../api/Requirements/FetchApiRequirement.jsx";
+import { FetchApiRequirementByStatus } from "../../api/Requirements/FetchApiRequirement.jsx";
 
 const statusDesignOptions = [5, 6, 7];
 const statusProductOptions = [8, 9, 10];
@@ -30,7 +30,6 @@ function PlanningList() {
   const fetchDataByStatus = async (currentType) => {
     const statusOptions =
       currentType === "design" ? statusDesignOptions : statusProductOptions;
-
     try {
       const dataPromises = statusOptions.map((code) =>
         fetchApiRequirementByStatus(code)

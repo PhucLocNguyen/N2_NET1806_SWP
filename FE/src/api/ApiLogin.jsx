@@ -44,7 +44,6 @@ const LoginWithGoogle = async (token)=>{
         return role;
 
     }catch(e){
-            toast.error("Error during login with Google");
             role = null;
             return role;
     }

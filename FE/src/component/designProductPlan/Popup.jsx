@@ -4,7 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { FetchApiDesignByDesignId } from "../../api/design/FetchApiDesign";
+import { fetchApiDesignById } from "../../api/FetchApiDesign";
 import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
 import useAuth from "../../hooks/useAuth.jsx";
 
@@ -58,7 +58,7 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
   };
 
   const getDesign = async (designId) => {
-    const response = await FetchApiDesignByDesignId(designId);
+    const response = await fetchApiDesignById(designId);
     setDataDesign(response);
     if (response.masterGemstone) {
       setMasterGemStone(response.masterGemstone);

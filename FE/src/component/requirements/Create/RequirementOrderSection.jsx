@@ -2,11 +2,6 @@ import FirstStep from "./FirstStep";
 import { multiStepContext, StepContext } from "./StepContext";
 import { motion, useAnimate } from "framer-motion";
 
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-
 import { useContext, useEffect, useRef, useState } from "react";
 import CurrentRequirement from "./CurrentRequirement";
 import { useParams } from "react-router-dom";
@@ -50,6 +45,7 @@ const navigate = useNavigate();
 
                      
         </motion.div>
+
         </div>:<div className="bg-[#fff]  px-10 shadow-[0_5px_15px_rgba(0,0,0,0.35)] relative z-10  w-[768px] max-w-[100%] min-h-[480px] h-max pb-10">
             <div className="">
              <div className="iconNotification"><Lottie animationData={iconSuccess} loop={false}/>

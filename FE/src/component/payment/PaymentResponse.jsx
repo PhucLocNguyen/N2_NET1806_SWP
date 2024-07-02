@@ -20,9 +20,10 @@ function PaymentResponse() {
     const requirementObject = await FetchApiRequirementById(verifyApi.requirementId);
     if (!verifyApi.isFailed) {
       setStatus(true);
-      if(requirementObject.status === "4") {
+      if(requirementObject.status == "4") {
         PutApiRequirement({...requirementObject, status: "5"}, "Successful", "Deposit Failed");
-      } else {
+      } 
+      if(requirementObject.status =="10"){
         PutApiRequirement({...requirementObject, status: "11"}, "Successful", "Pay the rest Failed");
       }
     } else {

@@ -20,7 +20,7 @@ function App() {
       <Suspense>
         <Routes>
           {/* Route tự viết để test */}
-          <Route path="/test" element={PlanningList}/>
+          <Route path="/test" Component={PlanningList}/>
           {/* Route tự viết không ghi qua phần này */}
 
           {publicRoutes.map((route, index) => {

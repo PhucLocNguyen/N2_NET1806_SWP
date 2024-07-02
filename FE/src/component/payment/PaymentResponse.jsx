@@ -70,7 +70,7 @@ function PaymentResponse() {
               }}
               onClick={moveToOrder}
             >
-              Go to Home Page
+              Go to your order
             </CustomButton>
           </div>
         </div>

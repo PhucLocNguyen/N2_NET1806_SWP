@@ -16,6 +16,8 @@ function StaffLayout({ children }) {
       Nav = ManagerNav;
    } else if (role === 'Sale') {
       Nav = SaleNav;
+   }else{
+      Nav = SaleNav;
    }
 
    return (

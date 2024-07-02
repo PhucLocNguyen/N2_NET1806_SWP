@@ -16,44 +16,25 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
   const [stone, setStone] = useState(null);
   const [type, setType] = useState("");
 
-  const statusDesignOptions = [
-    { code: 1, label: "The sketch is being drafted" },
-    { code: 2, label: "Design The Ring" },
-    { code: 3, label: "Design The form" },
-    { code: 4, label: "Design The Stone Place" },
-    { code: 5, label: "Design The Feature" },
-    { code: 6, label: "The sketch is complete" },
-  ];
-
-  const statusProductOptions = [
-    { code: 1, label: "The sketch is ready" },
-    { code: 2, label: "Product is being processed" },
-    { code: 3, label: "Process the form" },
-    { code: 4, label: "Process the Stone Place" },
-    { code: 5, label: "Add Stone" },
-    { code: 6, label: "Polishing" },
-    { code: 7, label: "Processing completed and ready for handover" },
-  ];
+  const statusDesignOptions = [5, 6, 7];
+  const statusProductOptions = [8, 9, 10];
 
   const { role } = useAuth();
 
   useEffect(() => {
     if (role === "DesignStaff") {
       setType("design");
-    }
-    if (role === "ProductStaff") {
+    } else if (role === "ProductStaff") {
       setType("product");
     }
     getDesign(data.designId);
   }, [role]);
 
-  const getStatusOptions = (type, currentStatus) => {
+  const getStatusOptions = (currentType, currentStatus) => {
     const options =
-      type === "design" ? statusDesignOptions : statusProductOptions;
-    const currentStatusCode = options.find(
-      (option) => option.label === currentStatus
-    )?.code;
-    return options.filter((option) => option.code > currentStatusCode);
+      currentType === "design" ? statusDesignOptions : statusProductOptions;
+    const currentStatusCode = parseInt(currentStatus);
+    return options.filter((code) => code > currentStatusCode);
   };
 
   const dataUpdate = {
@@ -73,7 +54,7 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
 
   const UpdateRequirement = async (requirementId, updateData) => {
     const response = await PutApiRequirementByStatus(requirementId, updateData);
-    return response?.status === 200;
+    return response;
   };
 
   const getDesign = async (designId) => {
@@ -188,9 +169,9 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
                 label={data.status}
                 onChange={handleChange}
               >
-                {getStatusOptions(type, data.status).map((option) => (
-                  <MenuItem key={option.code} value={option.label}>
-                    {option.label}
+                {getStatusOptions(type, data.status).map((code) => (
+                  <MenuItem key={code} value={code}>
+                    {code}
                   </MenuItem>
                 ))}
               </Select>

@@ -47,6 +47,9 @@ function PaymentSelection() {
         );
         break;
       case "11":
+        setTitle("Waiting for add the warranty to your requirement");
+        break;
+      case "12":
         setTitle("Your requirement has been successfully completed");
         break;
       default:
@@ -173,11 +176,24 @@ function PaymentSelection() {
             total={total}
           />
         );
-        case "11":
-          return <RequirementDone status={status}
-          designDetail={designDetail}
-          title={title}
-          requirementDetail={requirementDetail}/>
+      case "11":
+        return (
+          <RequirementDone
+            status={status}
+            designDetail={designDetail}
+            title={title}
+            requirementDetail={requirementDetail}
+          />
+        );
+      case "12":
+        return (
+          <RequirementDone
+            status={status}
+            designDetail={designDetail}
+            title={title}
+            requirementDetail={requirementDetail}
+          />
+        );
       default:
         return <div>{/* Add your default payment component here */}</div>;
     }

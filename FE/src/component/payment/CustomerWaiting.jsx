@@ -167,32 +167,6 @@ function CustomerWaiting({
           );
         }
        
-      case "-7":
-        return (
-          <div className="mb-6">
-            {requirementDetail.design3D == null ? (
-              <div className="border px-6 py-6">
-                <div className="text-center mb-2">
-                  <WatchLaterIcon color="warning" sx={{ fontSize: "36px" }} />
-                </div>
-                <h3 className="text-center text-lg">
-                  Please wait for design staff to redraw the design based on your
-                  requirement
-                </h3>
-              </div>
-            ) : (
-              <div className="border">
-                <img
-                  src={requirementDetail.design3D}
-                  alt={
-                    "Image of design in requirement #" +
-                    requirementDetail.requirementId
-                  }
-                />
-              </div>
-            )}
-          </div>
-        );
     }
   }
   return (

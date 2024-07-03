@@ -1,16 +1,14 @@
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { React, useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import Button from "@mui/material/Button";
-import axios from "axios";
+import { fetchApiDesignById } from "../../api/FetchApiDesign";
+import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
+import useAuth from "../../hooks/useAuth.jsx";
 
-function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
+function Popup({ setIsOpenPopup, data, handleStatusChange }) {
   const [selection, setSelection] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [dataDesign, setDataDesign] = useState({});
@@ -18,53 +16,34 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
   const [stone, setStone] = useState(null);
   const [type, setType] = useState("");
 
-  const statusDesignOptions = [
-    { code: 1, label: "The sketch is being drafted" },
-    { code: 2, label: "Design The Ring" },
-    { code: 3, label: "Design The form" },
-    { code: 4, label: "Design The Stone Place" },
-    { code: 5, label: "Design The Feature" },
-    { code: 6, label: "The sketch is complete" },
-  ];
+  const statusDesignOptions = [5, 6, 7];
+  const statusProductOptions = [8, 9, 10];
 
-  const statusProductOptions = [
-    { code: 1, label: "The sketch is ready" },
-    { code: 2, label: "Product is being processed" },
-    { code: 3, label: "Process the form" },
-    { code: 4, label: "Process the Stone Place" },
-    { code: 5, label: "Add Stone" },
-    { code: 6, label: "Polishing" },
-    { code: 7, label: "Processing completed and ready for handover" },
-  ];
+  const { role } = useAuth();
 
   useEffect(() => {
     if (role === "DesignStaff") {
       setType("design");
-    }
-    if (role === "ProductStaff") {
+    } else if (role === "ProductStaff") {
       setType("product");
     }
     getDesign(data.designId);
   }, [role]);
 
-  const getStatusOptions = (type, currentStatus) => {
+  const getStatusOptions = (currentType, currentStatus) => {
     const options =
-      type === "design" ? statusDesignOptions : statusProductOptions;
-    const currentStatusCode = options.find(
-      (option) => option.label === currentStatus
-    )?.code;
-    return options.filter((option) => option.code > currentStatusCode);
+      currentType === "design" ? statusDesignOptions : statusProductOptions;
+    const currentStatusCode = parseInt(currentStatus);
+    return options.filter((code) => code > currentStatusCode);
   };
-
-  const urlUpdateRequirement = `https://localhost:7103/api/Requirement?id=${data.requirementId}`;
-  const urlForDesign = `https://localhost:7103/api/Design/${data.designId}`;
 
   const dataUpdate = {
     status: selection,
-    expectedDelivery: `${data.expectedDelivery}`,
-    size: `${data.size}`,
+    expectedDelivery: data.expectedDelivery,
+    size: data.size,
     designId: data.designId,
-    design3D: `${data.design3D}`,
+    design3D: data.design3D,
+    weightOfMaterial: data.weightOfMaterial,
     materialPriceAtMoment: data.materialPriceAtMoment,
     stonePriceAtMoment: data.stonePriceAtMoment,
     machiningFee: data.machiningFee,
@@ -75,29 +54,19 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
 
   const UpdateRequirement = async (requirementId, updateData) => {
     const response = await PutApiRequirementByStatus(requirementId, updateData);
-    return response?.status === 200;
+    return response;
   };
 
-  const FetchApiDesign = async () => {
-    try {
-      const response = await axios.get(urlForDesign);
-      const designData = response.data;
-      setDataDesign(designData);
-      if (designData.masterGemstone) {
-        setMasterGemStone(designData.masterGemstone);
-      }
-      if (designData.stone) {
-        setStone(designData.stone);
-      }
-    } catch (error) {
-      console.error(error);
-      return [];
+  const getDesign = async (designId) => {
+    const response = await fetchApiDesignById(designId);
+    setDataDesign(response);
+    if (response.masterGemstone) {
+      setMasterGemStone(response.masterGemstone);
+    }
+    if (response.stone) {
+      setStone(response.stone);
     }
   };
-
-  useEffect(() => {
-    FetchApiDesign();
-  }, []);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -120,16 +89,6 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
     setSelection(event.target.value);
   };
 
-  const filterItems = (statusCodes, type) => {
-    const statusOptions =
-      type === "design" ? statusDesignOptions : statusProductOptions;
-    const statusLabels = statusCodes.map(
-      (statusCode) =>
-        statusOptions.find((option) => option.code === statusCode)?.label
-    );
-    return data.filter((item) => statusLabels.includes(item.status));
-  };
-
   return (
     <div
       onClick={() => setIsOpenPopup(false)}
@@ -146,7 +105,6 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
             Requirement ID: R00{data.requirementId}
           </h1>
 
-          {/* Design detail */}
           <h2 className="text-2xl my-2 font-medium">Design Information</h2>
           <div className="ml-5">
             <img
@@ -154,11 +112,9 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
               className="size-32"
               alt="Design Image"
             />
-            <p>Weight predict: {dataDesign.weightOfMaterial}</p>
             <p>Name Of Design: {dataDesign.designName}</p>
           </div>
 
-          {/* chi tiết về các loại đá */}
           {(masterGemStone || stone) && (
             <h2 className="text-2xl my-2 font-medium">Stones Detail</h2>
           )}
@@ -213,16 +169,15 @@ function Popup({ setIsOpenPopup, data, handleDataUpdate }) {
                 label={data.status}
                 onChange={handleChange}
               >
-                {getStatusOptions(type, data.status).map((option) => (
-                  <MenuItem key={option.code} value={option.label}>
-                    {option.label}
+                {getStatusOptions(type, data.status).map((code) => (
+                  <MenuItem key={code} value={code}>
+                    {code}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </div>
 
-          {/* Input Hình */}
           <div className="w-full">
             <div className="font-[sans-serif]">
               <label className="text-base text-gray-500 font-semibold mb-2 block">

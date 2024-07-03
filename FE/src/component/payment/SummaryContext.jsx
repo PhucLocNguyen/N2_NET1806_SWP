@@ -4,30 +4,41 @@ import { FetchApiDesignById } from "../../api/Requirements/FetchApiDesign";
 import useAuth from "../../hooks/useAuth";
 
 export const summaryContext = createContext();
-export function SummaryContext({children, requirementData, ChangeToggle}) {
+export function SummaryContext({children, requirementData, ChangeToggle, status, setStatus}) {
     const [total, setTotal] = useState("");
     const [designDetail, setDesignDetail] = useState({});
     const {UserId} = useAuth();
     const [requirementDetail, setRequirementDetail] = useState(requirementData);
     console.log(requirementData);
-        async function payNow(moneyWillPay){
-            const paymentRequest ={
-                "id": "string",
-                "paymentContent": "Payment for order #"+requirementDetail.requirementId,
-                "paymentCurrency": "VND",
-                "paymentRefId": "string",
-                "requiredAmount": moneyWillPay,
-                "paymentLanguage": "EN",
-                "merchantId": "MERCHANT123",
-                "paymentDestinationId": "DEST123",
-                "paymentStatus": "Completed",
-                "paidAmount": moneyWillPay,
-                "userId": Number(UserId),
-                "requirementId": requirementDetail.requirementId
-              };
-              const responseUrl = await PostPaymentApi(paymentRequest);
-                window.location.href=responseUrl;              
+    async function payNow(moneyWillPay) {
+        const paymentRequest = {
+            "id": "string",
+            "paymentContent": "Payment for order #" + requirementDetail.requirementId,
+            "paymentCurrency": "VND",
+            "paymentRefId": "string",
+            "requiredAmount": moneyWillPay,
+            "paymentLanguage": "EN",
+            "merchantId": "MERCHANT123",
+            "paymentDestinationId": "DEST123",
+            "paymentStatus": "Completed",
+            "paidAmount": moneyWillPay,
+            "userId": Number(UserId),
+            "requirementId": requirementDetail.requirementId
+        };
+    
+        try {
+            const responseUrl = await PostPaymentApi(paymentRequest);
+            if (responseUrl) {
+                console.log(responseUrl);
+                window.location.href = responseUrl;
+            } else {
+                console.error('Failed to get response URL.');
+            }
+        } catch (error) {
+            console.error('Payment processing failed:', error);
         }
+    }
+    
     async function loadData(){
         const getDesignDetail = await FetchApiDesignById(requirementDetail.designId);
         setDesignDetail(getDesignDetail);
@@ -45,7 +56,7 @@ export function SummaryContext({children, requirementData, ChangeToggle}) {
         setTotal(totalMoney);  
        
     },[designDetail])
-    return (<summaryContext.Provider value={{total, payNow,requirementDetail, designDetail, ChangeToggle }}>
+    return (<summaryContext.Provider value={{total, payNow,requirementDetail, designDetail, ChangeToggle, status,setStatus}}>
         {children}
     </summaryContext.Provider>  );
 }

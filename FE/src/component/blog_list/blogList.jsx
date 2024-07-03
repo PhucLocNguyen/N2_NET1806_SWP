@@ -20,25 +20,16 @@ export default function BlogList() {
     const fetchApi = async () => {
       try {
         const response = await FetchApiBlog({ pageSize, page });
-        if (response && Array.isArray(response)) {
-          setData(response); // Ensure response.data is an array of blog objects
-          setDataSize(response.totalCount || 0); // Fallback to 0 if totalCount is undefined
-        } else {
-          setData([]);
-          setDataSize(0);
-          console.error("Unexpected response format:", response);
-        }
+        setData(response);
+        setDataSize(response.totalCount);
       } catch (error) {
         console.error(error);
         setData([]);
-        setDataSize(0);
       }
     };
 
     fetchApi();
   }, [page]);
-
-  const pageCount = Math.ceil(dataSize / pageSize);
 
   return (
     <>
@@ -63,13 +54,18 @@ export default function BlogList() {
 
       {/* Content */}
       <div className="grid grid-cols-3 gap-10 mx-96">
-        {Array.isArray(data) &&
-          data.map((item, index) => <BoxContent key={index} data={item} />)}
+        {data.map((item, index) => (
+          <BoxContent key={index} data={item} />
+        ))}
       </div>
 
       <div className="flex justify-center items-center">
         <Stack>
-          <Pagination count={pageCount} page={page} onChange={handleChange} />
+          <Pagination
+            count={Math.ceil(dataSize / pageSize)}
+            page={page}
+            onChange={handleChange}
+          />
         </Stack>
       </div>
     </>

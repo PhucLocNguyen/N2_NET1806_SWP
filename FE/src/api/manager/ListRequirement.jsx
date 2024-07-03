@@ -1,12 +1,11 @@
 import api from '../instance'
+import axiosConfigHeader from '../AxiosConfigHeader';
 
-const ApiListRequirement = async ({ accessToken, pageSize, page, status }) => {
+const ApiListRequirement = async ({ pageSize, page, status }) => {
 
    try {
       const response = await api.get('/Requirement', {
-         headers: {
-            'Authorization': `Bearer ${accessToken}`
-         },
+         axiosConfigHeader,
          params: {
             pageIndex: page,
             pageSize: pageSize,

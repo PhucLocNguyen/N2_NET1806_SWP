@@ -19,9 +19,9 @@ const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
 
-const OrderDetail = lazy(()=>import("../component/orderCustomer/OrderDetail"));
-const OrderCustomer = lazy(()=>import("../component/orderCustomer/OrderCustomer"));
-const PaymentResponse = lazy(()=>import("../component/payment/PaymentResponse"));
+const OrderDetail = lazy(() => import("../component/orderCustomer/OrderDetail"));
+const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"));
+const PaymentResponse = lazy(() => import("../component/payment/PaymentResponse"));
 
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
@@ -31,10 +31,10 @@ const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 const Warranty = lazy(() => import('../component/saleStaff/Warranty'));
 const WarrantyDetail = lazy(() => import('../component/saleStaff/WarrantyDetail'));
+const ListRePriceQuote = lazy(() => import('../component/manager/rePriceQuote/ListRePriceQuote'));
+const RePriceDetail = lazy(() => import('../component/manager/rePriceQuote/RePriceDetail'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
-
-const PlanningList = lazy(() => import('../component/designProductPlan/PlanningList'));
 
 const publicRoutes = [
    {
@@ -113,7 +113,9 @@ const privateRoutes = [
          { path: 'price-quote/:id', component: RequirementDetail },
          { path: 'master-gemstone', component: ListMasterGemstone },
          { path: 'design-management', component: ListDesign },
-         { path: 'stone-management', component: ListStone }
+         { path: 'stone-management', component: ListStone },
+         { path: 're-price-quote', component: ListRePriceQuote },
+         { path: 're-price-quote/:id', component: RePriceDetail }
       ],
       role: ['Manager']
    },
@@ -133,19 +135,19 @@ const privateRoutes = [
          { index: true, component: WorkingBoard },
          { path: 'chat', component: ChatStaff },
          { path: 'warranty', component: Warranty },
-         { path: 'warranty-detail/:id', component: WarrantyDetail}
+         { path: 'warranty-detail/:id', component: WarrantyDetail }
       ],
       role: ['DesignStaff', 'ProductStaff', "Sale"],
    },
-  {
-    path:"/my-order",
-    component:Empty,
-    children:[
-        {index:true, component: OrderCustomer},
-        {path:':id', component: OrderDetail}
+   {
+      path: "/my-order",
+      component: Empty,
+      children: [
+         { index: true, component: OrderCustomer },
+         { path: ':id', component: OrderDetail }
       ],
-    role:['Customer']
-  }
+      role: ['Customer']
+   }
 ]
 
 export { publicRoutes, privateRoutes }

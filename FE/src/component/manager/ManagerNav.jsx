@@ -3,6 +3,7 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import SpokeIcon from '@mui/icons-material/Spoke';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { NavLink } from 'react-router-dom';
 
 function ManagerNav() {
@@ -15,6 +16,13 @@ function ManagerNav() {
                   <div className="w-[100%] cursor-pointer group flex items-center ">
                      <MonetizationOnIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Price Quote</h2>
+                  </div>
+               </NavLink>
+
+               <NavLink to='re-price-quote'>
+                  <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
+                     <CurrencyExchangeIcon className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Re-price quote</h2>
                   </div>
                </NavLink>
 

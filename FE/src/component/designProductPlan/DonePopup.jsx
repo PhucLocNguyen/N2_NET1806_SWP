@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { fetchApiDesignById } from "../../api/FetchApiDesign.jsx";
+import { fetchApiDesignById } from "../../api/FetchApiDesign";
 import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -10,7 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useAuth from "../../hooks/useAuth.jsx";
 const { role } = useAuth();
 
-function DonePopup({ setIsOpenPopup, data, handleStatusChange }) {
+function DonePopup({ setIsOpenPopup, data }) {
   const [dataDesign, setDataDesign] = useState({});
   const [masterGemStone, setMasterGemStone] = useState(null);
   const [type, setType] = useState("");
@@ -156,7 +156,7 @@ function DonePopup({ setIsOpenPopup, data, handleStatusChange }) {
                     </div>
                   </div>
                 ) : (
-                  <>
+                  <div>
                     {masterGemStone && (
                       <div className="flex space-x-4">
                         <div>
@@ -204,7 +204,7 @@ function DonePopup({ setIsOpenPopup, data, handleStatusChange }) {
                         </p>
                       </div>
                     )}
-                  </>
+                  </div>
                 )}
               </div>
             </AccordionDetails>
@@ -221,11 +221,13 @@ function DonePopup({ setIsOpenPopup, data, handleStatusChange }) {
         <img
           src={data.design3D}
           className="w-[600px] object-cover h-[300px] mx-auto"
-          alt={type === "design"
-            ? "Design3D"
-            : type === "product"
-            ? "Product Completed"
-            : ""}
+          alt={
+            type === "design"
+              ? "Design3D"
+              : type === "product"
+              ? "Product Completed"
+              : ""
+          }
         />
       </motion.div>
     </div>

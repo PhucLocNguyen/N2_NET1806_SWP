@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-import useAuth from "../../hooks/useAuth";
 import ApiListRequirement from "../../api/manager/ListRequirement";
 import RowWarranty from "./RowWarranty";
 
@@ -10,11 +9,9 @@ function Warranty() {
 
    const [data, setData] = useState([]);
    const [page, setPage] = useState(1);
-   const { accessToken } = useAuth();
-
 
    const fetchApi = async () => {
-      const respone = await ApiListRequirement({ accessToken, pageSize, page, status });
+      const respone = await ApiListRequirement({ pageSize, page, status });
       setData(respone)
    }
 

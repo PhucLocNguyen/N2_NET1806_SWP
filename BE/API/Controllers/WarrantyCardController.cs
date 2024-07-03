@@ -1,5 +1,6 @@
 ﻿using API.Model.WarrantyCardModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repositories;
 
 namespace API.Controllers
@@ -18,49 +19,80 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult SearchWarrantyCard()
         {
-            return Ok(_unitOfWork.WarrantyCardRepository.Get());
+            try
+            {
+                return Ok(_unitOfWork.WarrantyCardRepository.Get());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in SearchWarrantyCard");
+            }
+            
         }
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetWarrantyCardById(int id)
         {
-            var warrantyCard = _unitOfWork.WarrantyCardRepository
-                        /*.GetByID(id, c => c.Haves.Select(h => h.Requirement));*/
-                        .GetByID(id);
-
-            if (warrantyCard == null)
+            try
             {
-                return NotFound();
-            }
+                var warrantyCard = _unitOfWork.WarrantyCardRepository
+                                        /*.GetByID(id, c => c.Haves.Select(h => h.Requirement));*/
+                                        .GetByID(id);
 
-            return Ok(warrantyCard);
+                if (warrantyCard == null)
+                {
+                    return NotFound("WarrantyCard is not existed");
+                }
+
+                return Ok(warrantyCard);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetWarrantyCardById");
+            }
+            
         }
 
         [HttpPost]
         public IActionResult CreateWarrantyCard(RequestWarrantyCardModel requestWarrantyCardModel)
         {
-            var WarrantyCard = requestWarrantyCardModel.ToWarrantyCardEntity();
-            _unitOfWork.WarrantyCardRepository.Insert(WarrantyCard);
-            _unitOfWork.Save();
-            return Ok();
+            try
+            {
+                var WarrantyCard = requestWarrantyCardModel.ToWarrantyCardEntity();
+                _unitOfWork.WarrantyCardRepository.Insert(WarrantyCard);
+                _unitOfWork.Save();
+                return Ok("Create Warranty successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Create Warranty failed");
+            }
+            
         }
 
         [HttpPut]
         [Route("{id}")]
         public IActionResult UpdateWarrantyCard([FromRoute] int id, RequestWarrantyCardModel requestWarrantyCardModel)
         {
-            var ExistWarrantyCard = _unitOfWork.WarrantyCardRepository.GetByID(id);
-
-            if (ExistWarrantyCard == null)
+            try
             {
-                return NotFound();
-            }
+                var ExistWarrantyCard = _unitOfWork.WarrantyCardRepository.GetByID(id);
 
-            ExistWarrantyCard.Title = requestWarrantyCardModel.Title;
-            ExistWarrantyCard.Description = requestWarrantyCardModel.Description;
-            _unitOfWork.WarrantyCardRepository.Update(ExistWarrantyCard);
-            _unitOfWork.Save();
-            return Ok();
+                if (ExistWarrantyCard == null)
+                {
+                    return NotFound("WarrantyCard is not existed");
+                }
+
+                ExistWarrantyCard.Title = requestWarrantyCardModel.Title;
+                ExistWarrantyCard.Description = requestWarrantyCardModel.Description;
+                _unitOfWork.WarrantyCardRepository.Update(ExistWarrantyCard);
+                _unitOfWork.Save();
+                return Ok("Update Warranty successfully");
+            } catch (Exception Ex)
+            {
+                return BadRequest("Update Warranty failed");
+            }
+            
         }
 
         [HttpDelete]
@@ -71,13 +103,27 @@ namespace API.Controllers
 
             if (ExistWarrantyCard == null)
             {
-                return NotFound();
+                return NotFound("WarrantyCard is not existed");
             }
-
-            _unitOfWork.WarrantyCardRepository.Delete(ExistWarrantyCard);
-            _unitOfWork.Save();
-            return Ok();
+            try
+            {
+                _unitOfWork.WarrantyCardRepository.Delete(ExistWarrantyCard);
+                _unitOfWork.Save();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (_unitOfWork.IsForeignKeyConstraintViolation(ex))
+                {
+                    return BadRequest("Cannot delete this item because it is referenced by another entity.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return Ok("Delete Successfully");
+            
         }
-
+       
     }
 }

@@ -23,95 +23,120 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult SearchDesign([FromQuery] RequestSearchDesignModel requestSearchDesignModel)
         {
-            var sortBy = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignBy.ToString() : null;
-            var sortType = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignType.ToString() : null;
-            Expression<Func<Design, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchDesignModel.DesignName) || x.DesignName.Contains(requestSearchDesignModel.DesignName)) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.Stone) || x.Stone.Kind.Contains(requestSearchDesignModel.Stone)) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.MasterGemstone) || x.MasterGemstone.Kind.Contains(requestSearchDesignModel.MasterGemstone)) &&
-                (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.TypeOfJewellery) || x.TypeOfJewellery.Name.Contains(requestSearchDesignModel.TypeOfJewellery)) &&
-                (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material)) ;
-            Func<IQueryable<Design>, IOrderedQueryable<Design>> orderBy = null;
+            try
+            {
+                var sortBy = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignBy.ToString() : null;
+                var sortType = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignType.ToString() : null;
+                Expression<Func<Design, bool>> filter = x =>
+                    (string.IsNullOrEmpty(requestSearchDesignModel.DesignName) || x.DesignName.Contains(requestSearchDesignModel.DesignName)) &&
+                    (string.IsNullOrEmpty(requestSearchDesignModel.Stone) || x.Stone.Kind.Contains(requestSearchDesignModel.Stone)) &&
+                    (string.IsNullOrEmpty(requestSearchDesignModel.MasterGemstone) || x.MasterGemstone.Kind.Contains(requestSearchDesignModel.MasterGemstone)) &&
+                    (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
+                    (string.IsNullOrEmpty(requestSearchDesignModel.TypeOfJewellery) || x.TypeOfJewellery.Name.Contains(requestSearchDesignModel.TypeOfJewellery)) &&
+                    (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material));
+                Func<IQueryable<Design>, IOrderedQueryable<Design>> orderBy = null;
 
-            if (!string.IsNullOrEmpty(sortBy))
-            {
-                if (sortType == SortDesignTypeEnum.Ascending.ToString())
+                if (!string.IsNullOrEmpty(sortBy))
                 {
-                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    if (sortType == SortDesignTypeEnum.Ascending.ToString())
+                    {
+                        orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    }
+                    else if (sortType == SortDesignTypeEnum.Descending.ToString())
+                    {
+                        orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                    }
                 }
-                else if (sortType == SortDesignTypeEnum.Descending.ToString())
+                if (requestSearchDesignModel.SortContent?.isParent == null)
                 {
-                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                    filter = x => (x.ParentId == null);
                 }
+                else
+                {
+                    filter = x => (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null);
+                }
+                var reponseDesign = _unitOfWork.DesignRepository.Get(
+                    filter,
+                    orderBy,
+                    /*includeProperties: "",*/
+                    pageIndex: requestSearchDesignModel.pageIndex,
+                    pageSize: requestSearchDesignModel.pageSize,
+                    m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery
+                    ).Select(d => d.toDesignDTO());
+                return Ok(reponseDesign);
             }
-            if(requestSearchDesignModel.SortContent?.isParent == null)
+            catch (Exception ex)
             {
-                filter = x => (x.ParentId == null);
-            }else
-            {
-                filter = x => (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null);
+                return BadRequest("Something wrong in SearchDesign");
             }
-            var reponseDesign = _unitOfWork.DesignRepository.Get(
-                filter,
-                orderBy,
-                /*includeProperties: "",*/
-                pageIndex: requestSearchDesignModel.pageIndex,
-                pageSize: requestSearchDesignModel.pageSize,
-                m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery
-                ).Select(d => d.toDesignDTO());
-            return Ok(reponseDesign);
+           
         }
 
         [HttpGet("{id}")]
         public IActionResult GetDesignById(int id)
         {
-            var Design = _unitOfWork.DesignRepository.GetByID(id, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery);
-            if (Design == null)
+            try
             {
-                return NotFound("Design is not existed");
-            }
+                var Design = _unitOfWork.DesignRepository.GetByID(id, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery);
+                if (Design == null)
+                {
+                    return NotFound("Design is not existed");
+                }
 
-            return Ok(Design.toDesignDTO());
+                return Ok(Design.toDesignDTO());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetDesignById");
+            }
+            
         }
 
         [HttpPost("DesignChild")]
         public IActionResult CreateDesignForRequirement(RequestCreateDesignModel requestCreateDesignModel, int parentId)
         {
-            var parentDesign = _unitOfWork.DesignRepository.GetByID(parentId);
-            int childDesignId = 0;
-            var listDesign = _unitOfWork.DesignRepository.Get();
-            if(parentDesign == null)
+            try
             {
-                return NotFound("ParentId does not exist");
-            }
-            foreach (var item in listDesign)
-            {
-                if(item.StonesId == requestCreateDesignModel.StonesId && item.MasterGemstoneId == requestCreateDesignModel.MasterGemstoneId 
-                    && item.MaterialId == requestCreateDesignModel.MaterialId) 
+                var parentDesign = _unitOfWork.DesignRepository.GetByID(parentId);
+                int childDesignId = 0;
+                var listDesign = _unitOfWork.DesignRepository.Get();
+                if (parentDesign == null)
                 {
-                    childDesignId = item.DesignId;
-                    break;
+                    return NotFound("ParentId does not exist");
+                }
+                foreach (var item in listDesign)
+                {
+                    if (item.StonesId == requestCreateDesignModel.StonesId && item.MasterGemstoneId == requestCreateDesignModel.MasterGemstoneId
+                        && item.MaterialId == requestCreateDesignModel.MaterialId)
+                    {
+                        childDesignId = item.DesignId;
+                        break;
+                    }
+                }
+                if (childDesignId == 0)
+                {
+                    var Design = requestCreateDesignModel.toDesignChildEntity(parentId);
+                    Design.DesignName = parentDesign.DesignName;
+                    Design.Image = parentDesign.Image;
+                    Design.TypeOfJewelleryId = parentDesign.TypeOfJewelleryId;
+                    Design.Description = parentDesign.Description;
+                    Design.ManagerId = null;
+                    _unitOfWork.DesignRepository.Insert(Design);
+                    _unitOfWork.Save();
+                    return Ok(Design.toDesignDTO());
+                    /*return Ok("Create successfully");*/
+                }
+                else
+                {
+                    var Design = _unitOfWork.DesignRepository.GetByID(childDesignId, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery); ;
+                    return Ok(Design.toDesignDTO());
                 }
             }
-            if(childDesignId==0)
+            catch (Exception ex)
             {
-                var Design = requestCreateDesignModel.toDesignChildEntity(parentId);
-                Design.DesignName = parentDesign.DesignName;
-                Design.Image =  parentDesign.Image;
-                Design.TypeOfJewelleryId = parentDesign.TypeOfJewelleryId;
-                Design.Description = parentDesign.Description;
-                Design.ManagerId = null;
-                _unitOfWork.DesignRepository.Insert(Design);
-                _unitOfWork.Save();
-                return Ok(Design.toDesignDTO());
-                /*return Ok("Create successfully");*/
+                return BadRequest("Create DesignChild failed");
             }
-            else
-            {
-                var Design = _unitOfWork.DesignRepository.GetByID(childDesignId, m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery); ;
-                return Ok(Design.toDesignDTO());
-            }
+            
         }
 
         [HttpPost("DesignParent")]
@@ -135,7 +160,7 @@ namespace API.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest("Something ");
+                return BadRequest("Create DesignParent failed");
             }
             
         }
@@ -179,9 +204,23 @@ namespace API.Controllers
             {
                 return NotFound("Design is not existed");
             }
-            _unitOfWork.DesignRepository.Delete(existedDesign);
-            _unitOfWork.Save();
-            return Ok();
+            try
+            {
+                _unitOfWork.DesignRepository.Delete(existedDesign);
+                _unitOfWork.Save();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (_unitOfWork.IsForeignKeyConstraintViolation(ex))
+                {
+                    return BadRequest("Cannot delete this item because it is referenced by another entity");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return Ok("Delete Design successfully");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace API.Controllers
             try
             {
                 var PaymentByMonth = _unitOfWork.PaymentRepository.Get(filter:
-               x => x.CompletedAt.Value.Month.Equals((int)monthFromRequest) && x.CompletedAt.Value.Year.Equals(year)).ToList();
+               x => x.CompletedAt.Value.Month.Equals((int)monthFromRequest) && x.CompletedAt.Value.Year.Equals(year)&&x.Status.Equals("Paid")).ToList();
                 var RevenueByMonth = PaymentByMonth.GroupBy(x => x.CompletedAt.Value.Month).Select(x => new
                 {
                     month = monthFromRequest.ToString(),
@@ -31,7 +31,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Something wrong");
+                return BadRequest("Something wrong in GetRevenue");
             }
         }
         [HttpGet("CountType")]
@@ -77,70 +77,85 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Something wrong");
+                return BadRequest("Something wrong in GetCountByType");
             }
 
         }
         [HttpGet("NumberRequirementInMonth")]
         public IActionResult GetNumberRequirementInMonth(int? year, Month monthFromRequest)
         {
-            var RequirementInMonth = _unitOfWork.RequirementRepository.Get(filter: x => x.CreatedDate.Value.Month.Equals((int)monthFromRequest)
-                && x.CreatedDate.Value.Year.Equals(year)).ToList().Count();
-            return Ok(new
+            try
             {
-                month = monthFromRequest.ToString(),
-                NumberSelling = RequirementInMonth,
-            });
+                var RequirementInMonth = _unitOfWork.RequirementRepository.Get(filter: x => x.CreatedDate.Value.Month.Equals((int)monthFromRequest)
+                && x.CreatedDate.Value.Year.Equals(year)).ToList().Count();
+                return Ok(new
+                {
+                    month = monthFromRequest.ToString(),
+                    NumberSelling = RequirementInMonth,
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetNumberRequirementInMonth");
+            }
+            
         }
 
         [HttpGet("MostDesign")]
         public IActionResult GetMostDesign()
         {
-            //Đếm số bản desgin mà requirement dùng
-            var designCounts = _unitOfWork.DesignRepository.Get(filter: x=>x.ParentId == null)
-                .GroupJoin(
-                    _unitOfWork.RequirementRepository.Get(),
-                    design => design.DesignId,
-                    requirement => requirement.DesignId,
-                    (design, requirements) => new
+            try
+            {
+                //Đếm số bản desgin mà requirement dùng
+                var designCounts = _unitOfWork.DesignRepository.Get(filter: x => x.ParentId == null)
+                    .GroupJoin(
+                        _unitOfWork.RequirementRepository.Get(),
+                        design => design.DesignId,
+                        requirement => requirement.DesignId,
+                        (design, requirements) => new
+                        {
+                            DesignId = design.DesignId,
+                            Count = requirements.Count()
+                        })
+                        .OrderByDescending(x => x.Count);
+
+                //Đếm design cha có bao nhiêu con 
+                var parentDesigns = _unitOfWork.DesignRepository.Get(filter: x => x.ParentId == null).Select(x => x.DesignId);
+                var childDesignCounts = _unitOfWork.DesignRepository.Get()
+                    .GroupBy(x => x.ParentId)
+                    .Select(x => new
                     {
-                        DesignId = design.DesignId,
-                        Count = requirements.Count()
+                        ParentId = x.Key,
+                        Count = x.Count()
+                    }).ToList();
+
+                var allParentDesignCounts = parentDesigns.GroupJoin(
+                    childDesignCounts,
+                    parent => parent,
+                    child => child.ParentId,
+                    (parent, children) => new
+                    {
+                        ParentId = parent,
+                        Count = children.FirstOrDefault()?.Count ?? 0
                     })
                     .OrderByDescending(x => x.Count);
-
-            //Đếm design cha có bao nhiêu con 
-            var parentDesigns = _unitOfWork.DesignRepository.Get(filter: x => x.ParentId == null).Select(x => x.DesignId);
-            var childDesignCounts = _unitOfWork.DesignRepository.Get()
-                .GroupBy(x => x.ParentId)
-                .Select(x => new
-                {
-                    ParentId = x.Key,
-                    Count = x.Count()
-                }).ToList();
-
-            var allParentDesignCounts = parentDesigns.GroupJoin(
-                childDesignCounts,
-                parent => parent,
-                child => child.ParentId,
-                (parent, children) => new
-                {
-                    ParentId = parent,
-                    Count = children.FirstOrDefault()?.Count ?? 0
-                })
-                .OrderByDescending(x => x.Count);
-            // Đếm tổng 
-            var Result = designCounts.GroupJoin(
-                allParentDesignCounts,
-                designCount => designCount.DesignId,
-                allParent => allParent.ParentId,
-                (designCounts, allParentCount) => new
-                {
-                    DesignId = designCounts.DesignId,
-                    Count = designCounts.Count + allParentCount.FirstOrDefault()?.Count ?? 0
-                }
-                ).OrderByDescending(x=>x.Count).Take(3);
-            return Ok(Result);
+                // Đếm tổng 
+                var Result = designCounts.GroupJoin(
+                    allParentDesignCounts,
+                    designCount => designCount.DesignId,
+                    allParent => allParent.ParentId,
+                    (designCounts, allParentCount) => new
+                    {
+                        DesignId = designCounts.DesignId,
+                        Count = designCounts.Count + allParentCount.FirstOrDefault()?.Count ?? 0
+                    }
+                    ).OrderByDescending(x => x.Count).Take(3);
+                return Ok(Result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetMostDesign");
+            }
         }
 
     }

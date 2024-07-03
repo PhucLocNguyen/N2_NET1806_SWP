@@ -28,22 +28,29 @@ namespace API.Controllers
         [HttpPost("registerForCustomer")]
         public async Task<IActionResult> Register([FromBody] RequestRegisterAccount requestRegisterAccount)
         {
-
-            if (checkDuplicateUsername(requestRegisterAccount.Username))
+            try
             {
-                return BadRequest("Username is existed");
+                if (checkDuplicateUsername(requestRegisterAccount.Username))
+                {
+                    return BadRequest("Username is existed");
+                }
+                var existUserHaveSameEmail = _unitOfWork.UserRepository.Get(filter: x => x.Email.Equals(requestRegisterAccount.Email));
+                if (existUserHaveSameEmail.Count() > 0)
+                {
+                    return BadRequest("Email has already been registered");
+                }
+                if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
+                {
+                    return BadRequest("PasswordConfirm is not correct");
+                }
+                _emailService.SaveInCache(requestRegisterAccount);
+                return Ok("Please check email to verify your email");
             }
-            var existUserHaveSameEmail = _unitOfWork.UserRepository.Get(filter: x => x.Email.Equals(requestRegisterAccount.Email));
-            if (existUserHaveSameEmail.Count() > 0)
+            catch (Exception ex)
             {
-                return BadRequest("Email has already been registered");
+                return BadRequest("Something wrong when sending email");
             }
-            if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
-            {
-                return BadRequest("PasswordConfirm is not correct");
-            }
-            _emailService.SaveInCache(requestRegisterAccount);
-            return Ok("Please check email to verify your email");
+            
         }
 
         [HttpPost("registerForAdmin")]

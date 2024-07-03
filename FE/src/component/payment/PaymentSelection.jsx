@@ -14,6 +14,9 @@ function PaymentSelection() {
 
   useEffect(() => {
     switch (status) {
+      case "-2":
+        setTitle("Please contact with sale in chat system");
+        break;
       case "-3":
         setTitle("Waiting for the next price quote");
         break;
@@ -68,6 +71,16 @@ function PaymentSelection() {
   }) {
     console.log(status);
     switch (status) {
+      case "-2":
+        return (
+          <CustomerWaiting
+            designDetail={designDetail}
+            title={title}
+            requirementDetail={requirementDetail}
+            total={total}
+            status={status}
+          />
+        );
       case "-3":
         return (
           <CustomerWaiting

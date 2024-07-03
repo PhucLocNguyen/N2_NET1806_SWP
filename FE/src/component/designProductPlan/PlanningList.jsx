@@ -21,6 +21,8 @@ function PlanningList() {
     }
   }, [role]);
 
+  console.log(type)
+
   useEffect(() => {
     fetchDataByStatus(type);
   }, [type, dataUpdated]);

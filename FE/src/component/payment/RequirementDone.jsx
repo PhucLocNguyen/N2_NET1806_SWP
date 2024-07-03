@@ -203,148 +203,158 @@ function RequirementDone({
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1-content"
-                id="panel1-header"
-                className="text-[24px]"
-              >
-                <Typography
-                  variant="h3"
-                  sx={{ width: "33%", flexShrink: 0, fontSize: "20px" }}
+            {saleStaff !== null ? (
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                  className="text-[24px]"
                 >
-                  Sale staff
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  <Link to="/chat">
-                    <Button
-                      variant="contained"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        CreateConversationJoin(UserId, saleStaff.usersId);
-                      }}
-                    >
-                      Chat with sale staff
-                    </Button>
-                  </Link>
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <div className="flex items-center gap-4">
-                  <img
-                    src={
-                      saleStaff.image != null
-                        ? saleStaff.image
-                        : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
-                    }
-                    className="w-[150px] rounded-full"
-                    alt="Sale staff image"
-                  />
-                  <div>
-                    <h4 className="text-[20px]">
-                      Sale staff name: {saleStaff.name}
-                    </h4>
-                    <h4>Email: {saleStaff.email}</h4>
+                  <Typography
+                    variant="h3"
+                    sx={{ width: "33%", flexShrink: 0, fontSize: "20px" }}
+                  >
+                    Sale staff
+                  </Typography>
+                  <Typography sx={{ color: "text.secondary" }}>
+                    <Link to="/chat">
+                      <Button
+                        variant="contained"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          CreateConversationJoin(UserId, saleStaff.usersId);
+                        }}
+                      >
+                        Chat with sale staff
+                      </Button>
+                    </Link>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={
+                        saleStaff.image != null
+                          ? saleStaff.image
+                          : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                      }
+                      className="w-[150px] rounded-full"
+                      alt="Sale staff image"
+                    />
+                    <div>
+                      <h4 className="text-[20px]">
+                        Sale staff name: {saleStaff.name}
+                      </h4>
+                      <h4>Email: {saleStaff.email}</h4>
+                    </div>
                   </div>
-                </div>
-              </AccordionDetails>
-            </Accordion>
+                </AccordionDetails>
+              </Accordion>
+            ) : null}
 
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1-content"
-                id="panel1-header"
-                className="text-[24px]"
-              >
-                <Typography
-                  variant="h3"
-                  sx={{ width: "33%", flexShrink: 0, fontSize: "20px" }}
+            {deisgnStaff !== null ? (
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                  className="text-[24px]"
                 >
-                  Design staff
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  <Link to="/chat">
-                    <Button
-                      variant="contained"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        CreateConversationJoin(UserId, deisgnStaff.usersId);
-                      }}
-                    >
-                      Chat with design staff
-                    </Button>
-                  </Link>
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <div className="flex items-center gap-4">
-                  <img
-                    src={
-                      deisgnStaff.image != null
-                        ? deisgnStaff.image
-                        : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
-                    }
-                    className="w-[150px] rounded-full"
-                    alt="Sale staff image"
-                  />
-                  <div>
-                    <h4 className="text-[20px]">
-                      Design staff name: {deisgnStaff.name}
-                    </h4>
-                    <h4>Email: {deisgnStaff.email}</h4>
+                  <Typography
+                    variant="h3"
+                    sx={{ width: "33%", flexShrink: 0, fontSize: "20px" }}
+                  >
+                    Design staff
+                  </Typography>
+                  <Typography sx={{ color: "text.secondary" }}>
+                    <Link to="/chat">
+                      <Button
+                        variant="contained"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          CreateConversationJoin(UserId, deisgnStaff.usersId);
+                        }}
+                      >
+                        Chat with design staff
+                      </Button>
+                    </Link>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={
+                        deisgnStaff.image != null
+                          ? deisgnStaff.image
+                          : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                      }
+                      className="w-[150px] rounded-full"
+                      alt="Sale staff image"
+                    />
+                    <div>
+                      <h4 className="text-[20px]">
+                        Design staff name: {deisgnStaff.name}
+                      </h4>
+                      <h4>Email: {deisgnStaff.email}</h4>
+                    </div>
                   </div>
-                </div>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1-content"
-                id="panel1-header"
-                className="text-[24px]"
-              >
-                <Typography
-                  variant="h3"
-                  sx={{ width: "33%", flexShrink: 0, fontSize: "20px" }}
+                </AccordionDetails>
+              </Accordion>
+            ) : null}
+
+            {deisgnStaff !== null ? (
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                  className="text-[24px]"
                 >
-                  Production staff
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  <Link to="/chat">
-                    <Button
-                      variant="contained"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        CreateConversationJoin(UserId, productionStaff.usersId);
-                      }}
-                    >
-                      Chat with Production staff
-                    </Button>
-                  </Link>
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <div className="flex items-center gap-4">
-                  <img
-                    src={
-                      productionStaff.image != null
-                        ? productionStaff.image
-                        : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
-                    }
-                    className="w-[150px] rounded-full"
-                    alt="production staff image"
-                  />
-                  <div>
-                    <h4 className="text-[20px]">
-                      Sale staff name: {productionStaff.name}
-                    </h4>
-                    <h4>Email: {productionStaff.email}</h4>
+                  <Typography
+                    variant="h3"
+                    sx={{ width: "33%", flexShrink: 0, fontSize: "20px" }}
+                  >
+                    Production staff
+                  </Typography>
+                  <Typography sx={{ color: "text.secondary" }}>
+                    <Link to="/chat">
+                      <Button
+                        variant="contained"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          CreateConversationJoin(
+                            UserId,
+                            productionStaff.usersId
+                          );
+                        }}
+                      >
+                        Chat with Production staff
+                      </Button>
+                    </Link>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={
+                        productionStaff.image != null
+                          ? productionStaff.image
+                          : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                      }
+                      className="w-[150px] rounded-full"
+                      alt="production staff image"
+                    />
+                    <div>
+                      <h4 className="text-[20px]">
+                        Sale staff name: {productionStaff.name}
+                      </h4>
+                      <h4>Email: {productionStaff.email}</h4>
+                    </div>
                   </div>
-                </div>
-              </AccordionDetails>
-            </Accordion>
+                </AccordionDetails>
+              </Accordion>
+            ) : null}
           </AccordionDetails>
         </Accordion>
       </div>

@@ -114,16 +114,9 @@ function CustomerPay({
     <div className="col-span-2 flex flex-col justify-center items-center">
       <div className="min-h-[350px] w-[500px]">
         <h2 className="text-3xl font-bold text-gray-900 mb-6">{title}</h2>
-        <img
-          src={requirementDetail.design3D}
-          alt={
-            "image last product of requirement #" +
-            requirementDetail.requirementId
-          }
-        />
         <h3 className="text-xl font-semibold text-gray-700 mb-3">Summary:</h3>
         <ReDesignSummary status={status} />
-        <CustomerPayButton moneyWillPay={Math.ceil(requirementDetail.totalMoney - Math.ceil(total / 2))} />
+        <CustomerPayButton moneyWillPay={Math.abs(Math.ceil(requirementDetail.totalMoney - Math.ceil(total / 2)))} />
       </div>
     </div>
   );

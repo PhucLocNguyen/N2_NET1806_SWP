@@ -2,12 +2,14 @@ import { TextField } from '@mui/material'
 import { useCallback, useState } from 'react';
 import { useRef } from 'react';
 
-function InputText({ label, type, pattern}) {
+function InputText({ label, type, pattern, inputCase}) {
     const [useValid, setValid] = useState({isValid: false,
     message: ""});
     function ValidateInputChange(e){
+        if(inputCase!=null&&inputCase=="login"){
+          return;
+        }
         const value = e.target.value.trim();
-        console.log(value.length);
         if(value.length ==0){
             setValid({isValid:true, message: `${label} field can't be empty!`});
             return;

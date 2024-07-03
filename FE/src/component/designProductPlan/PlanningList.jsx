@@ -10,7 +10,7 @@ function PlanningList() {
   const [data, setData] = useState([]);
   const [dataUpdated, setDataUpdated] = useState(true);
   const [type, setType] = useState("");
-  const { role } = useAuth();
+  const { role, UserId } = useAuth();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function PlanningList() {
       currentType === "design" ? statusDesignOptions : statusProductOptions;
     try {
       const dataPromises = statusOptions.map((code) =>
-        fetchApiRequirementByStatus(code)
+        FetchApiRequirementByStatus(UserId,code)
       );
       const dataResponses = await Promise.all(dataPromises);
 

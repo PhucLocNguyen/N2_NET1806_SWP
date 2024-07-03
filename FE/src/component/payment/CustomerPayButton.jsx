@@ -5,7 +5,6 @@ function CustomerPayButton({moneyWillPay}) {
     console.log(moneyWillPay);
     const { total, requirementDetail, designDetail , payNow} = useContext(summaryContext);
     
-    
     return ( <button onClick={(e)=>
         {
         payNow(moneyWillPay);

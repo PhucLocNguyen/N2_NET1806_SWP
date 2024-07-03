@@ -1,5 +1,6 @@
 import { lazy } from "react";
-
+const OrderSupportDetail = lazy(() => import("../component/saleStaff/OrderSupportDetail"));
+const OrderSupportList= lazy(() => import("../component/saleStaff/OrderSupportList"));
 const ChatStaff = lazy(() => import("../component/staff/ChatStaff"));
 
 const Home = lazy(() => import('../component/home/Home'));
@@ -140,11 +141,20 @@ const privateRoutes = [
       role: ['DesignStaff', 'ProductStaff', "Sale"],
    },
    {
-      path: "/my-order",
-      component: Empty,
+      path: '/staff',
+      component: StaffLayout,
       children: [
-         { index: true, component: OrderCustomer },
-         { path: ':id', component: OrderDetail }
+         { path: 'order-support', component: OrderSupportList },
+         { path: 'order-support/:id', component: OrderSupportDetail}
+      ],
+      role: ["Sale"],
+   },
+   {
+    path:"/my-order",
+    component:Empty,
+    children:[
+        {index:true, component: OrderCustomer},
+        {path:':id', component: OrderDetail}
       ],
       role: ['Customer']
    }

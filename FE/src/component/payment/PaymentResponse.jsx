@@ -6,6 +6,7 @@ import { FetchApiRequirementById } from "../../api/Requirements/FetchApiRequirem
 import { PutApiRequirement } from "../../api/Requirements/PutApiRequirement";
 import Lottie from "lottie-react";
 import iconSuccess from "../../assets/icon/iconSuccess.json";
+import iconFailed from "../../assets/icon/iconFailed.json";
 import { CustomButton } from "../home/Home";
 
 function PaymentResponse() {
@@ -76,7 +77,32 @@ function PaymentResponse() {
           </div>
         </div>
       ) : (
-        <h3>Failed Payment</h3>
+        <div className="bg-[#fff] rounded-lg px-10 shadow-[0_5px_15px_rgba(0,0,0,0.35)] absolute -translate-y-1/2 top-1/2 z-10 w-[768px] max-w-[100%] pb-10">
+          <div className="">
+            <div className="iconNotification">
+              <Lottie animationData={iconFailed} style={{ width: "100%", height: "320px" }} loop={false} />
+            </div>
+            <h3 className="text-[32px] text-center mb-6">Your payment was failed</h3>
+            <CustomButton
+              variant="contained"
+              sx={{
+                color: "#fff",
+                bgcolor: "#000",
+                letterSpacing: 4,
+                padding: "0.7rem 2.375rem",
+                fontSize: "1rem",
+                fontWeight: 400,
+                lineHeight: "1.5rem",
+                display: "flex",
+                justifyContent: "justify-center",
+                width: "100%",
+              }}
+              onClick={moveToOrder}
+            >
+              Go to your order
+            </CustomButton>
+          </div>
+        </div>
       )}
     </div>
   );

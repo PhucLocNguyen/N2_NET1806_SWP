@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import { fetchApiDesignById } from "../../api/FetchApiDesign";
 import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
 import useAuth from "../../hooks/useAuth.jsx";
@@ -14,9 +10,6 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
   const [masterGemStone, setMasterGemStone] = useState(null);
   const [stone, setStone] = useState(null);
   const [status, setStatus] = useState("");
-
-  const statusDesignOptions = [5, 6, 7];
-  const statusProductOptions = [8, 9, 10];
 
   const { role } = useAuth();
 

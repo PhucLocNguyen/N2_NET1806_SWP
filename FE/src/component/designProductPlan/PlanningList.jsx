@@ -6,6 +6,7 @@ import {
   FetchApiRequirementOpeningOrder,
 } from "../../api/Requirements/FetchApiRequirement.jsx";
 
+
 function PlanningList() {
   const [dataTodo, setDataTodo] = useState([]);
   const [dataInProgress, setDataInProgress] = useState([]);

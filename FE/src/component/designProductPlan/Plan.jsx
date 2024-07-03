@@ -3,6 +3,39 @@ import TodoPopup from "./TodoPopup";
 import DonePopup from "./DonePopup";
 import Popup from "./Popup";
 
+export const statusOption = [
+  { code: 5, label: "The sketch is being drafted" },
+  { code: 6, label: "Design The Ring" },
+  { code: 7, label: "The sketch is complete" },
+  { code: 8, label: "The sketch is ready" },
+  { code: 9, label: "Product is being processed" },
+  { code: 10, label: "Processing completed and ready for handover" },
+];
+
+export const getStatusClass = (status) => {
+  switch (status) {
+    case "The sketch is being drafted":
+      return "bg-yellow-100 text-yellow-600";
+    case "Design The Ring":
+      return "bg-yellow-100 text-yellow-600";
+    case "The sketch is complete":
+      return "bg-yellow-100 text-yellow-600";
+    case "The sketch is ready":
+      return "bg-yellow-100 text-yellow-600";
+    case "Product is being processed":
+      return "bg-yellow-100 text-yellow-600";
+    case "Processing completed and ready for handover":
+      return "bg-yellow-100 text-yellow-600";
+    default:
+      return "bg-gray-100 text-gray-600";
+  }
+};
+
+export const getStatus = (code) => {
+  const status = statusOption.find((item) => item.code == code);
+  return status ? status.label : "Unknown status";
+};
+
 function Plan({ data, handleStatusChange, handlePopupOpen, isTodo, isDone }) {
   const [isOpenPopup, setIsOpenPopup] = useState(false);
 
@@ -50,7 +83,7 @@ function Plan({ data, handleStatusChange, handlePopupOpen, isTodo, isDone }) {
             Requirement ID: R00{data.requirementId}
           </span>
           <h4 className="mt-4 text-sm font-medium bg-[#4338d3] text-white px-2 h-fit w-fit rounded ml-6">
-            {data.status}
+            {getStatus(data.status)}
           </h4>
           <div className="flex items-center w-full mt-3 text-xs font-medium text-gray-400 ml-6">
             <div className="flex items-center">

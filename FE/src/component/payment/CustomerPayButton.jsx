@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { summaryContext } from "./SummaryContext";
 
 function CustomerPayButton({moneyWillPay}) {
     console.log(moneyWillPay);
     const { total, requirementDetail, designDetail , payNow} = useContext(summaryContext);
-    const [getRequirementDetail, setRequirementDetail]= useState();
     
     return ( <button onClick={(e)=>
         {

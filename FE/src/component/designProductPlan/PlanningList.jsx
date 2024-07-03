@@ -45,6 +45,7 @@ function PlanningList() {
       const doneResponse = await FetchApiRequirementByStatus(
         UserId,
         statusDone
+
       );
 
       setDataTodo(todoResponse);

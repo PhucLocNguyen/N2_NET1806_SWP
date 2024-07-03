@@ -16,11 +16,11 @@ function CustomerConfirmation({
     if (status == "3") {
       const updateStatusRequirement = await PutApiRequirement({
         ...requirementDetail,
-        status: "-3",
+        status: "-2",
       });
       if (updateStatusRequirement != null) {
         toast.success("Decline the price quote successful");
-        setStatus("-3");
+        setStatus("-2");
       }
     }
     if (status == "7") {

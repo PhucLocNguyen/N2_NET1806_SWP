@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
-
-
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 import RowRequirement from "./RowRequirement"
 import ApiListRequirement from '../../api/manager/ListRequirement';
-import useAuth from '../../hooks/useAuth'
 
 function ListRequirement() {
    const pageSize = 6;
@@ -15,7 +12,6 @@ function ListRequirement() {
    const [page, setPage] = useState(1);
    const [data, setData] = useState([]);
    const [dataSize, setDataSize] = useState(0);
-   const { accessToken } = useAuth();
 
    const handleChange = (event, value) => {
       setPage(value);
@@ -24,12 +20,12 @@ function ListRequirement() {
    useEffect(() => {
       try {
          const fetchApi = async () => {
-            const respone = await ApiListRequirement({ accessToken, pageSize, page, status });
+            const respone = await ApiListRequirement({ pageSize, page, status });
             setData(respone)
          }
 
          const fetchApiTotal = async () => {
-            const respone = await ApiListRequirement({ accessToken, status });
+            const respone = await ApiListRequirement({ status });
             setDataSize(respone?.length)
          }
 

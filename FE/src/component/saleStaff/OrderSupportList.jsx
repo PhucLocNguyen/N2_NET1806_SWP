@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-
+import { useEffect, useState } from "react";
 import ApiListRequirement from "../../api/manager/ListRequirement";
-import RowWarranty from "./RowWarranty";
+import RowOrderSupportList from "./RowOrderSupportList";
 
-function Warranty() {
-   const status = 11;
+function OrderSupportList() {
+    const status = -2;
    const pageSize = 6;
 
    const [data, setData] = useState([]);
    const [page, setPage] = useState(1);
+
 
    const fetchApi = async () => {
       const respone = await ApiListRequirement({ pageSize, page, status });
@@ -34,7 +34,7 @@ function Warranty() {
       <>
          <div className="flex flex-col text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-[100vh]">
             <div className=" flex items-center flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75">
-               <h1 className="text-2xl font-bold">Warranty</h1>
+               <h1 className="text-2xl font-bold">Order </h1>
             </div>
 
             <div className="py-[3rem] px-[3rem]">
@@ -57,7 +57,7 @@ function Warranty() {
 
                   {data?.map((item, index) => {
                      return (
-                        <RowWarranty key={index} data={item} />
+                        <RowOrderSupportList key={index} data={item} />
                      )
                   })}
 
@@ -69,4 +69,4 @@ function Warranty() {
    )
 }
 
-export default Warranty;
+export default OrderSupportList;

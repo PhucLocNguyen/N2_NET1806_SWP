@@ -26,7 +26,7 @@ export function SummaryContext({children, requirementData, ChangeToggle, status,
                 "requirementId": requirementDetail.requirementId
               };
               const responseUrl = await PostPaymentApi(paymentRequest);
-                window.location.href=responseUrl;              
+                window.location.href= await responseUrl;              
         }
     async function loadData(){
         const getDesignDetail = await FetchApiDesignById(requirementDetail.designId);

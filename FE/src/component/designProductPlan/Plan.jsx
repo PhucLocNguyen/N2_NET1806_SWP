@@ -82,10 +82,7 @@ function Plan({ data, handleStatusChange, handlePopupOpen, isTodo, isDone }) {
               requirementId={data.requirementId}
             />
           ) : isDone ? (
-            <DonePopup
-              setIsOpenPopup={setIsOpenPopup}
-              data={data}
-            />
+            <DonePopup setIsOpenPopup={setIsOpenPopup} data={data} />
           ) : (
             <Popup
               setIsOpenPopup={setIsOpenPopup}

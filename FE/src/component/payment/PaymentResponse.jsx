@@ -7,7 +7,6 @@ import { PutApiRequirement } from "../../api/Requirements/PutApiRequirement";
 import Lottie from "lottie-react";
 import iconSuccess from "../../assets/icon/iconSuccess.json";
 import iconFailed from "../../assets/icon/iconFailed.json";
-
 import { CustomButton } from "../home/Home";
 
 function PaymentResponse() {

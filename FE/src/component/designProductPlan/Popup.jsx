@@ -1,50 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import { fetchApiDesignById } from "../../api/FetchApiDesign";
 import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
 import useAuth from "../../hooks/useAuth.jsx";
 
 function Popup({ setIsOpenPopup, data, handleStatusChange }) {
-  const [selection, setSelection] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [dataDesign, setDataDesign] = useState({});
   const [masterGemStone, setMasterGemStone] = useState(null);
   const [stone, setStone] = useState(null);
-  const [type, setType] = useState("");
-
-  const statusDesignOptions = [5, 6, 7];
-  const statusProductOptions = [8, 9, 10];
+  const [status, setStatus] = useState("");
 
   const { role } = useAuth();
 
   useEffect(() => {
     if (role === "DesignStaff") {
-      setType("design");
+      setStatus("7");
     } else if (role === "ProductStaff") {
-      setType("product");
+      setStatus("10");
     }
     getDesign(data.designId);
   }, [role]);
 
-  const getStatusOptions = (currentType, currentStatus) => {
-    const options =
-      currentType === "design" ? statusDesignOptions : statusProductOptions;
-    const currentStatusCode = parseInt(currentStatus);
-    return options.filter((code) => code > currentStatusCode);
-  };
-
   const dataUpdate = {
-    status: selection,
+    status: status,
+    createdDate: data.createdDate,
     expectedDelivery: data.expectedDelivery,
     size: data.size,
     designId: data.designId,
     design3D: data.design3D,
     weightOfMaterial: data.weightOfMaterial,
     materialPriceAtMoment: data.materialPriceAtMoment,
+    masterGemStonePriceAtMoment: data.masterGemStonePriceAtMoment,
     stonePriceAtMoment: data.stonePriceAtMoment,
     machiningFee: data.machiningFee,
     totalMoney: data.totalMoney,
@@ -79,14 +66,10 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
         dataUpdate
       );
       if (updateSuccess) {
-        handleStatusChange(data.requirementId, selection);
+        handleStatusChange(data.requirementId, status);
       }
       setIsOpenPopup(false);
     }
-  };
-
-  const handleChange = (event) => {
-    setSelection(event.target.value);
   };
 
   return (
@@ -155,27 +138,6 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
                 </div>
               </div>
             )}
-          </div>
-
-          <div className="w-52 mt-10 mb-4">
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                {data.status}
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={selection}
-                label={data.status}
-                onChange={handleChange}
-              >
-                {getStatusOptions(type, data.status).map((code) => (
-                  <MenuItem key={code} value={code}>
-                    {code}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
           </div>
 
           <div className="w-full">

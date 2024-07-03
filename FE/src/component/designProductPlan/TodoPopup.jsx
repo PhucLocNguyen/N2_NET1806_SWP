@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FetchApiRequirementById } from "../../api/Requirements/FetchApiRequirement";
 import { fetchApiDesignById } from "../../api/FetchApiDesign";
 import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
+import { PostUsersRequirement } from "../../api/Requirements/PostUsersRequirement.jsx";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -17,7 +18,7 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
   const [stone, setStone] = useState(null);
   const [statusUpdate, setStatusUpdate] = useState("");
   const [type, setType] = useState("");
-  const { role } = useAuth();
+  const { role, UserId } = useAuth();
 
   useEffect(() => {
     if (role === "DesignStaff") {
@@ -66,6 +67,17 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
         requirementId,
         updateData
       );
+
+      return response;
+    } catch (error) {
+      console.error("Error updating requirement:", error);
+      return false;
+    }
+  };
+
+  const postUserRequirement = async (requirementId, userId) => {
+    try {
+      const response = await PostUsersRequirement(requirementId, userId);
       return response;
     } catch (error) {
       console.error("Error updating requirement:", error);
@@ -80,7 +92,9 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
         status: statusUpdate,
       });
 
-      if (updateSuccess) {
+      const postSuccess = await postUserRequirement(requirementId,UserId);
+
+      if (updateSuccess && postSuccess) {
         handleStatusChange(requirementId, statusUpdate);
         setIsOpenPopup(false);
       } else {

@@ -12,6 +12,7 @@ import {
   TableRow,
   Paper,
   Button,
+  CircularProgress
 } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
@@ -35,6 +36,7 @@ const OrderDetail = () => {
   const [valid, setValid] = useState(false);
   const [status, setStatus] = useState(0);
   const [statusLabel, setStatusLabel] = useState("");
+  const [loading, setLoading] = useState(true);
   const getRequirementById = async (requirementId, UserId) => {
     try {
       const response = await FetchApiRequirementByIdSecure(
@@ -49,6 +51,8 @@ const OrderDetail = () => {
       } else {
         setValid(false);
       }
+      setLoading(false);
+
     } catch (error) {
       console.error("Failed to fetch requirement:", error);
     }
@@ -104,6 +108,11 @@ const OrderDetail = () => {
 
   function ChangeToggle() {
     setToggle(!toggle);
+  }
+  if(loading){
+    return <div className="flex justify-center items-center h-screen">
+    <CircularProgress />
+  </div>
   }
   if (valid) {
     return (

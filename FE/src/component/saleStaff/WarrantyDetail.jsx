@@ -91,6 +91,7 @@ function WarrantyDetail() {
       CallApiUpdateRequirement(data, id)
       // Chuyen huong
       navigate('/staff/warranty', { replace: true })
+      window.location.reload();
    }
 
    console.log(warranty)

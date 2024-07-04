@@ -87,6 +87,7 @@ function RequirementDetail() {
          }
          CallApi()
          navigate('/manager', { replace: true })
+         window.location.reload();
          console.log('Upload price quote success')
       }
    }

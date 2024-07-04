@@ -36,7 +36,6 @@ function HomeNew() {
    };
 
    return (
-
       <>
          <div className='w-[100%] pb-[8rem]'>
             <div className='w-[90%] my-[3rem] mx-auto'>

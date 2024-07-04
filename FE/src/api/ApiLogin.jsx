@@ -62,8 +62,8 @@ const LoginWithAdmin = async (formData)=>{
         return role;
     }catch(e){
 toast.error("Failed: "+ e?.response?.data);
+return null;
     }
-    return { role }
 
 }
 const VerifyRegister = async (verifyCode)=>{

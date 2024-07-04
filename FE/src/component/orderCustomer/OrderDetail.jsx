@@ -12,17 +12,24 @@ import {
   TableRow,
   Paper,
   Button,
-  CircularProgress
+  CircularProgress,
 } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 import PaymentSection from "../payment/PaymentSection";
 import useAuth from "../../hooks/useAuth";
 import PageError from "../pageerror/PageError";
 import { getStatusCustomerByCode, getStatusClass } from "./OrderCustomer";
+import { PutApiRequirement } from "../../api/Requirements/PutApiRequirement";
 
 const OrderDetail = () => {
   const [show3DDesign, setShow3DDesign] = useState(false);
@@ -37,6 +44,28 @@ const OrderDetail = () => {
   const [status, setStatus] = useState(0);
   const [statusLabel, setStatusLabel] = useState("");
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [isChange,setIsChange] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleCloseUpdate = ()=>{
+    setOpen(false);
+    CancelOrder(data);
+    setIsChange(!isChange);
+
+  }
+  const CancelOrder=async(data)=>{
+    const actionUpdate = await PutApiRequirement({...data,status:"-1"},"Cancel order completed", "Failed to cancel the order");
+    setStatus("-1");
+  }
+  useEffect(()=>{
+    getRequirementById(id,UserId);
+  },[isChange])
   const getRequirementById = async (requirementId, UserId) => {
     try {
       const response = await FetchApiRequirementByIdSecure(
@@ -52,7 +81,6 @@ const OrderDetail = () => {
         setValid(false);
       }
       setLoading(false);
-
     } catch (error) {
       console.error("Failed to fetch requirement:", error);
     }
@@ -109,10 +137,12 @@ const OrderDetail = () => {
   function ChangeToggle() {
     setToggle(!toggle);
   }
-  if(loading){
-    return <div className="flex justify-center items-center h-screen">
-    <CircularProgress />
-  </div>
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <CircularProgress />
+      </div>
+    );
   }
   if (valid) {
     return (
@@ -149,14 +179,26 @@ const OrderDetail = () => {
                   </span>
                 </div>
                 <div className="flex flex-col justify-center items-end">
+                  <div className="flex gap-3">
                   <Button
-                    variant="contained"
-                    disabled={data.status >= 0 && data.status < 3}
-                    sx={{ width: "fit-content" }}
-                    onClick={ChangeToggle}
-                  >
-                    Track order
-                  </Button>
+                      variant="outlined"
+                      color="error"
+                      onClick={handleClickOpen}
+                      disabled={!(data.status>=0&&data.status<=4)}
+                    >
+                      Cancel order
+                    </Button>
+                    <Button
+                      variant="contained"
+                      disabled={data.status >= 0 && data.status < 3}
+                      sx={{ width: "fit-content" }}
+                      onClick={ChangeToggle}
+                    >
+                      Track order
+                    </Button>
+
+                    
+                  </div>
                   {!(data.status >= 0 && data.status < 3) ? (
                     <span className="pb-3">
                       Tracking order will allow after sale staff contact with
@@ -166,31 +208,31 @@ const OrderDetail = () => {
                 </div>
               </div>
               <Grid container spacing={3} className="mb-4">
-          {Object.entries(data)
-            .filter(
-              ([key]) =>
-                key !== "design3D" &&
-                key !== "materialPriceAtMoment" &&
-                key !== "stonePriceAtMoment" &&
-                key !== "machiningFee"&&
-                key !== "status"&&
-                key!== "masterGemStonePriceAtMoment"&&
-                key!== "designId"
-            ) // Remove design3D and price details from display
-            .map(([key, value]) => (
-              <Grid item xs={12} sm={6} key={key}>
-                <Typography variant="body1">
-                  <strong>
-                    {key
-                      .replace(/([A-Z])/g, " $1")
-                      .replace(/^./, (str) => str.toUpperCase())}
-                    :
-                  </strong>{" "}
-                  {value}
-                </Typography>
+                {Object.entries(data)
+                  .filter(
+                    ([key]) =>
+                      key !== "design3D" &&
+                      key !== "materialPriceAtMoment" &&
+                      key !== "stonePriceAtMoment" &&
+                      key !== "machiningFee" &&
+                      key !== "status" &&
+                      key !== "masterGemStonePriceAtMoment" &&
+                      key !== "designId"
+                  ) // Remove design3D and price details from display
+                  .map(([key, value]) => (
+                    <Grid item xs={12} sm={6} key={key}>
+                      <Typography variant="body1">
+                        <strong>
+                          {key
+                            .replace(/([A-Z])/g, " $1")
+                            .replace(/^./, (str) => str.toUpperCase())}
+                          :
+                        </strong>{" "}
+                        {value}
+                      </Typography>
+                    </Grid>
+                  ))}
               </Grid>
-            ))}
-        </Grid>
 
               <div className="flex flex-row flex-wrap mt-6 mb-4">
                 <div className="flex-1 flex flex-col items-center bg-blue-100 rounded-lg p-2 mb-2">
@@ -332,6 +374,28 @@ const OrderDetail = () => {
             />
           </div>
         )}
+
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Cancel this order?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+                After clicking the Agree button, the order will be cancel and you can't restore.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Disagree</Button>
+            <Button onClick={handleCloseUpdate} color="error" autoFocus>
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   } else {

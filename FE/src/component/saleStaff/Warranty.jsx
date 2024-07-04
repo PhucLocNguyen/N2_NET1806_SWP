@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-
-import ApiListRequirement from "../../api/manager/ListRequirement";
+import { FetchApiRequirementHaveUserWithStatus } from "../../api/Requirements/FetchApiRequirement";
+import useAuth from "../../hooks/useAuth";
 import RowWarranty from "./RowWarranty";
 
 function Warranty() {
    const status = 11;
-   const pageSize = 6;
 
    const [data, setData] = useState([]);
-   const [page, setPage] = useState(1);
-
+   const {UserId} = useAuth();
    const fetchApi = async () => {
-      const respone = await ApiListRequirement({ pageSize, page, status });
+      const respone = await FetchApiRequirementHaveUserWithStatus(status,UserId);
       setData(respone)
    }
 
@@ -26,9 +24,6 @@ function Warranty() {
       }
 
    }, [])
-
-   console.log(data);
-
 
    return (
       <>

@@ -38,7 +38,7 @@ function HomeNew() {
    return (
 
       <>
-         <div className='w-[100%] pb-[8rem]'>
+         <div className='w-[100%] pb-[8rem] pt-[10rem]'>
             <div className='w-[90%] my-[3rem] mx-auto'>
                <Slider {...settings}>
 
@@ -219,7 +219,7 @@ function HomeNew() {
                      </h2>
                   </div>
 
-                  <div className='mt-[20px] w-[100%] ml-[100px]'>
+                  <div className='mt-[20px] ml-[100px]'>
 
                      <div className='mb-[25px] flex items-center'>
                         <div className='w-[50px] h-[50px] rounded-[50%] bg-[#fff] flex items-center justify-center'>

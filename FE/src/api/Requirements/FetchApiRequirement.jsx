@@ -47,17 +47,4 @@ const FetchApiRequirementByIdSecure= async (id, UserId) => {
       return null; 
    }
 }
-const FetchApiRequirementHaveUserWithStatus = async (status, UserId)=>{
-   try {
-      const response = await api.get(`/Requirement/GetRequirementByRole`,{axiosConfigHeader,params:{
-         userId:UserId,
-         status: status
-      }});
-      const requirementById = response.data;
-      return requirementById; 
-   } catch (error) {
-      console.error(error);
-      return null; 
-   }
-}
-export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure, FetchApiRequirementHaveUserWithStatus}
+export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure}

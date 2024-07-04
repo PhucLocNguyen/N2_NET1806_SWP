@@ -15,10 +15,12 @@ function InputPassword({label, pattern, refInput, inputCase}) {
         message: ""});
         function ValidateInputChange(e){
             const value = e.target.value.trim();
+            console.log(value.length);
             if (value.length === 0) {
                 setValid({ isValid: true, message: `${label} field can't be empty!` });
                 return;
             }
+            console.log(inputCase);
             if(inputCase =="register"){
                 // Kiểm tra mật khẩu có ít nhất một chữ cái viết hoa
                 if (!/[A-Z]/.test(value)) {

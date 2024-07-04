@@ -2,7 +2,6 @@ import ChatIcon from "@mui/icons-material/Chat";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import { NavLink } from "react-router-dom";
-import LogoutStaff from "../staff/Logout";
 
 function SaleNav() {
   return (
@@ -44,7 +43,6 @@ function SaleNav() {
               </h2>
             </div>
           </NavLink>
-          <LogoutStaff />
         </div>
       </div>
     </>

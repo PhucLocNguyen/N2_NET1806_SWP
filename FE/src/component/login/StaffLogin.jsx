@@ -36,8 +36,6 @@ function StaffLogin() {
          }else {
             navigate('/staff', {replace: true})
          }
-      }else{
-         
       }
       
       // Navigate()

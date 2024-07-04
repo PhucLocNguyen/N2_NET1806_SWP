@@ -3,6 +3,7 @@ const OrderSupportDetail = lazy(() => import("../component/saleStaff/OrderSuppor
 const OrderSupportList= lazy(() => import("../component/saleStaff/OrderSupportList"));
 const ChatStaff = lazy(() => import("../component/staff/ChatStaff"));
 
+const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
 const BlogList = lazy(() => import('../component/blog_list/blogList'));
 const ListAll = lazy(() => import('../component/category/ListAll'));
@@ -16,7 +17,6 @@ const StaffLogin = lazy(() => import("../component/login/StaffLogin"));
 const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
 const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
-const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
 
 const OrderDetail = lazy(() => import("../component/orderCustomer/OrderDetail"));
@@ -28,12 +28,12 @@ const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
 const Chat = lazy(() => import('../component/chat/Chat'));
 const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
 const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
+const ListBlog = lazy(() => import('../component/manager/blog/ListBlog'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 const Warranty = lazy(() => import('../component/saleStaff/Warranty'));
 const WarrantyDetail = lazy(() => import('../component/saleStaff/WarrantyDetail'));
 const ListRePriceQuote = lazy(() => import('../component/manager/rePriceQuote/ListRePriceQuote'));
 const RePriceDetail = lazy(() => import('../component/manager/rePriceQuote/RePriceDetail'));
-const HomeNew = lazy(() => import('../component/home/HomeNew'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
@@ -43,16 +43,16 @@ const RejectDesignDetail = lazy(() => import('../component/designProductPlan/Rej
 const publicRoutes = [
    {
       index: true,
-      component: HomeNew
+      component: Home
    },
    {
       path: '/design',
       component: Design,
       children: [
          { index: true, component: ListAll },
-         { path: 'earrings', component: ListAll },
+         { path: 'earring', component: ListAll },
          { path: 'bracelet', component: ListAll },
-         { path: 'chain', component: ListAll },
+         { path: 'necklace', component: ListAll },
          { path: 'ring', component: ListAll }
       ]
    },
@@ -113,7 +113,7 @@ const privateRoutes = [
       component: StaffLayout,
       children: [
          { index: true, component: ListRequirement },
-         { path: 'blog-create', component: BlogCreate },
+         { path: 'blog-management', component: ListBlog },
          { path: 'price-quote/:id', component: RequirementDetail },
          { path: 'master-gemstone', component: ListMasterGemstone },
          { path: 'design-management', component: ListDesign },

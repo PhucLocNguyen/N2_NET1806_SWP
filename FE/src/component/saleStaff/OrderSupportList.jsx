@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import ApiListRequirement from "../../api/manager/ListRequirement";
-import { FetchApiRequirementHaveUserWithStatus } from "../../api/Requirements/FetchApiRequirement";
-import useAuth from "../../hooks/useAuth";
 import RowOrderSupportList from "./RowOrderSupportList";
 
 function OrderSupportList() {
     const status = -2;
+   const pageSize = 6;
 
    const [data, setData] = useState([]);
-   const {UserId} = useAuth();
+   const [page, setPage] = useState(1);
+
 
    const fetchApi = async () => {
-      const respone = await FetchApiRequirementHaveUserWithStatus(status, UserId);
+      const respone = await ApiListRequirement({ pageSize, page, status });
       setData(respone)
    }
 
@@ -20,6 +20,7 @@ function OrderSupportList() {
       try {
 
          fetchApi();
+
       } catch (error) {
          setData([]);
       }

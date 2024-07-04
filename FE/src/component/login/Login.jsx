@@ -66,9 +66,8 @@ function Login() {
         })
         
         const { role } = await LoginApi(listState);
-        if(role!==null){
-            navigate(from, { replace: true })
-        }
+
+        navigate(from, { replace: true })
     }
     const HandleSubmitRegister = async (e)=>{
         e.preventDefault();

@@ -69,7 +69,7 @@ function ThirdStep({handleCompleteStep}) {
     };
   };
 
-  const debouncedOnChange = useCallback(debounce(HandleChangeData, 100), []);
+  const debouncedOnChange = useCallback(debounce(HandleChangeData, 1000), []);
 
   return (
     <>

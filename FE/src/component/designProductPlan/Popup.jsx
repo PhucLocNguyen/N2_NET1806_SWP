@@ -13,6 +13,7 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
   const [masterGemStone, setMasterGemStone] = useState(null);
   const [stone, setStone] = useState(null);
   const [status, setStatus] = useState("");
+
   const [dataUpdate, setDataUpdate] = useState({
     status: "",
     createdDate: data.createdDate,

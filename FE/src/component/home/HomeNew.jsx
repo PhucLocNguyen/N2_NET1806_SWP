@@ -219,7 +219,7 @@ function HomeNew() {
                      </h2>
                   </div>
 
-                  <div className='mt-[20px] w-[100%] ml-[100px]'>
+                  <div className='mt-[20px] ml-[100px]'>
 
                      <div className='mb-[25px] flex items-center'>
                         <div className='w-[50px] h-[50px] rounded-[50%] bg-[#fff] flex items-center justify-center'>

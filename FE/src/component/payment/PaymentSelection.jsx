@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from "react";
+import CustomerCanceled from "./CustomerCanceled";
 import CustomerConfirmation from "./CustomerConfirmation";
 import CustomerPay from "./CustomerPay";
 import CustomerWaiting from "./CustomerWaiting";
@@ -14,6 +15,9 @@ function PaymentSelection() {
 
   useEffect(() => {
     switch (status) {
+      case "-1":
+        setTitle("Your order has been canceled")
+        break;
       case "-2":
         setTitle("Please contact with sale in chat system");
         break;
@@ -71,6 +75,8 @@ function PaymentSelection() {
   }) {
     console.log(status);
     switch (status) {
+      case "-1":
+        return <CustomerCanceled  title={title}/>
       case "-2":
         return (
           <CustomerWaiting

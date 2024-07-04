@@ -1,4 +1,5 @@
 import { lazy } from "react";
+const ChatCustomer =lazy(()=>import("../component/chat/ChatCustomer"));
 const OrderSupportDetail = lazy(() => import("../component/saleStaff/OrderSupportDetail"));
 const OrderSupportList= lazy(() => import("../component/saleStaff/OrderSupportList"));
 const ChatStaff = lazy(() => import("../component/staff/ChatStaff"));
@@ -18,14 +19,13 @@ const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
-
+const ListRequirementManage = lazy(()=>import('../component/manager/OrderManage/ListRequirementManage'));
 const OrderDetail = lazy(() => import("../component/orderCustomer/OrderDetail"));
 const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"));
 const PaymentResponse = lazy(() => import("../component/payment/PaymentResponse"));
 
 const ConfirmationAccount = lazy(() => import("../component/login/ConfirmationAccount"));
 const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
-const Chat = lazy(() => import('../component/chat/Chat'));
 const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
 const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
@@ -104,7 +104,7 @@ const privateRoutes = [
    },
    {
       path: "/chat",
-      component: Chat,
+      component: ChatCustomer,
       role: ['Customer', 'Sale', 'DesignStaff', 'ProductStaff', 'Manager']
 
    },
@@ -119,7 +119,9 @@ const privateRoutes = [
          { path: 'design-management', component: ListDesign },
          { path: 'stone-management', component: ListStone },
          { path: 're-price-quote', component: ListRePriceQuote },
-         { path: 're-price-quote/:id', component: RePriceDetail }
+         { path: 're-price-quote/:id', component: RePriceDetail },
+         {path:'orders', component: ListRequirementManage}
+
       ],
       role: ['Manager']
    },
@@ -169,7 +171,8 @@ const privateRoutes = [
         {path:':id', component: OrderDetail}
       ],
       role: ['Customer']
-   }
+   },
+
 ]
 
 export { publicRoutes, privateRoutes }

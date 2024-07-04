@@ -6,6 +6,7 @@ import SpokeIcon from '@mui/icons-material/Spoke';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { NavLink } from 'react-router-dom';
 import LogoutStaff from '../staff/Logout';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 function ManagerNav() {
    return (
       <>
@@ -32,7 +33,12 @@ function ManagerNav() {
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Blog Management</h2>
                   </div>
                </NavLink>
-
+               <NavLink to='orders'>
+                  <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
+                     <AssignmentIcon   className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Manage order</h2>
+                  </div>
+               </NavLink>
                <NavLink to='master-gemstone'>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <DiamondIcon className="group-hover:text-[rgb(66,133,244)]" />

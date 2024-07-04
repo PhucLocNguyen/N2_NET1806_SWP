@@ -37,6 +37,9 @@ const RePriceDetail = lazy(() => import('../component/manager/rePriceQuote/RePri
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
+const RejectDesignList = lazy(() => import('../component/designProductPlan/RejectDesignList'));
+const RejectDesignDetail = lazy(() => import('../component/designProductPlan/RejectDesignDetail'));
+
 const publicRoutes = [
    {
       index: true,
@@ -148,6 +151,15 @@ const privateRoutes = [
          { path: 'order-support/:id', component: OrderSupportDetail}
       ],
       role: ["Sale"],
+   },
+   {
+      path: '/staff',
+      component: StaffLayout,
+      children: [
+         { path: 'reject-design', component: RejectDesignList },
+         { path: 'reject-design/:id', component: RejectDesignDetail}
+      ],
+      role: ["DesignStaff"],
    },
    {
     path:"/my-order",

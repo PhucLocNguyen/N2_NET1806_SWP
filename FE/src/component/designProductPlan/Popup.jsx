@@ -61,7 +61,7 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
     const selectFile = event.target.files[0];
     if (selectFile) {
         try {
-            if (selectFile !== '') {
+            if (dataUpdate.design3D !== '' && dataUpdate.design3D != null) {
                 await DeleteImage(dataUpdate.design3D);
             }
 

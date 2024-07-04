@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Fragment, Suspense, lazy } from "react";
 import AuthProvider from "./context/AuthContext.jsx";
 import "./App.css";
+import Navbar from "../src/component/nav/Navbar2.jsx"
 
 const DefaultLayout = lazy(() =>
   import("./component/layout/DefaultLayout.jsx")
@@ -16,96 +17,99 @@ const PlanningList = lazy(()=>import("./component/designProductPlan/PlanningList
 
 function App() {
   return (
-    <AuthProvider>
-      <Suspense>
-        <Routes>
-          {/* Route tự viết để test */}
-          <Route path="/test" Component={PlanningList}/>
-          {/* Route tự viết không ghi qua phần này */}
+    // <AuthProvider>
+    //   <Suspense>
+    //     <Routes>
+    //       {/* Route tự viết để test */}
+    //       <Route path="/test" Component={PlanningList}/>
+    //       {/* Route tự viết không ghi qua phần này */}
 
-          {publicRoutes.map((route, index) => {
-            let Page = route.component;
-            let Layout = DefaultLayout;
+    //       {publicRoutes.map((route, index) => {
+    //         let Page = route.component;
+    //         let Layout = DefaultLayout;
 
-            if (route.layout) {
-              Layout = route.layout;
-            } else if (route.layout === null) {
-              Layout = Fragment;
-            }
+    //         if (route.layout) {
+    //           Layout = route.layout;
+    //         } else if (route.layout === null) {
+    //           Layout = Fragment;
+    //         }
 
-            return (
-              // Route cho nhung thanh phan cha
-              <Route
-                key={index}
-                index={route.index ? true : undefined}
-                path={route.index ? undefined : route.path}
-                element={
-                  <Layout>
-                    {" "}
-                    <Page />{" "}
-                  </Layout>
-                }
-              >
-                {/* Route neu co child trong file Route.jsx */}
-                {route.children && route.children.map((childRoute, childIndex) => {
-                  let ChildPage = childRoute.component
-                  return (
-                    <Route key={childIndex} index={childRoute.index ? true : undefined} path={childRoute.index ? undefined : childRoute.path} element={<ChildPage />} />
-                  )
-                })}
+    //         return (
+    //           // Route cho nhung thanh phan cha
+    //           <Route
+    //             key={index}
+    //             index={route.index ? true : undefined}
+    //             path={route.index ? undefined : route.path}
+    //             element={
+    //               <Layout>
+    //                 {" "}
+    //                 <Page />{" "}
+    //               </Layout>
+    //             }
+    //           >
+    //             {/* Route neu co child trong file Route.jsx */}
+    //             {route.children && route.children.map((childRoute, childIndex) => {
+    //               let ChildPage = childRoute.component
+    //               return (
+    //                 <Route key={childIndex} index={childRoute.index ? true : undefined} path={childRoute.index ? undefined : childRoute.path} element={<ChildPage />} />
+    //               )
+    //             })}
 
-              </Route>
-            )
-          })}
+    //           </Route>
+    //         )
+    //       })}
 
-          {/* Private route */}
+    //       {/* Private route */}
 
-          {privateRoutes.map((route, index) => {
-            let Page = route.component;
-            let Layout = Fragment;
+    //       {privateRoutes.map((route, index) => {
+    //         let Page = route.component;
+    //         let Layout = Fragment;
 
-            if (route.layout) {
-              Layout = route.layout;
-            } else if (route.layout === null) {
-              Layout = Fragment;
-            }
+    //         if (route.layout) {
+    //           Layout = route.layout;
+    //         } else if (route.layout === null) {
+    //           Layout = Fragment;
+    //         }
 
-            return (
-              <Route
-                key={index}
-                element={<RequireAuth allowedRole={route.role} />}
-              >
-                <Route
-                  path={route.path}
-                  element={
-                    <Layout>
-                      {" "}
-                      <Page />{" "}
-                    </Layout>
-                  }
-                >
-                  {route.children &&
-                    route.children.map((childRoute, childIndex) => {
-                      let ChildPage = childRoute.component;
-                      return (
-                        <Route
-                          key={childIndex}
-                          index={childRoute.index ? true : undefined}
-                          path={childRoute.index ? undefined : childRoute.path}
-                          element={<ChildPage />}
-                        />
-                      );
-                    })}
-                </Route>
-              </Route>
-            );
-          })}
+    //         return (
+    //           <Route
+    //             key={index}
+    //             element={<RequireAuth allowedRole={route.role} />}
+    //           >
+    //             <Route
+    //               path={route.path}
+    //               element={
+    //                 <Layout>
+    //                   {" "}
+    //                   <Page />{" "}
+    //                 </Layout>
+    //               }
+    //             >
+    //               {route.children &&
+    //                 route.children.map((childRoute, childIndex) => {
+    //                   let ChildPage = childRoute.component;
+    //                   return (
+    //                     <Route
+    //                       key={childIndex}
+    //                       index={childRoute.index ? true : undefined}
+    //                       path={childRoute.index ? undefined : childRoute.path}
+    //                       element={<ChildPage />}
+    //                     />
+    //                   );
+    //                 })}
+    //             </Route>
+    //           </Route>
+    //         );
+    //       })}
 
 
-        </Routes>
-      </Suspense>
-      <ToastContainer />
-    </AuthProvider>
+    //     </Routes>
+    //   </Suspense>
+    //   <ToastContainer />
+    // </AuthProvider>
+    <>
+      <Navbar />
+    </>
   );
 }
 

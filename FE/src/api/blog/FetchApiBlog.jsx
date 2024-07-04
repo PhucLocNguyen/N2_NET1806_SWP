@@ -19,18 +19,14 @@ const FetchApiBlog = async ({ pageSize, page }) => {
   }
 };
 
-const FetchApiBlogById = async (id) => {
+const FetchApiBlogById= async (id) => {
   try {
-    const response = await api.get(`/Blog/${id}`, {
-      headers: {
-        ...axiosConfigHeader,
-      },
-    });
-    return response.data;
+     const response = await api.get(`/Blog/${id}`);
+     return response.data; 
   } catch (error) {
-    console.error("Error fetching blog by ID:", error);
-    return [];
+     console.error(error);
+     return []; 
   }
-};
+}
 
 export { FetchApiBlog, FetchApiBlogById };

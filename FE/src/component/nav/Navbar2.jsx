@@ -102,7 +102,10 @@ function Navbar() {
                 <Link to="/my-order">
                   <ShoppingCartIcon className="scale-125 h-6 w-6 hover:text-[#fab52c] transition duration-100" />
                 </Link>
-              </div>
+              )}
+              <Link to="/my-order">
+                <ShoppingCartIcon className="scale-125 h-6 w-6 hover:text-[#fab52c] transition duration-100" />
+              </Link>
             </div>
           </nav>
         </section>

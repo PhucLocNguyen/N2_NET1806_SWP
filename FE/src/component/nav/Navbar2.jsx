@@ -8,25 +8,24 @@ function Navbar() {
   const { role, UserId } = useAuth();
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md h-fit min-h-[130px]">
+    <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md h-fit min-h-[130px] max-h-[200px]">
       <div className="w-full py-[4px] bg-[#C6AD8A]">
         <p className="text-center text-black text-xs">
           YOUR HAPPINESS, OUR RESPONSIBILITY
         </p>
       </div>
-      <section className="fixed h-[85px] mx-auto w-full">
+      <section className="h-[85px] mx-auto w-full">
+        <p className="block bg-black text-white w-full text-3xl text-center py-2">
+          Jewelry FPT
+        </p>
         <nav className="flex justify-between bg-black text-white w-full">
-          <div className="px-5 pt-3 pb-4 flex w-full items-center justify-center">
-            <div className="relative">
-              <div className="w-full text-3xl font-bold text-white mb-4">
-                <p className="w-full text-center">Jewelry FPT</p>
-              </div>
-
-              <ul className="hidden md:flex px-4 font-semibold font-heading space-x-20">
+          <div className="px-10 py-2 flex w-full items-center justify-center">
+            <div className="flex justify-center w-full text-3xl font-bold text-white mb-4">
+              <ul className="flex px-4 font-semibold font-heading space-x-20">
                 <li>
                   <Link
                     to="/"
-                    className="font-normal text-xl hover:text-[#C6AD8A] hover:duration-200"
+                    className="font-normal text-2xl hover:text-[#C6AD8A] hover:duration-200"
                   >
                     Home
                   </Link>
@@ -35,7 +34,7 @@ function Navbar() {
                   <div className="relative group">
                     <Link
                       to="/design"
-                      className="font-normal text-xl hover:text-[#C6AD8A] hover:duration-200 flex items-center"
+                      className="font-normal text-2xl hover:text-[#C6AD8A] hover:duration-200"
                     >
                       Category
                     </Link>
@@ -44,7 +43,7 @@ function Navbar() {
                 <li>
                   <Link
                     to="/blog"
-                    className="font-normal text-xl hover:text-[#C6AD8A] hover:duration-200"
+                    className="font-normal text-2xl hover:text-[#C6AD8A] hover:duration-200"
                   >
                     Blog
                   </Link>
@@ -52,57 +51,50 @@ function Navbar() {
                 <li>
                   <Link
                     to="#"
-                    className="font-normal text-xl hover:text-[#C6AD8A] hover:duration-200"
+                    className="font-normal text-2xl hover:text-[#C6AD8A] hover:duration-200"
                   >
                     Contact Us
                   </Link>
                 </li>
               </ul>
+            </div>
 
-              <div className="absolute top-2 right-[-700px] flex items-center space-x-4">
-                {UserId ? (
-                  <div className="relative group inline-block">
-                    <PermIdentityIcon
-                      style={{ marginLeft: "1rem", fontSize: "1.4rem" }}
-                      className="hover:text-[#f0cd8c] scale-125"
-                    />
-                    <div className="absolute  border-[1px] border-black rounded-sm top-8 left-[-1rem] group-hover:block hidden w-fit h-fit bg-white">
-                      <div className="absolute top-[-10px] left-8 h-5 w-7"></div>
-                      <ul className="flex flex-col">
-                        <li className="w-36">
+            <div className="flex items-center space-x-4">
+              {UserId ? (
+                <div className="group inline-block">
+                  <PermIdentityIcon  className="hover:text-[#f0cd8c] ml-4 scale-125"  />
+                  <div className="relative border-[1px] border-black rounded-sm group-hover:block hidden w-fit h-fit bg-white">
+                    <ul className="absolute left-[-40px] border-[1px] border-black rounded-sm group-hover:block hidden w-fit h-fit bg-white hover:flex hover:flex-col">
+                      <li className="w-28">
+                        <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100">
+                          My Account
+                        </p>
+                        <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100">
+                          Log Out
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <Link to="/login">
+                  <div className=" group inline-block">
+                    <PermIdentityIcon className="hover:text-[#f0cd8c] ml-4 scale-125" />
+                    <div className="relative border-[1px] border-black rounded-sm group-hover:block hidden w-fit h-fit bg-white">
+                      <ul className="absolute left-[-40px] border-[1px] border-black rounded-sm group-hover:block hidden w-fit h-fit bg-white hover:flex hover:flex-col">
+                        <li className="w-28">
                           <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100">
-                            My Account
-                          </p>
-                          <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100">
-                            Log Out
+                            Log In
                           </p>
                         </li>
                       </ul>
                     </div>
                   </div>
-                ) : (
-                  <Link to="/login">
-                    <div className="relative group inline-block scale-125">
-                      <PermIdentityIcon
-                        className="hover:text-[#f0cd8c] ml-4 scale-125"
-                      />
-                      <div className="absolute rounded-sm top-8 left-[-1rem] group-hover:block hidden w-fit h-fit bg-white border-[1px] border-[#f0f0f0]">
-                        <div className="absolute top-[-10px] left-8 h-5 w-7"></div>
-                        <ul className="flex flex-col">
-                          <li className="w-36">
-                            <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100">
-                              Log In
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </Link>
-                )}
-                <Link to="/my-order">
-                  <ShoppingCartIcon className="scale-125 h-6 w-6 hover:text-[#fab52c] transition duration-100" />
                 </Link>
-              </div>
+              )}
+              <Link to="/my-order">
+                <ShoppingCartIcon className="scale-125 h-6 w-6 hover:text-[#fab52c] transition duration-100" />
+              </Link>
             </div>
           </div>
         </nav>

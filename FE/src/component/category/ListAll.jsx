@@ -29,12 +29,12 @@ function ListAll() {
 
    // Lay ra design thong qua type
    const filter = getTypeFromPath(location.pathname) === 'design' ? 'all' : getTypeFromPath(location.pathname)
-   let filterDesign = filter === 'all' ? design : design.filter(item => item.typeOfJewellery.name === filter)
+   let filterDesign = filter === 'all' ? design : design.filter(item => item.typeOfJewellery.name.toLowerCase() === filter)
 
    if (filterDesign === undefined) filterDesign = []
 
    return (
-      <div className="px-[6.25rem]">
+      <div className="px-[6.25rem] pb-[3rem]">
          <div className="text-[1rem] leading-[1.3em] font-normal">
             <div className="grid gap-x-[2.5rem] gap-y-[2.5rem] grid-cols-4">
 

@@ -8,7 +8,7 @@ function Navbar() {
   const { role, UserId } = useAuth();
 
   return (
-    <div className="z-10">
+    <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md h-fit min-h-[130px]">
       <div className="w-full py-[4px] bg-[#C6AD8A]">
         <p className="text-center text-black text-xs">
           YOUR HAPPINESS, OUR RESPONSIBILITY
@@ -64,16 +64,16 @@ function Navbar() {
                   <div className="relative group inline-block">
                     <PermIdentityIcon
                       style={{ marginLeft: "1rem", fontSize: "1.4rem" }}
-                      className="hover:text-[#f0cd8c]"
+                      className="hover:text-[#f0cd8c] scale-125"
                     />
-                    <div className="absolute rounded-sm top-8 left-[-1rem] group-hover:block hidden w-fit h-fit bg-white border-[1px] border-[#f0f0f0]">
+                    <div className="absolute  border-[1px] border-black rounded-sm top-8 left-[-1rem] group-hover:block hidden w-fit h-fit bg-white">
                       <div className="absolute top-[-10px] left-8 h-5 w-7"></div>
                       <ul className="flex flex-col">
                         <li className="w-36">
-                          <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100">
+                          <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100">
                             My Account
                           </p>
-                          <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] p-2 duration-100">
+                          <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100">
                             Log Out
                           </p>
                         </li>
@@ -81,10 +81,10 @@ function Navbar() {
                     </div>
                   </div>
                 ) : (
-                  <Link to="/signin">
-                    <div className="relative group inline-block">
+                  <Link to="/login">
+                    <div className="relative group inline-block scale-125">
                       <PermIdentityIcon
-                        className="hover:text-[#f0cd8c] ml-4 scale-150"
+                        className="hover:text-[#f0cd8c] ml-4 scale-125"
                       />
                       <div className="absolute rounded-sm top-8 left-[-1rem] group-hover:block hidden w-fit h-fit bg-white border-[1px] border-[#f0f0f0]">
                         <div className="absolute top-[-10px] left-8 h-5 w-7"></div>

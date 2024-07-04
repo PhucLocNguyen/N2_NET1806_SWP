@@ -3,7 +3,6 @@ const OrderSupportDetail = lazy(() => import("../component/saleStaff/OrderSuppor
 const OrderSupportList= lazy(() => import("../component/saleStaff/OrderSupportList"));
 const ChatStaff = lazy(() => import("../component/staff/ChatStaff"));
 
-const Home = lazy(() => import('../component/home/Home'));
 const Design = lazy(() => import('../component/category/Category'));
 const BlogList = lazy(() => import('../component/blog_list/blogList'));
 const ListAll = lazy(() => import('../component/category/ListAll'));
@@ -34,22 +33,26 @@ const Warranty = lazy(() => import('../component/saleStaff/Warranty'));
 const WarrantyDetail = lazy(() => import('../component/saleStaff/WarrantyDetail'));
 const ListRePriceQuote = lazy(() => import('../component/manager/rePriceQuote/ListRePriceQuote'));
 const RePriceDetail = lazy(() => import('../component/manager/rePriceQuote/RePriceDetail'));
+const HomeNew = lazy(() => import('../component/home/HomeNew'));
 
 const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
+
+const RejectDesignList = lazy(() => import('../component/designProductPlan/RejectDesignList'));
+const RejectDesignDetail = lazy(() => import('../component/designProductPlan/RejectDesignDetail'));
 
 const publicRoutes = [
    {
       index: true,
-      component: Home
+      component: HomeNew
    },
    {
       path: '/design',
       component: Design,
       children: [
          { index: true, component: ListAll },
-         { path: 'earring', component: ListAll },
+         { path: 'earrings', component: ListAll },
          { path: 'bracelet', component: ListAll },
-         { path: 'necklace', component: ListAll },
+         { path: 'chain', component: ListAll },
          { path: 'ring', component: ListAll }
       ]
    },
@@ -148,6 +151,15 @@ const privateRoutes = [
          { path: 'order-support/:id', component: OrderSupportDetail}
       ],
       role: ["Sale"],
+   },
+   {
+      path: '/staff',
+      component: StaffLayout,
+      children: [
+         { path: 'reject-design', component: RejectDesignList },
+         { path: 'reject-design/:id', component: RejectDesignDetail}
+      ],
+      role: ["DesignStaff"],
    },
    {
     path:"/my-order",

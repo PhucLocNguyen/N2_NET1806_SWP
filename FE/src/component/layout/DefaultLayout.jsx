@@ -1,4 +1,4 @@
-import Navbar from "../nav/Navbar";
+import Navbar from "../nav/Navbar2";
 import Footer from "../footer/Footer";
 
 function DefaultLayout({ children }) {

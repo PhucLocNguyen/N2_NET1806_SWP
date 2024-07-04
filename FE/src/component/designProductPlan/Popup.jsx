@@ -2,28 +2,20 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { fetchApiDesignById } from "../../api/FetchApiDesign";
 import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
+import UploadImage from "../../utils/UploadImage.jsx";
+import DeleteImage from "../../utils/DeleteImage.jsx";
 import useAuth from "../../hooks/useAuth.jsx";
 
 function Popup({ setIsOpenPopup, data, handleStatusChange }) {
+  const folder = "Design3D";
   const [selectedFile, setSelectedFile] = useState(null);
   const [dataDesign, setDataDesign] = useState({});
   const [masterGemStone, setMasterGemStone] = useState(null);
   const [stone, setStone] = useState(null);
   const [status, setStatus] = useState("");
 
-  const { role } = useAuth();
-
-  useEffect(() => {
-    if (role === "DesignStaff") {
-      setStatus("7");
-    } else if (role === "ProductStaff") {
-      setStatus("10");
-    }
-    getDesign(data.designId);
-  }, [role]);
-
-  const dataUpdate = {
-    status: status,
+  const [dataUpdate, setDataUpdate] = useState({
+    status: "",
     createdDate: data.createdDate,
     expectedDelivery: data.expectedDelivery,
     size: data.size,
@@ -37,7 +29,18 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
     totalMoney: data.totalMoney,
     customerNote: data.customerNote,
     staffNote: data.staffNote,
-  };
+  });
+
+  const { role } = useAuth();
+
+  useEffect(() => {
+    if (role === "DesignStaff") {
+      setStatus("7");
+    } else if (role === "ProductStaff") {
+      setStatus("10");
+    }
+    getDesign(data.designId);
+  }, [role]);
 
   const UpdateRequirement = async (requirementId, updateData) => {
     const response = await PutApiRequirementByStatus(requirementId, updateData);
@@ -55,9 +58,27 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
     }
   };
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+  const handleFileChange = async (event) => {
+    const selectFile = event.target.files[0];
+    if (selectFile) {
+        try {
+            if (dataUpdate.design3D !== '' && dataUpdate.design3D != null) {
+                await DeleteImage(dataUpdate.design3D);
+            }
+
+            let urlImage = await UploadImage(folder, selectFile);
+            if (urlImage) {
+              setDataUpdate({ ...dataUpdate, design3D: urlImage, status: status });
+            } else {
+                console.error("Upload returned undefined URL.");
+            }
+        } catch (error) {
+            console.error("Error during file upload: ", error);
+        }
+        setSelectedFile(selectFile);
+    }
+};
+
 
   const handleSubmit = async () => {
     if (selectedFile) {

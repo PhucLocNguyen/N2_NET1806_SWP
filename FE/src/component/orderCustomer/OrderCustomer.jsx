@@ -11,6 +11,7 @@ export const statusOptionCustomer = [
   { code: 0, label: "Waiting for sale receive" },
   { code: 1, label: "Waiting for sale contact you in chat system" },
   { code: 2, label: "Sale has sent your requirement to manager to quote price" },
+  { code: -2, label: "Please check the chat system to contact with sale staff" },
   { code: 3, label: "Confirm the price quote" },
   { code: -3, label: "Waiting for manager quote price again" },
   { code: 4, label: "Deposit the order" },
@@ -30,6 +31,8 @@ export const getStatusClass = (status) => {
       return "bg-yellow-100 text-yellow-600";
     case "Waiting for sale contact you in chat system":
       return "bg-yellow-100 text-yellow-600";
+    case "Please check the chat system to contact with sale staff":
+      return "bg-yellow-200 text-yellow-800";
     case "Sale has sent your requirement to manager to quote price":
       return "bg-yellow-100 text-yellow-600";
     case "Confirm the price quote":

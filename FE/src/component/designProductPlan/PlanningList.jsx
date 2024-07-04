@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Plan from "./Plan";
 import useAuth from "../../hooks/useAuth.jsx";
-import { FetchApiRequirementByStatus } from "../../api/Requirements/FetchApiRequirement.jsx";
+import {
+  FetchApiRequirementByStatus,
+  FetchApiRequirementOpeningOrder,
+} from "../../api/Requirements/FetchApiRequirement.jsx";
 
-const statusDesignOptions = [5, 6, 7];
-const statusProductOptions = [8, 9, 10];
 
 function PlanningList() {
-  const [data, setData] = useState([]);
-  const [dataUpdated, setDataUpdated] = useState(true);
+  const [dataTodo, setDataTodo] = useState([]);
+  const [dataInProgress, setDataInProgress] = useState([]);
+  const [dataDone, setDataDone] = useState([]);
   const [type, setType] = useState("");
   const { role, UserId } = useAuth();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [dataUpdated, setDataUpdated] = useState(false);
 
   useEffect(() => {
     if (role === "DesignStaff") {
@@ -21,36 +24,61 @@ function PlanningList() {
     }
   }, [role]);
 
-  console.log(type)
-
-  useEffect(() => {
-    fetchDataByStatus(type);
-  }, [type, dataUpdated]);
-
-  const fetchDataByStatus = async (currentType) => {
-    const statusOptions =
-      currentType === "design" ? statusDesignOptions : statusProductOptions;
+  const getRequirements = async () => {
     try {
-      const dataPromises = statusOptions.map((code) =>
-        FetchApiRequirementByStatus(UserId,code)
-      );
-      const dataResponses = await Promise.all(dataPromises);
+      let statusTodo, statusInProgress, statusDone;
+      if (type === "design") {
+        statusTodo = "5";
+        statusInProgress = "6";
+        statusDone = "7";
+      } else {
+        statusTodo = "8";
+        statusInProgress = "9";
+        statusDone = "10";
+      }
 
-      const combinedData = dataResponses.flat();
-      setData(combinedData);
-      console.log("Fetched Data:", combinedData); // Debug log
+      const todoResponse = await FetchApiRequirementOpeningOrder(statusTodo);
+      const inProgressResponse = await FetchApiRequirementByStatus(
+        UserId,
+        statusInProgress
+      );
+      const doneResponse = await FetchApiRequirementByStatus(
+        UserId,
+        statusDone
+
+      );
+
+      setDataTodo(todoResponse);
+      setDataInProgress(inProgressResponse);
+      setDataDone(doneResponse);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching requirements:", error);
     }
   };
 
+  useEffect(() => {
+    if (type) {
+      getRequirements();
+    }
+  }, [type, dataUpdated]);
+
   const handleStatusChange = (itemId, newStatus) => {
-    setData((prevData) =>
-      prevData.map((item) =>
+    setDataTodo((prevDataTodo) =>
+      prevDataTodo.map((item) =>
         item.requirementId === itemId ? { ...item, status: newStatus } : item
       )
     );
-    setDataUpdated(!dataUpdated); // Toggle dataUpdated to trigger re-render
+    setDataInProgress((prevDataInProgres) =>
+      prevDataInProgres.map((item) =>
+        item.requirementId === itemId ? { ...item, status: newStatus } : item
+      )
+    );
+    setDataDone((prevDataDone) =>
+      prevDataDone.map((item) =>
+        item.requirementId === itemId ? { ...item, status: newStatus } : item
+      )
+    );
+    setDataUpdated((prevState) => !prevState);
   };
 
   const handlePopupOpen = (isOpen) => {
@@ -104,27 +132,19 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">To-do</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {
-                  data.filter(
-                    (item) => item.status === (type === "design" ? "5" : "8")
-                  ).length
-                }
+                {dataTodo.length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {data
-                .filter(
-                  (item) => item.status === (type === "design" ? "5" : "8")
-                )
-                .map((item, index) => (
-                  <Plan
-                    key={index}
-                    data={item}
-                    handleStatusChange={handleStatusChange}
-                    handlePopupOpen={handlePopupOpen}
-                    isTodo={true}
-                  />
-                ))}
+              {dataTodo.map((item, index) => (
+                <Plan
+                  key={index}
+                  data={item}
+                  handleStatusChange={handleStatusChange}
+                  handlePopupOpen={handlePopupOpen}
+                  isTodo={true}
+                />
+              ))}
             </div>
           </div>
 
@@ -132,26 +152,18 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">In-Progress</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {
-                  data.filter(
-                    (item) => item.status === (type === "design" ? "6" : "9")
-                  ).length
-                }
+                {dataInProgress.length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {data
-                .filter(
-                  (item) => item.status === (type === "design" ? "6" : "9")
-                )
-                .map((item, index) => (
-                  <Plan
-                    key={index}
-                    data={item}
-                    handleStatusChange={handleStatusChange}
-                    handlePopupOpen={handlePopupOpen}
-                  />
-                ))}
+              {dataInProgress.map((item, index) => (
+                <Plan
+                  key={index}
+                  data={item}
+                  handleStatusChange={handleStatusChange}
+                  handlePopupOpen={handlePopupOpen}
+                />
+              ))}
             </div>
           </div>
 
@@ -159,27 +171,19 @@ function PlanningList() {
             <div className="flex items-center h-10 px-2">
               <span className="block text-sm font-semibold">Done</span>
               <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-                {
-                  data.filter(
-                    (item) => item.status === (type === "design" ? "7" : "10")
-                  ).length
-                }
+                {dataDone.length}
               </span>
             </div>
             <div className="flex flex-col pb-2 overflow-auto h-[calc(100vh-140px)]">
-              {data
-                .filter(
-                  (item) => item.status === (type === "design" ? "7" : "10")
-                )
-                .map((item, index) => (
-                  <Plan
-                    key={index}
-                    data={item}
-                    handleStatusChange={handleStatusChange}
-                    handlePopupOpen={handlePopupOpen}
-                    isDone={true}
-                  />
-                ))}
+              {dataDone.map((item, index) => (
+                <Plan
+                  key={index}
+                  data={item}
+                  handleStatusChange={handleStatusChange}
+                  handlePopupOpen={handlePopupOpen}
+                  isDone={true}
+                />
+              ))}
             </div>
           </div>
         </div>

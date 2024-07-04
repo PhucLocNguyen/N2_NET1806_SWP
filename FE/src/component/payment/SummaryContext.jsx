@@ -10,6 +10,7 @@ export function SummaryContext({children, requirementData, ChangeToggle, status,
     const {UserId} = useAuth();
     const [requirementDetail, setRequirementDetail] = useState(requirementData);
     console.log(requirementData);
+
     async function payNow(moneyWillPay) {
         const paymentRequest = {
             "id": "string",

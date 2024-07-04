@@ -21,6 +21,9 @@ function DesignInfo() {
    const { id } = useParams()
 
    useEffect(() => {
+
+      window.scrollTo(0, 0);
+
       const fetchAPI = async () => {
          const respone = await fetchApiDesignById(id)
          setDesignInfo(respone)

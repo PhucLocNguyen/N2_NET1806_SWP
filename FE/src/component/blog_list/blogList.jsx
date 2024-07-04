@@ -62,7 +62,7 @@ export default function BlogList() {
       <div className="flex justify-center items-center">
         <Stack>
           <Pagination
-            count={Math.ceil(dataSize / pageSize)}
+            count={dataSize ? Math.ceil(dataSize / pageSize) : 0}
             page={page}
             onChange={handleChange}
           />

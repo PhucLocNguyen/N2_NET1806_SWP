@@ -36,7 +36,7 @@ function Navbar() {
             <div className="w-1/2">
               {/* Logo */}
               <div className="text-center">
-                <SvgIcon style={{ fontSize: "9rem", height: "50%" }}>
+                {/* <SvgIcon style={{ fontSize: "9rem", height: "50%" }}>
                   <svg
                     width="140"
                     height="14"
@@ -77,7 +77,7 @@ function Navbar() {
                       fill="#181818"
                     />
                   </svg>
-                </SvgIcon>
+                </SvgIcon> */}
               </div>
               {/* Navbar */}
               <div className="flex justify-between px-36 mt-4">

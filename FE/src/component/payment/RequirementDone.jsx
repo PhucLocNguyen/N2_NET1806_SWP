@@ -3,14 +3,16 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Button, Link, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
 import CreateConversationJoin from "../../utils/CreateConversationJoin";
 import { FetchPaymentApiByRequirementId } from "../../api/payment/PaymentApi";
 import FormatDate from "../../utils/FormatDate";
 import { ApiGetWarrantyByRequirementId } from "../../api/warranty/ApiChangeWarranty";
+import useAuth from "../../hooks/useAuth";
 function RequirementDone({
   title,
   designDetail,
@@ -23,6 +25,7 @@ function RequirementDone({
   const [saleStaff, setSaleStaff] = useState({});
   const [transaction, setTransaction] = useState([]);
   const [warrantyCard, setWarrantyCard] = useState([]);
+  const {UserId} = useAuth();
   async function loadDataStaff(requirementId) {
     const getDesignStaff = await FetchApiUserBasedRoleInRequirement(
       3,

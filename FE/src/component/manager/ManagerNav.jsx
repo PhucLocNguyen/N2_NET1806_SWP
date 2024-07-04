@@ -5,7 +5,7 @@ import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import SpokeIcon from '@mui/icons-material/Spoke';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { NavLink } from 'react-router-dom';
-
+import LogoutStaff from '../staff/Logout';
 function ManagerNav() {
    return (
       <>
@@ -53,7 +53,7 @@ function ManagerNav() {
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Design</h2>
                   </div>
                </NavLink>
-
+               <LogoutStaff />
             </div>
          </div>
       </>

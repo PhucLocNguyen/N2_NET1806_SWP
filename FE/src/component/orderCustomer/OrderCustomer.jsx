@@ -8,6 +8,7 @@ import Order from "./Order";
 import OrderDetail from "./OrderDetail";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 export const statusOptionCustomer = [
+  { code: -1, label: "Canceled order" },
   { code: 0, label: "Waiting for sale receive" },
   { code: 1, label: "Waiting for sale contact you in chat system" },
   { code: 2, label: "Sale has sent your requirement to manager to quote price" },
@@ -27,6 +28,8 @@ export const statusOptionCustomer = [
 ];
 export const getStatusClass = (status) => {
   switch (status) {
+    case "Canceled order":
+      return "bg-red-600 text-red-100"
     case "Waiting for sale receive":
       return "bg-yellow-100 text-yellow-600";
     case "Waiting for sale contact you in chat system":

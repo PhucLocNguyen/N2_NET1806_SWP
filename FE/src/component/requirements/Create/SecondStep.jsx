@@ -61,11 +61,11 @@ const [ dataSelected, setDataSelected] = useState({
         setDataApiStones(res);
         setFilterStones(res);
         const selectKind = new Set(res.map(item => item.kind));
-        setKindMasterGemstone([...selectKind]);
+        setKindStones([...selectKind]);
         const selectSize = new Set(res.map(item => item.size));
-        setSizeMasterGemstone([...selectSize]);
+        setSizeStones([...selectSize]);
         const selectQuantity = new Set(res.map(item=> item.quantity));
-        setShapeMasterGemstone([...selectQuantity]);
+        setQuantityStones([...selectQuantity]);
       })
 
       // set du lieu khi da select nhung quay lai step nay de coi chinh sua tiep
@@ -422,15 +422,16 @@ const HandleChangeData = (e) => {
     {kindMasterGemstone.map((val, index) => {
         return (
             <label 
-                key={val + index} 
-                htmlFor={"material-" + index} 
+                key={val+ "materialMastergemstone"} 
+                htmlFor={"materialMastergemstone-" +val+"-"+ index} 
                 className="cursor-pointer"
             >
                 <div className="">
                     <input 
                         type="radio" 
-                        name="kind" 
-                        id={"material-" + index} 
+                        name="kind"
+                        key={"materialMastergemstone-" +val+"-"+ index} 
+                        id={"materialMastergemstone-" +val+"-"+ index} 
                         value={val} 
                         className="inline-block" 
                         data_object="MasterGemstone" 
@@ -457,9 +458,9 @@ const HandleChangeData = (e) => {
                     value={dataSelected.MasterGemstone== null || dataSelected.MasterGemstone.size == null? "":dataSelected.MasterGemstone.size }
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
-                    <option key="defaultSelect" value="">--Choose MasterGemStone size--</option>
+                    <option key="defaultSelectingMasterGemstone" value="">--Choose MasterGemStone size--</option>
                     {sizeMasterGemstone.map((items, index) => (
-                        <option key={items + index} value={items} >{items}</option>
+                        <option key={items + index+"sizeMasterGemstone"} value={items} >{items}</option>
                     ))}
                 </select>
 
@@ -477,7 +478,7 @@ const HandleChangeData = (e) => {
                     <option key="defaultSelectShape" value="">--Choose MasterGemStone shape--</option>
                     {
                         shapeMasterGemstone.map((item, index) => (
-                            <option key={item} value={item}>{item}</option>
+                            <option key={item+"shapeMasterGemStone"} value={item}>{item}</option>
                         ))
                     }
                </select>
@@ -486,7 +487,7 @@ const HandleChangeData = (e) => {
             </div>
           </div>
           <div className="flex justify-between content-center">
-            <h2 className="text-[24px] mb-1 mt-3">Loại hạt Tấm  </h2>
+            <h2 className="text-[24px] mb-1 mt-3">Melee Stones</h2>
             <input
               type="checkbox"
               className="peer"
@@ -510,15 +511,16 @@ const HandleChangeData = (e) => {
     {kindStones.map((val, index) => {
         return (
             <label 
-                key={val + index} 
-                htmlFor={"material-" + val} 
+                key={val+"-Stones-" + index} 
+                htmlFor={"material-Stones" + val+index} 
                 className="cursor-pointer"
             >
                 <div className="">
                     <input 
                         type="radio" 
+                        key={val+"-Stones"} 
                         name="kindStones" 
-                        id={"material-" + val} 
+                        id={"material-Stones" + val+index} 
                         value={val} 
                         className="inline-block" 
                         data_object="Stones" 

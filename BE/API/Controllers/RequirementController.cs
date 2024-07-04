@@ -155,7 +155,10 @@ namespace API.Controllers
                     return NotFound("Requiremnet is not existed");
                 }
                 existedRequirement.Status = requestCreateRequirementModel.Status;
-                existedRequirement.ExpectedDelivery = requestCreateRequirementModel.ExpectedDelivery != null ? DateOnly.FromDateTime((DateTime)requestCreateRequirementModel.ExpectedDelivery) : null;
+                if (requestCreateRequirementModel.Status.Equals("4"))
+                {
+                    existedRequirement.ExpectedDelivery = DateOnly.FromDateTime(DateTime.Now.AddDays(14));
+                }
                 existedRequirement.Size = requestCreateRequirementModel.Size;
                 existedRequirement.DesignId = (int)requestCreateRequirementModel.DesignId;
                 existedRequirement.Design3D = requestCreateRequirementModel.Design3D;

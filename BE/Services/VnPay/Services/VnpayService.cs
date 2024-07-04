@@ -142,6 +142,7 @@ namespace Repositories.VnPay.Services
             {
                 return "Valid amount ranges from 5,000 to under 1 billion VND";
             }
+
             string verificationCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6).ToUpper();
             _cache.Set(verificationCode, requestCreateVnpay, DateTime.Now.AddMinutes(15));
             var paymentUrl = string.Empty;

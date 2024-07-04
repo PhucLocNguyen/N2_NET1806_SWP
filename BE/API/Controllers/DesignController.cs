@@ -21,7 +21,7 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
         [HttpGet]
-        public IActionResult SearchDesign([FromQuery] RequestSearchDesignModel requestSearchDesignModel)
+        public IActionResult SearchDesign([FromQuery] RequestSearchDesignModel requestSearchDesignModel, int? DesignId)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace API.Controllers
                     (string.IsNullOrEmpty(requestSearchDesignModel.Stone) || x.Stone.Kind.Contains(requestSearchDesignModel.Stone)) &&
                     (string.IsNullOrEmpty(requestSearchDesignModel.MasterGemstone) || x.MasterGemstone.Kind.Contains(requestSearchDesignModel.MasterGemstone)) &&
                     (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
-                    (string.IsNullOrEmpty(requestSearchDesignModel.TypeOfJewellery) || x.TypeOfJewellery.Name.Contains(requestSearchDesignModel.TypeOfJewellery)) &&
+                    (string.IsNullOrEmpty(requestSearchDesignModel.TypeOfJewellery) || x.TypeOfJewellery.Name.Equals(requestSearchDesignModel.TypeOfJewellery)) &&
                     (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material));
                 Func<IQueryable<Design>, IOrderedQueryable<Design>> orderBy = null;
 
@@ -47,22 +47,26 @@ namespace API.Controllers
                         orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
                     }
                 }
-                if (requestSearchDesignModel.SortContent?.isParent == null)
-                {
-                    filter = x => (x.ParentId == null);
-                }
-                else
-                {
-                    filter = x => (x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null);
-                }
                 var reponseDesign = _unitOfWork.DesignRepository.Get(
                     filter,
                     orderBy,
-                    /*includeProperties: "",*/
                     pageIndex: requestSearchDesignModel.pageIndex,
                     pageSize: requestSearchDesignModel.pageSize,
                     m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery
                     ).Select(d => d.toDesignDTO());
+                if (requestSearchDesignModel.SortContent?.isParent == null)
+                {
+
+                    reponseDesign  = reponseDesign.Where(x=>x.ParentId == null).ToList();
+                }
+                else
+                {
+                    reponseDesign = reponseDesign.Where(x=>x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null).ToList();
+                }
+                if(DesignId > 0)
+                {
+                    reponseDesign = reponseDesign.Where(x=>x.DesignId != DesignId).ToList();
+                }
                 return Ok(reponseDesign);
             }
             catch (Exception ex)

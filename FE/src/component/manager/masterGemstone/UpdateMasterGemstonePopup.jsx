@@ -65,7 +65,7 @@ function UpdateMasterGemstonePopup({ data, setIsOpenUpdatePopup }) {
 
    }
 
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       let isValid = true;
       let newError = {};
 
@@ -89,7 +89,7 @@ function UpdateMasterGemstonePopup({ data, setIsOpenUpdatePopup }) {
          const CallApi = async () => {
             const respone = await ApiUpdateMasterGemstone({ id, formData })
          }
-         CallApi();
+         await CallApi();
          toast.success('Update Success');
          setIsOpenUpdatePopup(false)
       }

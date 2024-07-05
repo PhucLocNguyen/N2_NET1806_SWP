@@ -36,6 +36,7 @@ function ListDesign() {
 
    const fetchApiGetParentDesign = async () => {
       const response = await ApiGetParentDesign({ pageSize, page })
+      console.log('>>Check point ', response)
       setDesign(response);
    }
 
@@ -76,7 +77,9 @@ function ListDesign() {
          setDesign(paginatedData);
          setDataSize(filteredData?.length);
       }
-      designPagination()
+      if (search !== '') {
+         designPagination()
+      }
 
    }, [search, searchPage, isDelete, isOpenUpdatePopup])
 
@@ -94,7 +97,7 @@ function ListDesign() {
       setSearchPage(1);
    }
 
-   console.log(search)
+   console.log(design)
 
    return (
       <>

@@ -23,8 +23,8 @@ function StoneRow({ data, setItemUpdate, setIsOpenUpdatePopup, setIsDelete, isDe
       const respone = await ApiDeleteStone(id);
    }
 
-   const handleDeleteGemstone = () => {
-      CallApi();
+   const handleDeleteGemstone = async () => {
+      await CallApi();
       handleCloseMenu();
       setIsDelete(!isDelete);
    }

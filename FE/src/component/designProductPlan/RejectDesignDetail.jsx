@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -7,6 +7,7 @@ import Chip from "@mui/material/Chip";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Typography from "@mui/material/Typography";
 import ApiRequirementById from "../../api/manager/FetchApiRequirementById";
@@ -15,28 +16,43 @@ import formatVND from "../../utils/FormatCurrency";
 import ApiUpdateRequirement from "../../api/manager/ApiUpdateRequirement";
 import DeleteImage from "../../utils/DeleteImage.jsx";
 import UploadImage from "../../utils/UploadImage.jsx";
+import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
+import CreateConversationJoin from "../../utils/CreateConversationJoin";
+import useAuth from "../../hooks/useAuth";
 
 function RejectDesignDetail() {
   const folder = "Design3D";
   const navigate = useNavigate();
   const { id } = useParams(); // requirement id
-
+  const { UserId } = useAuth();
   const [requirement, setRequirement] = useState();
   const [design, setDesign] = useState();
   const [staffNote, setStaffNote] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [customerInformation, setCustomerInformation] = useState({});
+
   // Thong tin form de dang len
+  const fetchData = async () => {
+    const requirementRespone = await ApiRequirementById(id);
+    setRequirement(requirementRespone);
 
+    const dataDesignId = requirementRespone?.designId;
+
+    const designRespone = await fetchApiDesignById(dataDesignId);
+    setDesign(designRespone);
+  };
+  async function loadCustomerDetail() {
+    const roleIdCustomer = 6;
+    const getCustomerByRequirement = await FetchApiUserBasedRoleInRequirement(
+      roleIdCustomer,
+      id
+    );
+    if (getCustomerByRequirement != null) {
+      setCustomerInformation(getCustomerByRequirement);
+    }
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      const requirementRespone = await ApiRequirementById(id);
-      setRequirement(requirementRespone);
-
-      const dataDesignId = requirementRespone?.designId;
-
-      const designRespone = await fetchApiDesignById(dataDesignId);
-      setDesign(designRespone);
-    };
+    loadCustomerDetail();
 
     fetchData();
   }, []);
@@ -80,7 +96,7 @@ function RejectDesignDetail() {
 
   const debouncedOnChange = useCallback(debounce(HandleChangeData, 500), []);
 
-  console.log(selectedFile)
+  console.log(selectedFile);
 
   const handleSubmit = () => {
     if (staffNote.length > 0) {
@@ -248,7 +264,56 @@ function RejectDesignDetail() {
                   </table>
                 </div>
               </div>
-
+              <Accordion sx={{ borderRadius: "2.5rem", marginTop: "3rem" }}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                  className="text-[24px]"
+                >
+                  <Typography
+                    variant="h3"
+                    sx={{ width: "33%", flexShrink: 0, fontSize: "24px" }}
+                  >
+                    Customer details
+                  </Typography>
+                  <Typography sx={{ color: "text.secondary" }}>
+                    <Link to="/staff/chat">
+                      <Button
+                        variant="contained"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          CreateConversationJoin(
+                            UserId,
+                            customerInformation.usersId
+                          );
+                        }}
+                      >
+                        Chat with customer
+                      </Button>
+                    </Link>
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={
+                        customerInformation.image != null
+                          ? customerInformation.image
+                          : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                      }
+                      className="w-[150px] rounded-full"
+                      alt=""
+                    />
+                    <div>
+                      <h4 className="text-[20px]">
+                        Customer name: {customerInformation.name}
+                      </h4>
+                      <h4>Email: {customerInformation.email}</h4>
+                    </div>
+                  </div>
+                </AccordionDetails>
+              </Accordion>
               {/* Note cua customer */}
               <div className=" my-[1.5rem] py-[2.5rem] px-[2.5rem] rounded-[30px] border-[1px] border-[#e9eaf3] border-solid bg-[white]">
                 <h2 className="text-[22px] mb-[1rem] font-bold leading-[1.273em]">

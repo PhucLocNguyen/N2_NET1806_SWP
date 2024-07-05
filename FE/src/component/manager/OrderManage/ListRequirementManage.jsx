@@ -10,6 +10,10 @@ function ListRequirement() {
    const [page, setPage] = useState(1);
    const [data, setData] = useState([]);
    const [dataSize, setDataSize] = useState(0);
+   const [isUpdated, setIsUpdated] = useState(false);
+   function handleUpdateData(){
+      setIsUpdated((prev)=>!prev);
+   }
    const handleChange = (event, value) => {
       setPage(value);
    };
@@ -31,7 +35,7 @@ function ListRequirement() {
          setData([])
       }
 
-   }, [page])
+   }, [page, isUpdated])
 console.log(data);
    return (
 
@@ -65,7 +69,7 @@ console.log(data);
                {data?.map((item, index) => {
 
                   return (
-                     <RowRequirement key={index} data={item} />
+                     <RowRequirement key={index} data={item} handleUpdateData={handleUpdateData}/>
                   )
                })}
 
@@ -75,7 +79,6 @@ console.log(data);
          <div className='flex justify-center items-center'>
             <Stack>
                <Pagination count={(Math.ceil(dataSize / 6)) || 0} page={page} onChange={handleChange} />
-
             </Stack>
          </div>
       </div>

@@ -24,7 +24,7 @@ function StaffLayout({ children }) {
 
    return (
       <>
-         <div className="flex ">
+         <div className="relative flex ">
 
             {/* Nav bar */}
             <div className="w-[20%]">

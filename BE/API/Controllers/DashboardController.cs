@@ -71,7 +71,7 @@ namespace API.Controllers
                     if ((int)monthFromRequest == 1)
                     {
                         var RequirementLastMonth = _unitOfWork.RequirementRepository.Get(filter: x => x.CreatedDate.Value.Month.Equals(12)
-                        && x.CreatedDate.Value.Year.Equals(year - 1)).ToList();
+                        && x.CreatedDate.Value.Year.Equals(year - 1) && !x.Status.Equals("-1")).ToList();
 
                         var CountTypeCurrentMonth = RequirementCurrentMonth.Where(requirement => DesignHaveRequirement.Contains(requirement.DesignId)).ToList().Count;
                         var CountTypeLastMonth = RequirementLastMonth.Where(requirement => DesignHaveRequirement.Contains(requirement.DesignId)).ToList().Count;
@@ -86,7 +86,7 @@ namespace API.Controllers
                     else
                     {
                         var RequirementLastMonth = _unitOfWork.RequirementRepository.Get(filter: x => x.CreatedDate.Value.Month.Equals((int)monthFromRequest - 1)
-                        && x.CreatedDate.Value.Year.Equals(year)).ToList();
+                        && x.CreatedDate.Value.Year.Equals(year) && !x.Status.Equals("-1")).ToList();
 
                         var CountTypeCurrentMonth = RequirementCurrentMonth.Where(requirement => DesignHaveRequirement.Contains(requirement.DesignId)).ToList().Count;
                         var CountTypeLastMonth = RequirementLastMonth.Where(requirement => DesignHaveRequirement.Contains(requirement.DesignId)).ToList().Count;
@@ -120,7 +120,7 @@ namespace API.Controllers
                 var responseData = new List<object>();
                 foreach (var item in MasterGemstone)
                 {
-                    var DesignHaveMasterGemstone = _unitOfWork.DesignRepository.Get(includes: x=>x.MasterGemstone).ToList().
+                    var DesignHaveMasterGemstone = _unitOfWork.DesignRepository.Get(filter: x=>x.MasterGemstoneId!=null&&x.ParentId!=null,includes: x=>x.MasterGemstone).ToList().
                         Where(x=>x.MasterGemstone.Kind.Equals(item.Name)).Select(x=>x.DesignId).ToList();
                     var Requirement = _unitOfWork.RequirementRepository.Get(x => !x.Status.Equals("-1")).ToList();
                     var CountMasterGemsonte = Requirement.Where(requirement => DesignHaveMasterGemstone.Contains(requirement.DesignId)).ToList().Count();

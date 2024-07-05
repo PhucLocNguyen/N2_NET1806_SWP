@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { fetchApiDesignById } from '../../api/FetchApiDesign'
 
-function RowRequirement({ data }) {
+function RowRequirement({ data}) {
 
    const [design, setDesign] = useState()
    const id = data.designId;

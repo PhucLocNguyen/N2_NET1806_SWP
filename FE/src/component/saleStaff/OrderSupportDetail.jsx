@@ -71,6 +71,7 @@ function OrderSupportDetail() {
          }
          CallApi()
          navigate('/staff/order-support/', { replace: true })
+         window.location.reload();
       }
    }
 

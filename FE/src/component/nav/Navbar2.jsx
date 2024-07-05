@@ -9,7 +9,7 @@ function Navbar() {
   const { role, UserId } = useAuth();
   const navigate = useNavigate();
   return (
-    <>
+    <div>
       <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md h-fit min-h-[130px] max-h-[200px]">
         <div className="w-full py-[4px] bg-[#C6AD8A]">
           <p className="text-center text-black text-xs">
@@ -102,16 +102,13 @@ function Navbar() {
                 <Link to="/my-order">
                   <ShoppingCartIcon className="scale-125 h-6 w-6 hover:text-[#fab52c] transition duration-100" />
                 </Link>
-              )}
-              <Link to="/my-order">
-                <ShoppingCartIcon className="scale-125 h-6 w-6 hover:text-[#fab52c] transition duration-100" />
-              </Link>
+              </div>
             </div>
           </nav>
         </section>
       </div>
       <div className="pt-[8rem]"></div>
-    </>
+    </div>
   );
 }
 

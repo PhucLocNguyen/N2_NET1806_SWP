@@ -105,7 +105,7 @@ function MasterGemstonePopup({ setIsOpenPopup }) {
 
    console.log(formData)
 
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       let isValid = true;
       let newError = {};
       console.log(errors);
@@ -140,7 +140,7 @@ function MasterGemstonePopup({ setIsOpenPopup }) {
          const CallApi = async () => {
             const respone = await ApiCreateMasterGemstone({ formData })
          }
-         CallApi();
+         await CallApi();
          toast.success('Create Success');
          setIsOpenPopup(false)
       }

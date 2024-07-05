@@ -80,7 +80,7 @@ function RePriceDetail() {
 
    }
 
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       let isValid = true
 
       Object.keys(errorForm).forEach((key) => {
@@ -106,7 +106,7 @@ function RePriceDetail() {
          const CallApi = async () => {
             const response = await ApiUpdateRequirement({ data, id });
          }
-         CallApi()
+         await CallApi()
          navigate('/manager/re-price-quote', { replace: true })
          console.log('Upload price quote success')
       }

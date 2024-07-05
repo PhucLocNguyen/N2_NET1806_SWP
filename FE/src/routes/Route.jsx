@@ -17,7 +17,6 @@ const StaffLogin = lazy(() => import("../component/login/StaffLogin"));
 const StaffList = lazy(() => import('../component/admin/staffList/StaffList'));
 const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
-const BlogCreate = lazy(() => import('../component/manager/BlogCreate'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
 const ListRequirementManage = lazy(()=>import('../component/manager/OrderManage/ListRequirementManage'));
 const OrderDetail = lazy(() => import("../component/orderCustomer/OrderDetail"));
@@ -29,6 +28,8 @@ const WorkingBoard = lazy(() => import('../component/staff/WorkingBoard'));
 const ListMasterGemstone = lazy(() => import('../component/manager/masterGemstone/ListMasterGemstone'));
 const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
+const ListBlog = lazy(() => import('../component/manager/blog/ListBlog'));
+const ListDesignRule = lazy(() => import('../component/manager/designRule/ListDesignRule'));
 const Warranty = lazy(() => import('../component/saleStaff/Warranty'));
 const WarrantyDetail = lazy(() => import('../component/saleStaff/WarrantyDetail'));
 const ListRePriceQuote = lazy(() => import('../component/manager/rePriceQuote/ListRePriceQuote'));
@@ -113,11 +114,12 @@ const privateRoutes = [
       component: StaffLayout,
       children: [
          { index: true, component: ListRequirement },
-         { path: 'blog-create', component: BlogCreate },
+         { path: 'blog-management', component: ListBlog },
          { path: 'price-quote/:id', component: RequirementDetail },
          { path: 'master-gemstone', component: ListMasterGemstone },
          { path: 'design-management', component: ListDesign },
          { path: 'stone-management', component: ListStone },
+         { path: 'design-rule', component: ListDesignRule },
          { path: 're-price-quote', component: ListRePriceQuote },
          { path: 're-price-quote/:id', component: RePriceDetail },
          {path:'orders', component: ListRequirementManage}

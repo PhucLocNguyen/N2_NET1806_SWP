@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { getStatusCustomerByCode , getStatusClass} from "../../orderCustomer/OrderCustomer";
 
 import { FetchApiDesignById } from "../../../api/Requirements/FetchApiDesign";
@@ -15,6 +16,7 @@ function RowRequirement({ data, handleUpdateData }) {
     };
     fetchApi();
   }, []);
+
   const handleOpenPopup = () => {
     setIsOpenPopup(true);
   };

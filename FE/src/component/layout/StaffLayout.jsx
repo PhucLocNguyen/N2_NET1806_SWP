@@ -7,6 +7,7 @@ import ProductNav from "../designProductPlan/ProductNav";
 import useAuth from "../../hooks/useAuth";
 
 function StaffLayout({ children }) {
+
   const { role } = useAuth();
 
   let Nav = <></>;
@@ -27,7 +28,7 @@ function StaffLayout({ children }) {
 
   return (
     <>
-      <div className="flex ">
+      <div className="relative flex">
         {/* Nav bar */}
         <div className="w-[20%]">
           <Nav />
@@ -40,6 +41,7 @@ function StaffLayout({ children }) {
       </div>
     </>
   );
+
 }
 
 export default StaffLayout;

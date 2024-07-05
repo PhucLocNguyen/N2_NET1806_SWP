@@ -143,8 +143,6 @@ public partial class MyDbContext : DbContext
 
             entity.Property(e => e.WarrantyCardId).HasColumnName("WarrantyCardID");
             entity.Property(e => e.RequirementId).HasColumnName("RequirementID");
-            entity.Property(e => e.DateCreated).HasColumnType("datetime");
-            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
 
             entity.HasOne(d => d.Requirement).WithMany(p => p.Haves)
                 .HasForeignKey(d => d.RequirementId)

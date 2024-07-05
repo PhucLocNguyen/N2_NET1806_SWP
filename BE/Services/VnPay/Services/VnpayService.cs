@@ -143,13 +143,18 @@ namespace Repositories.VnPay.Services
                 return "Valid amount ranges from 5,000 to under 1 billion VND";
             }
 
-            string verificationCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6).ToUpper();
-            _cache.Set(verificationCode, requestCreateVnpay, DateTime.Now.AddMinutes(15));
+            /*string verificationCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6).ToUpper();
+            _cache.Set(verificationCode, requestCreateVnpay, DateTime.Now.AddMinutes(15));*/
+            var payment = requestCreateVnpay.ToPaymentEntity((int)requestCreateVnpay.userId, (int)requestCreateVnpay.requirementId);
+            payment.Status = "Pending ";
+            _unitOfWork.PaymentRepository.Insert(payment);
+            _unitOfWork.Save();
+            var resultPayment = _unitOfWork.PaymentRepository.Get(filter: x => x.Equals(payment)).FirstOrDefault();
             var paymentUrl = string.Empty;
             var test = _vnpayConfig;
             _vnpayPayRequest = new VnpayPayRequest(_vnpayConfig.Version,
             _vnpayConfig.TmnCode, DateTime.Now, "127.0.0.1" ?? string.Empty, requestCreateVnpay.RequiredAmount , requestCreateVnpay.PaymentCurrency ?? string.Empty,
-                            "other", requestCreateVnpay.PaymentContent ?? string.Empty, _vnpayConfig.ReturnUrl, verificationCode);
+                            "other", requestCreateVnpay.PaymentContent ?? string.Empty, _vnpayConfig.ReturnUrl, resultPayment.PaymentId!.ToString() ?? string.Empty);
             paymentUrl = GetLink(_vnpayConfig.PaymentUrl, _vnpayConfig.HashSecret);
             return paymentUrl;
         }
@@ -168,9 +173,10 @@ namespace Repositories.VnPay.Services
 
             var vnp_SecureHash = collections.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
             bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, _vnpayConfig.HashSecret);
-            _cache.TryGetValue(vnpay.GetResponseData("vnp_TxnRef"), out RequestCreateVnpay requestCreateVnpay);
-            var payment = requestCreateVnpay.ToPaymentEntity((int)requestCreateVnpay.userId, (int)requestCreateVnpay.requirementId);
-            _cache.Remove(vnpay.GetResponseData("vnp_TxnRef"));
+           /* _cache.TryGetValue(vnpay.GetResponseData("vnp_TxnRef"), out RequestCreateVnpay requestCreateVnpay);
+            var payment = requestCreateVnpay.ToPaymentEntity((int)requestCreateVnpay.userId, (int)requestCreateVnpay.requirementId);*/
+           var payment = _unitOfWork.PaymentRepository.GetByID(int.Parse(vnpay.GetResponseData("vnp_TxnRef")));
+            //_cache.Remove(vnpay.GetResponseData("vnp_TxnRef"));
             if (checkSignature)
             {
                 if (payment != null)

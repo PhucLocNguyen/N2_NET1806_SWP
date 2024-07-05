@@ -29,6 +29,7 @@ const ListMasterGemstone = lazy(() => import('../component/manager/masterGemston
 const ListDesign = lazy(() => import('../component/manager/design/ListDesign'));
 const ListStone = lazy(() => import('../component/manager/stone/ListStone'));
 const ListBlog = lazy(() => import('../component/manager/blog/ListBlog'));
+const ListMaterial = lazy(() => import('../component/manager/material/ListMaterial'));
 const ListDesignRule = lazy(() => import('../component/manager/designRule/ListDesignRule'));
 const Warranty = lazy(() => import('../component/saleStaff/Warranty'));
 const WarrantyDetail = lazy(() => import('../component/saleStaff/WarrantyDetail'));
@@ -118,6 +119,7 @@ const privateRoutes = [
          { path: 'price-quote/:id', component: RequirementDetail },
          { path: 'master-gemstone', component: ListMasterGemstone },
          { path: 'design-management', component: ListDesign },
+         { path: 'material-management', component: ListMaterial },
          { path: 'stone-management', component: ListStone },
          { path: 'design-rule', component: ListDesignRule },
          { path: 're-price-quote', component: ListRePriceQuote },

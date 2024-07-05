@@ -59,7 +59,7 @@ function RequirementDetail() {
 
    }
 
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       let isValid = true
 
       Object.keys(errorForm).forEach((key) => {
@@ -85,7 +85,7 @@ function RequirementDetail() {
          const CallApi = async () => {
             const response = await ApiUpdateRequirement({ data, id });
          }
-         CallApi()
+         await CallApi()
          navigate('/manager', { replace: true })
          window.location.reload();
          console.log('Upload price quote success')

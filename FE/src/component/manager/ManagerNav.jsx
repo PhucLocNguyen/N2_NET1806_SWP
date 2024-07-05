@@ -4,6 +4,7 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import RuleIcon from '@mui/icons-material/Rule';
 import SpokeIcon from '@mui/icons-material/Spoke';
+import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { NavLink } from 'react-router-dom';
 import LogoutStaff from '../staff/Logout';
@@ -38,6 +39,12 @@ function ManagerNav() {
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <AssignmentIcon   className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Manage order</h2>
+                  </div>
+               </NavLink>
+               <NavLink to='material-management'>
+                  <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
+                     <DataSaverOnIcon className="group-hover:text-[rgb(66,133,244)]" />
+                     <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Material</h2>
                   </div>
                </NavLink>
                <NavLink to='master-gemstone'>

@@ -22,8 +22,8 @@ function MasterGemstoneRow({ data, setIsOpenUpdatePopup, setItemUpdate, isDelete
       const respone = await ApiDeleteMasterGemstone(id);
    }
 
-   const handleDeleteGemstone = () => {
-      CallApi();
+   const handleDeleteGemstone = async () => {
+      await CallApi();
       handleCloseMenu();
       setIsDelete(!isDelete);
    }

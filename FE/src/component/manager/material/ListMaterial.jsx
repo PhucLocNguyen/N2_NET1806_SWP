@@ -1,22 +1,29 @@
 import { useState, useEffect } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import Button from "@mui/material/Button";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import SearchIcon from "@mui/icons-material/Search";
 import { TextField, InputAdornment } from "@mui/material";
 
-import DesignRuleRow from "./DesignRuleRow";
-import UpdateDesignRule from "./UpdateDesignRule";
-import { FetchDesignRule } from "../../../api/designRule/FetchDesignRule";
+import MaterialRow from "./MaterialRow";
+import MaterialPopup from "./MaterialPopup";
+import UpdateMaterial from "./UpdateMaterial";
+import { FetchApiMaterial } from "../../../api/material/FetchApiMaterial";
 
-function ListDesignRule() {
+function ListMaterial() {
   const pageSize = 6;
 
-  const [designRule, setDesignRule] = useState([]);
+  const [isOpenPopup, setIsOpenPopup] = useState(false);
+  const [material, setMaterial] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Update
+  //Update
   const [isOpenUpdatePopup, setIsOpenUpdatePopup] = useState(false);
   const [itemUpdate, setItemUpdate] = useState();
+
+  //Delete
+  const [isDelete, setIsDelete] = useState(false);
 
   // Search
   const [searchPage, setSearchPage] = useState(1);
@@ -25,47 +32,56 @@ function ListDesignRule() {
   const [dataSize, setDataSize] = useState(0);
   const [page, setPage] = useState(1);
 
-  const getDesignRule = async (page, search = "") => {
-    const response = await FetchDesignRule({ pageSize, page });
-    if (search) {
-      const filteredData = response.filter((item) => {
+  const fetchApimaterial = async () => {
+    const respone = await FetchApiMaterial({ pageSize, page });
+    setMaterial(respone);
+  };
+
+  const fetchApiTotal = async () => {
+    const respone = await FetchApiMaterial({});
+    setDataSize(respone?.length);
+    return respone;
+  };
+
+  useEffect(() => {
+    if (search === "") {
+      fetchApimaterial();
+    }
+    fetchApiTotal();
+    // console.log('Call again')
+  }, [isOpenPopup, page, isOpenUpdatePopup, isDelete]);
+
+  // Dung cho pagination
+  useEffect(() => {
+    let data = [];
+    if (search === "") {
+      setPage(1);
+      fetchApimaterial();
+    }
+
+    
+    let gemPagination = async () => {
+      data = await fetchApiTotal();
+        console.log(search)
+      const filteredData = data.filter((item) => {
         return (
-          String(item.designRuleId).toLowerCase().includes(search.toLowerCase()) ||
-          String(item.minSizeMasterGemstone).toLowerCase().includes(search.toLowerCase()) ||
-          String(item.maxSizeMasterGemstone).toLowerCase().includes(search.toLowerCase()) ||
-          String(item.minSizeJewellery).toLowerCase().includes(search.toLowerCase()) ||
-          String(item.maxSizeJewellery).toLowerCase().includes(search.toLowerCase()) ||
-          String(item?.typeOfJewellery?.name).toLowerCase().includes(search.toLowerCase())
+            String(item.materialId).toLowerCase().includes(search.toLowerCase()) ||
+            String(item.name).toLowerCase().includes(search.toLowerCase())
         );
       });
+
+      console.log(filteredData)
       const paginatedData = filteredData.slice(
         (searchPage - 1) * pageSize,
         searchPage * pageSize
       );
-      setDesignRule(paginatedData);
-      setDataSize(filteredData.length);
-    } else {
-      setDesignRule(response);
-      setDataSize(response.length);
-    }
-  };
 
-  useEffect(() => {
-    if (search) {
-      setSearchPage(1);
-      getDesignRule(1, search);
-    } else {
-      getDesignRule(page);
-    }
-  }, [search, searchPage, page, isOpenUpdatePopup]);
+      setMaterial(paginatedData);
+      setDataSize(filteredData?.length);
+    };
 
-  useEffect(() => {
-    if (search) {
-      getDesignRule(searchPage, search);
-    } else {
-      getDesignRule(page);
-    }
-  }, [search, searchPage, isOpenUpdatePopup]);
+    gemPagination();
+  }, [search, searchPage, isOpenUpdatePopup, isDelete]);
 
   const handleChange = (event, value) => {
     if (search === "") {
@@ -80,6 +96,8 @@ function ListDesignRule() {
     setSearchPage(1);
   };
 
+  // console.log('>>> Log item update : ', itemUpdate)
+
   return (
     <>
       <div className="min-h-[100vh] py-[3rem] px-[3rem] bg-[#f7f9fc]">
@@ -88,7 +106,7 @@ function ListDesignRule() {
             <div className="py-[1.75rem] px-[2.25rem] flex items-center justify-between">
               <div className="flex items-center ">
                 <h2 className="mr-5 font-bold text-[1.5rem] leading-[1.125em]">
-                  All Design Rule
+                  All Material
                 </h2>
                 <TextField
                   onChange={handleSearchChange}
@@ -114,48 +132,52 @@ function ListDesignRule() {
                   }}
                 />
               </div>
+              <Button
+                onClick={() => setIsOpenPopup(true)}
+                startIcon={<AddIcon />}
+                variant="contained"
+              >
+                New Material
+              </Button>
             </div>
 
             {/* Header row */}
-            <div className="bg-[#f7f9fc] grid grid-cols-8 gap-x-[1rem] py-[1rem] px-[2.25rem] border-t-[1px] border-solid border-[#e9eaf3]">
-              <div className="flex items-center">
-                <h2 className="mx-6 text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">
-                  DesignRuleId
+            <div className="grid grid-cols-8 gap-x-10 py-4 px-16 border-t border-solid border-gray-300 cursor-pointer my-4">
+              <div className="flex items-center col-span-1">
+                <h2 className="text-base font-medium tracking-wide leading-snug">
+                materialId
                 </h2>
               </div>
-              <div className="flex items-center">
-                <h2 className="mx-6 text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">
-                  Type Of Jewelry
+              <div className="flex items-center col-span-1">
+                <h2 className="text-base font-medium tracking-wide leading-snug">
+                Name
                 </h2>
               </div>
-              <div className="flex items-center">
-                <h2 className="mx-6 text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">
-                  Min Size MasterGemstone
+              <div className="flex items-center col-span-1">
+                <h2 className="text-base font-medium tracking-wide leading-snug">
+                  Price
                 </h2>
               </div>
-              <div className="flex items-center">
-                <h2 className="mx-6 text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">
-                  Max Size MasterGemstone
+              <div className="flex items-center col-span-3">
+                <h2 className="text-base font-medium tracking-wide leading-snug">
+                image
                 </h2>
               </div>
-              <div className="flex items-center">
-                <h2 className="mx-6 text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">
-                  Min Size Jewellery
-                </h2>
-              </div>
-              <div className="flex items-center">
-                <h2 className="mx-6 text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">
-                  Max Size Jewellery
+              <div className="flex items-center col-span-1">
+                <h2 className="text-base font-medium tracking-wide leading-snug">
+                managerId
                 </h2>
               </div>
             </div>
 
-            {designRule?.map((item, index) => (
-              <DesignRuleRow
+            {material?.map((item, index) => (
+              <MaterialRow
                 key={index}
                 data={item}
                 setIsOpenUpdatePopup={setIsOpenUpdatePopup}
                 setItemUpdate={setItemUpdate}
+                isDelete={isDelete}
+                setIsDelete={setIsDelete}
               />
             ))}
           </div>
@@ -163,7 +185,7 @@ function ListDesignRule() {
         <div className="flex justify-center items-center">
           <Stack>
             <Pagination
-              count={Math.ceil(dataSize / pageSize) || 0}
+              count={Math.ceil(dataSize / 6) || 0}
               page={search === "" ? page : searchPage}
               onChange={handleChange}
             />
@@ -171,8 +193,9 @@ function ListDesignRule() {
         </div>
       </div>
 
+      {isOpenPopup && <MaterialPopup setIsOpenPopup={setIsOpenPopup} />}
       {isOpenUpdatePopup && (
-        <UpdateDesignRule
+        <UpdateMaterial
           setIsOpenUpdatePopup={setIsOpenUpdatePopup}
           data={itemUpdate}
         />
@@ -181,4 +204,4 @@ function ListDesignRule() {
   );
 }
 
-export default ListDesignRule;
+export default ListMaterial;

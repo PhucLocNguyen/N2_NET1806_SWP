@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import { NavLink } from 'react-router-dom';
+import LogoutStaff from '../staff/Logout';
 
 function AdminNav() {
    return (
@@ -22,7 +23,7 @@ function AdminNav() {
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Dashboard</h2>
                   </div>
                </NavLink>
-
+               <LogoutStaff />
             </div>
          </div>
       </>

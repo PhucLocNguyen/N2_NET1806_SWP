@@ -15,7 +15,7 @@ CREATE TABLE Users (
     Name NVARCHAR(100) NOT NULL,
     Email NVARCHAR(100) NOT NULL UNIQUE,
     Phone NVARCHAR(10) ,
-	Image NVARCHAR(200),
+	Image NVARCHAR(Max),
     RoleID INT,
     FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
 );
@@ -23,8 +23,8 @@ CREATE TABLE Users (
 CREATE TABLE Blog (
     BlogID INT IDENTITY(1,1) PRIMARY KEY,
     Title NVARCHAR(200) NOT NULL,
-    Description TEXT NOT NULL,
-    Image NVARCHAR(200) NOT NULL,
+    Description NVARCHAR(Max) NOT NULL,
+    Image NVARCHAR(Max) NOT NULL,
     ManagerID INT,
     FOREIGN KEY (ManagerID) REFERENCES Users(UsersID)
 );
@@ -33,7 +33,7 @@ CREATE TABLE Material (
     MaterialID INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(100) NOT NULL,
     Price DECIMAL(18,2) NOT NULL,
-	Image NVARCHAR(200) NOT NULL,		
+	Image NVARCHAR(Max) NOT NULL,		
     ManagerID INT NOT NULL,
     FOREIGN KEY (ManagerID) REFERENCES Users(UsersID)
 );
@@ -55,21 +55,21 @@ CREATE TABLE MasterGemstone (
     Cut NVARCHAR(50) NOT NULL,
     Weight DECIMAL(18,2) NOT NULL,
     Shape NVARCHAR(50)NOT NULL,
-	Image NVARCHAR(200) NOT NULL
+	Image NVARCHAR(Max) NOT NULL
 );
 
 CREATE TABLE TypeOfJewellery (
     TypeOfJewelleryID INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(100) NOT NULL,
-	Image NVARCHAR(200) NOT NULL
+	Image NVARCHAR(Max) NOT NULL
 );
 
 CREATE TABLE Design (
     DesignID INT IDENTITY(1,1) PRIMARY KEY,
     ParentID INT,
     DesignName NVARCHAR(100) NOT NULL,
-    Image NVARCHAR(200) NOT NULL,
-    Description NVARCHAR(250) ,
+    Image NVARCHAR(Max) NOT NULL,
+    Description NVARCHAR(Max) ,
     StoneID INT,
     MasterGemstoneID INT,
     ManagerID INT,
@@ -88,15 +88,15 @@ CREATE TABLE Requirements (
 	CreatedDate DATE,
     ExpectedDelivery DATE,
     Size DECIMAL(18,2) NOT NULL,
-	Design3D NVARCHAR(200),
+	Design3D NVARCHAR(Max),
 	WeightOfMaterial DECIMAL(18,2),
     MaterialPriceAtMoment DECIMAL(18,2),
 	MasterGemStonePriceAtMoment DECIMAL(18,2),
     StonePriceAtMoment DECIMAL(18,2),
     MachiningFee DECIMAL(18,2),
     TotalMoney DECIMAL(18,2),
-    CustomerNote NVARCHAR(250),
-    StaffNote NVARCHAR(250),
+    CustomerNote NVARCHAR(Max),
+    StaffNote NVARCHAR(Max),
     DesignID INT NOT NULL,
     FOREIGN KEY (DesignID) REFERENCES Design(DesignID)
 );
@@ -125,14 +125,14 @@ CREATE TABLE Payment (
 CREATE TABLE WarrantyCard (
     WarrantyCardID INT IDENTITY(1,1) PRIMARY KEY,
     Title NVARCHAR(100) NOT NULL,
-    Description TEXT
+    Description NVARCHAR(Max)
 );
 
 CREATE TABLE Have (
     WarrantyCardID INT,
     RequirementID INT,
-    DateCreated DATETIME,
-    ExpirationDate DATETIME,
+    DateCreated DATE,
+    ExpirationDate DATE,
     PRIMARY KEY (WarrantyCardID, RequirementID),
     FOREIGN KEY (WarrantyCardID) REFERENCES WarrantyCard(WarrantyCardID),
     FOREIGN KEY (RequirementID) REFERENCES Requirements(RequirementID)
@@ -171,68 +171,68 @@ CREATE TABLE Messages (
 GO
 
 GO
-insert into MasterGemstone values ('Diamond',4,890.0,'VVS1','EX',0.2,'Round','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWHUscJPTURmqG413RW3IUoQFaWE_ypeDRQ&s')
-insert into MasterGemstone values ('Diamond',5,3150,'VVS2','VG', 0.4,'Marquise','https://5.imimg.com/data5/SELLER/Default/2022/10/QG/QA/DM/70249436/marquise-shape-diamond-500x500.jpg')
-insert into MasterGemstone values ('Diamond',6,8700,'VVS1','EX',0.8,'Round','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWHUscJPTURmqG413RW3IUoQFaWE_ypeDRQ&s')
-insert into MasterGemstone values ('Diamond',7,244490.80,'VVS2','VG',1.2,'Princess','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxfsnec1qOzWuNuTt3yE4wXkPkbQ0n5VZekQ&s')
-insert into MasterGemstone values ('Diamond',8,53101.90,'VS1','EX',2.0,'Baguete','https://www.mydiamonds.com.au/cdn/shop/products/Envy-White-Gold-Emerald-Tapered-Baguette-Diamond-Three-Stone-Ring-2_b2f3b1a3-b61e-4ab1-8de8-ce23bce618db.jpg?v=1671891940')
-insert into MasterGemstone values ('Diamond',9,79235.96,'VS2','EX',2.75,'Pear','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMhc8p0RGypJTByZlZ8_sBFtH_zK4hUu-ngQ&s')
-insert into MasterGemstone values ('Diamond',4.5,1210.80,'VVS1','EX',0.33,'Oval','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf-w8ypjG8oNmi5sQkWAS3R1Pji12gBhfjpQ&s')
-insert into MasterGemstone values ('Diamond',5.5,4300,'IF','VG',0.7,'Marquise','https://5.imimg.com/data5/SELLER/Default/2022/10/QG/QA/DM/70249436/marquise-shape-diamond-500x500.jpg')
-insert into MasterGemstone values ('Diamond',6.5,9100,'VS1','VG',1.1,'Pear','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMhc8p0RGypJTByZlZ8_sBFtH_zK4hUu-ngQ&s')
-insert into MasterGemstone values ('Diamond',7.5,26500.20,'VVS2','VG',1.65,'Heart','https://www.rockher.com/cdn/shop/files/e80127_v2_heart_white_1__1.jpg?v=1717689418')
-insert into MasterGemstone values ('Diamond',8.5,49870.90,'VS2','EX',2.25,'Emerald','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCUuK0Eur30RhEn9n3t577MXycbS5djfMNJQ&s')
-insert into MasterGemstone values ('Diamond',9.5,11555.81,'IF','GD',3.1,'Trillion','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqB2e-8HSaay-HgOFpzWidCLkBbkPqrBkSCw&s')
+insert into MasterGemstone values ('Diamond',4,22637150,'VVS1','EX',0.2,'Round','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F1.jpg?alt=media&token=f09d8188-0790-487c-8d29-7a16c7ba8df0')
+insert into MasterGemstone values ('Diamond',5,80120250,'VVS2','VG', 0.4,'Marquise','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F2.jpg?alt=media&token=835fd8f9-e96d-475b-9bfb-23da38469231')
+insert into MasterGemstone values ('Diamond',6,221284500,'VVS1','EX',0.8,'Round','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F3.jpg?alt=media&token=ce98cf5e-b110-49c0-b0ea-8fefa8113c84')
+insert into MasterGemstone values ('Diamond',7,766400000,'VVS2','VG',1.2,'Princess','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F4.jpg?alt=media&token=a2b3eee0-1206-4bd1-840b-e894ac84e177')
+insert into MasterGemstone values ('Diamond',8, 979400000,'VS1','EX',2.0,'Baguete','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F5.jpg?alt=media&token=b9fbfe24-07b2-498f-b65d-b4ed54acafc2')
+insert into MasterGemstone values ('Diamond',9,1298000000,'VS2','EX',2.75,'Pear','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F6.jpg?alt=media&token=1279d357-159d-4088-b89a-22e485f5029c')
+insert into MasterGemstone values ('Diamond',4.5,116820000,'VVS1','EX',0.33,'Oval','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F7.jpg?alt=media&token=67bc9c39-1652-41e4-8783-c7c17ac532c6')
+insert into MasterGemstone values ('Diamond',5.5,297360000,'IF','VG',0.7,'Marquise','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F8.jpg?alt=media&token=ffd8c905-47d2-43ef-83c2-05df7b6b56cf')
+insert into MasterGemstone values ('Diamond',6.5,467280000,'VS1','VG',1.1,'Pear','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F9.jpg?alt=media&token=878e5fdd-9ac3-4cb9-8264-39f6e6158b7a')
+insert into MasterGemstone values ('Diamond',7.5,973500000 ,'VVS2','VG',1.65,'Heart','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F10.jpg?alt=media&token=1710889a-0b11-48c5-8ec5-4f4929c1a038')
+insert into MasterGemstone values ('Diamond',8.5,955800000,'VS2','EX',2.25,'Emerald','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F11.jpg?alt=media&token=f92f41f4-ac07-4345-b23b-4b281fee3d5e')
+insert into MasterGemstone values ('Diamond',9.5,293922027,'IF','GD',3.1,'Trillion','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F12.jpg?alt=media&token=4f8e6bbc-4949-4a9d-b17c-a1285da2a2f5')
 
-insert into MasterGemstone values ('Ruby',6.2,567.95,'VVS2','EX',0.96,'Oval','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2jyWQP-qaThFhZPPRycV7CawwamQ1el3yDw&s')
-insert into MasterGemstone values ('Ruby',6.9,3162.54,'VVS1','EX',1.42,'Oval','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2jyWQP-qaThFhZPPRycV7CawwamQ1el3yDw&s')
-insert into MasterGemstone values ('Ruby',7.3,1298.70,'VVS2','EX',1.29,'Oval','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2jyWQP-qaThFhZPPRycV7CawwamQ1el3yDw&s')
+insert into MasterGemstone values ('Ruby',6.2,14445808,'VVS2','EX',0.96,'Oval','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F13.jpg?alt=media&token=d778b96c-5cb4-472f-ab02-2433896c7a44')
+insert into MasterGemstone values ('Ruby',6.9,80439204,'VVS1','EX',1.42,'Oval','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F13.jpg?alt=media&token=d778b96c-5cb4-472f-ab02-2433896c7a44')
+insert into MasterGemstone values ('Ruby',7.3,33032434,'VVS2','EX',1.29,'Oval','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F13.jpg?alt=media&token=d778b96c-5cb4-472f-ab02-2433896c7a44')
 
-insert into MasterGemstone values ('Sapphire',7.1,1259.35,'VVS2','EX',1.34,'Octagon','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_JrhfLcxKf5BEDc4gPzysaKOkJY3w3WsjpQ&s')
-insert into MasterGemstone values ('Sapphire',8.5,1534.83,'VVS1','EX',2.5,'Octagon','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_JrhfLcxKf5BEDc4gPzysaKOkJY3w3WsjpQ&s')
-insert into MasterGemstone values ('Sapphire',8,661.16,'VVS1','EX',2.1,'Octagon','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_JrhfLcxKf5BEDc4gPzysaKOkJY3w3WsjpQ&s')
+insert into MasterGemstone values ('Sapphire',7.1,32031567,'VVS2','EX',1.34,'Octagon','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F15.jpg?alt=media&token=6e77c627-eb94-49bc-89cf-85e6cd265553')
+insert into MasterGemstone values ('Sapphire',8.5,39038401,'VVS1','EX',2.5,'Octagon','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F15.jpg?alt=media&token=6e77c627-eb94-49bc-89cf-85e6cd265553')
+insert into MasterGemstone values ('Sapphire',8,16816604,'VVS1','EX',2.1,'Octagon','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F15.jpg?alt=media&token=6e77c627-eb94-49bc-89cf-85e6cd265553')
 
 
-
-insert into MasterGemstone
-values ('Emerald',7.5,920.10,'VVS2','EX',1.62,'Emerald','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPbfJp0LWlpvwB3qpD0qefb3fGwURY2ZEAqw&s')
 
 insert into MasterGemstone
-values ('Emerald',9.5,1031.88,'IF','EX',2.85,'Emerald','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPbfJp0LWlpvwB3qpD0qefb3fGwURY2ZEAqw&s') 
+values ('Emerald',7.5,23402743,'VVS2','EX',1.62,'Emerald','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F16.jpg?alt=media&token=42211d9c-fe7e-4b9b-86f9-4647d450346f')
 
 insert into MasterGemstone
-values ('Emerald',10,1168.83,'VVS1','EX',2.85,'Oval','https://atjewels.in/cdn/shop/products/Detailsabout1.1CtOvalCutGreenEmeraldSolitaireHaloEngagementRing14KRoseGoldFinish1.jpg?v=1617700350')
+values ('Emerald',9.5,26245867,'IF','EX',2.85,'Emerald','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F16.jpg?alt=media&token=42211d9c-fe7e-4b9b-86f9-4647d450346f') 
 
-insert into MasterGemstone values ('Garnet ',8,220.23,'VVS1','EX',2,'Heart','https://i.etsystatic.com/15646423/r/il/71d77c/3520051313/il_570xN.3520051313_5et6.jpg')
-insert into MasterGemstone values ('Garnet ',8.5,262.50,'VVS2','EX',2.25,'Octagon','https://media.superjeweler.com/f_auto,fl_lossy,q_auto,c_scale/Images/Products/700x700/pic62389-1')
-insert into MasterGemstone values ('Garnet ',9,267.06,'VVS1','EX',3,'Octagon','https://media.superjeweler.com/f_auto,fl_lossy,q_auto,c_scale/Images/Products/700x700/pic62389-1')
+insert into MasterGemstone
+values ('Emerald',10,29729191,'VVS1','EX',2.85,'Oval','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F17.jpg?alt=media&token=cb9bce45-642e-47cf-91b7-f3d00f8f86aa')
 
-insert into MasterGemstone values ('Topaz',6.3,56.28,'VVS2','VG',1.10,'Octagon','https://media.superjeweler.com/Images/Products/700X700/pic61701-1')
-insert into MasterGemstone values ('Topaz',7.5,91.07,'VVS2','VG',1.78,'Princess','https://www.virjewels.com/cdn/shop/files/r12433bt_6_2048x.jpg?v=1689259683')
-insert into MasterGemstone values ('Topaz',8.5,126.37,'VVS2','VG',2.47,'Octagon','https://media.superjeweler.com/Images/Products/700X700/pic61701-1')
+insert into MasterGemstone values ('Garnet ',8,5601550,'VVS1','EX',2,'Heart','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F18.jpg?alt=media&token=b530b62a-df2e-4eb3-a5a0-d25192001f28')
+insert into MasterGemstone values ('Garnet ',8.5,6676687,'VVS2','EX',2.25,'Octagon','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F19.jpg?alt=media&token=c70f60f8-61a1-4447-b94e-804d8febcd38')
+insert into MasterGemstone values ('Garnet ',9,6792671,'VVS1','EX',3,'Octagon','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F19.jpg?alt=media&token=c70f60f8-61a1-4447-b94e-804d8febcd38')
+
+insert into MasterGemstone values ('Topaz',6.3,1431481,'VVS2','VG',1.10,'Octagon','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F20.jpg?alt=media&token=abfe4802-1ff3-4994-a6b0-98fecf858eca')
+insert into MasterGemstone values ('Topaz',7.5,2316365,'VVS2','VG',1.78,'Princess','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F21.jpg?alt=media&token=16bcac57-e578-49d3-83f5-72ba037af95e')
+insert into MasterGemstone values ('Topaz',8.5,3214220,'VVS2','VG',2.47,'Octagon','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/MasterGemstone%2F20.jpg?alt=media&token=abfe4802-1ff3-4994-a6b0-98fecf858eca')
 GO
 
 
 
-insert into Stones values ('CZ',1,20,1)
-insert into Stones values ('CZ',1,36,1.45)
-insert into Stones values ('CZ',1,40,1.65)
+insert into Stones values ('CZ',1,20,25000)
+insert into Stones values ('CZ',1,36,37000)
+insert into Stones values ('CZ',1,40,42000)
 
-insert into Stones values ('CZ',1.5,20,1.2)
-insert into Stones values ('CZ',1.5,36,1.45)
-insert into Stones values ('CZ',1.5,40,1.7)
+insert into Stones values ('CZ',1.5,20,31000)
+insert into Stones values ('CZ',1.5,36,37000)
+insert into Stones values ('CZ',1.5,40,43000)
 
-insert into Stones values ('CZ',2,20,1.45)
-insert into Stones values ('CZ',2,36,1.75)
-insert into Stones values ('CZ',2,40,2.2)
+insert into Stones values ('CZ',2,20,37000)
+insert into Stones values ('CZ',2,36,45000)
+insert into Stones values ('CZ',2,40,56000)
 
-insert into Stones values ('CZ',2.5,20,1.55)
-insert into Stones values ('CZ',2.5,36,1.85)
-insert into Stones values ('CZ',2.5,40,2.2)
+insert into Stones values ('CZ',2.5,20,40000)
+insert into Stones values ('CZ',2.5,36,47000)
+insert into Stones values ('CZ',2.5,40,56000)
 
-insert into Stones values ('CZ',3,20,1.75)
-insert into Stones values ('CZ',3,36,2.15)
-insert into Stones values ('CZ',3,40,2.45)
+insert into Stones values ('CZ',3,20,45000)
+insert into Stones values ('CZ',3,36,550000)
+insert into Stones values ('CZ',3,40,62000)
 GO
 
 GO
@@ -252,41 +252,41 @@ insert into Users values ('AEOPAOP','badat123!!@@','nguyenbadat','dat@gmail.com'
 insert into Users values ('youknowwho','quanghuy123!!@@','lequanghuy','huy@gmail.com','0764567123','',6)
 GO
 GO
-insert into Material values ('Gold 24K',322.71,'https://www.vnsc.vn/wp-content/uploads/2023/02/dac-diem-vang-24k.jpg',2)
-insert into Material values ('Gold 18K',161.07,'https://locphuc.com.vn/Content/Images/San-pham-lan-22/nhan-nam-cz-vang-18k-VRF0531R-LP0618940-g1.jpg',2)
-insert into Material values ('Gold 14K',120.59,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd83gUoQAohdV5cP3c0cYcNaP43of1PXNx5A&s',2)
-insert into Material values ('Gold 10K',109.57,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxSajVLxRxIrhQ89J3jj19GbPo-kw1uxZrew&s',2)
-insert into Material values ('Pink Gold 10K',94.41,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyMKzQHVdWsKX3gRT-x02DooHLUmD8gdegCQ&s',2)
-insert into Material values ('Pink Gold 14K',132.54,'https://www.beawelry.co.th/wp-content/uploads/2020/06/BRA0206-01-01-F-700x700.jpg',2)
-insert into Material values ('Pink Gold 18K',169.77,'https://www.masseysjewelers.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/3/0/30348pkd-18r.jpg',2)
-insert into Material values ('White Gold 10K',133.97,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNilFfKxlpXfjaCqB30BAiXbKKWXW-awFzeA&s',2)
-insert into Material values ('White Gold 14K',158.66,'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-8qLGZMrIq17mZFi24z29gK06pAbGZCvNOQ&s',2)
-insert into Material values ('White Gold 18K',212.75,'https://i.ebayimg.com/images/g/OR0AAOSwnAZhSMJy/s-l400.jpg',2)
+insert into Material values ('Gold 24K',8208128,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F22.jpg?alt=media&token=46de03bc-b95b-4699-a011-4a418f761cea',2)
+insert into Material values ('Gold 18K',4096815,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F23.jpg?alt=media&token=5fdf0097-2714-40d1-887d-d097053f7257',2)
+insert into Material values ('Gold 14K',120.59,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F24.jpg?alt=media&token=7f724e6a-e623-4fe5-a78f-a4a2fc0def9a',2)
+insert into Material values ('Gold 10K',3067206,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F25.jpg?alt=media&token=87c56efe-d212-4cf3-ad72-34547eaa00e6',2)
+insert into Material values ('Pink Gold 10K',2401318,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F26.jpg?alt=media&token=b0778c75-cb59-4a61-b962-19ccc59a8148',2)
+insert into Material values ('Pink Gold 14K',132.54,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F27.jpg?alt=media&token=3ee1b9c9-cb05-4126-a85a-4063d7a865bc',2)
+insert into Material values ('Pink Gold 18K',3371154,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F28.jpg?alt=media&token=2e85ae74-5a8e-47f1-92bc-9bef41bedbc6',2)
+insert into Material values ('White Gold 10K',3407526,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F29.jpg?alt=media&token=010c6468-7fcb-4b03-bf94-82edd37af092',2)
+insert into Material values ('White Gold 14K',4035517,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F30.jpg?alt=media&token=6ed19015-e9da-4d61-81f6-13080ea5ab33',2)
+insert into Material values ('White Gold 18K',5411296,'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Material%2F31.jpg?alt=media&token=fcaac88a-e8b4-45d7-9fba-ecde09d40c55',2)
 GO
 
 GO
-insert into TypeOfJewellery values('Ring','https://mdjluxury.vn/wp-content/uploads/2019/04/NN218-1.jpg')
-insert into TypeOfJewellery values('Bracelet','https://manssion.com/cdn/shop/products/Gold_Rope_Bracelet_FRONT_ff6efdb7-3ecf-4c00-9543-347d0eddebb0.png?v=1666564939')
-insert into TypeOfJewellery values('Earings','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtEDJm5RKeTZVDQWUEYH2O1AFtQbS0hw7dcw&s')
-insert into TypeOfJewellery values('Chain','https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw938e85a3/images/hi-res/502621CDYAA00_1.jpg?sw=640&sh=640')
+insert into TypeOfJewellery values('Ring','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/TypeOfJewellery%2F32.jpg?alt=media&token=68a7d146-e2d0-4e89-b91d-2eb2ea8178ea')
+insert into TypeOfJewellery values('Bracelet','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/TypeOfJewellery%2F33.jpg?alt=media&token=f077aed9-c470-4506-91c9-6d697edd8620')
+insert into TypeOfJewellery values('Earrings','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/TypeOfJewellery%2F34.jpg?alt=media&token=e278dbcd-c723-48ae-827c-4f4d801d3d66')
+insert into TypeOfJewellery values('Chain','https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/TypeOfJewellery%2F35.jpg?alt=media&token=803c4f98-453c-4530-8704-cce21f70cca5')
 GO
 GO
 insert into Blog values ('DONT BE CONNED: JEWELLERY MYTHS & MISLEADING MARKETING','Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
-'https://simonewalsh.com/cdn/shop/articles/dont-be-conned-jewellery-myths-misleading-marketing-115234.jpg?v=1709414391&width=800',2)
+'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Blog%2F36.jpg?alt=media&token=9f2b7fa7-0af3-40d8-a1d0-224208c1dd94',2)
 insert into Blog values ('AUSTRALIAN FASHION: CHRISTMAS & SUMMER OUTFIT IDEAS','Look dashing as you sleigh this Christmas (and throughout the summer season) in our handmade jewellery. As we do each year, weve lined up some of our range with pieces from o As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
-'https://simonewalsh.com/cdn/shop/articles/australian-fashion-christmas-summer-outfit-ideas-609113.jpg?v=1699886089&width=1000',2)
+'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Blog%2F37.jpg?alt=media&token=bdf1b67e-0fb9-4ccb-81b9-ab1d842cd1cc',2)
 insert into Blog values ('ARE GOLD RINGS WORTH THE INVESTMENT?','Gold rings have been a much sought after jewellery accessory for millennia, with some of the oldest rings in gold found to date having been made around 6,500 years ago. The beautyw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
-'https://simonewalsh.com/cdn/shop/articles/are-gold-rings-worth-the-investment-143777.jpg?v=1695245481&width=1000',2)
+'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Blog%2F38.jpg?alt=media&token=d3ff3c66-c363-4b9a-a147-f1b0a63d086f',2)
 insert into Blog values ('HOW TO STYLE SILVER JEWELLERY','Did you know that in Australia the jewellery industry is worth almost $3 billion annually? Thats a lot of sparkles. If youre one of the many women who love to accessorise with jewellery, jewellery designs. As a jewellery profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
-'https://simonewalsh.com/cdn/shop/articles/how-to-style-silver-jewellery-698324.jpg?v=1680687086&width=600',2)
+'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Blog%2F39.jpg?alt=media&token=b6d06092-6b6e-4dbc-811c-47bb547cf17f',2)
 insert into Blog values ('7 ONLINE JEWELLERY SHOPPING MISTAKES TO AVOID','Like so many other products, jewellery sales are increasingly moving online rather than taking place in a traditional brick and mortar store. Shopping online is of course quick and convenient,profession Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
-'https://simonewalsh.com/cdn/shop/articles/7-online-jewellery-shopping-mistakes-to-avoid-953961.jpg?v=1661354754&width=600',2)
+'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Blog%2F40.jpg?alt=media&token=8a9b0f1c-aad5-433c-853a-1ef9cb79771b',2)
 insert into Blog values ('THE ULTIMATE GUIDE TO STYLING GOLD JEWELLERY','Who doesnt love the gorgeous glamour of gold jewellery? Its beautiful quality and colour make it the most sought after metal when it comes to jewellery. That said, even gold jewellery wont do for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
-'https://simonewalsh.com/cdn/shop/articles/the-ultimate-guide-to-styling-gold-jewellery-609393.jpg?v=1669833961&width=800',2)
+'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Blog%2F41.jpg?alt=media&token=39eb4852-f40d-4d0e-8460-19c25c968adf',2)
 insert into Blog values ('ALL ABOUT OPAL JEWELLERY','Opal is a unique and fascinating gemstone that has been used in jewellery for millennia. With its distinctive play of colours and iridescence, opal jewellery is both beautiful and eye-catching.gged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
-'https://simonewalsh.com/cdn/shop/articles/all-about-opal-jewellery-802946.jpg?v=1681924880&width=600',2)
+'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Blog%2F42.jpg?alt=media&token=255033fc-3f71-4859-b677-c89dffee0f3e',2)
 insert into Blog values ('MOST POPULAR JEWELLERY THIS CHRISTMAS (2023)','Im always fascinated to see which of our Australian jewellery designs will be popular with our lovely customers in the lead up to Christmas - and this year is no exception and Ive just put togeth Recently I saw an ad for a new jewellery brand which bragged about the amazing features of their jewellery which they claimed made it superior to other jewellery designs. As a jewellery profession...',
-'https://simonewalsh.com/cdn/shop/articles/most-popular-jewellery-this-christmas-2023-348947.jpg?v=1701294149&width=800',2)
+'https://firebasestorage.googleapis.com/v0/b/fir-e797a.appspot.com/o/Blog%2F43.jpg?alt=media&token=75b12b3d-2e52-4511-8ff8-c37472da7a3f',2)
 GO
 
 GO
@@ -295,55 +295,4 @@ insert into DesignRule values (4.0,10.0,14.0,20.0,1)
 insert into DesignRule values (6.0,10.0,360.0,600.0,2)
 insert into DesignRule values (4.0,8.5,6.0,12.0,3)
 insert into DesignRule values (5.5,10.0,300.0,600.0,4)
-GO
 
-GO
-insert into Design values('','The Archie Bold Ring','https://oradina.com/cdn/shop/products/RDOM10-2_small.progressive.jpg?v=1671931253',
-'Your classic domed band, now bigger and bolder. The Archie Bold Ring offers a gorgeous curve of solid gold that makes a chic statement on its own, or stacked with other favorites.',
-7,10,2,2,1)
-
-insert into Design values('','TBold Spirah Chain','https://oradina.com/cdn/shop/products/10KHSING035_1024x1024.progressive.jpg?v=1605462156',
-'Our take on the classic Singapore look, our Bold Spirah Chain is the perfect staple piece for every woman�s jewelry box. Made up of a criss cross spiral pattern, it is both versatile and chic. Thicker than our Spirah Classic Chain, you can pair it with your favorite pendant, or wear it solo for understated elegance.',
-null,null,2,4,4)
-
-insert into Design values('','Penthouse Bracelet','https://oradina.com/cdn/shop/files/ROL73-7.5FLC_480ee152-bd11-4e97-bae6-0b54fa74c73e_1024x1024.progressive.jpg?v=1699302771',
-'Theres no stopping you in our Penthouse Link Bracelet. Chunky round rolo links form together to create a dramatic look, for style and class at every turn.',
-null,null,2,3,4)
-
-insert into Design values('','Mystic Mariner Choker','https://oradina.com/cdn/shop/products/TVPC060-18LC_c6af6431-70c1-4825-96a4-f88bd2b9fd14_1024x1024.progressive.jpg?v=1646773381',
-'Get serious about your shine with our Mystic Mariner Choker. This timeless chain features flat, mirror-like links, also referred to as Gucci links, that catch the light from every direction. Adorn it on your neck to add sophistication to any look.',
-null,null,2,3,4)
-
-insert into Design values('','Byzantine Band Ring','https://oradina.com/cdn/shop/products/RBYZ1_1024x1024.progressive.jpg?v=1615756872',
-'This intricately woven style of jewelry dates back centuries, worn as a symbol of status and power. Weve taken this classically intertwined design and given it a modern polished spin. Slip on our Byzantine Band Ring to instantly elevate any look.',
-4,9,2,3,1)
-
-insert into Design values('','Fresco Baguette Ring','https://oradina.com/cdn/shop/products/R26901-GRN_small.progressive.jpg?v=1630957997',
-'Our Fresco Baguette Ring is the pop of sophistication you need this season! Inspired by the vibrant colors of Italian murals, it features a floating sea green zirconia stone enrobed in 14k solid gold. Whether you stack it or wear it solo, its sure to let your inner artist shine!',
-2,7,2,3,1)
-
-insert into Design values('','The One Bold Bangle','https://oradina.com/cdn/shop/files/OFBNG6M_1024x1024.progressive.jpg?v=1695389562',
-'The One Bold Bangle is easy to love. With a sleek hinged design, this bracelet will add polished shine to any wrist stack or stand out solo as your go-to solid gold piece.',
-null,19,2,3,2)
-
-insert into Design values('','Mesh Glamour Stack Bracelet','https://oradina.com/cdn/shop/files/BMSH3-STR_de56e950-e5b9-4479-b64f-86129724cec9_1024x1024.progressive.jpg?v=1700938994',
-'Our Mesh Glamour Stack Bracelet is a testament to the exceptional artistry of the most skilled artisans. Crafted to highlight the intricate beauty & shine of the meshing technique, it is a true labor of love by our skilled craftsmen. Bracelet stretches to fit most wrist sizes.',
-8,null,2,3,2)
-
- insert into Design values('','Park Avenue Bold Herringbone Bracelet','https://oradina.com/cdn/shop/products/10KHB48-7.5_c2f42049-da6e-400f-bc7b-c1f3e480a0d5_1024x1024.progressive.jpg?v=1627840846',
-'A timeless classic, our Park Avenue Bold Herringbone Bracelet will never go out of style. Solid gold lays flat to form this bold chain � known for its elegance and shine.',
-9,null,2,4,2)
-
- insert into Design values('','Sparkling Tennis Bracelet','https://us.pandora.net/dw/image/v2/AAVX_PRD/on/demandware.static/-/Sites-pandora-master-catalog/default/dw88c6e0d2/productimages/singlepackshot/581469C01_RGB.jpg?sw=900&sh=900&sm=fit&sfrm=png&bgcolor=F5F5F5',
-'Elevate your Pandora bracelet stack with a forever piece, our Sparkling Tennis Bracelet. Featuring a row of sparkling clear cubic zirconia, this piece is sure to become a staple in your jewelry box that you reach for over and over again. Finished in 14k rose gold plating, this tennis bracelet is as elegant as it is timeless. It can be adjusted to three different lengths for ease of styling. Add depth to your stack with this sparkling piece or mix with other metal finishes for a contemporary jewelry look.',
-15,null,2,7,2)
-
- insert into Design values('','Shine Bright Diamond Small Studs','https://oradina.com/cdn/shop/products/DIAE02W-PR_1024x1024.progressive.jpg?v=1669236161https://oradina.com/cdn/shop/products/DIAE02W-PR_1024x1024.progressive.jpg?v=1669236161',
-'A modern interpretation of a timeless prong setting style, our Shine Bright Diamond Small Studs feature a refined setting that draws in light from all angles to spotlight your diamond�s brilliance. Our diamonds are always natural and hand-matched, because only real is real.',
-6,null,2,9,3)
-
- insert into Design values('','Shine Bright Small Diamond Hoops','https://oradina.com/cdn/shop/products/DIAE08W_small.progressive.jpg?v=1681225927',
-'The pure brilliance of the oval diamond elegantly nestled in the 18-carat white gold band symbolizes an everlasting love. With its refined and sophisticated design, this engagement ring will accompany you on the path to happiness, accentuating the beauty of your future spouse.',
-7,null,2,9,3)
-
-GO

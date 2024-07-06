@@ -1,6 +1,11 @@
-import { Outlet, Link, NavLink } from "react-router-dom"
+import { Outlet, NavLink } from "react-router-dom"
+import { useEffect } from "react"
 
 function Category() {
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, [])
+
    return (
       <>
          <div className="text-center px-[6.25rem] max-w-[100%] pb-[3rem] pt-[2.5rem]">

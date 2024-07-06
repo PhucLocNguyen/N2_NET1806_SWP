@@ -18,7 +18,6 @@ function App() {
         <Routes>
           {/* Route tự viết để test */}
           {/* Route tự viết không ghi qua phần này */}
-
           {publicRoutes.map((route, index) => {
             let Page = route.component;
             let Layout = DefaultLayout;
@@ -75,8 +74,7 @@ function App() {
                   path={route.path}
                   element={
                     <Layout>
-                      {" "}
-                      <Page />{" "}
+                      <Page />
                     </Layout>
                   }
                 >

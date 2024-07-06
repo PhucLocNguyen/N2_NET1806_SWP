@@ -28,5 +28,24 @@ const fetchApiDesignById = async (id) => {
    }
 }
 
+const ApiRelatedDesign = async ({ typeDesign, idDesign }) => {
+   try {
 
-export { fetchApiDesign, fetchApiDesignById }
+      const response = await api.get('/Design', {
+         params: {
+            TypeOfJewellery: typeDesign,
+            pageIndex: 1,
+            pageSize: 3,
+            DesignId: idDesign
+         }
+      })
+      return response.data
+
+   } catch (error) {
+      console.log('>>> Api Related Design Error : ', error)
+      return []
+   }
+}
+
+
+export { fetchApiDesign, fetchApiDesignById, ApiRelatedDesign }

@@ -15,60 +15,60 @@ function ManagerNav() {
          <div className="fixed top-0 bottom-0 left-0 px-[1.7rem] h-[100vh] w-[20%] max-w-[20%] border-r-[1px] border-solid border-[#e9eaf3] bg-[#f7f9fc] pt-[3rem]">
             <div className="relative w-[100%] py-[1.7rem]">
 
-               <NavLink to='/manager' end>
+               <NavLink to='/manager' end className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="w-[100%] cursor-pointer group flex items-center ">
                      <MonetizationOnIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Price Quote</h2>
                   </div>
                </NavLink>
 
-               <NavLink to='re-price-quote'>
+               <NavLink to='re-price-quote' className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <CurrencyExchangeIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Re-price quote</h2>
                   </div>
                </NavLink>
 
-               <NavLink to='blog-management'>
+               <NavLink to='blog-management' className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <ListAltIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Blog Management</h2>
                   </div>
                </NavLink>
-               <NavLink to='orders'>
+               <NavLink to='orders' className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
-                     <AssignmentIcon   className="group-hover:text-[rgb(66,133,244)]" />
+                     <AssignmentIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Manage order</h2>
                   </div>
                </NavLink>
-               <NavLink to='material-management'>
+               <NavLink to='material-management' className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <DataSaverOnIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Material</h2>
                   </div>
                </NavLink>
-               <NavLink to='master-gemstone'>
+               <NavLink to='master-gemstone' className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <DiamondIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Master Gemstone</h2>
                   </div>
                </NavLink>
 
-               <NavLink to='stone-management'>
+               <NavLink to='stone-management' className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <SpokeIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Stone</h2>
                   </div>
                </NavLink>
 
-               <NavLink to='design-management'>
+               <NavLink to='design-management' className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <DesignServicesIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Design</h2>
                   </div>
                </NavLink>
 
-               <NavLink to='design-rule'>
+               <NavLink to='design-rule' className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
                   <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
                      <RuleIcon className="group-hover:text-[rgb(66,133,244)]" />
                      <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">Design Rule</h2>

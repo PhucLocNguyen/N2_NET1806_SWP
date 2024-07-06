@@ -292,7 +292,7 @@ const OrderDetail = () => {
                       <TableBody>
                         {dataDesign.material &&
                           Object.entries(dataDesign.material)
-                            .filter(([key]) => key !== "image")
+                            .filter(([key]) => key !== "image" && key !== 'materialId')
                             .map(([key, value]) => (
                               <TableRow key={key}>
                                 <TableCell>
@@ -321,7 +321,7 @@ const OrderDetail = () => {
                       <TableBody>
                         {stone &&
                           Object.entries(stone)
-                            .filter(([key]) => key !== "stoneId")
+                            .filter(([key]) => key !== "stonesId")
                             .map(([key, value]) => (
                               <TableRow key={key}>
                                 <TableCell>

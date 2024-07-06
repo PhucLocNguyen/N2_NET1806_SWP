@@ -151,7 +151,7 @@ namespace API.Controllers
         public IActionResult GetAll([FromQuery] RequestSearchUserModel requestSearchUserModel)
         {
             Expression<Func<Users, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchUserModel.RoleFromInput) || x.Role.Name.Contains(requestSearchUserModel.RoleFromInput)) && x.Role.Name!=RoleConst.Customer;
+                (string.IsNullOrEmpty(requestSearchUserModel.RoleFromInput) || x.Role.Name.Contains(requestSearchUserModel.RoleFromInput)) && x.Role.Name!=RoleConst.Customer && x.Role.Name != RoleConst.Admin;
             var Users = _unitOfWork.UserRepository.Get(
                 filter, 
                 pageIndex: requestSearchUserModel.pageIndex,
@@ -159,13 +159,12 @@ namespace API.Controllers
             return Ok(Users);
         }
 
-        [HttpGet("Username")]
-        public IActionResult GetByUsername(string username)
+        [HttpPost("GetUserId")]
+        public IActionResult GetByUsername([FromBody]string userId)
         {
-            Expression<Func<Users, bool>> filter = x =>
-                (string.IsNullOrEmpty(username) || x.Username.Equals(username));
-            var Users = _unitOfWork.UserRepository.Get(filter);
-            return Ok(Users);
+            
+            var Users = _unitOfWork.UserRepository.GetByID(int.Parse(userId));
+            return Ok(Users.toUserDTO());
         }
 
         [HttpGet]

@@ -25,6 +25,7 @@ namespace API.Controllers
         {
             try
             {
+                var isParent = requestSearchDesignModel.SortContent?.isParent == null ? true: false;
                 var sortBy = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignBy.ToString() : null;
                 var sortType = requestSearchDesignModel.SortContent != null ? requestSearchDesignModel.SortContent?.sortDesignType.ToString() : null;
                 Expression<Func<Design, bool>> filter = x =>
@@ -33,7 +34,8 @@ namespace API.Controllers
                     (string.IsNullOrEmpty(requestSearchDesignModel.MasterGemstone) || x.MasterGemstone.Kind.Contains(requestSearchDesignModel.MasterGemstone)) &&
                     (x.ManagerId == requestSearchDesignModel.ManagerId || requestSearchDesignModel.ManagerId == null) &&
                     (string.IsNullOrEmpty(requestSearchDesignModel.TypeOfJewellery) || x.TypeOfJewellery.Name.Equals(requestSearchDesignModel.TypeOfJewellery)) &&
-                    (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material));
+                    (string.IsNullOrEmpty(requestSearchDesignModel.Material) || x.Material.Name.Contains(requestSearchDesignModel.Material)) &&
+                    ((isParent && x.ParentId == null) || (!isParent));
                 Func<IQueryable<Design>, IOrderedQueryable<Design>> orderBy = null;
 
                 if (!string.IsNullOrEmpty(sortBy))
@@ -54,16 +56,7 @@ namespace API.Controllers
                     pageSize: requestSearchDesignModel.pageSize,
                     m => m.Stone, m => m.MasterGemstone, m => m.Material, m => m.TypeOfJewellery
                     ).Select(d => d.toDesignDTO());
-                if (requestSearchDesignModel.SortContent?.isParent == null)
-                {
-
-                    reponseDesign  = reponseDesign.Where(x=>x.ParentId == null).ToList();
-                }
-                else
-                {
-                    reponseDesign = reponseDesign.Where(x=>x.ParentId == requestSearchDesignModel.ParentId || requestSearchDesignModel.ParentId == null).ToList();
-                }
-                if(DesignId > 0)
+                if (DesignId > 0)
                 {
                     reponseDesign = reponseDesign.Where(x=>x.DesignId != DesignId).ToList();
                 }

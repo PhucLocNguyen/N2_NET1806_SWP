@@ -1,9 +1,11 @@
 ﻿using API.Model.ConversationModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Repositories;
 using Repositories.Entity;
 using SWP391Project.Services.ChatSystem;
+using SWP391Project.Services.ChatSystem.Hubs;
 
 namespace API.Controllers
 {
@@ -13,11 +15,14 @@ namespace API.Controllers
     {
         private readonly IConversationService _conversationService;
         private readonly UnitOfWork _unitOfWork;
-        public ConversationController(IConversationService conversationService, UnitOfWork unitOfWork)
+        private readonly IHubContext<ChatHub> _hubContext;
+        public ConversationController(IConversationService conversationService, UnitOfWork unitOfWork, IHubContext<ChatHub> hubContext)
         {
 
-            _conversationService = conversationService; 
+            _conversationService = conversationService;
             this._unitOfWork = unitOfWork;
+            _hubContext = hubContext;
+
         }
         [HttpGet("{id}")]
 
@@ -72,6 +77,7 @@ namespace API.Controllers
                     var conversation = _conversationService.CreateConversation(model.ToConversationEntity());
                     if (conversation != null)
                     {
+                        _hubContext.Clients.All.SendAsync("LoadNewConversation", model);
                         return Ok(conversation);
                     }
                     else

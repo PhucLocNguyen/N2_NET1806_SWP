@@ -34,7 +34,7 @@ function DesignRow({ data, setIsDelete, isDelete, setIsOpenUpdatePopup, setItemU
 
          <div className="grid grid-cols-3 gap-x-[1rem] py-[1rem] px-[2.25rem] border-t-[1px] border-solid border-[#e9eaf3] cursor-pointer">
             <div className="flex items-center">
-               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.designName}</h2>
+               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em] overflow-hidden">{data?.designName}</h2>
             </div>
             <div className="flex items-center">
                <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.typeOfJewellery?.name}</h2>

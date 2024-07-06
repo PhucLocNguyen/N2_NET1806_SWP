@@ -49,11 +49,23 @@ export function SummaryContext({children, requirementData, ChangeToggle, status,
         loadData();
     },[])
     useEffect(()=>{
-        const masterGemstoneTotal = designDetail.masterGemstone!=null? designDetail.masterGemstone?.price : 0;
-        const stonesTotal = designDetail.stone!=null? designDetail.stone?.price:0;
-        const priceMaterial = designDetail.material!=null? designDetail.material?.price: 0;
+        let masterGemstoneTotal = 0
+        let stonesTotal = 0
+        let priceMaterial = 0
+        if(requirementDetail.status > 3){
+            masterGemstoneTotal = requirementDetail.materialPriceAtMoment;
+            stonesTotal = requirementDetail.stonePriceAtMoment;
+            priceMaterial = requirementDetail.materialPriceAtMoment * requirementDetail.weightOfMaterial;
+        } else {
+            masterGemstoneTotal = designDetail.masterGemstone!=null? designDetail.masterGemstone?.price : 0;
+            stonesTotal = designDetail.stone!=null? designDetail.stone?.price:0;
+            priceMaterial = designDetail.material!=null? designDetail.material?.price: 0;
+        }
+        // const masterGemstoneTotal = designDetail.masterGemstone!=null? designDetail.masterGemstone?.price : 0;
+        // const stonesTotal = designDetail.stone!=null? designDetail.stone?.price:0;
+        // const priceMaterial = designDetail.material!=null? designDetail.material?.price: 0;
 
-        const totalMoney = priceMaterial*requirementDetail.weightOfMaterial+ requirementDetail.machiningFee+ masterGemstoneTotal+ stonesTotal;
+        const totalMoney =  requirementDetail.machiningFee+ masterGemstoneTotal + stonesTotal + priceMaterial;
         setTotal(totalMoney);  
        
     },[designDetail])

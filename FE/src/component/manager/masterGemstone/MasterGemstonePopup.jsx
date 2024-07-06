@@ -177,7 +177,6 @@ function MasterGemstonePopup({ setIsOpenPopup }) {
 
    
 
-   console.log(formData);
 
    return (
       <>

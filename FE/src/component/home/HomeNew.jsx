@@ -2,7 +2,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import banner1 from '../../assets/home/newbanner1.jpg';
@@ -24,6 +24,10 @@ import ArrowWhite from '../../assets/home/arrowWhite.svg';
 function HomeNew() {
    const [currentSlide, setCurrentSlide] = useState(0);
 
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, [])
+
    var settings = {
       dots: true,
       infinite: true,
@@ -36,7 +40,6 @@ function HomeNew() {
    };
 
    return (
-
       <>
          <div className='w-[100%] pb-[8rem]'>
             <div className='w-[90%] my-[3rem] mx-auto'>

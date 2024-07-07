@@ -1,4 +1,5 @@
 import { lazy } from "react";
+
 const ChatCustomer = lazy(() => import("../component/chat/ChatCustomer"));
 const OrderSupportDetail = lazy(() => import("../component/saleStaff/OrderSupportDetail"));
 const OrderSupportList = lazy(() => import("../component/saleStaff/OrderSupportList"));
@@ -19,6 +20,7 @@ const Empty = lazy(() => import('../component/empty/Empty'));
 const Dashboard = lazy(() => import('../component/admin/dashboard/Dashboard'));
 const ListRequirement = lazy(() => import('../component/manager/ListRequirement'));
 const ListRequirementManage = lazy(() => import('../component/manager/OrderManage/ListRequirementManage'));
+
 const OrderDetail = lazy(() => import("../component/orderCustomer/OrderDetail"));
 const OrderCustomer = lazy(() => import("../component/orderCustomer/OrderCustomer"));
 const PaymentResponse = lazy(() => import("../component/payment/PaymentResponse"));
@@ -126,7 +128,6 @@ const privateRoutes = [
          { path: 're-price-quote', component: ListRePriceQuote },
          { path: 're-price-quote/:id', component: RePriceDetail },
          { path: 'orders', component: ListRequirementManage }
-
       ],
       role: ['Manager']
    },

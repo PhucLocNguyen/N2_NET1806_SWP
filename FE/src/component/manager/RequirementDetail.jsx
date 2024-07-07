@@ -87,7 +87,6 @@ function RequirementDetail() {
          }
          await CallApi()
          navigate('/manager', { replace: true })
-
          console.log('Upload price quote success')
       }
    }

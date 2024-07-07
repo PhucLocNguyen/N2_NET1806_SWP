@@ -56,13 +56,19 @@ function DesignPopup({ setIsOpenPopup }) {
    const [masterGemstoneSelect, setMasterGemstoneSelect] = useState({
       selectedKind: '',
       selectedSize: '',
-      selectedShape: ''
+      selectedShape: '',
+      selectedClarity: '',
+      selectedCut: '',
+      selectedWeight: ''
    });
 
    const [masterGemstoneOption, setMasterGemstoneOption] = useState({
       optionKind: [],
       optionSize: [],
-      optionShape: []
+      optionShape: [],
+      optionClarity: [],
+      optionCut: [],
+      optionWeight: []
    });
 
    const filterOptions = () => {
@@ -76,14 +82,29 @@ function DesignPopup({ setIsOpenPopup }) {
       if (masterGemstoneSelect.selectedShape) {
          filteredData = filteredData.filter(item => item.shape == masterGemstoneSelect.selectedShape);
       }
+      if (masterGemstoneSelect.selectedClarity) {
+         filteredData = filteredData.filter(item => item.clarity == masterGemstoneSelect.selectedClarity);
+      }
+      if (masterGemstoneSelect.selectedCut) {
+         filteredData = filteredData.filter(item => item.cut == masterGemstoneSelect.selectedCut);
+      }
+      if (masterGemstoneSelect.selectedWeight) {
+         filteredData = filteredData.filter(item => item.weight == masterGemstoneSelect.selectedWeight);
+      }
       const kindOptions = [...new Set(filteredData.map(item => item.kind))];
       const sizeOptions = [...new Set(filteredData.map(item => item.size))];
       const shapeOptions = [...new Set(filteredData.map(item => item.shape))];
+      const clarityOptions = [...new Set(filteredData.map(item => item.clarity))];
+      const cutOptions = [...new Set(filteredData.map(item => item.cut))];
+      const weightOptions = [...new Set(filteredData.map(item => item.weight))];
 
       setMasterGemstoneOption({
          optionKind: kindOptions,
          optionSize: sizeOptions,
-         optionShape: shapeOptions
+         optionShape: shapeOptions,
+         optionClarity: clarityOptions,
+         optionCut: cutOptions,
+         optionWeight: weightOptions
       });
    };
 
@@ -91,31 +112,40 @@ function DesignPopup({ setIsOpenPopup }) {
       const kindOptions = [...new Set(dataMasterGemstone.map(item => item.kind))];
       const sizeOptions = [...new Set(dataMasterGemstone.map(item => item.size))];
       const shapeOptions = [...new Set(dataMasterGemstone.map(item => item.shape))];
+      const clarityOptions = [...new Set(dataMasterGemstone.map(item => item.clarity))];
+      const cutOptions = [...new Set(dataMasterGemstone.map(item => item.cut))];
+      const weightOptions = [...new Set(dataMasterGemstone.map(item => item.weight))];
 
       setMasterGemstoneOption({
          optionKind: kindOptions,
          optionSize: sizeOptions,
-         optionShape: shapeOptions
+         optionShape: shapeOptions,
+         optionClarity: clarityOptions,
+         optionCut: cutOptions,
+         optionWeight: weightOptions
       });
    }, [dataMasterGemstone]);
 
    useEffect(() => {
 
       filterOptions();
-      if (masterGemstoneSelect.selectedKind !== '' && masterGemstoneSelect.selectedSize !== '' && masterGemstoneSelect.selectedShape !== '') {
+      if (masterGemstoneSelect.selectedKind !== '' && masterGemstoneSelect.selectedSize !== '' && masterGemstoneSelect.selectedShape !== '' && masterGemstoneSelect.selectedClarity !== '' && masterGemstoneSelect.selectedCut !== '' && masterGemstoneSelect.selectedWeight !== '') {
          const filterData = dataMasterGemstone.filter(item =>
             item.kind.toLowerCase() == masterGemstoneSelect.selectedKind.toLowerCase() &&
             item.size.toString().toLowerCase() == masterGemstoneSelect.selectedSize.toString().toLowerCase() &&
-            item.shape.toLowerCase() == masterGemstoneSelect.selectedShape.toLowerCase()
+            item.shape.toLowerCase() == masterGemstoneSelect.selectedShape.toLowerCase() &&
+            item.clarity.toLowerCase() == masterGemstoneSelect.selectedClarity.toLowerCase() &&
+            item.cut.toLowerCase() == masterGemstoneSelect.selectedCut.toLowerCase() &&
+            item.weight.toString().toLowerCase() == masterGemstoneSelect.selectedWeight.toString().toLowerCase()
          )
-         console.log(filterData[0])
+         console.log(filterData)
          setFormData({
             ...formData,
-            masterGemstoneId: filterData[0].masterGemstoneId
+            masterGemstoneId: filterData[0]?.masterGemstoneId
          })
       }
 
-   }, [masterGemstoneSelect.selectedKind, masterGemstoneSelect.selectedSize, masterGemstoneSelect.selectedShape])
+   }, [masterGemstoneSelect.selectedKind, masterGemstoneSelect.selectedSize, masterGemstoneSelect.selectedShape, masterGemstoneSelect.selectedClarity, masterGemstoneSelect.selectedCut, masterGemstoneSelect.selectedWeight])
 
    const handleMasterGemstoneSelectChange = (e) => {
       const { name, value } = e.target;
@@ -480,6 +510,78 @@ function DesignPopup({ setIsOpenPopup }) {
                         </FormControl>
                      </div>
                   </div>
+
+                  <div className='flex items-center justify-between'>
+                     <div className='w-[30%]'>
+                        <h2 className='text-[1.1rem] font-medium pb-[3px]'>Clarity</h2>
+                        <FormControl sx={{ minWidth: 120, width: '100%', minHeight: '4rem' }} size='small'>
+                           <Select
+                              value={masterGemstoneSelect.selectedClarity}
+                              name='selectedClarity'
+                              onChange={handleMasterGemstoneSelectChange}
+                              displayEmpty
+                              inputProps={{ 'aria-label': 'Without label' }}
+                              disabled={!formData.typeOfJewelleryId}
+                           >
+                              <MenuItem value=''>
+                                 <em>None</em>
+                              </MenuItem>
+                              {masterGemstoneOption.optionClarity.map((item, index) => {
+                                 return (
+                                    <MenuItem key={index} value={item}>{item}</MenuItem>
+                                 )
+                              })}
+                           </Select>
+                        </FormControl>
+                     </div>
+
+                     <div className='w-[30%]'>
+                        <h2 className='text-[1.1rem] font-medium pb-[3px]'>Cut</h2>
+                        <FormControl sx={{ minWidth: 120, width: '100%', minHeight: '4rem' }} size='small'>
+                           <Select
+                              value={masterGemstoneSelect.selectedCut}
+                              name='selectedCut'
+                              onChange={handleMasterGemstoneSelectChange}
+                              displayEmpty
+                              inputProps={{ 'aria-label': 'Without label' }}
+                              disabled={!formData.typeOfJewelleryId}
+                           >
+                              <MenuItem value=''>
+                                 <em>None</em>
+                              </MenuItem>
+                              {masterGemstoneOption.optionCut.map((item, index) => {
+                                 return (
+                                    <MenuItem key={index} value={item}>{item}</MenuItem>
+                                 )
+                              })}
+                           </Select>
+                        </FormControl>
+                     </div>
+
+                     <div className='w-[30%]'>
+                        <h2 className='text-[1.1rem] font-medium pb-[3px]'>Weight</h2>
+                        <FormControl sx={{ minWidth: 120, width: '100%', minHeight: '4rem' }} size='small'>
+                           <Select
+                              value={masterGemstoneSelect.selectedWeight}
+                              name='selectedWeight'
+                              onChange={handleMasterGemstoneSelectChange}
+                              displayEmpty
+                              inputProps={{ 'aria-label': 'Without label' }}
+                              disabled={!formData.typeOfJewelleryId}
+                           >
+                              <MenuItem value=''>
+                                 <em>None</em>
+                              </MenuItem>
+                              {masterGemstoneOption.optionWeight.map((item, index) => {
+                                 return (
+                                    <MenuItem key={index} value={item}>{item}</MenuItem>
+                                 )
+                              })}
+                           </Select>
+                        </FormControl>
+                     </div>
+                  </div>
+
 
                   {/* ----------------------------------------- */}
 

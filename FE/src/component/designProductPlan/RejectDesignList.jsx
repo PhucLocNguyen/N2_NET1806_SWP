@@ -55,7 +55,7 @@ function RejectDesignList() {
             </div>
 
             {data?.map((item, index) => {
-              return <RowRejectOrder key={index} data={item} handleStatusChange={handleStatusChange}/>;
+              return <RowRejectOrder key={index} data={item}/>;
             })}
           </div>
         </div>

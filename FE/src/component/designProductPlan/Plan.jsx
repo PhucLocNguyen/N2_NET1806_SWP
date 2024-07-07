@@ -82,10 +82,11 @@ function Plan({ data, handleStatusChange, handlePopupOpen, isTodo, isDone }) {
           <span className="flex items-center w-fit px-1 text-xs font-semibold text-green-500 bg-green-100 rounded-full h-fit py-1 ml-3">
             Requirement ID: R00{data.requirementId}
           </span>
-          <h4 className="mt-4 text-sm font-medium bg-[#4338d3] text-white px-2 h-fit w-fit rounded ml-6">
+          <p className="mt-4 text-sm font-medium bg-[#4338d3] text-white px-2 h-fit w-fit max-w-[80%] rounded ml-4 overflow-hidden text-ellipsis whitespace-nowrap">
             {getStatus(data.status)}
-          </h4>
-          <div className="flex items-center w-full mt-3 text-xs font-medium text-gray-400 ml-6">
+          </p>
+
+          <div className="flex items-center w-full mt-3 text-xs font-medium text-gray-400 ml-4">
             <div className="flex items-center">
               <svg
                 className="w-4 h-4 fill-current text-red-500"

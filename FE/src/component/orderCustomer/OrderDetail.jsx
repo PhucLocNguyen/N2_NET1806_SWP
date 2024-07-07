@@ -133,7 +133,6 @@ const OrderDetail = () => {
   console.log("stone:", stone);
 
   // Calculate total money
-
   function ChangeToggle() {
     setToggle(!toggle);
   }

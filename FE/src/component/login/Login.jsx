@@ -98,7 +98,7 @@ function Login() {
     }
    
     return (
-        <div className="bg-[#c9d6ff] w-full h-screen bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">
+        <div className="relative bg-[#FFF2D7] w-full h-screen flex items-center justify-center flex-col">
             <div className="bg-[#fff] rounded-[30px] shadow-[0_5px_15px_rgba(0,0,0,0.35)] relative overflow-hidden w-[768px] max-w-[100%] min-h-[480px]">
 
                 <motion.div

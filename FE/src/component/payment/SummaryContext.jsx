@@ -59,7 +59,7 @@ export function SummaryContext({children, requirementData, ChangeToggle, status,
         } else {
             masterGemstoneTotal = designDetail.masterGemstone!=null? designDetail.masterGemstone?.price : 0;
             stonesTotal = designDetail.stone!=null? designDetail.stone?.price:0;
-            priceMaterial = designDetail.material!=null? designDetail.material?.price: 0;
+            priceMaterial = designDetail.material!=null? designDetail.material?.price*requirementDetail.weightOfMaterial: 0;
         }
         // const masterGemstoneTotal = designDetail.masterGemstone!=null? designDetail.masterGemstone?.price : 0;
         // const stonesTotal = designDetail.stone!=null? designDetail.stone?.price:0;

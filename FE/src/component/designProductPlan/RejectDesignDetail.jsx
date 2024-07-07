@@ -27,7 +27,6 @@ function RejectDesignDetail() {
   const { UserId } = useAuth();
   const [requirement, setRequirement] = useState();
   const [design, setDesign] = useState();
-  const [staffNote, setStaffNote] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [customerInformation, setCustomerInformation] = useState({});
 
@@ -56,11 +55,6 @@ function RejectDesignDetail() {
 
     fetchData();
   }, []);
-
-  const HandleChangeData = (e) => {
-    const valueInput = e.target.value;
-    setStaffNote(valueInput);
-  };
 
   const handleFileChange = async (event) => {
     const selectFile = event.target.files[0];
@@ -99,10 +93,9 @@ function RejectDesignDetail() {
   console.log(selectedFile);
 
   const handleSubmit = () => {
-    if (staffNote.length > 0) {
+    if (handleFileChange) {
       const data = {
         ...requirement,
-        staffNote: staffNote,
         status: "7",
         design3D: selectedFile,
       };
@@ -110,9 +103,12 @@ function RejectDesignDetail() {
         const response = await ApiUpdateRequirement({ data, id });
       };
       CallApi();
-      navigate("/staff/reject-design/", { replace: true });
+      navigate("/staff/reject-design", { replace: true });
+      window.location.reload();
     }
   };
+
+  
 
   return (
     <>
@@ -333,9 +329,6 @@ function RejectDesignDetail() {
 
             {/* Ben phai */}
             <div className="sticky top-[24px]  py-[2.5rem] px-[2rem] rounded-[30px] border-[1px] border-[#e9eaf3] border-solid bg-[white]">
-              <h2 className="text-[22px] mb-[1rem] font-bold leading-[1.273em]">
-                Price Quotation
-              </h2>
 
               <div className="h-[1.5px] bg-[#e9eaf3] my-[1.5rem]"></div>
 
@@ -373,23 +366,11 @@ function RejectDesignDetail() {
               <div className="h-[1.5px] bg-[#e9eaf3] my-[1.5rem]"></div>
 
               {/* Form dien khoi luong va tien cong */}
-              <div>
-                <h2 className="text-[1rem] font-medium pb-[3px] mb-3">
-                  Staff note
-                </h2>
-                <textarea
-                  name="staffNote"
-                  onChange={debouncedOnChange}
-                  id=""
-                  className="w-full min-h-[200px] px-6 py-3 rounded-[10px] border mb-3"
-                ></textarea>
-                <div className="my-[1rem]"></div>
-              </div>
 
               <div className="mt-[1rem]">
                 <Button
                   onClick={handleSubmit}
-                  disabled={staffNote.length === 0 || !selectedFile}
+                  disabled={!selectedFile}
                   variant="contained"
                   sx={{ minWidth: "6rem" }}
                 >

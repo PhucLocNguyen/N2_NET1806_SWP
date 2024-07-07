@@ -55,7 +55,7 @@ function UpdateStonePopup({ data, setIsOpenUpdatePopup }) {
 
       }
 
-      const handleSubmit = () => {
+      const handleSubmit = async () => {
          let isValid = true;
          let newError = {};
 
@@ -79,7 +79,7 @@ function UpdateStonePopup({ data, setIsOpenUpdatePopup }) {
             const CallApi = async () => {
                const respone = await ApiUpdateStone({ id, formData })
             }
-            CallApi();
+            await CallApi();
             setIsOpenUpdatePopup(false)
          }
       }

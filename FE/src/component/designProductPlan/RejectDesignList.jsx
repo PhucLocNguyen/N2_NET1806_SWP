@@ -22,8 +22,6 @@ function RejectDesignList() {
     }
   }, []);
 
-  console.log(data);
-
   return (
     <>
       <div className="flex flex-col text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200 min-h-[100vh]">
@@ -57,7 +55,7 @@ function RejectDesignList() {
             </div>
 
             {data?.map((item, index) => {
-              return <RowRejectOrder key={index} data={item} />;
+              return <RowRejectOrder key={index} data={item} handleStatusChange={handleStatusChange}/>;
             })}
           </div>
         </div>

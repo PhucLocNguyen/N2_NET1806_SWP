@@ -80,7 +80,7 @@ function ThirdStep({handleCompleteStep}) {
             <div className="grid grid-cols-2">
               <img src={design.image} className="w-full h-[200px] object-contain rounded-md" alt="" />
               <div className="px-3">
-                <h2 className="text-[20px] mb-1">Design: {design.designName}</h2>
+                <h2 className="text-[20px] mb-1 break-words line-clamp-2 ">Design: {design.designName}</h2>
                 <ul className="ml-6 px-3 list-disc">
                   <li>Size for jewelry: {requirementData.size}</li>
                   <li>Material for jewelry: {material?.name}</li>

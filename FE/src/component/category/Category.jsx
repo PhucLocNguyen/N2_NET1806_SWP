@@ -1,6 +1,11 @@
-import { Outlet, Link, NavLink } from "react-router-dom"
+import { Outlet, NavLink } from "react-router-dom"
+import { useEffect } from "react"
 
 function Category() {
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, [])
+
    return (
       <>
          <div className="text-center px-[6.25rem] max-w-[100%] pb-[3rem] pt-[2.5rem]">
@@ -15,7 +20,7 @@ function Category() {
                   </div>
 
                   <div>
-                     <NavLink to='earring' className={({ isActive }) => `min-w-[2rem] max-w-[100%] inline-block py-[0.625rem] px-[0.94rem] border-[1px] border-solid border-[#000] rounded-[10px] ${isActive ? 'text-[#fff] bg-[#000]' : ''}`} >
+                     <NavLink to='earrings' className={({ isActive }) => `min-w-[2rem] max-w-[100%] inline-block py-[0.625rem] px-[0.94rem] border-[1px] border-solid border-[#000] rounded-[10px] ${isActive ? 'text-[#fff] bg-[#000]' : ''}`} >
                         <div className="min-w-[4rem]">Earring</div>
                      </NavLink>
                   </div>

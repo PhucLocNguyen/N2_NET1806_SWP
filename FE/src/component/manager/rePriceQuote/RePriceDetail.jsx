@@ -80,7 +80,7 @@ function RePriceDetail() {
 
    }
 
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       let isValid = true
 
       Object.keys(errorForm).forEach((key) => {
@@ -106,7 +106,7 @@ function RePriceDetail() {
          const CallApi = async () => {
             const response = await ApiUpdateRequirement({ data, id });
          }
-         CallApi()
+         await CallApi()
          navigate('/manager/re-price-quote', { replace: true })
          console.log('Upload price quote success')
       }
@@ -266,7 +266,7 @@ function RePriceDetail() {
 
                      {/* Form dien khoi luong va tien cong */}
                      <div>
-                        <h2 className='text-[1rem] font-medium pb-[3px]'>Material Weight (g)</h2>
+                        <h2 className='text-[1rem] font-medium pb-[3px]'>Material Weight (mace)</h2>
                         <div>
                            <TextField name='weightOfMaterial' inputProps={{ inputMode: 'numeric' }} onChange={handleFormChange} error={!!errorForm.weightOfMaterial} helperText={errorForm.weightOfMaterial} variant="outlined" style={{ width: '100%' }} size='small' />
                         </div>

@@ -67,7 +67,7 @@ function StonePopup({ setIsOpenPopup }) {
 
       }
 
-      const handleSubmit = () => {
+      const handleSubmit = async () => {
          let isValid = true;
          let newError = {};
 
@@ -92,7 +92,7 @@ function StonePopup({ setIsOpenPopup }) {
             const CallApi = async () => {
                const respone = await ApiCreateStone({ formData })
             }
-            CallApi();
+            await CallApi();
             setIsOpenPopup(false)
          }
       }

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { LoginApi, LoginWithGoogle, RegisterApi } from '../../api/ApiLogin';
 import { useNavigate, useLocation } from 'react-router-dom';
 import InputPasswordConfirmation from './InputPasswordConfirmation';
+import GoogleIcon from '../../assets/icon/google.png';
 
 function Login() {
     const navigate = useNavigate();
@@ -97,7 +98,7 @@ function Login() {
     }
    
     return (
-        <div className="bg-[#c9d6ff] w-full h-screen bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">
+        <div className="relative bg-[#FFF2D7] w-full h-screen flex items-center justify-center flex-col">
             <div className="bg-[#fff] rounded-[30px] shadow-[0_5px_15px_rgba(0,0,0,0.35)] relative overflow-hidden w-[768px] max-w-[100%] min-h-[480px]">
 
                 <motion.div
@@ -141,11 +142,8 @@ function Login() {
                         <div className='my-[10px]'>
                             <motion.a whileHover={{ scale: 1.2 }} onClick={ClickSave} href='https://accounts.google.com/o/oauth2/auth?scope=openid%20email%20profile&redirect_uri=http://localhost:5173/login&response_type=code
     &client_id=528761239720-ac1sb7qru7cnvmmbddpsi8plsgsqrrg4.apps.googleusercontent.com&approval_prompt=force' className='border-[2px] border-solid border-[#ccc] rounded-[20%] inline-flex justify-center items-center mx-[4px] w-[40px] h-[40px]'>
-                                <SvgIcon>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                                        <path d="M386.1 228.5c1.8 9.7 3.1 19.4 3.1 32C389.2 370.2 315.6 448 204.8 448c-106.1 0-192-85.9-192-192s85.9-192 192-192c51.9 0 95.1 18.9 128.6 50.3l-52.1 50c-14.1-13.6-39-29.6-76.5-29.6-65.5 0-118.9 54.2-118.9 121.3 0 67.1 53.4 121.3 118.9 121.3 76 0 104.5-54.7 109-82.8H204.8v-66h181.3zm185.4 6.4V179.2h-56v55.7h-55.7v56h55.7v55.7h56v-55.7H627.2v-56h-55.7z" />
-                                    </svg>
-                                </SvgIcon>
+                                
+                                <img className='p-[5px]' src={GoogleIcon} />
                             </motion.a>
                         </div>
                         <span className="text-[13px]">or use your username password</span>

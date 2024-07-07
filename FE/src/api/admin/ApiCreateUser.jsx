@@ -1,23 +1,22 @@
 import api from '../instance';
+import axiosConfigHeader from '../AxiosConfigHeader';
+import { toast } from 'react-toastify';
 
-
-const ApiCreateUser = async ({ formData : payload, accessToken }) => {
+const ApiCreateUser = async ({ formData: payload, accessToken }) => {
 
    try {
 
       let response = await api.post('/User/registerForAdmin', payload, {
-         headers: {
-            'Authorization': `Bearer ${accessToken}`
-         },
+         axiosConfigHeader,
          params: {
             roleEnum: `${payload.role}`
          }
       })
-
-      console.log(response?.data)
+      toast.success('Create success')
 
    } catch (error) {
       console.log('>>> Error Api Create User: ', error)
+      toast.error('Create failure')
    }
 
 }

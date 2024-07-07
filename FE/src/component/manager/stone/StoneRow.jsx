@@ -5,6 +5,7 @@ import Popover from '@mui/material/Popover';
 import MenuItem from '@mui/material/MenuItem';
 
 import { ApiDeleteStone } from '../../../api/manager/ApiStone';
+import formatVND from "../../../utils/FormatCurrency";
 
 function StoneRow({ data, setItemUpdate, setIsOpenUpdatePopup, setIsDelete, isDelete }) {
 
@@ -23,8 +24,8 @@ function StoneRow({ data, setItemUpdate, setIsOpenUpdatePopup, setIsDelete, isDe
       const respone = await ApiDeleteStone(id);
    }
 
-   const handleDeleteGemstone = () => {
-      CallApi();
+   const handleDeleteGemstone = async () => {
+      await CallApi();
       handleCloseMenu();
       setIsDelete(!isDelete);
    }
@@ -43,7 +44,7 @@ function StoneRow({ data, setItemUpdate, setIsOpenUpdatePopup, setIsDelete, isDe
                <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.quantity}</h2>
             </div>
             <div className="flex items-center">
-               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data?.price}</h2>
+               <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]"> {formatVND(data?.price)}</h2>
             </div>
             <div className="flex items-center justify-center">
                <IconButton onClick={handleOpenMenu}>

@@ -9,7 +9,7 @@ export const statusOption = [
   { code: 7, label: "The sketch is complete" },
   { code: 8, label: "The sketch is ready" },
   { code: 9, label: "Product is being processed" },
-  { code: 10, label: "Processing completed and ready for handover" },
+  { code: 10, label: "Product completed" },
 ];
 
 export const getStatusClass = (status) => {

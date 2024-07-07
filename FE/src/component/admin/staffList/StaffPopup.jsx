@@ -89,7 +89,7 @@ function StaffPopup({ setIsOpenPopup }) {
 
    }
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
       let isValid = true;
       let newError = {}
@@ -107,19 +107,16 @@ function StaffPopup({ setIsOpenPopup }) {
       setErrors(newError);
 
       if (isValid) {
-         const accessToken = localStorage.getItem('userInfo')
-         console.log(accessToken)
          // Call Api
          const CallApi = async () => {
-            const respone = await ApiCreateUser({ formData, accessToken })
+            const respone = await ApiCreateUser({ formData })
          }
-         CallApi()
+         await CallApi()
          console.log("Success")
+         setIsOpenPopup(false);
       }
 
    }
-
-
 
    return (
       <>

@@ -46,7 +46,7 @@ function CustomerConfirmation({
         materialPriceAtMoment: designDetail.material?.price,
         stonePriceAtMoment: 
           designDetail.stone != null ? designDetail.stone?.price : 0,
-        totalMoney: total,
+        totalMoney: Math.ceil(total),
       });
       if (updateStatusRequirement != null) {
         toast.success("Accept the price quote successful");

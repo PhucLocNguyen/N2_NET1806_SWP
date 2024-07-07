@@ -61,12 +61,6 @@ function DonePopup({ setIsOpenPopup, data }) {
               <p>Size: {data.size}</p>
               <p>Weight of Material: {data.weightOfMaterial}g</p>
             </div>
-            <div>
-              <p>Material Price: ${data.materialPriceAtMoment}</p>
-              <p>Stone Price: ${data.stonePriceAtMoment}</p>
-              <p>Machining Fee: ${data.machiningFee}</p>
-              <p>Total Money: ${data.totalMoney}</p>
-            </div>
           </div>
           <div>
             <p className="mt-2">
@@ -135,9 +129,6 @@ function DonePopup({ setIsOpenPopup, data }) {
                         <p>
                           <strong>Shape:</strong> {masterGemStone.shape}
                         </p>
-                        <p className="text-red-500">
-                          <strong>Price:</strong> ${masterGemStone.price}
-                        </p>
                       </div>
                     </div>
                     <div>
@@ -150,9 +141,8 @@ function DonePopup({ setIsOpenPopup, data }) {
                       <p>
                         <strong>Quantity:</strong> {stone.quantity}
                       </p>
-                      <p className="text-red-500">
-                        <strong>Price:</strong> ${stone.price}
-                      </p>
+                      <br/>
+                      <br/>
                     </div>
                   </div>
                 ) : (

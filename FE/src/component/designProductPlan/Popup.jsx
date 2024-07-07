@@ -138,9 +138,6 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
                     <p>Clarity: {masterGemStone.clarity}</p>
                     <p>Cut: {masterGemStone.cut}</p>
                     <p>Weight: {masterGemStone.weight}</p>
-                    <p className="text-red-500">
-                      Price: {masterGemStone.price}
-                    </p>
                   </div>
                 </div>
               </div>
@@ -153,7 +150,6 @@ function Popup({ setIsOpenPopup, data, handleStatusChange }) {
                     <p>Kind: {stone.kind}</p>
                     <p>Size: {stone.size}</p>
                     <p>Quantity: {stone.quantity}</p>
-                    <p className="text-red-500">Price: {stone.price}</p>
                   </div>
                 </div>
               </div>

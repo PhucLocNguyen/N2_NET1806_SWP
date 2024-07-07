@@ -10,7 +10,6 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
 import FormHelperText from '@mui/material/FormHelperText';
-import { toast } from 'react-toastify';
 
 import { ApigGetTypeOfJewellery, ApiCreateParentDesign } from '../../../api/manager/ApiDesign';
 import { FetchApiDesignRuleById } from '../../../api/Requirements/FetchApiDesignRule';
@@ -310,7 +309,7 @@ function DesignPopup({ setIsOpenPopup }) {
       width: 1,
    });
 
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       let isValid = true;
       let newError = {};
 
@@ -341,7 +340,7 @@ function DesignPopup({ setIsOpenPopup }) {
          const CallApi = async () => {
             const response = await ApiCreateParentDesign({ payload });
          }
-         CallApi();
+         await CallApi();
          setIsOpenPopup(false);
       }
 

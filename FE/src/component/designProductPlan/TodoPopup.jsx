@@ -10,6 +10,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useAuth from "../../hooks/useAuth.jsx";
+import formatVND from "../../utils/FormatCurrency.jsx";
 
 function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
   const [data, setData] = useState(null);
@@ -92,7 +93,7 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
         status: statusUpdate,
       });
 
-      const postSuccess = await postUserRequirement(requirementId,UserId);
+      const postSuccess = await postUserRequirement(requirementId, UserId);
 
       if (updateSuccess && postSuccess) {
         handleStatusChange(requirementId, statusUpdate);
@@ -196,11 +197,6 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
                               {masterGemStone.size}
                             </span>
                             <br />
-                            <strong>Price:</strong>{" "}
-                            <span className="text-pink-500">
-                              ${masterGemStone.price}
-                            </span>
-                            <br />
                             <strong>Clarity:</strong>{" "}
                             <span className="text-pink-500">
                               {masterGemStone.clarity}
@@ -253,10 +249,6 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
                         <br />
                         <strong>Quantity:</strong>{" "}
                         <span className="text-pink-500">{stone.quantity}</span>
-                        <br />
-                        <strong>Price:</strong>{" "}
-                        <span className="text-pink-500">${stone.price}</span>
-                        <br />
                       </Typography>
                     </AccordionDetails>
                   </Accordion>

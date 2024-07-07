@@ -68,9 +68,11 @@ function Navbar() {
                     <div className="relative border-[1px] border-black rounded-sm group-hover:block hidden w-fit h-fit bg-white">
                       <ul className="absolute left-[-40px] border-[1px] border-black rounded-sm group-hover:block hidden w-fit h-fit bg-white hover:flex hover:flex-col">
                         <li className="w-28">
-                          <p className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100">
+
+                          <Link to='/customer-profile' className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100">
                             My Account
-                          </p>
+                          </Link>
+
                           <p
                             className="block box-border text-black hover:text-[#f0cd8c] hover:bg-[#706f6e] hover:cursor-pointer p-2 duration-100"
                             onClick={() => {

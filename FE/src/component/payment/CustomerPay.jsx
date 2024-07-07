@@ -34,6 +34,7 @@ function CustomerPay({
        
         return (
           <div>
+            <p className="line-clamp-2">price: {requirementDetail.status > 3 ? formatVND(requirementDetail.materialPriceAtMoment) : formatVND(designDetail.material?.price)}  / mace</p>
             <div className="bg-gray-200 p-4 rounded-lg w-full px-3 mb-3 ">
               {designDetail.masterGemstone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">

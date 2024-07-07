@@ -64,9 +64,6 @@ export function SummaryContext({children, requirementData, ChangeToggle, status,
         // const masterGemstoneTotal = designDetail.masterGemstone!=null? designDetail.masterGemstone?.price : 0;
         // const stonesTotal = designDetail.stone!=null? designDetail.stone?.price:0;
         // const priceMaterial = designDetail.material!=null? designDetail.material?.price: 0;
-        console.log("totalMaster: "+masterGemstoneTotal);
-        console.log("stonesTotal: "+stonesTotal);
-        console.log("priceMaterial: "+priceMaterial);
 
         const totalMoney =  requirementDetail.machiningFee+ masterGemstoneTotal + stonesTotal + priceMaterial;
         setTotal(totalMoney);  

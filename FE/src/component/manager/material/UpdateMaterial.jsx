@@ -3,26 +3,26 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { styled } from "@mui/material/styles";
-import AddIcon from "@mui/icons-material/Add";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth.jsx";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import PutApiMaterial from "../../../api/material/PutApiMaterial.jsx";
-import UploadImage from "../../../utils/UploadImage.jsx";
-import DeleteImage from "../../../utils/DeleteImage.jsx";
 
 function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
-  const folder = "Material";
   const { UserId } = useAuth();
 
-  const [formData, setFormData] = useState({ name: "", price: "", image: "" });
-  const [errors, setErrors] = useState({ name: "", price: "" });
+  const [formData, setFormData] = useState({
+    materialId: data.materialId,
+    name: data.name,
+    price: "",
+    image: data.image,
+    managerId: UserId,
+  });
+  const [errors, setErrors] = useState({ price: "" });
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -36,41 +36,8 @@ function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
     });
   };
 
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
-
-  const handleFileChange = async (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      if (formData.image !== "" && formData.image != null) {
-        await DeleteImage(formData.image);
-      }
-
-      let urlImage = await UploadImage(folder, selectedFile);
-      setFormData({
-        ...formData,
-        image: urlImage,
-        managerId: UserId,
-      });
-    }
-  };
-
   const validateForm = () => {
-    const newErrors = { name: "", price: "" };
-
-    if (!formData.name) {
-      newErrors.name = "name cannot be empty";
-    }
-
+    const newErrors = { price: "" };
     if (!formData.price) {
       newErrors.price = "Price cannot be empty";
     } else if (isNaN(Number(formData.price))) {
@@ -78,7 +45,7 @@ function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
     }
 
     setErrors(newErrors);
-    return !newErrors.name && !newErrors.price;
+    return !newErrors.price;
   };
 
   const handleSubmit = () => {
@@ -129,7 +96,7 @@ function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
             </AccordionSummary>
             <AccordionDetails>
               <div className="mb-4">
-                <h3 className="text-[1rem] font-medium pb-[2px]">Old Image</h3>
+                <h3 className="text-[1rem] font-medium pb-[2px]">Image</h3>
                 <div className="flex justify-center">
                   <img
                     src={data?.image}
@@ -139,7 +106,7 @@ function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
                 </div>
               </div>
               <div className="mb-4">
-                <h3 className="text-[1rem] font-medium pb-[2px]">Old Name</h3>
+                <h3 className="text-[1rem] font-medium pb-[2px]">Name</h3>
                 <div className="flex justify-center">
                   <p className="w-[90%] text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
                     {data?.name}
@@ -147,7 +114,7 @@ function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
                 </div>
               </div>
               <div>
-                <h3 className="text-[1rem] font-medium pb-[2px]">Old Price</h3>
+                <h3 className="text-[1rem] font-medium pb-[2px]">Price</h3>
                 <div className="flex justify-center">
                   <p className="w-[90%] text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
                     {data?.price}
@@ -159,24 +126,6 @@ function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
 
           <div className="px-[1rem] py-[1rem]">
             <div className="flex flex-col ">
-              <div className="w-[100%]">
-                <h2 className="text-[1.1rem] font-medium pb-[3px]">New Name</h2>
-                <div>
-                  <TextField
-                    name="name"
-                    onChange={handleFormChange}
-                    error={!!errors.name}
-                    helperText={errors?.name}
-                    style={{ width: "100%" }}
-                    placeholder="New Name"
-                    id="outlined-basic"
-                    variant="outlined"
-                    size="small"
-                    sx={{ minHeight: "4rem" }}
-                  />
-                </div>
-              </div>
-
               <div className="w-full">
                 <h2 className="text-[1.1rem] font-medium pb-[3px]">
                   New Price
@@ -194,26 +143,6 @@ function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
                     size="medium"
                     sx={{ minHeight: "4rem" }}
                   />
-                </div>
-              </div>
-
-              <div>
-                <div className="w-80 mt-5">
-                  <Button
-                    component="label"
-                    role={undefined}
-                    variant="outlined"
-                    tabIndex={-1}
-                    startIcon={<CloudUploadIcon />}
-                    sx={{
-                      border: "2px solid",
-                      color: `${formData.image == "" ? "red" : "green"}`,
-                    }}
-                    onChange={handleFileChange}
-                  >
-                    Upload Material Image
-                    <VisuallyHiddenInput type="file" />
-                  </Button>
                 </div>
               </div>
             </div>

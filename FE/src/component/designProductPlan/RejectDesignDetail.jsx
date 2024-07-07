@@ -88,10 +88,6 @@ function RejectDesignDetail() {
     };
   };
 
-  const debouncedOnChange = useCallback(debounce(HandleChangeData, 500), []);
-
-  console.log(selectedFile);
-
   const handleSubmit = () => {
     if (handleFileChange) {
       const data = {

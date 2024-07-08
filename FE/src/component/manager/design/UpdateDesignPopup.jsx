@@ -5,7 +5,6 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
-import { toast } from 'react-toastify';
 
 import useAuth from '../../../hooks/useAuth';
 import UploadImage from '../../../utils/UploadImage';
@@ -77,6 +76,7 @@ function UpdateDesignPopup({ data, setIsOpenUpdatePopup }) {
    const handleFileChange = async (event) => {
       const selectedFile = event.target.files[0];
       if (selectedFile) {
+
          if (newImage !== '') {
             await DeleteImage(newImage);
          }
@@ -87,7 +87,7 @@ function UpdateDesignPopup({ data, setIsOpenUpdatePopup }) {
       }
    };
 
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       let isValid = true;
       let newError = {};
 
@@ -107,6 +107,9 @@ function UpdateDesignPopup({ data, setIsOpenUpdatePopup }) {
       });
 
       if (isValid) {
+         if (formData.image != '') {
+            await DeleteImage(formData.image)
+         }
          let id = data?.designId;
          let payload = { ...formData }
          if (newImage != '') {
@@ -115,21 +118,28 @@ function UpdateDesignPopup({ data, setIsOpenUpdatePopup }) {
          const CallApi = async () => {
             const response = await ApiUpdateParentDesign({ id, payload });
          }
-         CallApi();
+         await CallApi();
          setIsOpenUpdatePopup(false);
       }
+   }
+
+   const handleClose = async () => {
+      if (newImage != '') {
+         await DeleteImage(newImage)
+      }
+      setIsOpenUpdatePopup(false)
    }
 
    console.log(formData)
 
    return (
       <>
-         <div onClick={() => setIsOpenUpdatePopup(false)} className="fixed top-0 right-0 left-0 bottom-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center">
+         <div onClick={handleClose} className="fixed top-0 right-0 left-0 bottom-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center">
             <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1, transition: { duration: 0.5 } }} onClick={(e) => e.stopPropagation()} className="bg-[#fff] w-[30rem] rounded-[10px] min-h-[450px] min-w-[70%]">
                {/* Head */}
                <div className="relative text-center border-b-[1px] border-solid border-[#333] px-[1rem] py-[1rem] ">
                   <h1 className="font-bold leading-5 text-[1.5rem]">Update Design</h1>
-                  <div onClick={() => setIsOpenUpdatePopup(false)} className='absolute top-[10px] right-[10px] cursor-pointer'>
+                  <div onClick={handleClose} className='absolute top-[10px] right-[10px] cursor-pointer'>
                      <CloseIcon />
                   </div>
                </div>

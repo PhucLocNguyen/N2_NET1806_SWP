@@ -17,7 +17,7 @@ function SecondStep({ handleCompleteStep, completedSteps }) {
     const [dataApiStones, setDataApiStones] = useState([]);
     const [filterStones, setFilterStones] = useState([]);
     const [isToggle, setIsToggle] = useState(false);
-const [dataSelected, setDataSelected] = useState({
+const [ dataSelected, setDataSelected] = useState({
   MasterGemstone:{
     kind: null,
     shape:null,
@@ -43,6 +43,7 @@ const [dataSelected, setDataSelected] = useState({
   // Result after select
   const [masterGemstoneObject, setMasterGemstoneObject]= useState({});
   const [stonesObject, setStonesObject] = useState({});
+  const [index, setIndex] = useState(0);
   //initial api value when reload
     useEffect(()=>{
       const dataMaster = FetchApiMasterGemstone(designRuleState.MinSizeMasterGemstone,designRuleState.MaxSizeMasterGemstone).then((res)=>{
@@ -60,11 +61,11 @@ const [dataSelected, setDataSelected] = useState({
         setDataApiStones(res);
         setFilterStones(res);
         const selectKind = new Set(res.map(item => item.kind));
-        setKindMasterGemstone([...selectKind]);
+        setKindStones([...selectKind]);
         const selectSize = new Set(res.map(item => item.size));
-        setSizeMasterGemstone([...selectSize]);
+        setSizeStones([...selectSize]);
         const selectQuantity = new Set(res.map(item=> item.quantity));
-        setShapeMasterGemstone([...selectQuantity]);
+        setQuantityStones([...selectQuantity]);
       })
 
       // set du lieu khi da select nhung quay lai step nay de coi chinh sua tiep
@@ -129,7 +130,7 @@ const [dataSelected, setDataSelected] = useState({
       
     
     },[]);
-
+    console.log(filterMasterGemStone);
     // filter the selection list when choose an option to filter
     useEffect(() => {
       var output = true;
@@ -143,15 +144,19 @@ const [dataSelected, setDataSelected] = useState({
           }
           return true;
         })});
-        if(dataFilterLastMasterGemstone.length ==1){
-          setMasterGemstoneObject(dataFilterLastMasterGemstone[0]);
-          ShowMasterGemStone(dataFilterLastMasterGemstone[0]);
+        if(dataFilterLastMasterGemstone.length >0){
+          console.log(requirementData);
+          console.log(requirementData.selectedIndexMastergemstone);
+          console.log(dataFilterLastMasterGemstone);
+          setMasterGemstoneObject(dataFilterLastMasterGemstone[requirementData.selectedIndexMastergemstone]);
+          
+          ShowMasterGemStone(dataFilterLastMasterGemstone[requirementData.selectedIndexMastergemstone],dataFilterLastMasterGemstone, setMasterGemstoneObject, setIndex, index);
           var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
           target.style.display="block";
           setIsToggle(true);
         }
         // animation box mastergemstone
-        if(dataFilterLastMasterGemstone.length == 1 && !isToggle){
+        if(dataFilterLastMasterGemstone.length >0 && !isToggle){
           
           animate("div#boxRequirement", {x: [0,-150]});
         animate("div#boxRequirement #MasterGemstoneContainerFloat",{x:[0,"300px"], opacity:[0,1], zIndex: [-1,1]});
@@ -336,12 +341,13 @@ const HandleChangeData = (e) => {
       animate("div#boxRequirement #MasterGemstoneContainerFloat",{x:["300px",0], opacity:[1,0], zIndex: [1,-1]});
       setRequirementData({...requirementData,
         masterGemstoneId: masterGemstoneObject.masterGemstoneId,
-        stonesId:stonesObject.stonesId,});
+        stonesId:stonesObject.stonesId,
+        selectedIndexMastergemstone:index,
+      });
       handleCompleteStep(currentStep-1);
       setCurrentStep(currentStep+1);
     }
   }
-
 
   //view or disabled
   function ToogleStone(e) {
@@ -373,6 +379,7 @@ const HandleChangeData = (e) => {
       getSection.style.display="none";
     }
   }
+  
   return (
     <>
       <motion.div 
@@ -415,15 +422,16 @@ const HandleChangeData = (e) => {
     {kindMasterGemstone.map((val, index) => {
         return (
             <label 
-                key={val + index} 
-                htmlFor={"material-" + index} 
+                key={val+ "materialMastergemstone"} 
+                htmlFor={"materialMastergemstone-" +val+"-"+ index} 
                 className="cursor-pointer"
             >
                 <div className="">
                     <input 
                         type="radio" 
-                        name="kind" 
-                        id={"material-" + index} 
+                        name="kind"
+                        key={"materialMastergemstone-" +val+"-"+ index} 
+                        id={"materialMastergemstone-" +val+"-"+ index} 
                         value={val} 
                         className="inline-block" 
                         data_object="MasterGemstone" 
@@ -450,9 +458,9 @@ const HandleChangeData = (e) => {
                     value={dataSelected.MasterGemstone== null || dataSelected.MasterGemstone.size == null? "":dataSelected.MasterGemstone.size }
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
-                    <option key="defaultSelect" value="">--Choose MasterGemStone size--</option>
+                    <option key="defaultSelectingMasterGemstone" value="">--Choose MasterGemStone size--</option>
                     {sizeMasterGemstone.map((items, index) => (
-                        <option key={items + index} value={items} >{items}</option>
+                        <option key={items + index+"sizeMasterGemstone"} value={items} >{items}</option>
                     ))}
                 </select>
 
@@ -470,7 +478,7 @@ const HandleChangeData = (e) => {
                     <option key="defaultSelectShape" value="">--Choose MasterGemStone shape--</option>
                     {
                         shapeMasterGemstone.map((item, index) => (
-                            <option key={item} value={item}>{item}</option>
+                            <option key={item+"shapeMasterGemStone"} value={item}>{item}</option>
                         ))
                     }
                </select>
@@ -479,7 +487,7 @@ const HandleChangeData = (e) => {
             </div>
           </div>
           <div className="flex justify-between content-center">
-            <h2 className="text-[24px] mb-1 mt-3">Loại hạt Tấm  </h2>
+            <h2 className="text-[24px] mb-1 mt-3">Melee Stones</h2>
             <input
               type="checkbox"
               className="peer"
@@ -503,15 +511,16 @@ const HandleChangeData = (e) => {
     {kindStones.map((val, index) => {
         return (
             <label 
-                key={val + index} 
-                htmlFor={"material-" + val} 
+                key={val+"-Stones-" + index} 
+                htmlFor={"material-Stones" + val+index} 
                 className="cursor-pointer"
             >
                 <div className="">
                     <input 
                         type="radio" 
+                        key={val+"-Stones"} 
                         name="kindStones" 
-                        id={"material-" + val} 
+                        id={"material-Stones" + val+index} 
                         value={val} 
                         className="inline-block" 
                         data_object="Stones" 

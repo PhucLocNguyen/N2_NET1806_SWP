@@ -4,9 +4,14 @@ import { fetchApiDesignById } from "../../../api/FetchApiDesign";
 import { FetchApiDesignRuleById } from "../../../api/Requirements/FetchApiDesignRule";
 import { PostApiDesign } from "../../../api/Requirements/PostApiDesign";
 import { PostApiRequirement } from "../../../api/Requirements/PostRequirement";
+import { PostUsersRequirement } from "../../../api/Requirements/PostUsersRequirement";
+import useAuth from "../../../hooks/useAuth";
 
 export const multiStepContext = createContext();
 export function StepContext({children, designId, animate, scope}) {
+
+    const { UserId, role } = useAuth();
+
     const [currentStep, setCurrentStep] = useState(1);
     const [designRuleState, setDesignRule] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -16,6 +21,7 @@ export function StepContext({children, designId, animate, scope}) {
         size: 0,
         masterGemstoneId:0,
         stonesId: 0,
+        selectedIndexMastergemstone:0,
         customerNote:"",
     });
     useEffect(()=>{
@@ -37,6 +43,7 @@ var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
           var objectData = {designParentId: root.designId,
             material: material!=null? material.materialId : null,
             size: 0,
+            selectedIndexMastergemstone:requirementData.selectedIndexMastergemstone,
             masterGemstoneId:masterGemstone!=null? masterGemstone.masterGemstoneId : null,
             stonesId: stone!=null? stone.stonesId : null,
             customerNote: requirementData.customerNote,};
@@ -60,18 +67,21 @@ var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
 
             const postDesignChild = await PostApiDesign(dataToSubmit);
         const dataToSendRequirement = {
-            status: "1",
+            status: "0",
             size:requirementData.size,
             designId:postDesignChild.designId,
             customerNote:requirementData.customerNote
         }
         const PostRequirementCustomer = await PostApiRequirement(dataToSendRequirement);
-        console.log(PostRequirementCustomer);
+        const requirementId = PostRequirementCustomer.requirementId;
+        const UserJoinTheRequirement = await PostUsersRequirement(requirementId,UserId);
+        console.log(UserJoinTheRequirement);
     }
    useEffect(()=>{
     if(isSubmit){
         SubmitDesignFromCustomer();
     }
+
    })
     console.log(requirementData);
     return (  <>

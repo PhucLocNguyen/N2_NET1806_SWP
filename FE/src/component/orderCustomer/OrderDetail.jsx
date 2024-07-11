@@ -253,7 +253,7 @@ const OrderDetail = () => {
                           Object.entries(masterGemStone)
                             .filter(
                               ([key]) =>
-                                key !== "image" && key !== "masterGemstoneId"
+                                key !== "image" && key !== "masterGemstoneId" && key !== 'price'
                             )
                             .map(([key, value]) => (
                               <TableRow key={key}>
@@ -291,7 +291,7 @@ const OrderDetail = () => {
                       <TableBody>
                         {dataDesign.material &&
                           Object.entries(dataDesign.material)
-                            .filter(([key]) => key !== "image" && key !== 'materialId')
+                            .filter(([key]) => key !== "image" && key !== 'materialId' && key !== 'price')
                             .map(([key, value]) => (
                               <TableRow key={key}>
                                 <TableCell>
@@ -320,7 +320,7 @@ const OrderDetail = () => {
                       <TableBody>
                         {stone &&
                           Object.entries(stone)
-                            .filter(([key]) => key !== "stonesId")
+                            .filter(([key]) => key !== "stonesId" && key !== 'price')
                             .map(([key, value]) => (
                               <TableRow key={key}>
                                 <TableCell>

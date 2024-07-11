@@ -140,9 +140,8 @@ function Login() {
                     <form method='POST' onSubmit={HandleSubmitLogin} className='bg-[#fff] flex items-center justify-center flex-col h-[100%] px-[40px]' name='login'>
                         <h1 className='font-bold text-[35px]'>Sign In</h1>
                         <div className='my-[10px]'>
-                            <motion.a whileHover={{ scale: 1.2 }} onClick={ClickSave} href='https://accounts.google.com/o/oauth2/auth?scope=openid%20email%20profile&redirect_uri=http://localhost:5173/login&response_type=code
+                            <motion.a whileHover={{ scale: 1.2 }} onClick={ClickSave} href='https://accounts.google.com/o/oauth2/auth?scope=openid%20email%20profile&redirect_uri=https://fpt-jewelry-production.netlify.app/login&response_type=code
     &client_id=528761239720-ac1sb7qru7cnvmmbddpsi8plsgsqrrg4.apps.googleusercontent.com&approval_prompt=force' className='border-[2px] border-solid border-[#ccc] rounded-[20%] inline-flex justify-center items-center mx-[4px] w-[40px] h-[40px]'>
-                                
                                 <img className='p-[5px]' src={GoogleIcon} />
                             </motion.a>
                         </div>
@@ -152,7 +151,6 @@ function Login() {
                         <InputPassword label='Password' handleChild={debouncedOnChange}></InputPassword> */}
                         <InputText label='username' type='text' ></InputText>
                         <InputPassword label='password' ></InputPassword>
-                        <a className="text-[#333] text-[13px] mt-[15px] mb-[10px]" href="#">Forget Your Password?</a>
                         <Button variant="contained" type='submit'>Sign In</Button>
                     </form>
                 </motion.div>

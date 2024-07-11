@@ -83,15 +83,14 @@ function WarrantyDetail() {
       const response = await ApiUpdateRequirement({ data, id });
    }
 
-   const handleSave = () => {
+   const handleSave = async () => {
       let data = {
          ...requirement,
          status: '12'
       }
-      CallApiUpdateRequirement(data, id)
+      await CallApiUpdateRequirement(data, id)
       // Chuyen huong
       navigate('/staff/warranty', { replace: true })
-      window.location.reload();
    }
 
    console.log(warranty)

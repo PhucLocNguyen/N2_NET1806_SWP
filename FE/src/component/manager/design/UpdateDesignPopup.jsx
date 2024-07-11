@@ -174,7 +174,7 @@ function UpdateDesignPopup({ data, setIsOpenUpdatePopup }) {
 
                   <div className='mt-[1rem]'>
                      <Button onClick={handleSubmit} variant="contained" sx={{ minWidth: '6rem' }}>
-                        Add
+                        Update
                      </Button>
                   </div>
 

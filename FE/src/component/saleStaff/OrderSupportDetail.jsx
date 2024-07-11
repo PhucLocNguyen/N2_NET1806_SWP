@@ -59,7 +59,7 @@ function OrderSupportDetail() {
 
   const debouncedOnChange = useCallback(debounce(HandleChangeData, 500), []);
 
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       if (staffNote.length>0) {
          const data = {
             ...requirement,
@@ -69,9 +69,8 @@ function OrderSupportDetail() {
          const CallApi = async () => {
             const response = await ApiUpdateRequirement({ data, id });
          }
-         CallApi()
+         await CallApi()
          navigate('/staff/order-support/', { replace: true })
-         window.location.reload();
       }
    }
 

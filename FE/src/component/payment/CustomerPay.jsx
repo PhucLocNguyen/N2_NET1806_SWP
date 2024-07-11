@@ -34,7 +34,6 @@ function CustomerPay({
        
         return (
           <div>
-            <p className="line-clamp-2">price: {requirementDetail.status > 3 ? formatVND(requirementDetail.materialPriceAtMoment) : formatVND(designDetail.material?.price)}  / mace</p>
             <div className="bg-gray-200 p-4 rounded-lg w-full px-3 mb-3 ">
               {designDetail.masterGemstone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
@@ -136,6 +135,7 @@ function CustomerPay({
   return (
     <div className="col-span-2 flex flex-col justify-center items-center">
       <div className="min-h-[350px] w-[500px]">
+        {(getRequirementNew?.design3D!==""&& getRequirementNew?.design3D!=null)?<img className="w-full object-contain h-[300px]" src={getRequirementNew?.design3D} alt="image of design 3D last product"/>:null}
         <h2 className="text-3xl font-bold text-gray-900 mb-6">{title}</h2>
         <h3 className="text-xl font-semibold text-gray-700 mb-3">Summary:</h3>
         <ReDesignSummary status={status} />

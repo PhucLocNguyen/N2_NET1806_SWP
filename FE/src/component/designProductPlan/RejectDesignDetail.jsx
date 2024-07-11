@@ -103,7 +103,11 @@ function RejectDesignDetail() {
       window.location.reload();
     }
   };
-
+  async function ChatWithCustomer(e){
+    e.stopPropagation();
+    const conversationIdTarget = await CreateConversationJoin(UserId, customerInformation.usersId); 
+    navigate("/staff/chat",{ state: { conversationIdTarget }}) 
+  }
   
 
   return (
@@ -270,20 +274,14 @@ function RejectDesignDetail() {
                     Customer details
                   </Typography>
                   <Typography sx={{ color: "text.secondary" }}>
-                    <Link to="/staff/chat">
+                    
                       <Button
                         variant="contained"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          CreateConversationJoin(
-                            UserId,
-                            customerInformation.usersId
-                          );
-                        }}
+                        onClick={ChatWithCustomer}
                       >
                         Chat with customer
                       </Button>
-                    </Link>
+                    
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>

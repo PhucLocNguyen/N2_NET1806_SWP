@@ -110,11 +110,6 @@ function RequirementDetail() {
 
    }, [])
 
-   console.log(requirement)
-   // console.log(design)
-   console.log(dataForm)
-
-
    return (
       <>
          {requirement?.status == 2 ?
@@ -127,7 +122,7 @@ function RequirementDetail() {
                         <div>
                            <h2 className="text-[32px] font-bold ">Order #{id}</h2>
 
-                           <Chip label="Đang đợi báo giá" color='warning' variant="outlined" sx={{ fontWeight: 700 }} />
+                           <Chip label="Waiting for price quote" color='warning' variant="outlined" sx={{ fontWeight: 700 }} />
                         </div>
 
                         <div className="h-[1.5px] bg-[#e9eaf3] my-[1.5rem]"></div>

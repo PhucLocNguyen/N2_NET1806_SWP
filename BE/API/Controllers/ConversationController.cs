@@ -26,7 +26,7 @@ namespace API.Controllers
         }
         [HttpGet("{id}")]
 
-        public IActionResult GetById([FromRoute] int id, [FromQuery] int userId)
+        public IActionResult GetById([FromRoute]int id,[FromQuery] int userId)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace API.Controllers
             {
                 return BadRequest("Something wrong appears in GetById Conversation");
             }
-
+           
         }
         [HttpPost("all")]
         public IActionResult GetConversationByCurrentUser([FromBody] int userId)
@@ -61,7 +61,7 @@ namespace API.Controllers
             {
                 return BadRequest("Something wrong appears in GetConversationByCurrentUser");
             }
-
+           
         }
         [HttpPost]
         public IActionResult Create([FromBody] RequestCreateConversation model)
@@ -90,7 +90,7 @@ namespace API.Controllers
             {
                 return BadRequest("Create conversation failes");
             }
-
+           
         }
     }
 }

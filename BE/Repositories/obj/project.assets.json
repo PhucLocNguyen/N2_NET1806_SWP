@@ -4283,11 +4283,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj",
+      "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj",
       "projectName": "SWP391Project.Repositories",
-      "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj",
+      "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj",
       "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-      "outputPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\obj\\",
+      "outputPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",

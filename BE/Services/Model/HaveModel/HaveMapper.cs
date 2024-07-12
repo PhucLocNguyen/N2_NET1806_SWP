@@ -1,4 +1,5 @@
-﻿using API.Model.TypeOfJewellryModel;
+﻿using API.Model.RequirementModel;
+using API.Model.TypeOfJewellryModel;
 using API.Model.WarrantyCardModel;
 using Repositories.Entity;
 
@@ -12,8 +13,8 @@ namespace API.Model.HaveModel
             {
                 WarrantyCardId = requestCreateHaveModel.WarrantyCardId,
                 RequirementId = requestCreateHaveModel.RequirementId,
-                DateCreated = requestCreateHaveModel.DateCreated,
-                ExpirationDate = requestCreateHaveModel.ExpirationDate,
+                DateCreated = requestCreateHaveModel.DateCreated != null ? DateOnly.FromDateTime((DateTime)requestCreateHaveModel.DateCreated) : null,
+                ExpirationDate = requestCreateHaveModel.ExpirationDate != null ? DateOnly.FromDateTime((DateTime)requestCreateHaveModel.ExpirationDate) : null,
             };
         }
         public static ResponseHave toHaveDTO(this Have have)

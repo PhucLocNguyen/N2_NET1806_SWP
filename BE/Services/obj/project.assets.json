@@ -3203,11 +3203,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
+      "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
       "projectName": "SWP391Project.Services",
-      "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
+      "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
       "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-      "outputPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Services\\obj\\",
+      "outputPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3224,8 +3224,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
-              "projectPath": "D:\\Slide\\Sem_5\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
+            "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+              "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
             }
           }
         }

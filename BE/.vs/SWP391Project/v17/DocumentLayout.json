@@ -1,42 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Slide\\Sem_5\\SWP\\BE\\",
+  "WorkspaceRootPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\BE\\api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\swp\\be\\api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\BE\\api\\controllers\\userrequirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\userrequirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\services\\chatsystem\\conversationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|solutionrelative:services\\chatsystem\\conversationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\be\\api\\controllers\\stonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\stonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\be\\api\\controllers\\havecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\havecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\BE\\api\\controllers\\warrantycardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\warrantycardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\BE\\api\\controllers\\requirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\requirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\BE\\api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\BE\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\BE\\api\\api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{C94754F6-301F-435C-8B6E-4D1501053988}|Repositories\\SWP391Project.Repositories.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\repositories\\entity\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C94754F6-301F-435C-8B6E-4D1501053988}|Repositories\\SWP391Project.Repositories.csproj|solutionrelative:repositories\\entity\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\api\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\api\\controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,120 +38,92 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "StonesController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\StonesController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\StonesController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\StonesController.cs",
-              "RelativeToolTip": "API\\Controllers\\StonesController.cs",
-              "ViewState": "AQIAAGYAAAAAAAAAAAAowH0AAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T14:01:13.922Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserRequirementController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\UserRequirementController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\UserRequirementController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\UserRequirementController.cs",
-              "RelativeToolTip": "API\\Controllers\\UserRequirementController.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAowEIAAAAQAAAA",
+              "Title": "ConversationService.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\ChatSystem\\ConversationService.cs",
+              "RelativeDocumentMoniker": "Services\\ChatSystem\\ConversationService.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\ChatSystem\\ConversationService.cs",
+              "RelativeToolTip": "Services\\ChatSystem\\ConversationService.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAAACsAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T04:25:59.273Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-10T14:53:20.562Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "HaveController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\HaveController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\HaveController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\HaveController.cs",
-              "RelativeToolTip": "API\\Controllers\\HaveController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEgAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T04:22:47.234Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "WarrantyCardController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\WarrantyCardController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\WarrantyCardController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\WarrantyCardController.cs",
-              "RelativeToolTip": "API\\Controllers\\WarrantyCardController.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAUwFAAAAAHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T04:21:58.451Z",
-              "EditorCaption": ""
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\appsettings.json",
+              "RelativeDocumentMoniker": "API\\appsettings.json",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\appsettings.json",
+              "RelativeToolTip": "API\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-06T04:36:10.823Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PaymentController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\PaymentController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\PaymentController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\PaymentController.cs",
-              "RelativeToolTip": "API\\Controllers\\PaymentController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAE8AAAAJAAAA",
+              "Title": "ConversationController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\ConversationController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\ConversationController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\ConversationController.cs",
+              "RelativeToolTip": "API\\Controllers\\ConversationController.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAgwFEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T03:38:01.991Z",
+              "WhenOpened": "2024-07-08T02:10:00.637Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\UserController.cs",
-              "RelativeToolTip": "API\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAwwF0AAABsAAAA",
+              "Title": "LoginGoogleController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\LoginGoogleController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\LoginGoogleController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\LoginGoogleController.cs",
+              "RelativeToolTip": "API\\Controllers\\LoginGoogleController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAABfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T13:02:32.56Z"
+              "WhenOpened": "2024-07-06T04:36:51.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DesignController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\DesignController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeToolTip": "API\\Controllers\\DesignController.cs",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAYwCUAAACCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T02:06:27.723Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "RequirementController.cs",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\RequirementController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\RequirementController.cs",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\Controllers\\RequirementController.cs",
-              "RelativeToolTip": "API\\Controllers\\RequirementController.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAABoAAAAJAAAA",
+              "Title": "BlogController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\BlogController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\BlogController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\API\\Controllers\\BlogController.cs",
+              "RelativeToolTip": "API\\Controllers\\BlogController.cs",
+              "ViewState": "AQIAAFwAAAAAAAAAAAAgwLkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T07:35:43.362Z"
+              "WhenOpened": "2024-07-06T05:08:01.968Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\appsettings.json",
-              "RelativeDocumentMoniker": "API\\appsettings.json",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\appsettings.json",
-              "RelativeToolTip": "API\\appsettings.json",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABoAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-30T09:10:16.458Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "API",
-              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj",
-              "RelativeDocumentMoniker": "API\\API.csproj",
-              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\BE\\API\\API.csproj",
-              "RelativeToolTip": "API\\API.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-30T09:09:52.447Z"
+              "DocumentIndex": 4,
+              "Title": "MyDbContext.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\Entity\\MyDbContext.cs",
+              "RelativeDocumentMoniker": "Repositories\\Entity\\MyDbContext.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\Entity\\MyDbContext.cs",
+              "RelativeToolTip": "Repositories\\Entity\\MyDbContext.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAA6wDEAAACCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-06T05:17:15.12Z"
             }
           ]
         }

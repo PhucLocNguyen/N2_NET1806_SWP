@@ -24,10 +24,18 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult CreatePayment([FromBody] RequestCreateVnpay requestCreateVnpay)
         {
-            requestCreateVnpay.PaidAmount = requestCreateVnpay.RequiredAmount;
-            //string? ipAddress = GetClientIpAddress(_httpContextAccessor.HttpContext);
-            var result = _vnpayService.CreatePayment(requestCreateVnpay);
-            return Ok(result);
+            try
+            {
+                requestCreateVnpay.PaidAmount = requestCreateVnpay.RequiredAmount;
+                //string? ipAddress = GetClientIpAddress(_httpContextAccessor.HttpContext);
+                var result = _vnpayService.CreatePayment(requestCreateVnpay);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong when create Vnpay link");
+            }
+            
         }
 
         private string? GetClientIpAddress(HttpContext httpContext)
@@ -50,22 +58,37 @@ namespace API.Controllers
         [HttpGet("CheckResponse")]
         public IActionResult CheckResponse()
         {
-             ResponseMessage result = _vnpayService.checkPayment(Request.Query);
-            var ResponseCode = result.ResponseCode;
-            if (ResponseCode.Equals("00"))
+            try
             {
-                result.Payment.Status = "Paid";
-                _unitOfWork.Save();
-                return Ok(result.Payment.RequirementsId);
+                ResponseMessage result = _vnpayService.checkPayment(Request.Query);
+                var ResponseCode = result.ResponseCode;
+                var PaymentStatusPending = _unitOfWork.PaymentRepository.Get(filter: x=>x.Status.Equals("Pending")&& x.PaymentId != result.Payment.PaymentId
+                && x.CustomerId == result.Payment.CustomerId && x.RequirementsId == result.Payment.RequirementsId).Select(x=>x.PaymentId).ToList();
+                if (ResponseCode.Equals("00"))
+                {
+                    result.Payment.Status = "Paid";
+                    foreach (var item in PaymentStatusPending)
+                    {
+                        _unitOfWork.PaymentRepository.Delete(item);
+                    }
+                    _unitOfWork.Save();
+                    return Ok(result.Payment.RequirementsId);
+                }
+                else
+                {
+                    result.Payment.Status = "Failed";
+                    foreach (var item in PaymentStatusPending)
+                    {
+                        _unitOfWork.PaymentRepository.Delete(item);
+                    }
+                    _unitOfWork.Save();
+                    return BadRequest(result.Payment.RequirementsId);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                result.Payment.Status = "Failed";
-
-                _unitOfWork.Save();
-                return BadRequest(result.Payment.RequirementsId);
+                return BadRequest("Something wrong in CheckResponse");
             }
-
         }
     }
 }

@@ -1,12 +1,15 @@
-﻿using API.Model.UserModel;
+﻿using API.Model.StonesModel;
+using API.Model.UserModel;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Repositories;
 using Repositories.Email;
 using Repositories.Entity;
 using SWP391Project.Repositories.Token;
+using SWP391Project.Services.Model.UserModel;
 using System.Linq.Expressions;
 using static Repositories.Email.EmailService;
 
@@ -28,22 +31,29 @@ namespace API.Controllers
         [HttpPost("registerForCustomer")]
         public async Task<IActionResult> Register([FromBody] RequestRegisterAccount requestRegisterAccount)
         {
-
-            if (checkDuplicateUsername(requestRegisterAccount.Username))
+            try
             {
-                return BadRequest("Username is existed");
+                if (checkDuplicateUsername(requestRegisterAccount.Username))
+                {
+                    return BadRequest("Username is existed");
+                }
+                var existUserHaveSameEmail = _unitOfWork.UserRepository.Get(filter: x => x.Email.Equals(requestRegisterAccount.Email));
+                if (existUserHaveSameEmail.Count() > 0)
+                {
+                    return BadRequest("Email has already been registered");
+                }
+                if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
+                {
+                    return BadRequest("PasswordConfirm is not correct");
+                }
+                _emailService.SaveInCache(requestRegisterAccount);
+                return Ok("Please check email to verify your email");
             }
-            var existUserHaveSameEmail = _unitOfWork.UserRepository.Get(filter: x => x.Email.Equals(requestRegisterAccount.Email));
-            if (existUserHaveSameEmail.Count() > 0)
+            catch (Exception ex)
             {
-                return BadRequest("Email has already been registered");
+                return BadRequest("Something wrong when sending email");
             }
-            if (!requestRegisterAccount.Password.Equals(requestRegisterAccount.PasswordConfirm))
-            {
-                return BadRequest("PasswordConfirm is not correct");
-            }
-            _emailService.SaveInCache(requestRegisterAccount);
-            return Ok("Please check email to verify your email");
+            
         }
 
         [HttpPost("registerForAdmin")]
@@ -138,21 +148,23 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll([FromQuery] string RoleFromInput = null)
+        public IActionResult GetAll([FromQuery] RequestSearchUserModel requestSearchUserModel)
         {
             Expression<Func<Users, bool>> filter = x =>
-                (string.IsNullOrEmpty(RoleFromInput) || x.Role.Name.Contains(RoleFromInput)) && x.Role.Name!=RoleConst.Customer;
-            var Users = _unitOfWork.UserRepository.Get(filter);
+                (string.IsNullOrEmpty(requestSearchUserModel.RoleFromInput) || x.Role.Name.Contains(requestSearchUserModel.RoleFromInput)) && x.Role.Name!=RoleConst.Customer && x.Role.Name != RoleConst.Admin;
+            var Users = _unitOfWork.UserRepository.Get(
+                filter, 
+                pageIndex: requestSearchUserModel.pageIndex,
+                pageSize: requestSearchUserModel.pageSize);
             return Ok(Users);
         }
 
-        [HttpGet("Username")]
-        public IActionResult GetByUsername(string username)
+        [HttpPost("GetUserId")]
+        public IActionResult GetByUsername([FromBody]string userId)
         {
-            Expression<Func<Users, bool>> filter = x =>
-                (string.IsNullOrEmpty(username) || x.Username.Equals(username));
-            var Users = _unitOfWork.UserRepository.Get(filter);
-            return Ok(Users);
+            
+            var Users = _unitOfWork.UserRepository.GetByID(int.Parse(userId));
+            return Ok(Users.toUserDTO());
         }
 
         [HttpGet]

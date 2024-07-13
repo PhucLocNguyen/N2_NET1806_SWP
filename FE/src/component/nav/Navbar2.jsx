@@ -17,13 +17,13 @@ function Navbar() {
           </p>
         </div>
         <section className="h-[85px] mx-auto w-full">
-          <p className="block bg-black text-white w-full text-3xl text-center py-2">
-            Jewelry FPT
+          <p className="block bg-white text-black w-full text-3xl text-center py-2">
+            Jewelry Production FPT
           </p>
-          <nav className="flex justify-between bg-black text-white w-full">
+          <nav className="flex justify-between bg-white text-black w-full">
             <div className="px-10 py-2 flex w-full items-center justify-center">
-              <div className="flex justify-center w-full text-3xl font-bold text-white mb-4">
-                <ul className="flex px-4 font-semibold font-heading space-x-20">
+              <div className="flex justify-center w-full text-3xl font-bold text-black">
+                <ul className="flex px-4 font-semibold font-heading gap-20">
                   <li>
                     <Link
                       to="/"
@@ -50,18 +50,10 @@ function Navbar() {
                       Blog
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="font-normal text-2xl hover:text-[#C6AD8A] hover:duration-200"
-                    >
-                      Contact Us
-                    </Link>
-                  </li>
                 </ul>
               </div>
 
-              <div className="flex items-center space-x-4">
+              <div className="absolute right-24 flex items-center space-x-4">
                 {UserId ? (
                   <div className="group inline-block">
                     <PermIdentityIcon className="hover:text-[#f0cd8c] ml-4 scale-125" />

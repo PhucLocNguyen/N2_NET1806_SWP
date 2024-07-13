@@ -3,8 +3,11 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { toast } from 'react-toastify';
 
 const UploadImage = async (folder, data) => {
+   const originalName = data?.name;
+   const timestamp = Date.now();
+   const uniqueName = `${timestamp}_${originalName}`; 
 
-   const storageRef = ref(storage, `${folder}/${data?.name}`);
+   const storageRef = ref(storage, `${folder}/${uniqueName}`);
    const uploadTask = uploadBytesResumable(storageRef, data);
 
    const downloadURL = await new Promise((resolve, reject) => {

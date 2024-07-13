@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-
+import formatVND from "../../../utils/FormatCurrency"
 function ShowMasterGemStone(props, dataFilterLastMasterGemstone, setMasterGemstoneObject, setIndex, gettingIndex) {
   const getBoxMasterGemStone = document.getElementById("MasterGemstoneContainerFloat");
   if (getBoxMasterGemStone) {
@@ -38,7 +38,7 @@ function ViewDetailMasterGemStone({ initialGemstone, dataFilterLastMasterGemston
           className="mx-auto w-[250px] h-[250px] object-center object-contain px-3 rounded-lg"
           alt={"image of " + masterGemstone.kind + ` ${masterGemstone.shape}`}
         />
-        <h4 className="text-center text-[20px]">{masterGemstone.price} VND</h4>
+        <h4 className="text-center text-[20px]">{formatVND(masterGemstone.price)} </h4>
       </div>
       <div className="absolute -bottom-2 w-full rounded-lg overflow-hidden" style={filteredData.length>1?{display:"block"}:{display:"none"}}>
         <h3 className="text-[20px] ml-2">Another choices:</h3>

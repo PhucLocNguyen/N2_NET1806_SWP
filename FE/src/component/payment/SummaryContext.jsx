@@ -11,18 +11,18 @@ export function SummaryContext({children, requirementData, ChangeToggle, status,
     const [requirementDetail, setRequirementDetail] = useState(requirementData);
     console.log(requirementData);
 
-    async function payNow(moneyWillPay) {
+    async function payNow() {
         const paymentRequest = {
             "id": "string",
             "paymentContent": "Payment for order #" + requirementDetail.requirementId,
             "paymentCurrency": "VND",
             "paymentRefId": "string",
-            "requiredAmount": moneyWillPay,
+            "requiredAmount": 0,
             "paymentLanguage": "EN",
             "merchantId": "MERCHANT123",
             "paymentDestinationId": "DEST123",
             "paymentStatus": "Completed",
-            "paidAmount": moneyWillPay,
+            "paidAmount": 0,
             "userId": Number(UserId),
             "requirementId": requirementDetail.requirementId
         };
@@ -59,7 +59,7 @@ export function SummaryContext({children, requirementData, ChangeToggle, status,
         } else {
             masterGemstoneTotal = designDetail.masterGemstone!=null? designDetail.masterGemstone?.price : 0;
             stonesTotal = designDetail.stone!=null? designDetail.stone?.price:0;
-            priceMaterial = designDetail.material!=null? designDetail.material?.price: 0;
+            priceMaterial = designDetail.material!=null? designDetail.material?.price*requirementDetail.weightOfMaterial: 0;
         }
         // const masterGemstoneTotal = designDetail.masterGemstone!=null? designDetail.masterGemstone?.price : 0;
         // const stonesTotal = designDetail.stone!=null? designDetail.stone?.price:0;

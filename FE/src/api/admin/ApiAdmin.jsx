@@ -28,11 +28,11 @@ const ApiModifyStaff = async ({ payload, id }) => {
             userId: id
          }
       })
-      toast.success('Create success')
+      toast.success('Update success')
 
    } catch (error) {
       console.log('Api Modify Staff Error: ', error)
-      toast.error('Create failure')
+      toast.error('Update failure')
    }
 }
 

@@ -6,7 +6,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Button, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
 import CreateConversationJoin from "../../utils/CreateConversationJoin";
 import { FetchPaymentApiByRequirementId } from "../../api/payment/PaymentApi";
@@ -26,6 +26,12 @@ function RequirementDone({
   const [transaction, setTransaction] = useState([]);
   const [warrantyCard, setWarrantyCard] = useState([]);
   const {UserId} = useAuth();
+  const navigate = useNavigate();
+  async function ChatWithStaff(e,staffId){
+    e.stopPropagation();
+    const conversationIdTarget = await CreateConversationJoin(UserId, staffId); 
+    navigate("/chat",{ state: { conversationIdTarget }}) 
+  }
   async function loadDataStaff(requirementId) {
     const getDesignStaff = await FetchApiUserBasedRoleInRequirement(
       3,
@@ -221,17 +227,15 @@ function RequirementDone({
                     Sale staff
                   </Typography>
                   <Typography sx={{ color: "text.secondary" }}>
-                    <Link to="/chat">
+                    
                       <Button
                         variant="contained"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          CreateConversationJoin(UserId, saleStaff.usersId);
+                        onClick={(e) => {ChatWithStaff(e, saleStaff.usersId)
                         }}
                       >
                         Chat with sale staff
                       </Button>
-                    </Link>
+                    
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -271,17 +275,16 @@ function RequirementDone({
                     Design staff
                   </Typography>
                   <Typography sx={{ color: "text.secondary" }}>
-                    <Link to="/chat">
+                   
                       <Button
                         variant="contained"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          CreateConversationJoin(UserId, deisgnStaff.usersId);
+                        onClick={(e) => {ChatWithStaff(e,deisgnStaff.usersId);
+                          
                         }}
                       >
                         Chat with design staff
                       </Button>
-                    </Link>
+                    
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -321,20 +324,16 @@ function RequirementDone({
                     Production staff
                   </Typography>
                   <Typography sx={{ color: "text.secondary" }}>
-                    <Link to="/chat">
+                   
                       <Button
                         variant="contained"
                         onClick={(e) => {
-                          e.stopPropagation();
-                          CreateConversationJoin(
-                            UserId,
-                            productionStaff.usersId
-                          );
+                          ChatWithStaff(e,productionStaff.usersId);
                         }}
                       >
                         Chat with Production staff
                       </Button>
-                    </Link>
+                 
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>

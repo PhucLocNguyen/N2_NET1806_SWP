@@ -5,6 +5,7 @@ import { Bar, Line } from 'react-chartjs-2';
 import DashboardSaleOVerview from './DashboardSaleOverview';
 import DashboardCountType from './DashboardCountType';
 import DashboardMasterGemstone from './DashboardMasterGemstone';
+import DashboardRevenueByDate from './DashboardRevenueByDate';
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
@@ -25,6 +26,8 @@ function Dashboard() {
             return <DashboardCountType />;
          case 'masterGemstone':
             return <DashboardMasterGemstone />;
+         case 'revenueByDate':
+            return <DashboardRevenueByDate />;
       }
    };
 
@@ -41,6 +44,10 @@ function Dashboard() {
 
             <div onClick={() => setActiveTab('masterGemstone')} className={`px-[30px] py-[10px] cursor-pointer rounded-[30px] min-w-[200px] text-center ${activeTab == 'masterGemstone' ? 'bg-[#9b59b6]' : ''}`}>
                <h1 className='text-[20px] font-bold'>Master Gemstone</h1>
+            </div>
+
+            <div onClick={() => setActiveTab('revenueByDate')} className={`px-[30px] py-[10px] cursor-pointer rounded-[30px] min-w-[200px] text-center ${activeTab == 'revenueByDate' ? 'bg-[#9b59b6]' : ''}`}>
+               <h1 className='text-[20px] font-bold'>Revenue By Date</h1>
             </div>
          </div>
 

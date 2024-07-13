@@ -23,13 +23,13 @@ function DashboardMasterGemstone() {
    return (
       <>
          <div className='px-[3rem] pt-[5rem]'>
-            <div className="px-[15px] border-[1px] border-solid border-[#000] bg-[##f7f9fc] h-[500px]">
+            <div className="px-[15px] border-[1px] border-solid border-[#000] bg-[##f7f9fc] h-[70vh]">
                <Bar
                   data={{
                      labels: data?.map((item) => item.masterGemstone),
                      datasets: [
                         {
-                           label: 'Last month',
+                           label: 'Quantity',
                            data: data?.map((item) => item.amount),
                            backgroundColor: '#ff7979'
                         }

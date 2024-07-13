@@ -98,7 +98,7 @@ function Login() {
     }
    
     return (
-        <div className="bg-[#c9d6ff] w-full h-screen bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">
+        <div className="relative bg-[#FFF2D7] w-full h-screen flex items-center justify-center flex-col">
             <div className="bg-[#fff] rounded-[30px] shadow-[0_5px_15px_rgba(0,0,0,0.35)] relative overflow-hidden w-[768px] max-w-[100%] min-h-[480px]">
 
                 <motion.div
@@ -142,7 +142,6 @@ function Login() {
                         <div className='my-[10px]'>
                             <motion.a whileHover={{ scale: 1.2 }} onClick={ClickSave} href='https://accounts.google.com/o/oauth2/auth?scope=openid%20email%20profile&redirect_uri=http://localhost:5173/login&response_type=code
     &client_id=528761239720-ac1sb7qru7cnvmmbddpsi8plsgsqrrg4.apps.googleusercontent.com&approval_prompt=force' className='border-[2px] border-solid border-[#ccc] rounded-[20%] inline-flex justify-center items-center mx-[4px] w-[40px] h-[40px]'>
-                                
                                 <img className='p-[5px]' src={GoogleIcon} />
                             </motion.a>
                         </div>
@@ -152,7 +151,6 @@ function Login() {
                         <InputPassword label='Password' handleChild={debouncedOnChange}></InputPassword> */}
                         <InputText label='username' type='text' ></InputText>
                         <InputPassword label='password' ></InputPassword>
-                        <a className="text-[#333] text-[13px] mt-[15px] mb-[10px]" href="#">Forget Your Password?</a>
                         <Button variant="contained" type='submit'>Sign In</Button>
                     </form>
                 </motion.div>

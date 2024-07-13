@@ -27,7 +27,7 @@ const navigate = useNavigate();
 
   return (
     <>
-      <div  ref={scope} className="bg-[#c9d6ff] w-full h-full min-h-screen py-10 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">
+      <div  ref={scope} className="bg-custom-gradient w-full h-full min-h-screen py-10 flex items-center justify-center flex-col">
         {!isCompleted?<div id="boxRequirement" className="bg-[#fff] shadow-[0_5px_15px_rgba(0,0,0,0.35)] relative z-10  w-[768px] max-w-[100%] min-h-[480px] h-max pb-10">
 
           <h2 className="text-center text-[32px] py-[10px]">

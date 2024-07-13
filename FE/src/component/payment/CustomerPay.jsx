@@ -139,7 +139,7 @@ function CustomerPay({
         <h2 className="text-3xl font-bold text-gray-900 mb-6">{title}</h2>
         <h3 className="text-xl font-semibold text-gray-700 mb-3">Summary:</h3>
         <ReDesignSummary status={status} />
-        <CustomerPayButton moneyWillPay={getRequirementNew.status=="10"?Math.ceil(getRequirementNew.totalMoney-Math.ceil(getRequirementNew.totalMoney/2)) : Math.ceil(getRequirementNew.totalMoney/2)} />
+        <CustomerPayButton />
       </div>
     </div>
   );

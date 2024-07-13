@@ -19,15 +19,31 @@ namespace SWP391Project.Services.ChatSystem.Hubs
 
         public Conversation CreateConversation(Conversation conversation)
         {
-            try {
-                _context.Conversations.Add(conversation);
-                _context.SaveChanges();
-                return conversation;
+            if (!CheckValidConversation(conversation.User1Id, conversation.User2Id))
+            {
+                var getConversationFromOne = _context.Conversations.FirstOrDefault(x => (x.User1Id == conversation.User1Id && x.User2Id == conversation.User2Id));
+                var getConversationFromTwo = _context.Conversations.FirstOrDefault(x => (x.User1Id == conversation.User2Id && x.User2Id == conversation.User1Id));
+                if (getConversationFromOne != null)
+                {
+                    return getConversationFromOne;
+                }
+                if(getConversationFromTwo != null)
+                {
+                    return getConversationFromTwo;
+                }
             }
-            catch(Exception ex) {
-                Console.WriteLine(ex.Message);  
-                return null;
-            }
+                try
+                {
+                    _context.Conversations.Add(conversation);
+                    _context.SaveChanges();
+                    return conversation;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+            
         }
 
         public Conversation GetById(int id)
@@ -35,6 +51,7 @@ namespace SWP391Project.Services.ChatSystem.Hubs
             var conversation = _context.Conversations.Include(x => x.User1).Include(x => x.User2).FirstOrDefault(x=> x.ConversationId == id);
             return conversation;
         }
+       
         public bool CheckValidConversation(int userId1, int userId2)
         {
             var output = true;
@@ -61,7 +78,5 @@ namespace SWP391Project.Services.ChatSystem.Hubs
 
             return conversations;
         }
-
-       
     }
 }

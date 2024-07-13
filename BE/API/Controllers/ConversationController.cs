@@ -68,12 +68,7 @@ namespace API.Controllers
         {
             try
             {
-                if (!_conversationService.CheckValidConversation(model.userId1, model.userId2))
-                {
-                    return BadRequest();
-                }
-                else
-                {
+                
                     var conversation = _conversationService.CreateConversation(model.ToConversationEntity());
                     if (conversation != null)
                     {
@@ -84,7 +79,6 @@ namespace API.Controllers
                     {
                         return BadRequest();
                     }
-                }
             }
             catch (Exception ex)
             {

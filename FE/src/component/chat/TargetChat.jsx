@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-
+import iconStaff from "../../assets/icon/staffIcon.jpg";
 function TargetChat({ conversation, messages }) {
     const { role, UserId } = useAuth();
     const chatEndRef = useRef(null);
@@ -20,7 +20,7 @@ function TargetChat({ conversation, messages }) {
                 <div className="border-b h-[70px] bg-white">
                     <div className="pl-4 py-2 h-full flex gap-4">
                         <img
-                            src={conversation.user?.image!==null?conversation.user?.image: "https://cdn4.iconfinder.com/data/icons/gray-business-1/512/xxx010-512.png"}
+                            src={conversation.user?.image!==null?conversation.user?.image: iconStaff}
                             alt=""
                             className="h-full rounded-full"
                         />

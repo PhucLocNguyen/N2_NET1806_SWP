@@ -9,7 +9,6 @@ export function SummaryContext({children, requirementData, ChangeToggle, status,
     const [designDetail, setDesignDetail] = useState({});
     const {UserId} = useAuth();
     const [requirementDetail, setRequirementDetail] = useState(requirementData);
-    console.log(requirementData);
 
     async function payNow() {
         const paymentRequest = {

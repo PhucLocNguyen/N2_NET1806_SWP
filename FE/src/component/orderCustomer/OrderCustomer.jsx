@@ -50,7 +50,7 @@ export const getStatusClass = (status) => {
       return "bg-yellow-100 text-yellow-600";
     case "Confirm the design":
       return "bg-green-100 text-green-600";
-    case "Waiting for design staff redraw":
+    case "Waiting for design staff to contact you in chat system":
       return "bg-yellow-100 text-yellow-600";
     case "Waiting for production staff receive":
       return "bg-yellow-100 text-yellow-600";

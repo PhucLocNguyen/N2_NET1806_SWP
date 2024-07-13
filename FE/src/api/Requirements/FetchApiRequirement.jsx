@@ -60,4 +60,15 @@ const FetchApiRequirementHaveUserWithStatus = async (status, UserId)=>{
       return null; 
    }
 }
-export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure, FetchApiRequirementHaveUserWithStatus}
+
+const FetchSummaryPriceByRequirementId= async (id) => {
+   try {
+      const response = await api.get(`/Requirement/PriceOfRequirement?requirementId=${id}`);
+      const summaryPrice = response.data;
+      return summaryPrice; 
+   } catch (error) {
+      console.error(error);
+      return null; 
+   }
+}
+export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure, FetchApiRequirementHaveUserWithStatus, FetchSummaryPriceByRequirementId}

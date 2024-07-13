@@ -78,7 +78,7 @@ function WarrantyPopup({ setIsOpenPopup, requirementId }) {
    const filterOption = (all, selected) => {
       let filterData = all;
       filterData = filterData.filter(item => {
-         return !selected.some(itemSelected => itemSelected?.warrantyCardId == item?.warrantyCardId);
+         return !selected.some(itemSelected => itemSelected?.warrantyCard?.warrantyCardId == item?.warrantyCardId);
       })
       console.log('>>>', filterData);
       return filterData;

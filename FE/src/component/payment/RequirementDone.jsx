@@ -3,7 +3,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Button, Typography } from "@mui/material";
+import { Button, CircularProgress, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +13,8 @@ import { FetchPaymentApiByRequirementId } from "../../api/payment/PaymentApi";
 import FormatDate from "../../utils/FormatDate";
 import { ApiGetWarrantyByRequirementId } from "../../api/warranty/ApiChangeWarranty";
 import useAuth from "../../hooks/useAuth";
+import { FetchSummaryPriceByRequirementId } from "../../api/Requirements/FetchApiRequirement";
+import iconStaff from "../../assets/icon/staffIcon.jpg";
 function RequirementDone({
   title,
   designDetail,
@@ -20,6 +22,13 @@ function RequirementDone({
   total,
   status,
 }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [getSummary, setSummary] = useState({});
+  const callSummary = async (requirementId)=>{
+          const response = await FetchSummaryPriceByRequirementId(requirementId);
+          setSummary(response);
+          setIsLoading(false);
+        }
   const [deisgnStaff, setDesignStaff] = useState({});
   const [productionStaff, setProductionStaff] = useState({});
   const [saleStaff, setSaleStaff] = useState({});
@@ -56,7 +65,13 @@ function RequirementDone({
   }
   useEffect(() => {
     loadDataStaff(requirementDetail.requirementId);
+    callSummary(requirementDetail.requirementId);
   }, []);
+  if(isLoading){
+    return <div className="flex justify-center items-center h-screen">
+    <CircularProgress />
+  </div>
+  }
   return (
     <div className="col-span-2 flex flex-col justify-center items-center">
       <div className="min-h-[350px] w-[500px]">
@@ -90,32 +105,31 @@ function RequirementDone({
               {designDetail.masterGemstone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Master Gemstone</p>
-                  <p>{formatVND(designDetail.masterGemstone?.price)}</p>
+                  <p>{formatVND(getSummary.masterGemStonePriceAtMomentAnon)}</p>
                 </div>
               ) : null}
               {designDetail.stone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Melee Stones</p>
-                  <p>{formatVND(designDetail.stone?.price)}</p>
+                  <p>{formatVND(getSummary.stonePriceAtMomentAnon)}</p>
                 </div>
               ) : null}
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Material</p>
                 <p>
                   {formatVND(
-                    designDetail.material?.price *
-                      requirementDetail.weightOfMaterial
+                    getSummary.materialPriceAtMomentAnon
                   )}
                 </p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Machining Fee</p>
-                <p>{formatVND(requirementDetail.machiningFee)}</p>
+                <p>{formatVND(getSummary.machiningFeeAnon)}</p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300">
                 <p className="text-[20px]">Total</p>
                 <p className="text-[20px]">
-                  {formatVND(Math.ceil(requirementDetail.totalMoney))}
+                  {formatVND(getSummary.totalMoneyAnon)}
                 </p>
               </div>
             </div>
@@ -244,7 +258,7 @@ function RequirementDone({
                       src={
                         saleStaff.image != null
                           ? saleStaff.image
-                          : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                          : iconStaff
                       }
                       className="w-[150px] rounded-full"
                       alt="Sale staff image"
@@ -293,7 +307,7 @@ function RequirementDone({
                       src={
                         deisgnStaff.image != null
                           ? deisgnStaff.image
-                          : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                          : iconStaff
                       }
                       className="w-[150px] rounded-full"
                       alt="Sale staff image"
@@ -342,7 +356,7 @@ function RequirementDone({
                       src={
                         productionStaff.image != null
                           ? productionStaff.image
-                          : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                          : iconStaff
                       }
                       className="w-[150px] rounded-full"
                       alt="production staff image"

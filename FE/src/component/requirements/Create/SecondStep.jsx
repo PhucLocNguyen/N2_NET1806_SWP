@@ -124,6 +124,7 @@ const [ dataSelected, setDataSelected] = useState({
         getSection.style.display="none";
         isSelectedBefore = true;
       }
+      console.log(objectChange);
       if(isSelectedBefore){
         setDataSelected({...dataSelected, ...objectChange});
       }

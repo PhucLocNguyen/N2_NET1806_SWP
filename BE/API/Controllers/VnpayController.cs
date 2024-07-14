@@ -25,12 +25,18 @@ namespace API.Controllers
         public IActionResult CreatePayment([FromBody] RequestCreateVnpay requestCreateVnpay)
         {
             try
-            {   if(_unitOfWork.PaymentRepository.Get(filter: x=>x.RequirementsId == requestCreateVnpay.requirementId && x.Status.Equals("Paid")).ToList().Count <2) 
+            {
+                /*requestCreateVnpay.PaidAmount = requestCreateVnpay.RequiredAmount;
+                //string? ipAddress = GetClientIpAddress(_httpContextAccessor.HttpContext);
+                var result = _vnpayService.CreatePayment(requestCreateVnpay);
+                return Ok(result);*/
+
+                if (_unitOfWork.PaymentRepository.Get(filter: x => x.RequirementsId == requestCreateVnpay.requirementId && x.Status.Equals("Paid")).ToList().Count < 2)
                 {
                     var Requirement = _unitOfWork.RequirementRepository.GetByID((int)requestCreateVnpay.requirementId);
                     if (Requirement.Status.Equals("4"))
                     {
-                        requestCreateVnpay.RequiredAmount = Math.Round((decimal)(Requirement.TotalMoney / 2));
+                        requestCreateVnpay.RequiredAmount = Math.Ceiling((decimal)(Requirement.TotalMoney / 2));
                     }
                     else if (Requirement.Status.Equals("10"))
                     {
@@ -40,18 +46,18 @@ namespace API.Controllers
                     }
                     var result = _vnpayService.CreatePayment(requestCreateVnpay);
                     return Ok(result);
-                }else
+                }
+                else
                 {
                     return BadRequest("This requirement pay enough");
                 }
-                
             }
             catch (Exception ex)
             {
                 return BadRequest("Something wrong when create Vnpay link");
             }
             
-            }
+        }
 
         private string? GetClientIpAddress(HttpContext httpContext)
         {
@@ -82,7 +88,7 @@ namespace API.Controllers
                 if (ResponseCode.Equals("00"))
                 {
                     result.Payment.Status = "Paid";
-                    foreach (var item in    PaymentStatusPending)
+                    foreach (var item in PaymentStatusPending)
                     {
                         _unitOfWork.PaymentRepository.Delete(item);
                     }

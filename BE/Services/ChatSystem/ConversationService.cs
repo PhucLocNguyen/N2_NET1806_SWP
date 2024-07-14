@@ -27,23 +27,22 @@ namespace SWP391Project.Services.ChatSystem.Hubs
                 {
                     return getConversationFromOne;
                 }
-                if(getConversationFromTwo != null)
+                if (getConversationFromTwo != null)
                 {
                     return getConversationFromTwo;
                 }
             }
-                try
-                {
-                    _context.Conversations.Add(conversation);
-                    _context.SaveChanges();
-                    return conversation;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return null;
-                }
-            
+            try
+            {
+                _context.Conversations.Add(conversation);
+                _context.SaveChanges();
+                return conversation;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         public Conversation GetById(int id)
@@ -51,7 +50,6 @@ namespace SWP391Project.Services.ChatSystem.Hubs
             var conversation = _context.Conversations.Include(x => x.User1).Include(x => x.User2).FirstOrDefault(x=> x.ConversationId == id);
             return conversation;
         }
-       
         public bool CheckValidConversation(int userId1, int userId2)
         {
             var output = true;
@@ -78,5 +76,7 @@ namespace SWP391Project.Services.ChatSystem.Hubs
 
             return conversations;
         }
+
+       
     }
 }

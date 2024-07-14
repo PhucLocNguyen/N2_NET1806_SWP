@@ -62,9 +62,9 @@ namespace API.Controllers
         public IActionResult GetWarrantyByRequirementId([FromQuery] int requirementId)
         {
 
-            var warrantyInHave = _unitOfWork.HaveRepository.Get(filter: x => x.RequirementId == requirementId, includes: x => x.WarrantyCard).ToList();
+            var warrantyInHave = _unitOfWork.HaveRepository.Get(filter: x=>x.RequirementId == requirementId, includes: x=>x.WarrantyCard).Select(x=>x.toHaveDTO()).ToList() ;
 
-            if (warrantyInHave == null)
+            if (warrantyInHave ==null)
             {
                 return NotFound("Warranty is not existed");
             }

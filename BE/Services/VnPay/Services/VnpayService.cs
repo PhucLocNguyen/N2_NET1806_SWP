@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using API.Model.PaymentModel;
 using API.Model.VnPayModel;
 using SWP391Project.Services.Model.VnpayModel;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Repositories.VnPay.Services
 {
@@ -16,13 +17,14 @@ namespace Repositories.VnPay.Services
         private readonly VnpayConfig _vnpayConfig;
         private VnpayPayRequest _vnpayPayRequest;
         private readonly UnitOfWork _unitOfWork;
-
-        public VnpayService(VnpayPayResponse vnpayPayResponse, IOptions<VnpayConfig> vnpayConfig, VnpayPayRequest vnpayPayRequest, UnitOfWork unitOfWork)
+        private readonly IMemoryCache _cache;
+        public VnpayService(VnpayPayResponse vnpayPayResponse, IOptions<VnpayConfig> vnpayConfig, VnpayPayRequest vnpayPayRequest, UnitOfWork unitOfWork, IMemoryCache cache)
         {
             _vnpayPayResponse = vnpayPayResponse;
             _vnpayConfig = vnpayConfig.Value;
             _vnpayPayRequest = vnpayPayRequest;
             _unitOfWork = unitOfWork;
+            _cache = cache;
         }
 
         public SortedList<string, string> responseData
@@ -140,6 +142,9 @@ namespace Repositories.VnPay.Services
             {
                 return "Valid amount ranges from 5,000 to under 1 billion VND";
             }
+
+            /*string verificationCode = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6).ToUpper();
+            _cache.Set(verificationCode, requestCreateVnpay, DateTime.Now.AddMinutes(15));*/
             var payment = requestCreateVnpay.ToPaymentEntity((int)requestCreateVnpay.userId, (int)requestCreateVnpay.requirementId);
             payment.Status = "Pending ";
             _unitOfWork.PaymentRepository.Insert(payment);
@@ -153,64 +158,6 @@ namespace Repositories.VnPay.Services
             paymentUrl = GetLink(_vnpayConfig.PaymentUrl, _vnpayConfig.HashSecret);
             return paymentUrl;
         }
-
-        //Check payment response from VNPAY
-        /*public string CheckPaymentResponse(VnpayPayResponse vnpayPayResponse)
-        {
-            if (vnpayPayResponse != null)
-            {
-
-                _vnpayPayResponse = vnpayPayResponse;
-                if (IsValidSignature(_vnpayConfig.HashSecret))
-                {
-                    var payment = _context.Payments.Find(int.Parse(_vnpayPayResponse.vnp_TxnRef));
-
-                    if (payment != null)
-                    {
-                        if (payment.RequiredAmount == (vnpayPayResponse.vnp_Amount / 100))
-                        {
-                            if (payment.PaymentStatus == "0")
-                            {
-                                if (vnpayPayResponse.vnp_ResponseCode == "00" && vnpayPayResponse.vnp_TransactionStatus == "00")
-                                {
-                                    payment.PaymentStatus = "1";
-                                    _context.Payments.Update(payment);
-                                    var result = _context.SaveChanges();
-                                    return "Confirm Success"; // "RspCode":"00"
-                                }
-                                else
-                                {
-                                    payment.PaymentStatus = "2";
-                                    _context.Payments.Update(payment);
-                                    var result = _context.SaveChanges();
-                                    return "Có lỗi xảy ra trong quá trình xử lý";
-                                }
-                            }
-                            else
-                            {
-                                return "Payment already confirmed"; // "RspCode":"02"
-                            }
-                        }
-                        else
-                        {
-                            return "Invalid amount"; // "RspCode":"04"
-                        }
-                    }
-                    else
-                    {
-                        return "Payment not found"; // "RspCode":"01"
-                    }
-                }
-                else
-                {
-                    return "Invalid signature"; // "RspCode":"97"
-                }
-            }
-            else
-            {
-                return "Input data required"; // "RspCode":"99"
-            }
-        }*/
 
         public ResponseMessage checkPayment(IQueryCollection collections)
         {
@@ -226,7 +173,10 @@ namespace Repositories.VnPay.Services
 
             var vnp_SecureHash = collections.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
             bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, _vnpayConfig.HashSecret);
-            var payment = _unitOfWork.PaymentRepository.GetByID(int.Parse(vnpay.GetResponseData("vnp_TxnRef")));
+           /* _cache.TryGetValue(vnpay.GetResponseData("vnp_TxnRef"), out RequestCreateVnpay requestCreateVnpay);
+            var payment = requestCreateVnpay.ToPaymentEntity((int)requestCreateVnpay.userId, (int)requestCreateVnpay.requirementId);*/
+           var payment = _unitOfWork.PaymentRepository.GetByID(int.Parse(vnpay.GetResponseData("vnp_TxnRef")));
+            //_cache.Remove(vnpay.GetResponseData("vnp_TxnRef"));
             if (checkSignature)
             {
                 if (payment != null)
@@ -241,7 +191,6 @@ namespace Repositories.VnPay.Services
                             Payment = payment,
                         };
                     }
-                    //return vnpay.GetResponseData("vnp_ResponseCode");
                 }
                 else
                 {

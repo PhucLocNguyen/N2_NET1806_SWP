@@ -9,9 +9,9 @@ public partial class Have
 
     public int RequirementId { get; set; }
 
-    public DateTime? DateCreated { get; set; }
+    public DateOnly? DateCreated { get; set; }
 
-    public DateTime? ExpirationDate { get; set; }
+    public DateOnly? ExpirationDate { get; set; }
 
     public virtual Requirement Requirement { get; set; } = null!;
 

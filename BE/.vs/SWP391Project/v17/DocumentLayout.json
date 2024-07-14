@@ -3,36 +3,48 @@
   "WorkspaceRootPath": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\havecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\havecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\userrequirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\userrequirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\warrantycardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\warrantycardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\hoctap\\aspdotnet_practice\\swpworking\\be\\api\\controllers\\requirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\requirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\services\\model\\paymentmodel\\requestcreatepaymentbystaff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|solutionrelative:services\\model\\paymentmodel\\requestcreatepaymentbystaff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\services\\model\\paymentmodel\\paymentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|solutionrelative:services\\model\\paymentmodel\\paymentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\controllers\\havecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\havecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\controllers\\warrantycardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\warrantycardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\api\\controllers\\userrequirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\userrequirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,103 +59,135 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserRequirementController.cs",
-              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\UserRequirementController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\UserRequirementController.cs",
-              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\UserRequirementController.cs",
-              "RelativeToolTip": "API\\Controllers\\UserRequirementController.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAowEIAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T04:25:59.273Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HaveController.cs",
-              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\HaveController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\HaveController.cs",
-              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\HaveController.cs",
-              "RelativeToolTip": "API\\Controllers\\HaveController.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAiwDAAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T04:22:47.234Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "WarrantyCardController.cs",
-              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\WarrantyCardController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\WarrantyCardController.cs",
-              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\WarrantyCardController.cs",
-              "RelativeToolTip": "API\\Controllers\\WarrantyCardController.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAcwFAAAAAHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T04:21:58.451Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "PaymentController.cs",
               "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\PaymentController.cs",
               "RelativeDocumentMoniker": "API\\Controllers\\PaymentController.cs",
               "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\PaymentController.cs",
               "RelativeToolTip": "API\\Controllers\\PaymentController.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAowE8AAAAJAAAA",
+              "ViewState": "AQIAAGQAAAAAAAAAAAAmwH8AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-02T03:38:01.991Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-14T14:32:47.649Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\UserController.cs",
-              "RelativeToolTip": "API\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAwwF0AAABsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T13:02:32.56Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "RequirementController.cs",
               "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\RequirementController.cs",
               "RelativeDocumentMoniker": "API\\Controllers\\RequirementController.cs",
               "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\RequirementController.cs",
               "RelativeToolTip": "API\\Controllers\\RequirementController.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAABoAAAAJAAAA",
+              "ViewState": "AQIAAAsBAAAAAAAAAAAwwB4BAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T07:35:43.362Z",
+              "WhenOpened": "2024-07-14T10:27:27.203Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "ConversationController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\ConversationController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\ConversationController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\ConversationController.cs",
+              "RelativeToolTip": "API\\Controllers\\ConversationController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T10:27:21.191Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PaymentMapper.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Services\\Model\\PaymentModel\\PaymentMapper.cs",
+              "RelativeDocumentMoniker": "Services\\Model\\PaymentModel\\PaymentMapper.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Services\\Model\\PaymentModel\\PaymentMapper.cs",
+              "RelativeToolTip": "Services\\Model\\PaymentModel\\PaymentMapper.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAcwBQAAABbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T10:05:10.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RequestCreatePaymentByStaff.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Services\\Model\\PaymentModel\\RequestCreatePaymentByStaff.cs",
+              "RelativeDocumentMoniker": "Services\\Model\\PaymentModel\\RequestCreatePaymentByStaff.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\Services\\Model\\PaymentModel\\RequestCreatePaymentByStaff.cs",
+              "RelativeToolTip": "Services\\Model\\PaymentModel\\RequestCreatePaymentByStaff.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T10:04:49.097Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\appsettings.json",
               "RelativeDocumentMoniker": "API\\appsettings.json",
               "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\appsettings.json",
               "RelativeToolTip": "API\\appsettings.json",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABoAAAAeAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-30T09:10:16.458Z"
+              "WhenOpened": "2024-07-14T10:00:49.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoginGoogleController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\LoginGoogleController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\LoginGoogleController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\LoginGoogleController.cs",
+              "RelativeToolTip": "API\\Controllers\\LoginGoogleController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T09:57:08.456Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "API",
-              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\API.csproj",
-              "RelativeDocumentMoniker": "API\\API.csproj",
-              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\API.csproj",
-              "RelativeToolTip": "API\\API.csproj",
+              "Title": "HaveController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\HaveController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\HaveController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\HaveController.cs",
+              "RelativeToolTip": "API\\Controllers\\HaveController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T09:57:06.458Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "WarrantyCardController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\WarrantyCardController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\WarrantyCardController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\WarrantyCardController.cs",
+              "RelativeToolTip": "API\\Controllers\\WarrantyCardController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-30T09:09:52.447Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T09:57:03.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VnpayController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\VnpayController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\VnpayController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\VnpayController.cs",
+              "RelativeToolTip": "API\\Controllers\\VnpayController.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAewEwAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T09:56:53.402Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserRequirementController.cs",
+              "DocumentMoniker": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\UserRequirementController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\UserRequirementController.cs",
+              "ToolTip": "D:\\HocTap\\AspDotNet_Practice\\SwpWorking\\BE\\API\\Controllers\\UserRequirementController.cs",
+              "RelativeToolTip": "API\\Controllers\\UserRequirementController.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAwwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T09:56:52.431Z"
             }
           ]
         }

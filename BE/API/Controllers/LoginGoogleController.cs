@@ -18,7 +18,7 @@ namespace API.Controllers
         private readonly IToken _tokenService;
         private readonly string clientId = "528761239720-ac1sb7qru7cnvmmbddpsi8plsgsqrrg4.apps.googleusercontent.com";
         private readonly string clientSecret = "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";
-        private readonly string redirectUri = "http://localhost:5173/login";
+        private readonly string redirectUri = "https://fpt-jewelry-production.netlify.app/login";
         public LoginGoogleController(UnitOfWork unitOfWork, IToken tokenService)
         {
             _tokenService = tokenService;

@@ -94,7 +94,7 @@ function WarrantyPopup({ setIsOpenPopup, requirementId }) {
 
 
    const isAfter = (date1, date2) => {
-      return new Date(date1) >= new Date(date2);
+      return new Date(date1) > new Date(date2);
    };
 
    const handleFormChange = (e) => {

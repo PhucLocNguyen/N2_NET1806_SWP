@@ -109,7 +109,7 @@ function MyAccount() {
             </div>
          </div>
 
-         {isOpenPopup && <EditAccountPopUp setIsOpenPopup={setIsOpenPopup} />}
+         {isOpenPopup && <EditAccountPopUp setIsOpenPopup={setIsOpenPopup} userData={userData}/>}
 
       </>
    )

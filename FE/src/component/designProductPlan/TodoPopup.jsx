@@ -152,7 +152,7 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
                     <img
                       src={dataDesign.image}
                       alt={dataDesign.designName}
-                      className="w-full h-auto mb-4 rounded-lg lg:mb-0"
+                      className="w-32 h-32 object-cover"
                       style={{
                         maxWidth: "100%",
                         height: "auto",

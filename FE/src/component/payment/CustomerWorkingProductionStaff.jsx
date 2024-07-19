@@ -11,9 +11,16 @@ import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
 import useAuth from "../../hooks/useAuth";
+import iconStaff from "../../assets/icon/staffIcon.jpg";
 function CustomerWorkingProductionStaff({ title, requirementDetail, status }) {
   const { UserId } = useAuth();
   const navigate = useNavigate();
+
+  async function ChatWithStaff(e,staffId){
+    e.stopPropagation();
+    const conversationIdTarget = await CreateConversationJoin(UserId, staffId); 
+    navigate("/chat",{ state: { conversationIdTarget }}) 
+  }
   if (status == "8") {
     return (
       <div className="col-span-2 flex flex-col justify-center items-center">
@@ -74,9 +81,7 @@ function CustomerWorkingProductionStaff({ title, requirementDetail, status }) {
                   <Button
                     variant="contained"
                     onClick={(e) => {
-                      e.stopPropagation();
-                      CreateConversationJoin(UserId, productionStaff.usersId);
-                      navigate("/chat",{replace:false});
+                      ChatWithStaff(e, productionStaff.usersId);
                     }}
                   >
                     Chat
@@ -90,10 +95,10 @@ function CustomerWorkingProductionStaff({ title, requirementDetail, status }) {
                   src={
                     productionStaff.image != null
                       ? productionStaff.image
-                      : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                      : iconStaff
                   }
                   className="w-[150px] rounded-full"
-                  alt=""
+                  alt="Image of production staff"
                 />
                 <div>
                   <h4 className="text-[20px]">

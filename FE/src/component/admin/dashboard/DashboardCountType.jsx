@@ -9,7 +9,13 @@ import { ApiCountType } from '../../../api/dashboard/ApiDashboard';
 
 
 function DashboardCountType() {
-   const year = [2024, 2023, 2022, 2021];
+   const yearStart = 2024;
+   const currentYear = new Date().getFullYear();
+   const yearsArray = [];
+   for (let year = yearStart; year <= currentYear; year++) {
+      yearsArray.push(year);
+   }
+
    const month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
    const [yearSelected, setYearSelected] = useState('');
@@ -27,7 +33,7 @@ function DashboardCountType() {
 
    }, [yearSelected, monthSelected])
 
-   console.log(data);
+   console.log(yearsArray);
 
    return (
       <>
@@ -44,7 +50,7 @@ function DashboardCountType() {
                      <em>None</em>
                   </MenuItem>
 
-                  {year.map((item, index) => {
+                  {yearsArray.map((item, index) => {
                      return (
                         <MenuItem key={index} value={item}>{item}</MenuItem>
                      )
@@ -76,7 +82,7 @@ function DashboardCountType() {
          </div>
          <div className='py-[10px]'></div>
          <div className='px-[3rem]'>
-            <div className="px-[15px] border-[1px] border-solid border-[#000] bg-[##f7f9fc] h-[500px]">
+            <div className="px-[15px] border-[1px] border-solid border-[#000] bg-[##f7f9fc] h-[70vh]">
                <Bar
                   data={{
                      labels: data?.map((item) => item.typeOfJewelleryName),

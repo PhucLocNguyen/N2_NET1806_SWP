@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import axiosConfigHeader from '../AxiosConfigHeader.jsx';
 import api from '../instance.jsx'
 
@@ -40,4 +41,16 @@ const FetchPaymentApiByRequirementId = async (requirementId) => {
       return []; // Return an empty array or handle the error as needed
    }
 }
-export { PostPaymentApi, VerifyPaymentApi, FetchPaymentApiByRequirementId}
+const PostPaymentByStaff = async (formData,successMessage, failedMessage) => {
+   try {
+      const response = await api.post(`/Payment`, formData);
+      const paymentResponse = response.data;
+      toast.success(successMessage);
+      return paymentResponse; 
+   } catch (error) {
+      console.error(error);
+      toast.error(failedMessage);
+      return null; 
+   }
+}
+export { PostPaymentApi, VerifyPaymentApi, FetchPaymentApiByRequirementId, PostPaymentByStaff}

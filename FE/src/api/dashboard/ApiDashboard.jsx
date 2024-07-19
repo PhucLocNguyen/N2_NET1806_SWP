@@ -4,7 +4,7 @@ import axiosConfigHeader from '../AxiosConfigHeader';
 const ApiSaleOverview = async (year) => {
    try {
 
-      const response = await api.get('/Dashboard/Revenue', {
+      const response = await api.get('/Dashboard/RevenueByYear', {
          axiosConfigHeader,
          params: {
             year: year
@@ -45,4 +45,21 @@ const ApiDashboardMasterGemstone = async () => {
    }
 }
 
-export { ApiSaleOverview, ApiCountType, ApiDashboardMasterGemstone }
+const ApiDashboardRevenueByDate = async (FromDate, ToDate) => {
+   try {
+
+      const response = await api.get('/Dashboard/RevenueByDate', {
+         axiosConfigHeader,
+         params: {
+            FromDate: FromDate,
+            ToDate: ToDate
+         }
+      })
+      return response.data
+
+   } catch (error) {
+      console.log('>>> Api Dashboard Revenue By Date: ', error)
+   }
+}
+
+export { ApiSaleOverview, ApiCountType, ApiDashboardMasterGemstone, ApiDashboardRevenueByDate }

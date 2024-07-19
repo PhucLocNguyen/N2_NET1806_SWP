@@ -9,6 +9,7 @@ import * as signalR from '@microsoft/signalr';
 import { FetchConversation, FetchConversationById } from "../../api/Chat/FetchConversation";
 import useAuth from "../../hooks/useAuth";
 import { FetchChatByConversation } from "../../api/Chat/FetchChat";
+import { useLocation } from "react-router-dom";
 
 function Chat() {
 const { role, UserId } = useAuth();
@@ -21,19 +22,36 @@ const [listConversation, setListConversation] = useState([]);
 const [filterList, setFilterList] = useState([]);
 const [currentConversationId, setCurrentConversationId] = useState(null);
 const [conversation, setConversation] = useState({ conversationId: null });
-const connect = new signalR.HubConnectionBuilder()
-        .withUrl("https://localhost:7103/Chat") // Ensure this URL is correct
-        .withAutomaticReconnect()
-        .build();
-const fetchConversations = async () => {
-    const GetConversations = await FetchConversation(UserId);
-    setFilterList(GetConversations);
-    setListConversation(GetConversations);
-};
-useEffect(()=>{
-    fetchConversations();
+const location = useLocation();
 
-},[])
+const connect = new signalR.HubConnectionBuilder()
+.withUrl("https://app-swp391-su24.azurewebsites.net/Chat") // Ensure this URL is correct
+.withAutomaticReconnect()
+.build();
+
+const fetchConversations = async () => {
+const GetConversations = await FetchConversation(UserId);
+setFilterList(GetConversations);
+setListConversation(GetConversations);
+};
+
+useEffect(() => {
+fetchConversations();
+
+// Use a separate effect to handle the location state
+const tryToGetConversationTarget = async () => {
+    try {
+        const { conversationIdTarget } = location.state || {};
+        if (currentConversationId == null && conversationIdTarget != null) {
+            setCurrentConversationId(conversationIdTarget);
+        }
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+tryToGetConversationTarget();
+}, [location.state]);
 useEffect(() => {
     connect.start()
         .then(() => {
@@ -78,7 +96,16 @@ useEffect(() => {
     }
 }, [connection, currentConversationId]);
 
-
+useEffect(()=>{
+    if(connection){
+        connection.on("LoadNewConversation", model=>{
+            var targetIdUser = model.userId2;
+            if(targetIdUser == UserId ){
+                 fetchConversations();
+            }
+        });
+    }
+},[connection])
 useEffect(() => {
     if (currentConversationId !== null) {
        
@@ -164,7 +191,7 @@ return (
                 <div className="overflow-y-scroll h-[calc(100vh-250px)]">
                 {filterList.map((item) => (
 
-                   <BoxMessage key={item.conversationId} item={item} setCurrentConversationId={setCurrentConversationId} />
+                   <BoxMessage key={item.conversationId} item={item} setCurrentConversationId={setCurrentConversationId} currentConversationId={currentConversationId} />
                     ))}
                 </div>
             </div>
@@ -172,7 +199,7 @@ return (
                 {conversation.conversationId !== null ? (
                     <>
                         <div className="bg-slate-500 h-full">
-                            <TargetChat conversation={conversation} messages={messages} />
+                            <TargetChat conversation={conversation} messages={messages} currentConversationId={currentConversationId} />
                         </div>
                         <div className="absolute bottom-0 bg-white w-full left-1/2 -translate-x-1/2 h-[75px]">
                             <div className="flex items-center justify-center gap-3 h-full px-3">

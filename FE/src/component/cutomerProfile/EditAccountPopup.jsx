@@ -12,14 +12,14 @@ import useAuth from '../../hooks/useAuth';
 import UploadImage from '../../utils/UploadImage';
 import DeleteImage from '../../utils/DeleteImage';
 
-function EditAccountPopUp({ setIsOpenPopup }) {
+function EditAccountPopUp({ setIsOpenPopup , userData}) {
    const folder = 'CustomerProfile';
    const { UserId } = useAuth();
 
    const [formData, setFormData] = useState({
-      name: '',
-      phone: '',
-      image: ''
+      name: userData.name,
+      phone: userData.phone,
+      image: userData.image
    });
 
    const [errors, setErrors] = useState({
@@ -146,14 +146,14 @@ function EditAccountPopUp({ setIsOpenPopup }) {
                      <div className='w-[47%]'>
                         <h2 className='text-[1.1rem] font-medium pb-[3px]'>Name</h2>
                         <div>
-                           <TextField name='name' onChange={handleFormChange} error={!!errors.name} helperText={errors?.name} style={{ width: '100%' }} variant="outlined" size='small' sx={{ minHeight: '4rem' }} />
+                           <TextField value={formData.name} name='name' onChange={handleFormChange} error={!!errors.name} helperText={errors?.name} style={{ width: '100%' }} variant="outlined" size='small' sx={{ minHeight: '4rem' }} />
                         </div>
                      </div>
 
                      <div className='w-[47%]'>
                         <h2 className='text-[1.1rem] font-medium pb-[3px]'>Phone</h2>
                         <div>
-                           <TextField name='phone' onChange={handleFormChange} error={!!errors.phone} helperText={errors?.phone} style={{ width: '100%' }} variant="outlined" size='small' sx={{ minHeight: '4rem' }} />
+                           <TextField value={formData.phone!=null? formData.phone: ""} name='phone' onChange={handleFormChange} error={!!errors.phone} helperText={errors?.phone} style={{ width: '100%' }} variant="outlined" size='small' sx={{ minHeight: '4rem' }} />
                         </div>
                      </div>
                   </div>
@@ -171,7 +171,7 @@ function EditAccountPopUp({ setIsOpenPopup }) {
                         }}
                         onChange={handleFileChange}
                      >
-                        Upload Gemstone Image
+                        Upload avatar Image
                         <VisuallyHiddenInput type="file" />
                      </Button>
                   </div>

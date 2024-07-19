@@ -38,7 +38,6 @@ function UpdateMaterial({ data, setIsOpenUpdatePopup }) {
 
   const validateForm = () => {
     const newErrors = { price: "" };
-
     if (!formData.price) {
       newErrors.price = "Price cannot be empty";
     } else if (isNaN(Number(formData.price))) {

@@ -15,15 +15,10 @@ export const statusOption = [
 export const getStatusClass = (status) => {
   switch (status) {
     case "The sketch is being drafted":
-      return "bg-yellow-100 text-yellow-600";
     case "Design The Ring":
-      return "bg-yellow-100 text-yellow-600";
     case "The sketch is complete":
-      return "bg-yellow-100 text-yellow-600";
     case "The sketch is ready":
-      return "bg-yellow-100 text-yellow-600";
     case "Product is being processed":
-      return "bg-yellow-100 text-yellow-600";
     case "Processing completed and ready for handover":
       return "bg-yellow-100 text-yellow-600";
     default:
@@ -58,34 +53,17 @@ function Plan({ data, handleStatusChange, handlePopupOpen, isTodo, isDone }) {
     <div>
       <div
         onClick={handleOpenPopup}
-        className="relative flex items-center mt-3 h-28 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100 drop-shadow-lg"
+        className="relative flex items-center mt-3 h-28 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100 shadow-lg"
         draggable="true"
       >
         <div className="w-[80%] mx-auto">
-          <h3 className="mt-3 ml-6 text-sm font-medium leading-5">
-            {data.title}
-          </h3>
-          <div className="absolute top-0 right-0 w-6 h-6 mt-2 mr-2 text-gray-400 rounded-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
+          <p className="mt-3 ml-6 text-sm font-medium leading-5">{data.title}</p>
           <span className="flex items-center w-fit px-1 text-xs font-semibold text-green-500 bg-green-100 rounded-full h-fit py-1 ml-3">
             Requirement ID: R00{data.requirementId}
           </span>
           <p className="mt-4 text-sm font-medium bg-[#4338d3] text-white px-2 h-fit w-fit max-w-[80%] rounded ml-4 overflow-hidden text-ellipsis whitespace-nowrap">
             {getStatus(data.status)}
           </p>
-
           <div className="flex items-center w-full mt-3 text-xs font-medium text-gray-400 ml-4">
             <div className="flex items-center">
               <svg
@@ -100,9 +78,7 @@ function Plan({ data, handleStatusChange, handlePopupOpen, isTodo, isDone }) {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="leading-none text-red-500">
-                {data.expectedDelivery}
-              </span>
+              <span className="leading-none text-red-500">{data.expectedDelivery}</span>
             </div>
           </div>
         </div>

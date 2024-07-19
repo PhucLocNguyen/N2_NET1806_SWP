@@ -8,7 +8,12 @@ import { Bar, Line } from 'react-chartjs-2';
 import { ApiSaleOverview } from '../../../api/dashboard/ApiDashboard';
 
 function DashboardSaleOVerview() {
-   const year = [2024, 2023, 2022, 2021];
+   const yearStart = 2024;
+   const currentYear = new Date().getFullYear();
+   const yearsArray = [];
+   for (let year = yearStart; year <= currentYear; year++) {
+      yearsArray.push(year);
+   }
 
    const [yearSelected, setYearSelected] = useState('');
    const [data, setData] = useState([]);
@@ -41,7 +46,7 @@ function DashboardSaleOVerview() {
                      <em>None</em>
                   </MenuItem>
 
-                  {year.map((item, index) => {
+                  {yearsArray.map((item, index) => {
                      return (
                         <MenuItem key={index} value={item}>{item}</MenuItem>
                      )
@@ -52,7 +57,7 @@ function DashboardSaleOVerview() {
          </div>
          <div className='py-[10px]'></div>
          <div className='px-[3rem]'>
-            <div className="px-[15px] border-[1px] border-solid border-[#000] bg-[##f7f9fc] w-[100%] h-[500px]">
+            <div className="px-[15px] border-[1px] border-solid border-[#000] bg-[##f7f9fc] w-[100%] h-[70vh]">
                <Line
                   data={{
                      labels: data?.map((item) => item.month),

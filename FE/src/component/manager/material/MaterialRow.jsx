@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 import DeleteApiMaterial from "../../../api/material/DeleteApiMaterial";
 import { FetchApiMaterial } from "../../../api/Requirements/FetchApiMaterial";
+import formatVND from "../../../utils/FormatCurrency";
 
 function MaterialRow({
   data,
@@ -64,7 +65,7 @@ function MaterialRow({
         </div>
         <div className="flex items-center col-span-1">
           <h2 className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
-            {data?.price}
+            {formatVND(data?.price)}
           </h2>
         </div>
         <div className="flex items-center col-span-3">

@@ -1,7 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Accordion from "@mui/material/Accordion";
@@ -19,6 +18,7 @@ import UploadImage from "../../utils/UploadImage.jsx";
 import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
 import CreateConversationJoin from "../../utils/CreateConversationJoin";
 import useAuth from "../../hooks/useAuth";
+import { toast } from 'react-toastify';
 
 function RejectDesignDetail() {
   const folder = "Design3D";
@@ -59,6 +59,13 @@ function RejectDesignDetail() {
   const handleFileChange = async (event) => {
     const selectFile = event.target.files[0];
     if (selectFile) {
+      const fileType = selectFile.type;
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+      if (!validImageTypes.includes(fileType)) {
+        toast.error('Please select a valid image file (JPEG, PNG, GIF).');
+        return;
+    }
       try {
         if (requirement.design3D !== "" && requirement.design3D != null) {
           await DeleteImage(requirement.design3D);
@@ -76,18 +83,6 @@ function RejectDesignDetail() {
     }
   };
 
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  };
-
   const handleSubmit = () => {
     if (handleFileChange) {
       const data = {
@@ -103,7 +98,11 @@ function RejectDesignDetail() {
       window.location.reload();
     }
   };
-
+  async function ChatWithCustomer(e){
+    e.stopPropagation();
+    const conversationIdTarget = await CreateConversationJoin(UserId, customerInformation.usersId); 
+    navigate("/staff/chat",{ state: { conversationIdTarget }}) 
+  }
   
 
   return (
@@ -270,20 +269,14 @@ function RejectDesignDetail() {
                     Customer details
                   </Typography>
                   <Typography sx={{ color: "text.secondary" }}>
-                    <Link to="/staff/chat">
+                    
                       <Button
                         variant="contained"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          CreateConversationJoin(
-                            UserId,
-                            customerInformation.usersId
-                          );
-                        }}
+                        onClick={ChatWithCustomer}
                       >
                         Chat with customer
                       </Button>
-                    </Link>
+                    
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>

@@ -20,7 +20,7 @@ function DesignInfo() {
    const [designInfo, setDesignInfo] = useState({});
    const { id } = useParams()
    const [relatedDesign, setRelatedDesign] = useState();
-   let a = [1, 2, 3]
+   const nameLink = designInfo.typeOfJewellery?.name.toLowerCase();
 
    const fetchApiRelatedDesign = async ({ typeDesign, idDesign }) => {
       const response = await ApiRelatedDesign({ typeDesign, idDesign });
@@ -108,9 +108,9 @@ function DesignInfo() {
                <div className='w-[100%]'>
                   <div className='w-[100%] flex mb-[3rem] items-center justify-between'>
                      <h2 className='text-[2.625rem] font-normal leading-[3.5rem]'>RELATED DESIGN</h2>
-                     <Link to={`/design/${designInfo.typeOfJewellery?.name}`} className='tracking-[4px] flex items-center justify-start font-normal '>
-                        <div>VIEW MORE</div>
-                        <img className='translate-x-[-1.4rem]' src={Arrow} />
+                     <Link to={`/design/${nameLink}`} className='tracking-[4px] flex items-center justify-start font-normal group'>
+                        <div className='group-hover:scale-105'>VIEW MORE</div>
+                        <img className='translate-x-[-1.4rem] group-hover:translate-x-[0.2rem] transition-transform duration-300 ease-in-out' src={Arrow} />
                      </Link>
                   </div>
 
@@ -123,7 +123,7 @@ function DesignInfo() {
                               <div key={index} className='border-[1px] border-solid border-[#ccc] rounded-[5px]'>
                                  <Link to={`/design/${item?.designId}`} className='relative overflow-hidden max-w-[100%] inline-block '>
                                     <img className='inline-block w-[100%] object-cover overflow-hidden h-[400px]' src={item?.image} />
-                                    <div className='absolute top-[24px] left-[30px] font-normal tracking-[1px] text-[1.2rem] leading-[1.5rem]'>{item?.description}</div>
+                                    <div className='absolute top-[24px] left-[30px] font-normal tracking-[1px] text-[1.2rem] leading-[1.5rem] line-clamp-1'>{item?.description}</div>
                                  </Link>
                               </div>
                            )

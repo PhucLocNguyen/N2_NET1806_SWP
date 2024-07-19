@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PutApiRequirement } from "../../api/Requirements/PutApiRequirement";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import formatVND from "../../utils/FormatCurrency";
+import { FetchSummaryPriceByRequirementId } from "../../api/Requirements/FetchApiRequirement";
+import { CircularProgress } from "@mui/material";
+import { PostApiConfirmPrice } from "../../api/Requirements/PostRequirement";
 function CustomerConfirmation({
   setStatus,
   status,
   title,
   designDetail,
   requirementDetail,
-  total,
 }) {
+  const [getSummary, setSummary] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const callSummary = async (requirementId)=>{
+    const response = await FetchSummaryPriceByRequirementId(requirementId);
+    setSummary(response);
+    setIsLoading(false);
+  }
+  useEffect(()=>{
+    callSummary(requirementDetail.requirementId);
+  },[]);
   const declineButton = async () => {
     if (status == "3") {
       const updateStatusRequirement = await PutApiRequirement({
@@ -36,18 +48,7 @@ function CustomerConfirmation({
   };
   const acceptButton = async () => {
     if (status == "3") {
-      const updateStatusRequirement = await PutApiRequirement({
-        ...requirementDetail,
-        status: "4",
-        masterGemStonePriceAtMoment:
-          designDetail.masterGemstone != null
-            ? designDetail.masterGemstone?.price
-            : 0,
-        materialPriceAtMoment: designDetail.material?.price,
-        stonePriceAtMoment: 
-          designDetail.stone != null ? designDetail.stone?.price : 0,
-        totalMoney: Math.ceil(total),
-      });
+      const updateStatusRequirement = await PostApiConfirmPrice(requirementDetail.requirementId);
       if (updateStatusRequirement != null) {
         toast.success("Accept the price quote successful");
         setStatus("4");
@@ -71,6 +72,14 @@ function CustomerConfirmation({
   }) {
     switch (status) {
       case "3":
+        
+       
+        console.log(getSummary);
+        if(isLoading){
+          return <div className="flex justify-center items-center h-screen">
+          <CircularProgress />
+        </div>
+        }
         return (
           <div>
             <h3 className="text-xl font-semibold text-gray-700 mb-3">
@@ -81,7 +90,7 @@ function CustomerConfirmation({
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Master Gemstone</p>
                   <p>
-                    {formatVND(designDetail.masterGemstone?.price)}
+                    {formatVND(getSummary.masterGemStonePriceAtMomentAnon)}
                   </p>
                 </div>
               ):null}
@@ -89,28 +98,27 @@ function CustomerConfirmation({
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Melee Stones</p>
                   <p>
-                    {formatVND(designDetail.stone?.price)}
+                    {formatVND(getSummary.stonePriceAtMomentAnon)}
                   </p>
                 </div>
               ):null}
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Material</p>
                 <p>
-                  {formatVND(designDetail.material?.price *
-                    requirementDetail.weightOfMaterial)}
+                  {formatVND(getSummary.materialPriceAtMomentAnon)}
                  
                 </p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Machining Fee</p>
                 <p>
-                  {formatVND(requirementDetail.machiningFee)}
+                  {formatVND(getSummary.machiningFeeAnon)}
                 </p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300">
                 <p className="text-[20px]">Total</p>
                 <p className="text-[20px]">
-                  {formatVND(Math.ceil(total))}
+                  {formatVND(getSummary.totalMoneyAnon)}
                 </p>
               </div>
             </div>
@@ -164,8 +172,7 @@ function CustomerConfirmation({
           <button
             className="py-3 px-6 w-full bg-green-500 text-white hover:bg-green-700 rounded-md transition-all ease-linear"
             onClick={acceptButton}
-          >
-            Accept
+          >Accept
           </button>
         </motion.div>
       </div>

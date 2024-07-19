@@ -60,4 +60,32 @@ const FetchApiRequirementHaveUserWithStatus = async (status, UserId)=>{
       return null; 
    }
 }
-export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure, FetchApiRequirementHaveUserWithStatus}
+
+const FetchSummaryPriceByRequirementId= async (id) => {
+   try {
+      const response = await api.get(`/Requirement/PriceOfRequirement?requirementId=${id}`, axiosConfigHeader);
+      const summaryPrice = response.data;
+      return summaryPrice; 
+   } catch (error) {
+      console.error(error);
+      return null; 
+   }
+}
+
+const FetchRequirementWaitingPay= async ({page, pageSize}) => {
+   try {
+      const response = await api.get(`/Requirement/requirementWaitingToPay`, {
+         axiosConfigHeader,
+         params: {
+            pageIndex: page,
+            pageSize: pageSize,
+         }
+      });
+      const requirementData = response.data;
+      return requirementData; 
+   } catch (error) {
+      console.error(error);
+      return null; 
+   }
+}
+export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure, FetchApiRequirementHaveUserWithStatus, FetchSummaryPriceByRequirementId, FetchRequirementWaitingPay}

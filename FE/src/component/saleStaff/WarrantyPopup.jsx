@@ -114,7 +114,10 @@ function WarrantyPopup({ setIsOpenPopup, requirementId }) {
 
             // Dung de kiem tra cho date create
             let checkValidAfterOrderDate = isAfter(value, date);   // For date order
-            let checkValidBeforeExpirationDate = isAfter(value, formData.expirationDate); // Tra ve false la dung
+            let checkValidBeforeExpirationDate = isAfter(formData.expirationDate, value); // Tra ve false la dung
+            console.log('>>> 1 : ', checkValidAfterOrderDate);
+            console.log('>>> 2 : ', checkValidBeforeExpirationDate);
+
 
             // Dung de kiem tra cho date expiration
             if (formData.expirationDate != '') {
@@ -123,11 +126,16 @@ function WarrantyPopup({ setIsOpenPopup, requirementId }) {
                if (checkExpirationAfterCreateDate && checkExpirationAfterOrderDate) {
                   errorValueExpiration = '';
                }
+               if (checkValidAfterOrderDate && checkValidBeforeExpirationDate) {
+                  isNotValidForDateCreate = false;
+               }
+            } else {
+               if (checkValidAfterOrderDate) {
+                  isNotValidForDateCreate = false;
+               }
             }
 
-            if (checkValidAfterOrderDate && checkValidBeforeExpirationDate == false) {
-               isNotValidForDateCreate = false;
-            }
+
 
          } else if (name === 'expirationDate') {
             errorValueExpiration = `Date expiration must be greater than date create and date order`;

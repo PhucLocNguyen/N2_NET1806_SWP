@@ -26,110 +26,143 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult SearchMaterial([FromQuery] RequestSearchMaterialModel requestSearchMaterialModel)
         {
-            var sortBy = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialBy.ToString() : null;
-            var sortType = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialType.ToString() : null;
-            Expression<Func<Material, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchMaterialModel.Name) || x.Name.Contains(requestSearchMaterialModel.Name)) &&
-                (x.ManagerId == requestSearchMaterialModel.ManagerId || requestSearchMaterialModel.ManagerId == null) &&
-                x.Price >= requestSearchMaterialModel.FromPrice &&
-                (x.Price <= requestSearchMaterialModel.ToPrice || requestSearchMaterialModel.ToPrice == null);
-            Func<IQueryable<Material>, IOrderedQueryable<Material>> orderBy = null;
-
-            if (!string.IsNullOrEmpty(sortBy))
+            try
             {
-                if (sortType == SortMaterialTypeEnum.Ascending.ToString())
+                var sortBy = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialBy.ToString() : null;
+                var sortType = requestSearchMaterialModel.SortContent != null ? requestSearchMaterialModel.SortContent?.sortMaterialType.ToString() : null;
+                Expression<Func<Material, bool>> filter = x =>
+                    (string.IsNullOrEmpty(requestSearchMaterialModel.Name) || x.Name.Contains(requestSearchMaterialModel.Name)) &&
+                    (x.ManagerId == requestSearchMaterialModel.ManagerId || requestSearchMaterialModel.ManagerId == null) &&
+                    x.Price >= requestSearchMaterialModel.FromPrice &&
+                    (x.Price <= requestSearchMaterialModel.ToPrice || requestSearchMaterialModel.ToPrice == null);
+                Func<IQueryable<Material>, IOrderedQueryable<Material>> orderBy = null;
+
+                if (!string.IsNullOrEmpty(sortBy))
                 {
-                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    if (sortType == SortMaterialTypeEnum.Ascending.ToString())
+                    {
+                        orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    }
+                    else if (sortType == SortMaterialTypeEnum.Descending.ToString())
+                    {
+                        orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                    }
                 }
-                else if (sortType == SortMaterialTypeEnum.Descending.ToString())
-                {
-                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
-                }
+                var reponseDesign = _unitOfWork.MaterialRepository.Get(
+                    filter,
+                    orderBy,
+                    /*includeProperties: "",*/
+                    pageIndex: requestSearchMaterialModel.pageIndex,
+                    pageSize: requestSearchMaterialModel.pageSize, m => m.Designs
+                    ).Select(m => m.toMaterialDTO());
+                return Ok(reponseDesign);
             }
-            var reponseDesign = _unitOfWork.MaterialRepository.Get(
-                filter,
-                orderBy,
-                /*includeProperties: "",*/
-                pageIndex: requestSearchMaterialModel.pageIndex,
-                pageSize: requestSearchMaterialModel.pageSize, m => m.Designs
-                ).Select(m => m.toMaterialDTO());
-            return Ok(reponseDesign);
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in SearchMaterial");
+            }
+           
         }
 
         [HttpGet("{id}")]
         public IActionResult GetMaterialById(int id)
         {
-            var Material = _unitOfWork.MaterialRepository.GetByID(id, m => m.Designs);
-
-            if (Material == null)
+            try
             {
-                return NotFound("Maretrial is not existed");
-            }
+                var Material = _unitOfWork.MaterialRepository.GetByID(id, m => m.Designs);
 
-            return Ok(Material.toMaterialDTO());
+                if (Material == null)
+                {
+                    return NotFound("Maretrial is not existed");
+                }
+
+                return Ok(Material.toMaterialDTO());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetMaterialById");
+
+            }
+           
         }
 
         [HttpPost]
         public IActionResult CreateMaterial(RequestCreateMaterialModel requestCreateMaterialModel)
         {
-            var error = "";
-            var properties = typeof(RequestCreateMaterialModel).GetProperties();
+            try
+            {
+                var error = "";
+                var properties = typeof(RequestCreateMaterialModel).GetProperties();
 
-            foreach (var property in properties)
-            {
-                if (property.PropertyType == typeof(decimal))
+                foreach (var property in properties)
                 {
-                    var value = property.GetValue(requestCreateMaterialModel);
-                    if ((decimal)value < 0)
+                    if (property.PropertyType == typeof(decimal))
                     {
-                        error = property.Name + " must be positive number";
-                        break;
+                        var value = property.GetValue(requestCreateMaterialModel);
+                        if ((decimal)value < 0)
+                        {
+                            error = property.Name + " must be positive number";
+                            break;
+                        }
+                    }
+                    if (property.PropertyType == typeof(string))
+                    {
+                        var value = property.GetValue(requestCreateMaterialModel);
+                        if (string.IsNullOrEmpty((string)value))
+                        {
+                            error = property.Name + " must be not plank";
+                            break;
+                        }
                     }
                 }
-                if (property.PropertyType == typeof(string))
+                if (!string.IsNullOrEmpty(error))
                 {
-                    var value = property.GetValue(requestCreateMaterialModel);
-                    if (string.IsNullOrEmpty((string)value))
-                    {
-                        error = property.Name + " must be not plank";
-                        break;
-                    }
+                    return BadRequest(error);
                 }
+                var user = _unitOfWork.UserRepository.GetByID(requestCreateMaterialModel.ManagerId, m => m.Role);
+                if (user.Role.Name != RoleConst.Manager)
+                {
+                    return BadRequest("Manager Id is not valid");
+                }
+                var ExistedMaterial = _unitOfWork.MaterialRepository.Get(filter: x => x.Name.Equals(requestCreateMaterialModel.Name)).FirstOrDefault();
+                if (ExistedMaterial != null)
+                {
+                    return BadRequest("Material exists");
+                }
+                var Material = requestCreateMaterialModel.toMaterialEntity();
+                _unitOfWork.MaterialRepository.Insert(Material);
+                _unitOfWork.Save();
+                return Ok("Create successfully");
             }
-            if (!string.IsNullOrEmpty(error))
+            catch (Exception ex)
             {
-                return BadRequest(error);
+                return BadRequest("Create Material failed");
             }
-            var user = _unitOfWork.UserRepository.GetByID(requestCreateMaterialModel.ManagerId, m => m.Role);
-            if (user.Role.Name != RoleConst.Manager)
-            {
-                return BadRequest("Manager Id is not valid");
-            }
-            var ExistedMaterial = _unitOfWork.MaterialRepository.Get(filter: x => x.Name.Equals(requestCreateMaterialModel.Name)).FirstOrDefault();
-            if(ExistedMaterial != null)
-            {
-                return BadRequest("Material exists");
-            }
-            var Material = requestCreateMaterialModel.toMaterialEntity();
-            _unitOfWork.MaterialRepository.Insert(Material);
-            _unitOfWork.Save();
-            return Ok("Create successfully");
+            
         }
 
         [HttpPut]
         public IActionResult UpdateMaterial(int id, RequestCreateMaterialModel requestCreateMaterialModel)
         {
-            var existedMaterial = _unitOfWork.MaterialRepository.GetByID(id);
-            if (existedMaterial == null)
+            try
             {
-                return NotFound("Maretrial is not existed");
+                var existedMaterial = _unitOfWork.MaterialRepository.GetByID(id);
+                if (existedMaterial == null)
+                {
+                    return NotFound("Maretrial is not existed");
+                }
+                existedMaterial.Name = requestCreateMaterialModel.Name;
+                existedMaterial.Price = requestCreateMaterialModel.Price;
+                existedMaterial.ManagerId = requestCreateMaterialModel.ManagerId;
+                _unitOfWork.MaterialRepository.Update(existedMaterial);
+                _unitOfWork.Save();
+                return Ok("Update Material successfully");
             }
-            existedMaterial.Name = requestCreateMaterialModel.Name;
-            existedMaterial.Price = requestCreateMaterialModel.Price;
-            existedMaterial.ManagerId = requestCreateMaterialModel.ManagerId;
-            _unitOfWork.MaterialRepository.Update(existedMaterial);
-            _unitOfWork.Save();
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest("Update Material failed");
+            }
+            
         }
 
         [HttpDelete]

@@ -19,13 +19,28 @@ namespace SWP391Project.Services.ChatSystem.Hubs
 
         public Conversation CreateConversation(Conversation conversation)
         {
-            try {
+            if (!CheckValidConversation(conversation.User1Id, conversation.User2Id))
+            {
+                var getConversationFromOne = _context.Conversations.FirstOrDefault(x => (x.User1Id == conversation.User1Id && x.User2Id == conversation.User2Id));
+                var getConversationFromTwo = _context.Conversations.FirstOrDefault(x => (x.User1Id == conversation.User2Id && x.User2Id == conversation.User1Id));
+                if (getConversationFromOne != null)
+                {
+                    return getConversationFromOne;
+                }
+                if (getConversationFromTwo != null)
+                {
+                    return getConversationFromTwo;
+                }
+            }
+            try
+            {
                 _context.Conversations.Add(conversation);
                 _context.SaveChanges();
                 return conversation;
             }
-            catch(Exception ex) {
-                Console.WriteLine(ex.Message);  
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }

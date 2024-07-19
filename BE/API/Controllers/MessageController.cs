@@ -21,8 +21,16 @@ namespace SWP391Project.API.Controllers
         [HttpGet("{conversationId}/messages")]
         public async Task<IActionResult> GetMessages(int conversationId)
         {
-            var messages = await _chatService.GetMessagesAsync(conversationId);
-            return Ok(messages);
+            try
+            {
+                var messages = await _chatService.GetMessagesAsync(conversationId);
+                return Ok(messages);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetMessages");
+            }
+            
         }
 
     }

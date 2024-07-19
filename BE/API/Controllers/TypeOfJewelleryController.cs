@@ -21,42 +21,57 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult SearchJewellery([FromQuery] RequestSearchTypeOfJewelleryModel requestSearchTypeOfJewelleryModel)
         {
-
-            var sortBy = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryBy.ToString() : null;
-            var sortType = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryType.ToString() : null;
-            Expression<Func<TypeOfJewellery, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchTypeOfJewelleryModel.Name) || x.Name.Contains(requestSearchTypeOfJewelleryModel.Name));
-            Func<IQueryable<TypeOfJewellery>, IOrderedQueryable<TypeOfJewellery>> orderBy = null;
-
-            if (!string.IsNullOrEmpty(sortBy))
+            try
             {
-                if (sortType == SortTypeOfJewelleryTypeEnum.Ascending.ToString())
+                var sortBy = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryBy.ToString() : null;
+                var sortType = requestSearchTypeOfJewelleryModel.SortContent != null ? requestSearchTypeOfJewelleryModel.SortContent?.sortTypeOfJewelleryType.ToString() : null;
+                Expression<Func<TypeOfJewellery, bool>> filter = x =>
+                    (string.IsNullOrEmpty(requestSearchTypeOfJewelleryModel.Name) || x.Name.Contains(requestSearchTypeOfJewelleryModel.Name));
+                Func<IQueryable<TypeOfJewellery>, IOrderedQueryable<TypeOfJewellery>> orderBy = null;
+
+                if (!string.IsNullOrEmpty(sortBy))
                 {
-                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    if (sortType == SortTypeOfJewelleryTypeEnum.Ascending.ToString())
+                    {
+                        orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    }
+                    else if (sortType == SortTypeOfJewelleryTypeEnum.Descending.ToString())
+                    {
+                        orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                    }
                 }
-                else if (sortType == SortTypeOfJewelleryTypeEnum.Descending.ToString())
-                {
-                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
-                }
+                var reponseJewellery = _unitOfWork.TypeOfJewellryRepository.Get(filter,
+                    orderBy,
+                    pageIndex: requestSearchTypeOfJewelleryModel.pageIndex,
+                    pageSize: requestSearchTypeOfJewelleryModel.pageSize,
+                    includes: m => m.Designs).Select(x => x.toTypeOfJewelleryDTO());
+                return Ok(reponseJewellery);
             }
-            var reponseJewellery = _unitOfWork.TypeOfJewellryRepository.Get(filter,
-                orderBy,
-                pageIndex: requestSearchTypeOfJewelleryModel.pageIndex,
-                pageSize: requestSearchTypeOfJewelleryModel.pageSize,
-                includes: m =>m.Designs).Select(x=>x.toTypeOfJewelleryDTO());
-            return Ok(reponseJewellery);
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in SearchJewellery");
+            }
+            
         }
 
         [HttpGet("{id}")]
         public IActionResult GetTypeOfJewelleryById(int id)
         {
-            var TypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.GetByID(id,p=>p.Designs);
-            if (TypeOfJewellery == null)
+            try
             {
-                return NotFound("Type of jewellery is not existed");
-            }
+                var TypeOfJewellery = _unitOfWork.TypeOfJewellryRepository.GetByID(id, p => p.Designs);
+                if (TypeOfJewellery == null)
+                {
+                    return NotFound("Type of jewellery is not existed");
+                }
 
-            return Ok(TypeOfJewellery.toTypeOfJewelleryDTO());
+                return Ok(TypeOfJewellery.toTypeOfJewelleryDTO());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetTypeOfJewelleryById");
+            }
+           
         }
 
         [HttpPost]
@@ -76,11 +91,11 @@ namespace API.Controllers
                 };
                 _unitOfWork.TypeOfJewellryRepository.Insert(TypeOfJewellery);
                 _unitOfWork.Save();
-                return Ok("Create successfully");
+                return Ok("Create Type Of Jewellery successfully");
             }
             catch (Exception ex)
             {
-                return BadRequest("Create failed");
+                return BadRequest("Create Type Of Jewellery failed");
             }
            
         }
@@ -98,11 +113,11 @@ namespace API.Controllers
                 existedTypeOfJewellery.Name = requestTypeOfJewelleryModel.Name;
                 _unitOfWork.TypeOfJewellryRepository.Update(existedTypeOfJewellery);
                 _unitOfWork.Save();
-                return Ok();
+                return Ok("Update Type Of Jewellery successfully");
             }
             catch (Exception ex)
             {
-                return BadRequest("Update failed");
+                return BadRequest("Update Type Of Jewellery failed");
             }
             
         }

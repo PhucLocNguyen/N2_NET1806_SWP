@@ -3,31 +3,62 @@ import { multiStepContext } from "./StepContext";
 import { CustomButton } from "../../home/Home";
 import { motion } from "framer-motion";
 import "./style.css";
-import { TextField } from "@mui/material";
+import { FormControl, MenuItem, Select, TextField } from "@mui/material";
 import { FetchApiMaterial } from "../../../api/Requirements/FetchApiMaterial";
 
 function FirstStep({ handleCompleteStep }) {
-  const { currentStep, setCurrentStep, requirementData, setRequirementData, designRuleState, animate } =
-    useContext(multiStepContext);
+  const {
+    currentStep,
+    setCurrentStep,
+    requirementData,
+    setRequirementData,
+    designRuleState,
+    animate,
+  } = useContext(multiStepContext);
   const [isAllowed, setAllowed] = useState(false);
   const [data, setData] = useState({
     material: requirementData.material === 0 ? null : requirementData.material,
     size: requirementData.size === 0 ? null : requirementData.size,
   });
+  const [spacingSelect, setSpacingSelect] = useState([]);
   const [materialList, setMaterialList] = useState([]);
-
+  const spacingFunction = (designRuleState) => {
+    let arraySpacing = [];
+    let count = designRuleState.MinSizeJewellery;
+    while (count <= designRuleState.MaxSizeJewellery) {
+      arraySpacing.push(count);
+      if (designRuleState.MaxSizeJewellery > 100) {
+        count += 50;
+      } else {
+        count += 0.5;
+      }
+    }
+    return arraySpacing;
+  };
   useEffect(() => {
     const fetchMaterials = async () => {
       const res = await FetchApiMaterial();
       setMaterialList([...res]);
     };
     fetchMaterials();
+    if (designRuleState != null) {
+      const arraySpacing = spacingFunction(designRuleState);
+      setSpacingSelect([...arraySpacing]);
+    }
   }, []);
 
   useEffect(() => {
     let output = true;
     Object.entries(data).forEach(([key, value]) => {
-      if (value === -1 || (key === "size" && !(value >= designRuleState.MinSizeJewellery && value <= designRuleState.MaxSizeJewellery)) || data.material === null) {
+      if (
+        value === -1 ||
+        (key === "size" &&
+          !(
+            value >= designRuleState.MinSizeJewellery &&
+            value <= designRuleState.MaxSizeJewellery
+          )) ||
+        data.material === null
+      ) {
         output = false;
         setAllowed(false);
         return;
@@ -36,7 +67,11 @@ function FirstStep({ handleCompleteStep }) {
     if (output) {
       setAllowed(true);
     }
-  }, [data, designRuleState.MinSizeJewellery, designRuleState.MaxSizeJewellery]);
+  }, [
+    data,
+    designRuleState.MinSizeJewellery,
+    designRuleState.MaxSizeJewellery,
+  ]);
 
   function NextStep() {
     if (isAllowed) {
@@ -55,11 +90,19 @@ function FirstStep({ handleCompleteStep }) {
   };
 
   return (
-    <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="mx-16">
+    <motion.div
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      className="mx-16"
+    >
       <h2 className="text-[24px] mb-1 mt-3">Material</h2>
       <div className="grid grid-cols-5 mb-[30px] gap-4">
         {materialList.map((item, index) => (
-          <label key={item.name + index} htmlFor={"material-" + index} className="rounded-md border border-[#646464] cursor-pointer">
+          <label
+            key={item.name + index}
+            htmlFor={"material-" + index}
+            className="rounded-md border border-[#646464] cursor-pointer"
+          >
             <div className="shadow-lg relative h-[100px]">
               <input
                 type="radio"
@@ -71,7 +114,10 @@ function FirstStep({ handleCompleteStep }) {
                 onChange={HandleChangeData}
               />
               <span className="w-[20px] h-[20px] mb-[50px] top-1 left-1 inline-block border-[2px] border-[#e3e3e3] rounded-full relative z-10 peer-checked:bg-primary checkedBoxFormat peer-checked:border-[#3057d5] peer-checked:scale-110 peer-checked:bg-[#3057d5] peer-checked:before:opacity-100"></span>
-              <img src={item.image} className="rounded-md w-full absolute top-0 h-[80px]" />
+              <img
+                src={item.image}
+                className="rounded-md w-full absolute top-0 h-[80px]"
+              />
               <p className="text-center">{item.name}</p>
             </div>
           </label>
@@ -79,19 +125,27 @@ function FirstStep({ handleCompleteStep }) {
       </div>
       <h2 className="text-[24px] mb-1 mt-3">Size</h2>
       <div className="relative mb-5">
-        <TextField
-          type="number"
-          name="size"
-          id=""
-          value={data.size}
-          helperText={typeof data.size === "string" && !(data.size >= designRuleState.MinSizeJewellery && data.size <= designRuleState.MaxSizeJewellery)
-            ? `The size must be in range of ${designRuleState.MinSizeJewellery} to ${designRuleState.MaxSizeJewellery}`
-            : null}
-          error={typeof data.size === "string" && !(data.size >= designRuleState.MinSizeJewellery && data.size <= designRuleState.MaxSizeJewellery)}
-          onChange={HandleChangeData}
-          placeholder={`Enter your size from ${designRuleState.MinSizeJewellery} to ${designRuleState.MaxSizeJewellery}.`}
-          className="w-full"
-        />
+        <FormControl
+          sx={{ minWidth: 120, width: "100%", minHeight: "4rem" }}
+          size="small"
+        >
+          <Select
+            name="size"
+            onChange={HandleChangeData}
+            displayEmpty
+            inputProps={{ "aria-label": "Without label" }}
+            defaultValue={requirementData.size == 0 ? "" : requirementData.size}
+          >
+            <MenuItem value="">
+              <em>Please select the jewelery size</em>
+            </MenuItem>
+            {spacingSelect.map((items, index) => (
+              <MenuItem key={items} value={items}>
+                {items}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <span className="checkedBoxFormat absolute"></span>
       </div>
       <CustomButton

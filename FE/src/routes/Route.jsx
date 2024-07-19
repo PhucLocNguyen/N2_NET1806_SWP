@@ -44,7 +44,7 @@ const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
 const RejectDesignList = lazy(() => import('../component/designProductPlan/RejectDesignList'));
 const RejectDesignDetail = lazy(() => import('../component/designProductPlan/RejectDesignDetail'));
-
+const OrderWaitingPayList = lazy(()=>import("../component/saleStaff/PaySupport/OrderWaitingPayList"));
 const publicRoutes = [
    {
       index: true,
@@ -96,6 +96,11 @@ const publicRoutes = [
    {
       path: '/payment/response',
       component: PaymentResponse,
+      layout: null
+   },
+   {
+      path: '*',
+      component: PageError,
       layout: null
    }
 ]
@@ -156,7 +161,8 @@ const privateRoutes = [
       component: StaffLayout,
       children: [
          { path: 'order-support', component: OrderSupportList },
-         { path: 'order-support/:id', component: OrderSupportDetail }
+         { path: 'order-support/:id', component: OrderSupportDetail},
+         {path: 'pay-support',component: OrderWaitingPayList }
       ],
       role: ["Sale"],
    },
@@ -177,7 +183,8 @@ const privateRoutes = [
          { path: ':id', component: OrderDetail }
       ],
       role: ['Customer']
-   },
+   }
+   ,
    {
       path: '/customer-profile',
       component: MyAccount,

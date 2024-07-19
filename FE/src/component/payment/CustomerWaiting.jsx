@@ -16,7 +16,6 @@ function CustomerWaiting({
   title,
   designDetail,
   requirementDetail,
-  total,
   status,
 }) {
   const { UserId } = useAuth();

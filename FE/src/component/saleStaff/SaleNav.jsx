@@ -44,6 +44,15 @@ function SaleNav() {
               </h2>
             </div>
           </NavLink>
+
+          <NavLink to="pay-support" className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
+            <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
+              <LocalActivityIcon className="group-hover:text-[rgb(66,133,244)]" />
+              <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">
+                Pay support
+              </h2>
+            </div>
+          </NavLink>
           <LogoutStaff />
         </div>
       </div>

@@ -9,7 +9,6 @@ function CustomerPay({
   title,
   designDetail,
   requirementDetail,
-  total,
   status,
 }) {
   const [getRequirementNew, setRequirementNew] = useState({});

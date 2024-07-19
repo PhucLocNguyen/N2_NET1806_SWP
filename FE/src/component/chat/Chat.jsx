@@ -25,7 +25,7 @@ const [conversation, setConversation] = useState({ conversationId: null });
 const location = useLocation();
 
 const connect = new signalR.HubConnectionBuilder()
-.withUrl("https://localhost:7103/Chat") // Ensure this URL is correct
+.withUrl("https://app-swp391-su24.azurewebsites.net/Chat") // Ensure this URL is correct
 .withAutomaticReconnect()
 .build();
 

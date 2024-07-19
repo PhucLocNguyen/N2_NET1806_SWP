@@ -32,7 +32,7 @@ export function StepContext({ children, designId, animate, scope }) {
         let dataDesignId = await fetchApiDesignById(designId);
         const { masterGemstone, material, stone, typeOfJewellery, ...root } = dataDesignId;
         const typeOfJewelleryId = typeOfJewellery.typeOfJewelleryId;
-
+        console.log("Root design");
         const newRequirementData = {
           designParentId: root.designId,
           material: material ? material.materialId : null,
@@ -42,7 +42,7 @@ export function StepContext({ children, designId, animate, scope }) {
           stonesId: stone ? stone.stonesId : null,
           customerNote: requirementData.customerNote,
         };
-
+        console.log(newRequirementData);
         setRequirementData(newRequirementData);
 
         let designRuleById = await FetchApiDesignRuleById(typeOfJewelleryId);
@@ -70,7 +70,7 @@ export function StepContext({ children, designId, animate, scope }) {
       target.style.display = "block";
     }
   }, [requirementData, scope]);
-
+console.log(requirementData);
   async function SubmitDesignFromCustomer() {
     try {
       const dataToSubmit = {

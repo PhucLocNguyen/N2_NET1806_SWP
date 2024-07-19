@@ -63,7 +63,7 @@ const FetchApiRequirementHaveUserWithStatus = async (status, UserId)=>{
 
 const FetchSummaryPriceByRequirementId= async (id) => {
    try {
-      const response = await api.get(`/Requirement/PriceOfRequirement?requirementId=${id}`);
+      const response = await api.get(`/Requirement/PriceOfRequirement?requirementId=${id}`, axiosConfigHeader);
       const summaryPrice = response.data;
       return summaryPrice; 
    } catch (error) {
@@ -71,4 +71,21 @@ const FetchSummaryPriceByRequirementId= async (id) => {
       return null; 
    }
 }
-export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure, FetchApiRequirementHaveUserWithStatus, FetchSummaryPriceByRequirementId}
+
+const FetchRequirementWaitingPay= async ({page, pageSize}) => {
+   try {
+      const response = await api.get(`/Requirement/requirementWaitingToPay`, {
+         axiosConfigHeader,
+         params: {
+            pageIndex: page,
+            pageSize: pageSize,
+         }
+      });
+      const requirementData = response.data;
+      return requirementData; 
+   } catch (error) {
+      console.error(error);
+      return null; 
+   }
+}
+export { FetchApiRequirementOpeningOrder,FetchApiRequirementByStatus,FetchApiRequirementById, FetchApiRequirementByIdSecure, FetchApiRequirementHaveUserWithStatus, FetchSummaryPriceByRequirementId, FetchRequirementWaitingPay}

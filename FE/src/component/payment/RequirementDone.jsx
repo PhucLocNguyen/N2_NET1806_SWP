@@ -19,7 +19,6 @@ function RequirementDone({
   title,
   designDetail,
   requirementDetail,
-  total,
   status,
 }) {
   const [isLoading, setIsLoading] = useState(true);

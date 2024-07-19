@@ -137,20 +137,33 @@ const [ dataSelected, setDataSelected] = useState({
       var output = true;
       // tim ra id cho mastergemstones
       if(dataSelected.MasterGemstone!==null){
-      const dataFilterLastMasterGemstone = dataApiMasterGemStone.filter((current) => {
-        return Object.keys(dataSelected.MasterGemstone).every((key) => {
-          const selectedValue = dataSelected.MasterGemstone[key];
-          if (selectedValue !== null && selectedValue !== "") {
-            return current[key] == selectedValue;
+        console.log("tu dau :", dataApiMasterGemStone);
+      // const dataFilterLastMasterGemstone = dataApiMasterGemStone.filter((current) => {
+      //   return 
+      //   Object.keys(dataSelected.MasterGemstone).every((key) => {
+      //     const selectedValue = dataSelected.MasterGemstone[key];
+      //     if (selectedValue !== null && selectedValue !== "") {
+      //       // return current[key] == selectedValue;
+      //       return false;
+      //     }
+      //     return true;
+      //   })
+      // });
+      const dataFilterLastMasterGemstone = dataApiMasterGemStone.filter((current)=>{
+        return Object.keys(dataSelected.MasterGemstone).every((key)=>{
+          if(dataSelected.MasterGemstone[key] == current[key]){
+            return true;
           }
-          return true;
-        })});
+          return false;
+        })
+
+      })
+        console.log("da filter ra :",dataFilterLastMasterGemstone);
         if(dataFilterLastMasterGemstone.length >0){
           console.log(requirementData);
           console.log(requirementData.selectedIndexMastergemstone);
           console.log(dataFilterLastMasterGemstone);
           setMasterGemstoneObject(dataFilterLastMasterGemstone[requirementData.selectedIndexMastergemstone]);
-          
           ShowMasterGemStone(dataFilterLastMasterGemstone[requirementData.selectedIndexMastergemstone],dataFilterLastMasterGemstone, setMasterGemstoneObject, setIndex, index);
           var target = scope.current.querySelector("#MasterGemstoneContainerFloat");
           target.style.display="block";
@@ -217,10 +230,10 @@ const [ dataSelected, setDataSelected] = useState({
      if(dataSelected.MasterGemstone==null){
        target.style.display="none";
      }
-    },[dataSelected]);
+    },[dataSelected,dataApiMasterGemStone]);
     // 2 list thay doi khi show ra FE
 useEffect(()=>{
-  const selectKind = new Set(filterMasterGemStone.map(item => item.kind));
+  const selectKind = new Set(dataApiMasterGemStone.map(item => item.kind));
         setKindMasterGemstone([...selectKind]);
 
   const selectSize = new Set(filterMasterGemStone.map(item => item.size));

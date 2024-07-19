@@ -97,6 +97,11 @@ const publicRoutes = [
       path: '/payment/response',
       component: PaymentResponse,
       layout: null
+   },
+   {
+      path: '*',
+      component: PageError,
+      layout: null
    }
 ]
 

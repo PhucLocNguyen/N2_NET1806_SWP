@@ -100,23 +100,55 @@ function WarrantyPopup({ setIsOpenPopup, requirementId }) {
    const handleFormChange = (e) => {
       const { name, value } = e.target;
       let errorValue = '';
+      let errorValueCreate = errors.dateCreated ? errors.dateCreated : '';
+      let errorValueExpiration = errors.expirationDate ? errors.expirationDate : '';
 
       let isNotValid = true;
+      let isNotValidForDateCreate = true;
+      let isNotValidForExpirationDate = true;
+
       try {
 
          if (name === 'dateCreated') {
-            errorValue = `Date create must be greater than ${date}`;
-            let checkDateValid = isAfter(value, date);
-            if (checkDateValid) {
-               isNotValid = false;
+            errorValueCreate = `Date create must be greater than ${date} ${formData.expirationDate != '' ? 'and smaller than expirationdate ' : ''}`;
+
+            // Dung de kiem tra cho date create
+            let checkValidAfterOrderDate = isAfter(value, date);   // For date order
+            let checkValidBeforeExpirationDate = isAfter(value, formData.expirationDate); // Tra ve false la dung
+
+            // Dung de kiem tra cho date expiration
+            if (formData.expirationDate != '') {
+               let checkExpirationAfterCreateDate = isAfter(formData.expirationDate, value);
+               let checkExpirationAfterOrderDate = isAfter(formData.expirationDate, date);
+               if (checkExpirationAfterCreateDate && checkExpirationAfterOrderDate) {
+                  errorValueExpiration = '';
+               }
+            }
+
+            if (checkValidAfterOrderDate && checkValidBeforeExpirationDate == false) {
+               isNotValidForDateCreate = false;
             }
 
          } else if (name === 'expirationDate') {
-            errorValue = `Date create must be greater than ${formData.dateCreated}`;
-            let checkDateValid = isAfter(value, formData.dateCreated);
-            if (checkDateValid) {
-               isNotValid = false;
+            errorValueExpiration = `Date expiration must be greater than date create and date order`;
+
+            // Dung de kiem tra cho date expiration
+            let checkValidAfterCreateDate = isAfter(value, formData.dateCreated);  // For date create
+            let checkValidAfterOrderDate = isAfter(value, date);   // For date order
+
+            // Dung de kiem tra cho date create
+            let checkDateValidForCreateDate = isAfter(formData.dateCreated, date);
+            let checkDateNotValidForExpirationDate = isAfter(formData.dateCreated, value);
+
+            if (checkDateValidForCreateDate && checkDateNotValidForExpirationDate == false) {
+               errorValueCreate = ''
+               console.log('Check point');
             }
+
+            if (checkValidAfterCreateDate && checkValidAfterOrderDate) {
+               isNotValidForExpirationDate = false;
+            }
+
          } else if (name === 'warrantyCardId') {
             errorValue = 'This field cannot be blank';
             if (value !== '') {
@@ -133,10 +165,21 @@ function WarrantyPopup({ setIsOpenPopup, requirementId }) {
          [name]: value
       });
 
-      setErrors({
-         ...errors,
-         [name]: isNotValid ? errorValue : ''
-      })
+      if (name === 'warrantyCardId') {
+         setErrors({
+            ...errors,
+            [name]: isNotValid ? errorValue : ''
+         })
+      }
+
+      if (name === 'dateCreated' || name === 'expirationDate') {
+         setErrors({
+            ...errors,
+            dateCreated: isNotValidForDateCreate ? errorValueCreate : '',
+            expirationDate: isNotValidForExpirationDate ? errorValueExpiration : ''
+         })
+      }
+
 
    }
 

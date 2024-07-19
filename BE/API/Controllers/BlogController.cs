@@ -27,25 +27,32 @@ namespace API.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer)]
         public IActionResult SearchBlogRecords([FromQuery] RequestSearchBlogModel requestSearchBlogModel)
         {
-            
-            var sortBy = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
-            var sortType = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
-            Expression<Func<Blog, bool>> filter = x =>
-                (string.IsNullOrEmpty(requestSearchBlogModel.Title) || x.Title.Contains(requestSearchBlogModel.Title)) &&
-                (x.ManagerId == requestSearchBlogModel.ManagerId || requestSearchBlogModel.ManagerId == null);
-            var totalRecords = _unitOfWork.BlogRepository.Count(filter);
-
-            var response = new
+            try
             {
-                TotalRecords = totalRecords
-            };
+                var sortBy = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogBy.ToString() : null;
+                var sortType = requestSearchBlogModel.SortContent != null ? requestSearchBlogModel.SortContent?.sortBlogType.ToString() : null;
+                Expression<Func<Blog, bool>> filter = x =>
+                    (string.IsNullOrEmpty(requestSearchBlogModel.Title) || x.Title.Contains(requestSearchBlogModel.Title)) &&
+                    (x.ManagerId == requestSearchBlogModel.ManagerId || requestSearchBlogModel.ManagerId == null);
+                var totalRecords = _unitOfWork.BlogRepository.Count(filter);
 
-            return Ok(response);
+                var response = new
+                {
+                    TotalRecords = totalRecords
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong appears in total blog");
+            }
+
         }
 
         [HttpGet]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Customer )]
-        public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel) 
+        public IActionResult SearchBlog([FromQuery] RequestSearchBlogModel requestSearchBlogModel)
         {
             try
             {
@@ -78,22 +85,32 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Something wrong appears");
+                return BadRequest("Something wrong appears in showing all blogs");
             }
-            
+
         }
 
         [HttpGet("{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Admin)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConst.Admin)]
         public IActionResult GetBlogById(int id)
         {
-            var Blog = _unitOfWork.BlogRepository.GetByID(id, m => m.Manager);
-            if (Blog == null)
+            try
             {
-                return NotFound("Blog is not existed");
+                var Blog = _unitOfWork.BlogRepository.GetByID(id, m => m.Manager);
+                if (Blog == null)
+                {
+                    return NotFound("Blog is not existed");
+                }
+                return Ok(Blog.toBlogDTO());
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong appears in getting blog id");
             }
 
-            return Ok(Blog.toBlogDTO());
+
+
         }
 
         [HttpPost]
@@ -143,20 +160,27 @@ namespace API.Controllers
             {
                 return BadRequest("Update failed");
             }
-           
+
         }
 
         [HttpDelete]
         public IActionResult DeleteBlog(int id)
         {
-            var existedBlog = _unitOfWork.BlogRepository.GetByID(id);
-            if (existedBlog==null)
+            try
             {
-                return NotFound("Blog is not existed");
+                var existedBlog = _unitOfWork.BlogRepository.GetByID(id);
+                if (existedBlog == null)
+                {
+                    return NotFound("Blog is not existed");
+                }
+                _unitOfWork.BlogRepository.Delete(existedBlog);
+                _unitOfWork.Save();
+                return Ok("Delete blog successfully");
             }
-            _unitOfWork.BlogRepository.Delete(existedBlog);
-            _unitOfWork.Save();
-            return Ok();
+            catch (Exception ex)
+            {
+                return BadRequest("Delete failed");
+            }
         }
     }
 }

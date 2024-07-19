@@ -21,36 +21,44 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult SearchUserRequirement([FromQuery] RequestSearchUserRequirementModel requestSearchUserRequirementModel)
         {
-            var sortBy = requestSearchUserRequirementModel.SortContent?.sortUserRequirementBy.ToString();
-            var sortType = requestSearchUserRequirementModel.SortContent?.sortUserRequirementType.ToString();
-
-            Expression<Func<UserRequirement, bool>> filter = x =>
-                (x.UsersId == requestSearchUserRequirementModel.UsersId || requestSearchUserRequirementModel.UsersId == 0) &&
-                (x.RequirementId == requestSearchUserRequirementModel.RequirementId || requestSearchUserRequirementModel.RequirementId == 0);
-
-            Func<IQueryable<UserRequirement>, IOrderedQueryable<UserRequirement>> orderBy = null;
-
-            if (!string.IsNullOrEmpty(sortBy))
+            try
             {
-                if (sortType == SortUserRequirementTypeEnum.Ascending.ToString())
+                var sortBy = requestSearchUserRequirementModel.SortContent?.sortUserRequirementBy.ToString();
+                var sortType = requestSearchUserRequirementModel.SortContent?.sortUserRequirementType.ToString();
+
+                Expression<Func<UserRequirement, bool>> filter = x =>
+                    (x.UsersId == requestSearchUserRequirementModel.UsersId || requestSearchUserRequirementModel.UsersId == 0) &&
+                    (x.RequirementId == requestSearchUserRequirementModel.RequirementId || requestSearchUserRequirementModel.RequirementId == 0);
+
+                Func<IQueryable<UserRequirement>, IOrderedQueryable<UserRequirement>> orderBy = null;
+
+                if (!string.IsNullOrEmpty(sortBy))
                 {
-                    orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    if (sortType == SortUserRequirementTypeEnum.Ascending.ToString())
+                    {
+                        orderBy = query => query.OrderBy(p => EF.Property<object>(p, sortBy));
+                    }
+                    else if (sortType == SortUserRequirementTypeEnum.Descending.ToString())
+                    {
+                        orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
+                    }
                 }
-                else if (sortType == SortUserRequirementTypeEnum.Descending.ToString())
-                {
-                    orderBy = query => query.OrderByDescending(p => EF.Property<object>(p, sortBy));
-                }
+
+                var reponseUserRequirement = _unitOfWork.UserRequirementRepository.Get(
+                    filter,
+                    orderBy,
+                    includeProperties: "",
+                    pageIndex: requestSearchUserRequirementModel.pageIndex,
+                    pageSize: requestSearchUserRequirementModel.pageSize
+                ).Select(ur => ur.toUserRequirementDTO()).ToList();
+
+                return Ok(reponseUserRequirement);
             }
-
-            var reponseUserRequirement = _unitOfWork.UserRequirementRepository.Get(
-                filter,
-                orderBy,
-                includeProperties: "",
-                pageIndex: requestSearchUserRequirementModel.pageIndex,
-                pageSize: requestSearchUserRequirementModel.pageSize
-            ).Select(ur => ur.toUserRequirementDTO()).ToList();
-
-            return Ok(reponseUserRequirement);
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in SearchUserRequirement");
+            }
+            
         }
 
         [HttpPost]
@@ -83,7 +91,7 @@ namespace API.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest("Something wrong when create");
+                return BadRequest("Something wrong when create UserRequirement");
             }
            
         }

@@ -1,5 +1,6 @@
 ﻿using API.Model.VnPayModel;
 using Repositories.Entity;
+using SWP391Project.Services.Model.RequestCreatePaymentByStaff;
 
 namespace API.Model.PaymentModel
 {
@@ -15,6 +16,20 @@ namespace API.Model.PaymentModel
                 Method = "Vnpay",
                 CustomerId = userId,
                 RequirementsId = requirementId,
+            };
+        }
+
+        public static Payment ToPaymentEntityCreateByStaff(this RequestCreatePaymentByStaff paymentStaff, int customerId, decimal amount)
+        {
+            return new Payment
+            {
+                Amount = amount,
+                CompletedAt = DateTime.Now,
+                Content = paymentStaff.PaymentContent,
+                Method = "Cash",
+                Status = "Paid",
+                CustomerId = customerId,
+                RequirementsId = paymentStaff.RequirementsId,
             };
         }
     }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Entity;
+using SWP391Project.Services.Model.RequestCreatePaymentByStaff;
 using System.Linq.Expressions;
 
 namespace API.Controllers
@@ -101,14 +102,58 @@ namespace API.Controllers
             }
             
         }
-        /* [HttpPost]
-         public IActionResult CreatePayment(RequestCreatePaymentModel requestCreatePaymentModel)
-         {
-             var Payment = requestCreatePaymentModel.ToPaymentEntity();
-             _unitOfWork.PaymentRepository.Insert(Payment);
-             _unitOfWork.Save();
-             return Ok("Create successfully");
-         }*/
+
+        [HttpPost]
+        public IActionResult CreatePayment(RequestCreatePaymentByStaff requestCreatePaymentByStaff)
+        {
+            Requirement requirement = _unitOfWork.RequirementRepository.GetByID((int)requestCreatePaymentByStaff.RequirementsId);
+
+            Design design = _unitOfWork.DesignRepository.Get((Design x) => x.DesignId == requirement.DesignId, null, null, null, (Design x) => x.MasterGemstone, (Design x) => x.Stone, (Design x) => x.Material).FirstOrDefault();
+
+            if (requirement == null)
+            {
+                return BadRequest("Invalid requirement Id");
+            }
+            var users = _unitOfWork.UserRequirementRepository.Get(filter: x => x.RequirementId == requestCreatePaymentByStaff.RequirementsId, includeProperties: "User")
+            .Select(ur => ur.User).Where(x => x.RoleId == 6).FirstOrDefault();
+            decimal MaterialPriceAtMoment2 = Math.Ceiling((requirement.MaterialPriceAtMoment * requirement.WeightOfMaterial).Value);
+            decimal? MasterGemStonePriceAtMoment2 = requirement.MasterGemStonePriceAtMoment;
+            decimal? StonePriceAtMoment2 = requirement.StonePriceAtMoment;
+            decimal? MachiningFee2 = requirement.MachiningFee;
+            decimal? TotalMoney2 = (decimal?)MaterialPriceAtMoment2 + MasterGemStonePriceAtMoment2 + StonePriceAtMoment2 + MachiningFee2;
+            var amount = Decimal.Zero; // money will pay
+            if (requirement.Status.Equals("4"))
+            {
+                amount = Math.Ceiling((TotalMoney2 / (decimal?)2).Value);
+            }
+            if (requirement.Status.Equals("10"))
+            {
+                Payment paymentDeposit = _unitOfWork.PaymentRepository.Get((Payment x) => x.RequirementsId == requestCreatePaymentByStaff.RequirementsId && x.Status.Equals("Paid")).FirstOrDefault();
+
+                amount = (decimal)(TotalMoney2 - (decimal)paymentDeposit.Amount);
+
+            }
+
+            var Payment = requestCreatePaymentByStaff.ToPaymentEntityCreateByStaff(users.UsersId, amount);
+            if (Payment != null)
+            {
+                if (requirement.Status == "4")
+                {
+                    requirement.Status = "5";
+
+                }
+                if (requirement.Status == "10")
+                {
+                    requirement.Status = "11";
+                }
+            }
+
+
+            _unitOfWork.RequirementRepository.Update(requirement);
+            _unitOfWork.PaymentRepository.Insert(Payment);
+            _unitOfWork.Save();
+            return Ok("Create successfully");
+        }
 
         [HttpPut("{id}")]
         public IActionResult UpdatePayment(int id, RequestCreatePaymentModel requestCreatePaymentModel)

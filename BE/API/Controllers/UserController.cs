@@ -288,5 +288,19 @@ namespace API.Controllers
             }
             return check;
         }
+
+        [HttpPost("ResendCode")]
+        public async Task<IActionResult> ResendCode([FromBody] RequestRegisterAccount requestRegisterAccount)
+        {
+            try
+            {
+                _emailService.SaveInCache(requestRegisterAccount);
+                return Ok("Resend code successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong when sending email");
+            }
+        }
     }
 }

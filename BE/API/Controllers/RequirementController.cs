@@ -295,6 +295,54 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("requirementWaitingToPay")]
+        public IActionResult GetRequirementWaitingToPay([FromQuery] int pageIndex, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var Requirement = _unitOfWork.RequirementRepository.Get(
+                    filter: (x) => x.Status.Equals("4") || x.Status.Equals("10"), null, pageIndex: pageIndex, pageSize: pageSize)
+                    .Select((x) => x.toRequirementDTO()).ToList();
+                return Ok(Requirement);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetRequirementById");
+            }
+
+        }
+
+        [HttpPost("ConfirmPrice")]
+        public IActionResult ConfirmPrice([FromBody] int requirementId)
+        {
+            try
+            {
+                Requirement requirement = _unitOfWork.RequirementRepository.GetByID(requirementId);
+                Design design = _unitOfWork.DesignRepository.Get((Design x) => x.DesignId == requirement.DesignId, null, null, null, (Design x) => x.MasterGemstone, (Design x) => x.Stone, (Design x) => x.Material).FirstOrDefault();
+                if (requirement.Status.Equals("3"))
+                {
+                    var MasterGemstonePrice = design.MasterGemstone != null ? design.MasterGemstone.Price : 0;
+                    var StonePrice = design.Stone != null ? design.Stone.Price : 0;
+                    var MaterialPrice = design.Material.Price;
+                    requirement.MasterGemStonePriceAtMoment = MasterGemstonePrice;
+                    requirement.StonePriceAtMoment = StonePrice;
+                    requirement.MaterialPriceAtMoment = MaterialPrice;
+                    requirement.Status = "4";
+
+                    requirement.TotalMoney = (decimal?)(Math.Ceiling((decimal)(MaterialPrice * requirement.WeightOfMaterial)) + MasterGemstonePrice + StonePrice) + requirement.MachiningFee;
+                    requirement.ExpectedDelivery = DateOnly.FromDateTime(DateTime.Now.AddDays(14));
+                }
+
+                _unitOfWork.RequirementRepository.Update(requirement);
+                _unitOfWork.Save();
+                _hubContext.Clients.All.SendAsync("ReceiveOrderUpdate", requirementId);
+                return Ok("Update Requirement successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Something wrong in GetRequirementById");
+            }
+        }
 
     }
 }

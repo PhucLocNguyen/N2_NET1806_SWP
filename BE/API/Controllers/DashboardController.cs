@@ -89,6 +89,7 @@ namespace API.Controllers
         {
             try
             {
+                string message = "Total money from: " + DateOnly.FromDateTime((DateTime)FromDate) + " to " + DateOnly.FromDateTime((DateTime)ToDate);
                 Hashtable collections = new Hashtable();
                 if (FromDate > ToDate)
                 {
@@ -98,7 +99,7 @@ namespace API.Controllers
                 while (FromDate <= ToDate)
                 {
                     var PaymentByDate = _unitOfWork.PaymentRepository.Get(x => x.CompletedAt.Value.Date == FromDate && x.Status.Equals("Paid")).ToList();
-                    var RevenueByDate = PaymentByDate.GroupBy(x => x.CompletedAt.Value).Select(x => new
+                    var RevenueByDate = PaymentByDate.GroupBy(x => x.CompletedAt.Value.Date).Select(x => new
                     {
                         Date = DateOnly.FromDateTime((DateTime)FromDate),
                         Revenue = x.Sum(x => x.Amount)
@@ -109,7 +110,7 @@ namespace API.Controllers
                 }
                 var totalMoney = new
                 {
-                    ToTal = "Total money from: " + DateOnly.FromDateTime((DateTime)FromDate) + " to " + DateOnly.FromDateTime((DateTime)ToDate),
+                    ToTal = message,
                     Revenue = sum
                 };
 

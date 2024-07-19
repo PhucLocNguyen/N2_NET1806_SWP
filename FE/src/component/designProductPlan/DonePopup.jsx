@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { fetchApiDesignById } from "../../api/FetchApiDesign";
-import { PutApiRequirementByStatus } from "../../api/Requirements/PutApiRequirement";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useAuth from "../../hooks/useAuth.jsx";
+
 const { role } = useAuth();
 
 function DonePopup({ setIsOpenPopup, data }) {
   const [dataDesign, setDataDesign] = useState({});
   const [masterGemStone, setMasterGemStone] = useState(null);
-  const [type, setType] = useState("");
   const [stone, setStone] = useState(null);
+  const [type, setType] = useState("");
 
   useEffect(() => {
     if (role === "DesignStaff") {
@@ -103,97 +103,49 @@ function DonePopup({ setIsOpenPopup, data }) {
             </AccordionSummary>
             <AccordionDetails>
               <div className="space-y-4">
-                {masterGemStone && stone ? (
-                  <div className="flex justify-evenly">
-                    <div className="flex space-x-4">
-                      <div>
-                        <img
-                          src={masterGemStone.image}
-                          className="w-24 h-24 rounded-lg object-cover"
-                          alt={`${masterGemStone.kind} - ${masterGemStone.shape}`}
-                        />
-                      </div>
-                      <div>
-                        <p>
-                          <strong>Kind:</strong> {masterGemStone.kind}
-                        </p>
-                        <p>
-                          <strong>Clarity:</strong> {masterGemStone.clarity}
-                        </p>
-                        <p>
-                          <strong>Cut:</strong> {masterGemStone.cut}
-                        </p>
-                        <p>
-                          <strong>Weight:</strong> {masterGemStone.weight}ct
-                        </p>
-                        <p>
-                          <strong>Shape:</strong> {masterGemStone.shape}
-                        </p>
-                      </div>
-                    </div>
+                {masterGemStone && (
+                  <div className="flex space-x-4">
+                    <img
+                      src={masterGemStone.image}
+                      className="w-24 h-24 rounded-lg object-cover"
+                      alt={`${masterGemStone.kind} - ${masterGemStone.shape}`}
+                    />
                     <div>
                       <p>
-                        <strong>Kind:</strong> {stone.kind}
+                        <strong>Kind:</strong> {masterGemStone.kind}
                       </p>
                       <p>
-                        <strong>Size:</strong> {stone.size}mm
+                        <strong>Clarity:</strong> {masterGemStone.clarity}
                       </p>
                       <p>
-                        <strong>Quantity:</strong> {stone.quantity}
+                        <strong>Cut:</strong> {masterGemStone.cut}
                       </p>
-                      <br/>
-                      <br/>
+                      <p>
+                        <strong>Weight:</strong> {masterGemStone.weight}ct
+                      </p>
+                      <p>
+                        <strong>Shape:</strong> {masterGemStone.shape}
+                      </p>
+                      <p className="text-red-500">
+                        <strong>Price:</strong> ${masterGemStone.price}
+                      </p>
                     </div>
                   </div>
-                ) : (
+                )}
+                {stone && (
                   <div>
-                    {masterGemStone && (
-                      <div className="flex space-x-4">
-                        <div>
-                          <img
-                            src={masterGemStone.image}
-                            alt={`${masterGemStone.kind} - ${masterGemStone.shape}`}
-                            className="w-24 h-24 rounded-lg object-cover"
-                          />
-                        </div>
-                        <div>
-                          <p>
-                            <strong>Kind:</strong> {masterGemStone.kind}
-                          </p>
-                          <p>
-                            <strong>Clarity:</strong> {masterGemStone.clarity}
-                          </p>
-                          <p>
-                            <strong>Cut:</strong> {masterGemStone.cut}
-                          </p>
-                          <p>
-                            <strong>Weight:</strong> {masterGemStone.weight}ct
-                          </p>
-                          <p>
-                            <strong>Shape:</strong> {masterGemStone.shape}
-                          </p>
-                          <p className="text-red-500">
-                            <strong>Price:</strong> ${masterGemStone.price}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                    {stone && (
-                      <div>
-                        <p>
-                          <strong>Kind:</strong> {stone.kind}
-                        </p>
-                        <p>
-                          <strong>Size:</strong> {stone.size}mm
-                        </p>
-                        <p>
-                          <strong>Quantity:</strong> {stone.quantity}
-                        </p>
-                        <p className="text-red-500">
-                          <strong>Price:</strong> ${stone.price}
-                        </p>
-                      </div>
-                    )}
+                    <p>
+                      <strong>Kind:</strong> {stone.kind}
+                    </p>
+                    <p>
+                      <strong>Size:</strong> {stone.size}mm
+                    </p>
+                    <p>
+                      <strong>Quantity:</strong> {stone.quantity}
+                    </p>
+                    <p className="text-red-500">
+                      <strong>Price:</strong> ${stone.price}
+                    </p>
                   </div>
                 )}
               </div>
@@ -201,24 +153,26 @@ function DonePopup({ setIsOpenPopup, data }) {
           </Accordion>
         )}
 
-        <p className="text-xl font-medium mb-3">
-          {type === "design"
-            ? "Design3D"
-            : type === "product"
-            ? "Product Completed"
-            : ""}
-        </p>
-        <img
-          src={data.design3D}
-          className="w-[600px] object-cover h-[300px] mx-auto"
-          alt={
-            type === "design"
+        <div className="text-center mt-5">
+          <p className="text-xl font-medium mb-3">
+            {type === "design"
               ? "Design3D"
               : type === "product"
               ? "Product Completed"
-              : ""
-          }
-        />
+              : ""}
+          </p>
+          <img
+            src={data.design3D}
+            className="w-[600px] object-cover h-[300px] mx-auto"
+            alt={
+              type === "design"
+                ? "Design3D"
+                : type === "product"
+                ? "Product Completed"
+                : ""
+            }
+          />
+        </div>
       </motion.div>
     </div>
   );

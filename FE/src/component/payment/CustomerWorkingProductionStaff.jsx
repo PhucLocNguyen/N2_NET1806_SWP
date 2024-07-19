@@ -3,24 +3,14 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import CreateConversationJoin from "../../utils/CreateConversationJoin";
 import { useEffect } from "react";
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
 import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
 import useAuth from "../../hooks/useAuth";
 import iconStaff from "../../assets/icon/staffIcon.jpg";
 function CustomerWorkingProductionStaff({ title, requirementDetail, status }) {
   const { UserId } = useAuth();
-  const navigate = useNavigate();
 
-  async function ChatWithStaff(e,staffId){
-    e.stopPropagation();
-    const conversationIdTarget = await CreateConversationJoin(UserId, staffId); 
-    navigate("/chat",{ state: { conversationIdTarget }}) 
-  }
   if (status == "8") {
     return (
       <div className="col-span-2 flex flex-col justify-center items-center">
@@ -76,18 +66,6 @@ function CustomerWorkingProductionStaff({ title, requirementDetail, status }) {
              <h3 className="text-2xl font-semibold text-gray-700 mb-3 mr-6">
             Production staff information
           </h3>
-              <Typography sx={{ color: "text.secondary" }}>
-                <Link to="/chat">
-                  <Button
-                    variant="contained"
-                    onClick={(e) => {
-                      ChatWithStaff(e, productionStaff.usersId);
-                    }}
-                  >
-                    Chat
-                  </Button>
-                </Link>
-              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex items-center gap-4">

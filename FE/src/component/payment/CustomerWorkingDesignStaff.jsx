@@ -4,8 +4,6 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Button, Typography } from "@mui/material";
-import CreateConversationJoin from "../../utils/CreateConversationJoin";
-import {useNavigate} from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
@@ -14,12 +12,7 @@ import iconStaff from "../../assets/icon/staffIcon.jpg";
 
 function CustomerWorkingDesignStaff({ title, requirementDetail, status }) {
   const { UserId } = useAuth();
-  const navigate = useNavigate();
-  async function ChatWithStaff(e,staffId){
-    e.stopPropagation();
-    const conversationIdTarget = await CreateConversationJoin(UserId, staffId); 
-    navigate("/chat",{ state: { conversationIdTarget }}) 
-  }
+ 
   if (status == "5") {
     return (
       <div className="col-span-2 flex flex-col justify-center items-center">
@@ -79,15 +72,6 @@ function CustomerWorkingDesignStaff({ title, requirementDetail, status }) {
                 sx={{ width: "33%", flexShrink: 0, fontSize: "24px" }}
               >
                 Designer details
-              </Typography>
-              <Typography sx={{ color: "text.secondary" }}>
-                  <Button
-                    variant="contained"
-                    onClick={(e) => {ChatWithStaff(e, designer.usersId);
-                    }}
-                  >
-                    Chat with design staff
-                  </Button>
               </Typography>
             </AccordionSummary>
             <AccordionDetails>

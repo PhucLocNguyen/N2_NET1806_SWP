@@ -20,11 +20,12 @@ function InputPasswordConfirmation({label, pattern, refInput, inputCase}) {
             console.log(value.length);
             if(e.target.name=="password"){
                 setPassword(value);
+                if (value.length === 0) {
+                    setValid({ isValid: true, message: `${label} field can't be empty!` });
+                    return;
+                }
             }
-            if (value.length === 0) {
-                setValid({ isValid: true, message: `${label} field can't be empty!` });
-                return;
-            }
+            
         
             if(inputCase =="register"){
                 if(e.target.name=="passwordConfirm"){
@@ -35,34 +36,37 @@ function InputPasswordConfirmation({label, pattern, refInput, inputCase}) {
                     }
                 }
                 // Kiểm tra mật khẩu có ít nhất một chữ cái viết hoa
-                if (!/[A-Z]/.test(value)) {
-                    setValid({ isValid: true, message: `${label} must contain at least one uppercase letter!` });
-                    return;
+                if(e.target.name=="password"){
+                    if (!/[A-Z]/.test(value)) {
+                        setValid({ isValid: true, message: `${label} must contain at least one uppercase letter!` });
+                        return;
+                    }
+                    
+                    // Kiểm tra mật khẩu có ít nhất một chữ cái viết thường
+                    if (!/[a-z]/.test(value)) {
+                        setValid({ isValid: true, message: `${label} must contain at least one lowercase letter!` });
+                        return;
+                    }
+                    
+                    // Kiểm tra mật khẩu có ít nhất một chữ số
+                    if (!/\d/.test(value)) {
+                        setValid({ isValid: true, message: `${label} must contain at least one number!` });
+                        return;
+                    }
+                    
+                    // Kiểm tra mật khẩu có ít nhất một ký tự đặc biệt trong danh sách
+                    if (!/[!@#$%^&*()]/.test(value)) {
+                        setValid({ isValid: true, message: `${label} must contain at least one special character!` });
+                        return;
+                    }
+                    
+                    // Kiểm tra mật khẩu có độ dài ít nhất là 12 ký tự
+                    if (value.length < 12) {
+                        setValid({ isValid: true, message: `${label} must be at least 12 characters long!` });
+                        return;
+                    }
                 }
                 
-                // Kiểm tra mật khẩu có ít nhất một chữ cái viết thường
-                if (!/[a-z]/.test(value)) {
-                    setValid({ isValid: true, message: `${label} must contain at least one lowercase letter!` });
-                    return;
-                }
-                
-                // Kiểm tra mật khẩu có ít nhất một chữ số
-                if (!/\d/.test(value)) {
-                    setValid({ isValid: true, message: `${label} must contain at least one number!` });
-                    return;
-                }
-                
-                // Kiểm tra mật khẩu có ít nhất một ký tự đặc biệt trong danh sách
-                if (!/[!@#$%^&*()]/.test(value)) {
-                    setValid({ isValid: true, message: `${label} must contain at least one special character!` });
-                    return;
-                }
-                
-                // Kiểm tra mật khẩu có độ dài ít nhất là 12 ký tự
-                if (value.length < 12) {
-                    setValid({ isValid: true, message: `${label} must be at least 12 characters long!` });
-                    return;
-                }
             }
             setValid(true);
         }

@@ -12,7 +12,7 @@ import useAuth from '../../hooks/useAuth';
 import UploadImage from '../../utils/UploadImage';
 import DeleteImage from '../../utils/DeleteImage';
 
-function EditAccountPopUp({ setIsOpenPopup , userData}) {
+function EditAccountPopUp({ setIsOpenPopup, userData }) {
    const folder = 'CustomerProfile';
    const { UserId } = useAuth();
 
@@ -83,6 +83,15 @@ function EditAccountPopUp({ setIsOpenPopup , userData}) {
 
    const handleFileChange = async (event) => {
       const selectedFile = event.target.files[0];
+
+      const fileType = selectedFile.type;
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+      if (!validImageTypes.includes(fileType)) {
+         toast.error('Please select a valid image file (JPEG, PNG, GIF).');
+         return;
+      }
+
       if (selectedFile) {
          if (formData.image !== '') {
             await DeleteImage(formData.image);
@@ -153,7 +162,7 @@ function EditAccountPopUp({ setIsOpenPopup , userData}) {
                      <div className='w-[47%]'>
                         <h2 className='text-[1.1rem] font-medium pb-[3px]'>Phone</h2>
                         <div>
-                           <TextField value={formData.phone!=null? formData.phone: ""} name='phone' onChange={handleFormChange} error={!!errors.phone} helperText={errors?.phone} style={{ width: '100%' }} variant="outlined" size='small' sx={{ minHeight: '4rem' }} />
+                           <TextField value={formData.phone != null ? formData.phone : ""} name='phone' onChange={handleFormChange} error={!!errors.phone} helperText={errors?.phone} style={{ width: '100%' }} variant="outlined" size='small' sx={{ minHeight: '4rem' }} />
                         </div>
                      </div>
                   </div>

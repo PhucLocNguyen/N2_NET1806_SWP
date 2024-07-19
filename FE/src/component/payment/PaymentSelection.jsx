@@ -36,6 +36,9 @@ function PaymentSelection() {
       case "6":
         setTitle("Working with design staff");
         break;
+        case "-6":
+        setTitle("Please contact with sale in chat system");
+        break;
       case "7":
         setTitle("Confirm the sketch design");
         break;
@@ -141,6 +144,16 @@ function PaymentSelection() {
         );
         break;
       }
+      case "-6":
+        return (
+          <CustomerWaiting
+            designDetail={designDetail}
+            title={title}
+            requirementDetail={requirementDetail}
+            
+            status={status}
+          />
+        );
       case "7": {
         return (
           <CustomerConfirmation

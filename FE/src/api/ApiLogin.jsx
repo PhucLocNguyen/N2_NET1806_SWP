@@ -75,9 +75,9 @@ const VerifyRegister = async (verifyCode)=>{
         toast.error("Failed: ", e.response.data);
     }
 }
-const ResendCode = async ()=>{
+const ResendCode = async (listState)=>{
     
-    try{const response = await api.post(`/User/ResendCode`);
+    try{const response = await api.post(`/User/ResendCode`,{...listState});
     toast.success("Resend code to verify for register successful!");
     return response.status;
     }catch(e){

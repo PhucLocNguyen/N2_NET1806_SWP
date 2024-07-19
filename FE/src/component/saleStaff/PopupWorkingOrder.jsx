@@ -11,7 +11,7 @@ import CreateConversationJoin from "../../utils/CreateConversationJoin";
 import { PutApiRequirement } from "../../api/Requirements/PutApiRequirement";
 import {  FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-
+import CustomerAva from "../../assets/icon/staffIcon.jpg"
 function PopupWorkingOrder({data, handleDataUpdate, statusOptions}) {
     const [designDetail, setDesignDetail]= useState({});
     const {UserId} = useAuth();
@@ -160,7 +160,7 @@ function PopupWorkingOrder({data, handleDataUpdate, statusOptions}) {
           <AccordionDetails>
             <div className="flex items-center gap-4">
               <img
-                src={customerInformation.image !=null? customerInformation.image:"https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"}
+                src={customerInformation.image !=null? customerInformation.image: CustomerAva}
                 className="w-[150px] rounded-full"
                 alt=""
               />

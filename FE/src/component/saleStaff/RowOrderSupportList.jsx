@@ -27,8 +27,6 @@ function RowOrderSupportList({ data }) {
       fetApiGetNameCustomer();
    }, [])
 
-   console.log(user)
-
    return (
       <>
          <Link to={`/staff/order-support/${data?.requirementId}`}>

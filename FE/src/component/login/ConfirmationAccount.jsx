@@ -15,14 +15,13 @@ function ConfirmationAccount() {
     const [valid, setValid] = useState(true);
 
     try {
-        const { email, username } = location.state;
+        const { email, username , password, passwordConfirm} = location.state;
         const navigate = useNavigate();
         const submitCode = async (e) => {
             e.preventDefault();
             const data = e.target[0].value;
             // Gửi dữ liệu tới backend để kiểm tra
             const sendingCode = await VerifyRegister(data);
-            console.log(sendingCode);
             if (sendingCode < 400) {
                 localStorage.removeItem('expiryTime');
                 localStorage.removeItem('currentUser');
@@ -36,12 +35,16 @@ function ConfirmationAccount() {
             // Gửi lại mã tới email và cập nhật thời gian hết hạn
             // Nếu thành công gửi lại mã
             const newExpiryTime = Date.now() + 300000; // 300000ms = 5 phút
-            const responseResend = await ResendCode();
+            
+            const responseResend = await ResendCode({...location.state});
             
             if(responseResend==200 ){
               localStorage.setItem('expiryTime', newExpiryTime);
-              setTimeLeft(30); // Đặt lại thời gian đếm ngược
+              setOpenResendCode(false);
+              setTimeLeft(300); // Đặt lại thời gian đếm ngược
             }else{
+               localStorage.removeItem('expiryTime');
+               localStorage.removeItem('currentUser');
               toast.info("Register again to verify the code");
               navigate("/login", { replace: true });
             }
@@ -78,7 +81,6 @@ function ConfirmationAccount() {
                         });
                     }, 1000);
 
-                    // Hủy bộ đếm khi component bị unmount
                     return () => clearInterval(timer);
                 }
             } else {
@@ -121,7 +123,7 @@ function ConfirmationAccount() {
 
         return (
             <>
-                <div className="bg-[#c9d6ff] w-full h-screen bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center flex-col">
+                <div className="bg-custom-gradient w-full h-screen flex items-center justify-center flex-col">
                     <div className="bg-[#fff] rounded-[30px] shadow-[0_5px_15px_rgba(0,0,0,0.35)] relative overflow-hidden w-[768px] max-w-[100%] min-h-[480px] py-6 px-3">
                         <div className="flex justify-center">
                             <SvgIcon sx={{ color: "rgb(198 173 138)", fontSize: "120px" }} className="border-[2px] rounded-full shadow-sm border-blue-500 p-3 mt-3">

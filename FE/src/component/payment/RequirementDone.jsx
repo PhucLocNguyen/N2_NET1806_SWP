@@ -287,18 +287,6 @@ function RequirementDone({
                   >
                     Design staff
                   </Typography>
-                  <Typography sx={{ color: "text.secondary" }}>
-                   
-                      <Button
-                        variant="contained"
-                        onClick={(e) => {ChatWithStaff(e,deisgnStaff.usersId);
-                          
-                        }}
-                      >
-                        Chat with design staff
-                      </Button>
-                    
-                  </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="flex items-center gap-4">
@@ -322,7 +310,7 @@ function RequirementDone({
               </Accordion>
             ) : null}
 
-            {deisgnStaff !== null ? (
+            {productionStaff !== null ? (
               <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -335,18 +323,6 @@ function RequirementDone({
                     sx={{ width: "33%", flexShrink: 0, fontSize: "20px" }}
                   >
                     Production staff
-                  </Typography>
-                  <Typography sx={{ color: "text.secondary" }}>
-                   
-                      <Button
-                        variant="contained"
-                        onClick={(e) => {
-                          ChatWithStaff(e,productionStaff.usersId);
-                        }}
-                      >
-                        Chat with Production staff
-                      </Button>
-                 
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { fetchApiDesignById } from '../../api/FetchApiDesign';
 import ApiGetUserByRoleAndRequirement from '../../api/warranty/ApiGetUserInfoByRoleAndRequirement';
+import Chip from "@mui/material/Chip";
 
 
 function RowOrderSupportList({ data }) {
@@ -39,7 +40,12 @@ function RowOrderSupportList({ data }) {
                   <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{user?.name}</h2>
                </div>
                <div className="flex items-center">
-                  <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{data.createdDate}</h2>
+               <Chip
+                    label={data.status=="-6"?"Design Reject need support": "Confirm price reject need support"}
+                    color="warning"
+                    variant="outlined"
+                    sx={{ fontWeight: 700 }}
+                  />
                </div>
                <div className="flex items-center">
                   <h2 className="text-[14px] font-medium tracking-[0.06em] leading-[1.167em]">{design?.typeOfJewellery?.name}</h2>

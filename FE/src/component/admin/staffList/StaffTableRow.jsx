@@ -24,7 +24,6 @@ function StaffTableRow({ data, setItemUpdate, setIsOpenUpdatePopup }) {
             <TableCell align='left'>{data.name}</TableCell>
             <TableCell align='left'>{data.roleId == 2 ? 'Manager' : (data.roleId == 3 ? 'Design' : (data.roleId == 4 ? 'Production' : (data.roleId == 5 ? 'Sale' : '')))}</TableCell>
             <TableCell align='left'>{data.email}</TableCell>
-            <TableCell align='left'>{data.phone}</TableCell>
             <TableCell>
                <IconButton onClick={handleOpenMenu}>
                   <MoreVertIcon />

@@ -5,6 +5,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
+import { toast } from 'react-toastify';
 
 import useAuth from '../../../hooks/useAuth';
 import UploadImage from '../../../utils/UploadImage';
@@ -75,6 +76,15 @@ function UpdateDesignPopup({ data, setIsOpenUpdatePopup }) {
 
    const handleFileChange = async (event) => {
       const selectedFile = event.target.files[0];
+
+      const fileType = selectedFile.type;
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+      if (!validImageTypes.includes(fileType)) {
+         toast.error('Please select a valid image file (JPEG, PNG, GIF).');
+         return;
+      }
+
       if (selectedFile) {
 
          if (newImage !== '') {

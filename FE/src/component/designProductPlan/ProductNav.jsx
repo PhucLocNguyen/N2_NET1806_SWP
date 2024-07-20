@@ -1,4 +1,4 @@
-import ChatIcon from "@mui/icons-material/Chat";
+// import ChatIcon from "@mui/icons-material/Chat";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { NavLink } from "react-router-dom";
 import LogoutStaff from "../../component/staff/Logout";
@@ -17,14 +17,14 @@ function ProductNav() {
             </div>
           </NavLink>
 
-          <NavLink to="chat" className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
+          {/* <NavLink to="chat" className={({ isActive }) => `${isActive ? 'text-[rgb(66,133,244)]' : ''}`}>
             <div className="mt-[1.5rem]  w-[100%] cursor-pointer group flex items-center ">
               <ChatIcon className="group-hover:text-[rgb(66,133,244)]" />
               <h2 className=" ml-[10px] text-[1.1rem] font-medium group-hover:text-[rgb(66,133,244)]">
                 Chat
               </h2>
             </div>
-          </NavLink>
+          </NavLink> */}
 
           <LogoutStaff />
         </div>

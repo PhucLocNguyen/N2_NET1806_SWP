@@ -8,6 +8,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {motion} from "framer-motion";
 import { Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import CustomerAva from "../../assets/icon/staffIcon.jpg"
+
 function PopupWaitingCustomer({data, handleDataUpdate, statusOptions}) {
     const [designDetail, setDesignDetail]= useState({});
     const [customerInformation, setCustomerInformation] = useState({});
@@ -118,7 +120,7 @@ function PopupWaitingCustomer({data, handleDataUpdate, statusOptions}) {
                   <AccordionDetails>
                     <div className="flex items-center gap-4">
                       <img
-                        src={customerInformation.image !=null? customerInformation.image:"https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"}
+                        src={customerInformation.image !=null? customerInformation.image:CustomerAva}
                         className="w-[150px] rounded-full"
                         alt=""
                       />

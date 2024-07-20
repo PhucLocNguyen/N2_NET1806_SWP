@@ -21,8 +21,12 @@ function UpdateBlog({ data, setIsOpenUpdatePopup }) {
   const folder = "Design3D";
   const { UserId } = useAuth();
 
-  const [formData, setFormData] = useState({ title: '', description: '', image: '' });
-  const [errors, setErrors] = useState({ title: '', description: '' });
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    image: "",
+  });
+  const [errors, setErrors] = useState({ title: "", description: "" });
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +36,7 @@ function UpdateBlog({ data, setIsOpenUpdatePopup }) {
     });
     setErrors({
       ...errors,
-      [name]: '',
+      [name]: "",
     });
   };
 
@@ -51,6 +55,14 @@ function UpdateBlog({ data, setIsOpenUpdatePopup }) {
   const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
+      const fileType = selectedFile.type;
+      const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
+
+      if (!validImageTypes.includes(fileType)) {
+        toast.error("Please select a valid image file (JPEG, PNG, GIF).");
+        return;
+      }
+
       if (formData.image !== "" && formData.image != null) {
         await DeleteImage(formData.image);
       }
@@ -65,12 +77,12 @@ function UpdateBlog({ data, setIsOpenUpdatePopup }) {
   };
 
   const validateForm = () => {
-    const newErrors = { title: '', description: '' };
+    const newErrors = { title: "", description: "" };
     if (!formData.title) {
-      newErrors.title = 'Title cannot be empty';
+      newErrors.title = "Title cannot be empty";
     }
     if (!formData.description) {
-      newErrors.description = 'Description cannot be empty';
+      newErrors.description = "Description cannot be empty";
     }
     setErrors(newErrors);
     return !newErrors.title && !newErrors.description;
@@ -85,9 +97,9 @@ function UpdateBlog({ data, setIsOpenUpdatePopup }) {
       CallApi();
       toast.success("Create Success");
       setIsOpenUpdatePopup(false);
-      console.log('Updating with data:', formData);
+      console.log("Updating with data:", formData);
     } else {
-      console.log('Form validation failed');
+      console.log("Form validation failed");
     }
   };
 
@@ -135,7 +147,7 @@ function UpdateBlog({ data, setIsOpenUpdatePopup }) {
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex justify-center">
-              <p className="w-[90%] text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
+                <p className="w-[90%] text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
                   {data?.title}
                 </p>
               </div>

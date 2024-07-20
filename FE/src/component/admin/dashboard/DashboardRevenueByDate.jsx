@@ -41,23 +41,41 @@ function DashboardRevenueByDate() {
 
    const handleFormChange = (e) => {
       const { name, value } = e.target;
-      let errorValue = '';
+      let errorFromValue = errors.FromDate ? errors.FromDate : '';
+      let errorToValue = errors.ToDate ? errors.ToDate : '';
 
-      let isNotValid = true;
+      let isNotFromDateValid = true;
+      let isNotToDateValid = true;
+
       try {
 
          if (name === 'FromDate') {
-            errorValue = 'Please select valid date';
-            if (value !== '') {
-               isNotValid = false;
+            errorFromValue = 'Please select valid date';
+
+            if (formData.ToDate != '') {
+               let checkFromBeforeTo = isAfter(formData.ToDate, value);
+               if (checkFromBeforeTo) {
+                  errorToValue = ''
+               }
+               if (value != '' && checkFromBeforeTo) {
+                  isNotFromDateValid = false;
+               }
+
+            } else {
+
+               if (value !== '') {
+                  isNotFromDateValid = false;
+               }
+
             }
 
          } else if (name === 'ToDate') {
-            errorValue = `Date must be greater than ${formData.FromDate}`;
+            errorToValue = `Date must be greater than ${formData.FromDate}`;
+
             let checkDateValid = isAfter(value, formData.FromDate);
             if (checkDateValid) {
-               isNotValid = false;
-               console.log('Check point');
+               errorFromValue = ''
+               isNotToDateValid = false;
             }
          }
 
@@ -72,7 +90,8 @@ function DashboardRevenueByDate() {
 
       setErrors({
          ...errors,
-         [name]: isNotValid ? errorValue : ''
+         FromDate: isNotFromDateValid ? errorFromValue : '',
+         ToDate: isNotToDateValid ? errorToValue : ''
       })
 
    }

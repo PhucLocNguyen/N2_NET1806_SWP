@@ -8,7 +8,7 @@ namespace API.Model.HaveModel
         //public int WarrantyCardId { get; set; }
         public virtual WarrantyCardDTO? WarrantyCard { get; set; }
         public int RequirementId { get; set; }
-        public DateTime? DateCreated { get; set; }
-        public DateTime? ExpirationDate { get; set; }
+        public DateOnly? DateCreated { get; set; }
+        public DateOnly? ExpirationDate { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IPi58nb3LOMXIgBT7/603PjGkcT5BCyp0PqUE0eytkhl/OBUpMYHZvH/oxwBnjgV8UfzZQdiED+uEbBgW2HK9g==",
+  "dgSpecHash": "XUvWmmBY2VtAhKEAlEv5vpoPGWczuVsBjS71FbdTkytboTLMWiQsdHA0V3PsIU8QvUStaqL3Z0QQiocOldbcyA==",
   "success": true,
-  "projectFilePath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
+  "projectFilePath": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\SWP391Project.Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
@@ -72,5 +72,16 @@
     "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MimeKit' 4.6.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-gmc6-fwg3-75m5",
+      "libraryId": "MimeKit",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

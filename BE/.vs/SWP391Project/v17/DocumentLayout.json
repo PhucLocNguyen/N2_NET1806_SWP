@@ -1,12 +1,295 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\",
-  "Documents": [],
+  "WorkspaceRootPath": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\logingooglecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C94754F6-301F-435C-8B6E-4D1501053988}|Repositories\\SWP391Project.Repositories.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\repositories\\entity\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C94754F6-301F-435C-8B6E-4D1501053988}|Repositories\\SWP391Project.Repositories.csproj|solutionrelative:repositories\\entity\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|d:\\slide\\sem_5\\swp\\new folder\\be\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\stonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\stonescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\blogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\requirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\requirementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\vnpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\services\\chatsystem\\conversationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|solutionrelative:services\\chatsystem\\conversationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\services\\model\\paymentmodel\\paymentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|solutionrelative:services\\model\\paymentmodel\\paymentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\services\\model\\paymentmodel\\requestcreatepaymentbystaff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|solutionrelative:services\\model\\paymentmodel\\requestcreatepaymentbystaff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\designcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\api\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591A095A-BE39-439A-BB80-40F6F9612ED9}|API\\API.csproj|solutionrelative:api\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\services\\vnpay\\services\\vnpayservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9473BF7-9C4A-4073-A52F-C4A790268B9C}|Services\\SWP391Project.Services.csproj|solutionrelative:services\\vnpay\\services\\vnpayservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ConversationController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\ConversationController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\ConversationController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\ConversationController.cs",
+              "RelativeToolTip": "API\\Controllers\\ConversationController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFIAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T02:10:00.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\appsettings.json",
+              "RelativeDocumentMoniker": "API\\appsettings.json",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\appsettings.json",
+              "RelativeToolTip": "API\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-06T04:36:10.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BlogController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\BlogController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\BlogController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\BlogController.cs",
+              "RelativeToolTip": "API\\Controllers\\BlogController.cs",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAkwG8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-06T05:08:01.968Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MyDbContext.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Repositories\\Entity\\MyDbContext.cs",
+              "RelativeDocumentMoniker": "Repositories\\Entity\\MyDbContext.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Repositories\\Entity\\MyDbContext.cs",
+              "RelativeToolTip": "Repositories\\Entity\\MyDbContext.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAiwDsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-06T05:17:15.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginGoogleController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\LoginGoogleController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\LoginGoogleController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\LoginGoogleController.cs",
+              "RelativeToolTip": "API\\Controllers\\LoginGoogleController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-06T04:36:51.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StonesController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\StonesController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\StonesController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\StonesController.cs",
+              "RelativeToolTip": "API\\Controllers\\StonesController.cs",
+              "ViewState": "AQIAAI0AAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T15:31:19.238Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MaterialController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\MaterialController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\MaterialController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\MaterialController.cs",
+              "RelativeToolTip": "API\\Controllers\\MaterialController.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAYwFUAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-20T15:26:49.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\UserController.cs",
+              "RelativeToolTip": "API\\Controllers\\UserController.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAYwC8BAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T04:38:05.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PaymentController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\PaymentController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\PaymentController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\PaymentController.cs",
+              "RelativeToolTip": "API\\Controllers\\PaymentController.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAYwAAAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T16:06:15.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ConversationService.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\ChatSystem\\ConversationService.cs",
+              "RelativeDocumentMoniker": "Services\\ChatSystem\\ConversationService.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\ChatSystem\\ConversationService.cs",
+              "RelativeToolTip": "Services\\ChatSystem\\ConversationService.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwCcAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-10T14:53:20.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RequirementController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\RequirementController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\RequirementController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\RequirementController.cs",
+              "RelativeToolTip": "API\\Controllers\\RequirementController.cs",
+              "ViewState": "AQIAADcBAAAAAAAAAAAuwFgBAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T14:50:43.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "RequestCreatePaymentByStaff.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\Model\\PaymentModel\\RequestCreatePaymentByStaff.cs",
+              "RelativeDocumentMoniker": "Services\\Model\\PaymentModel\\RequestCreatePaymentByStaff.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\Model\\PaymentModel\\RequestCreatePaymentByStaff.cs",
+              "RelativeToolTip": "Services\\Model\\PaymentModel\\RequestCreatePaymentByStaff.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T16:04:38.101Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PaymentMapper.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\Model\\PaymentModel\\PaymentMapper.cs",
+              "RelativeDocumentMoniker": "Services\\Model\\PaymentModel\\PaymentMapper.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\Model\\PaymentModel\\PaymentMapper.cs",
+              "RelativeToolTip": "Services\\Model\\PaymentModel\\PaymentMapper.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAuwCEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-14T16:05:02.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "VnpayController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\VnpayController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\VnpayController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\VnpayController.cs",
+              "RelativeToolTip": "API\\Controllers\\VnpayController.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAYwC8AAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T03:25:10.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DesignController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\DesignController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\DesignController.cs",
+              "RelativeToolTip": "API\\Controllers\\DesignController.cs",
+              "ViewState": "AQIAAKcAAAAAAAAAAAAswCUAAACCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T02:06:27.723Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\DashboardController.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\API\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "API\\Controllers\\DashboardController.cs",
+              "ViewState": "AQIAACgBAAAAAAAAAAAAAFQAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T03:28:51.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "VnpayService.cs",
+              "DocumentMoniker": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\VnPay\\Services\\VnpayService.cs",
+              "RelativeDocumentMoniker": "Services\\VnPay\\Services\\VnpayService.cs",
+              "ToolTip": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\VnPay\\Services\\VnpayService.cs",
+              "RelativeToolTip": "Services\\VnPay\\Services\\VnpayService.cs",
+              "ViewState": "AQIAAH4AAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T05:31:43.023Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

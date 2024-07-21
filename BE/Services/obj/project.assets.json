@@ -3203,11 +3203,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
+      "projectUniqueName": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\SWP391Project.Services.csproj",
       "projectName": "SWP391Project.Services",
-      "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\SWP391Project.Services.csproj",
+      "projectPath": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\SWP391Project.Services.csproj",
       "packagesPath": "C:\\Users\\HA GIA KHANH\\.nuget\\packages\\",
-      "outputPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Services\\obj\\",
+      "outputPath": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HA GIA KHANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3224,8 +3224,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
-              "projectPath": "D:\\Slide\\Sem_5\\SWP\\SWP\\BE\\Repositories\\SWP391Project.Repositories.csproj"
+            "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Repositories\\SWP391Project.Repositories.csproj": {
+              "projectPath": "D:\\Slide\\Sem_5\\SWP\\New folder\\BE\\Repositories\\SWP391Project.Repositories.csproj"
             }
           }
         }
@@ -3277,5 +3277,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MimeKit' 4.6.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-gmc6-fwg3-75m5",
+      "libraryId": "MimeKit",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

@@ -126,9 +126,6 @@ function DonePopup({ setIsOpenPopup, data }) {
                       <p>
                         <strong>Shape:</strong> {masterGemStone.shape}
                       </p>
-                      <p className="text-red-500">
-                        <strong>Price:</strong> ${masterGemStone.price}
-                      </p>
                     </div>
                   </div>
                 )}
@@ -142,9 +139,6 @@ function DonePopup({ setIsOpenPopup, data }) {
                     </p>
                     <p>
                       <strong>Quantity:</strong> {stone.quantity}
-                    </p>
-                    <p className="text-red-500">
-                      <strong>Price:</strong> ${stone.price}
                     </p>
                   </div>
                 )}

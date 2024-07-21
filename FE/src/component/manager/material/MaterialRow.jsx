@@ -52,31 +52,31 @@ function MaterialRow({
 
   return (
     <>
-      <div className="grid grid-cols-8 gap-x-10 py-4 px-16 border-t border-solid border-gray-300 cursor-pointer my-4">
+      <div className="grid grid-cols-7 gap-x-10 py-4 px-16 border-t border-solid border-gray-300 cursor-pointer my-4">
         <div className="flex items-center col-span-1">
-          <h2 className="text-sm font-medium tracking-wide leading-snug">
+          <p className="text-sm font-medium tracking-wide leading-snug">
             {data?.materialId}
-          </h2>
+          </p>
         </div>
         <div className="flex items-center col-span-1">
-          <h2 className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
+          <p className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
             {data?.name}
-          </h2>
+          </p>
         </div>
         <div className="flex items-center col-span-1">
-          <h2 className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
+          <p className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
             {formatVND(data?.price)}
-          </h2>
-        </div>
-        <div className="flex items-center col-span-3">
-          <h2 className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
-            {data?.image}
-          </h2>
+          </p>
         </div>
         <div className="flex items-center col-span-1">
-          <h2 className="text-sm font-medium tracking-wide leading-snug">
+            <div>
+              <img src={data?.image} className="w-16 h-16 object-cover"/>
+            </div>
+        </div>
+        <div className="flex items-center col-span-2">
+          <p className="text-sm font-medium tracking-wide leading-snug">
             {data?.managerId}
-          </h2>
+          </p>
         </div>
         <div className="flex items-center justify-center col-span-1">
           <IconButton onClick={handleOpenMenu}>

@@ -197,11 +197,6 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
                               {masterGemStone.size}
                             </span>
                             <br />
-                            <strong>Price:</strong>{" "}
-                            <span className="text-pink-500">
-                              {formatVND(masterGemStone.price)}
-                            </span>
-                            <br />
                             <strong>Clarity:</strong>{" "}
                             <span className="text-pink-500">
                               {masterGemStone.clarity}
@@ -254,9 +249,6 @@ function TodoPopup({ setIsOpenPopup, handleStatusChange, requirementId }) {
                         <br />
                         <strong>Quantity:</strong>{" "}
                         <span className="text-pink-500">{stone.quantity}</span>
-                        <br />
-                        <strong>Price:</strong>{" "}
-                        <span className="text-pink-500">{formatVND(stone.price)}</span>
                         <br />
                       </Typography>
                     </AccordionDetails>

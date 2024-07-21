@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 
 
-function StaffTableRow({ data }) {
+function StaffTableRow({ data, setItemUpdate, setIsOpenUpdatePopup }) {
    const [open, setOpen] = useState(null);
 
    const handleOpenMenu = (event) => {
@@ -22,9 +22,8 @@ function StaffTableRow({ data }) {
       <>
          <TableRow>
             <TableCell align='left'>{data.name}</TableCell>
-            <TableCell align='left'>{data.role}</TableCell>
+            <TableCell align='left'>{data.roleId == 2 ? 'Manager' : (data.roleId == 3 ? 'Design' : (data.roleId == 4 ? 'Production' : (data.roleId == 5 ? 'Sale' : '')))}</TableCell>
             <TableCell align='left'>{data.email}</TableCell>
-            <TableCell align='left'>{data.phone}</TableCell>
             <TableCell>
                <IconButton onClick={handleOpenMenu}>
                   <MoreVertIcon />
@@ -42,14 +41,12 @@ function StaffTableRow({ data }) {
                sx: { width: 140 },
             }}
          >
-            <MenuItem onClick={handleCloseMenu}>
-               
+            <MenuItem onClick={() => {
+               setItemUpdate(data)
+               setIsOpenUpdatePopup(true)
+               handleCloseMenu()
+            }}>
                Edit
-            </MenuItem>
-
-            <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
-               
-               Delete
             </MenuItem>
          </Popover>
       </>

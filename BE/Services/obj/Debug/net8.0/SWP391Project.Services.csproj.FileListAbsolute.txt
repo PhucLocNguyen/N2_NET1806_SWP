@@ -73,6 +73,7 @@ D:\Slide\Sem_5\SWP\SWP\BE\Services\obj\Debug\net8.0\SWP391Project.Services.dll
 D:\Slide\Sem_5\SWP\SWP\BE\Services\obj\Debug\net8.0\refint\SWP391Project.Services.dll
 D:\Slide\Sem_5\SWP\SWP\BE\Services\obj\Debug\net8.0\SWP391Project.Services.pdb
 D:\Slide\Sem_5\SWP\SWP\BE\Services\obj\Debug\net8.0\ref\SWP391Project.Services.dll
+<<<<<<< HEAD
 D:\Slide\Sem_5\SWP\New folder\BE\Services\bin\Debug\net8.0\SWP391Project.Services.deps.json
 D:\Slide\Sem_5\SWP\New folder\BE\Services\bin\Debug\net8.0\SWP391Project.Services.dll
 D:\Slide\Sem_5\SWP\New folder\BE\Services\bin\Debug\net8.0\SWP391Project.Services.pdb
@@ -88,3 +89,5 @@ D:\Slide\Sem_5\SWP\New folder\BE\Services\obj\Debug\net8.0\SWP391Project.Service
 D:\Slide\Sem_5\SWP\New folder\BE\Services\obj\Debug\net8.0\refint\SWP391Project.Services.dll
 D:\Slide\Sem_5\SWP\New folder\BE\Services\obj\Debug\net8.0\SWP391Project.Services.pdb
 D:\Slide\Sem_5\SWP\New folder\BE\Services\obj\Debug\net8.0\ref\SWP391Project.Services.dll
+=======
+>>>>>>> 737b5a8b9b610958c012e5667f037addc6eee394

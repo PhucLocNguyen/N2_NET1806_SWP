@@ -68,6 +68,7 @@ D:\Slide\Sem_5\SWP\SWP\BE\Repositories\obj\Debug\net8.0\refint\SWP391Project.Rep
 D:\Slide\Sem_5\SWP\SWP\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.pdb
 D:\Slide\Sem_5\SWP\SWP\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.genruntimeconfig.cache
 D:\Slide\Sem_5\SWP\SWP\BE\Repositories\obj\Debug\net8.0\ref\SWP391Project.Repositories.dll
+<<<<<<< HEAD
 D:\Slide\Sem_5\SWP\New folder\BE\Repositories\bin\Debug\net8.0\SWP391Project.Repositories.deps.json
 D:\Slide\Sem_5\SWP\New folder\BE\Repositories\bin\Debug\net8.0\SWP391Project.Repositories.runtimeconfig.json
 D:\Slide\Sem_5\SWP\New folder\BE\Repositories\bin\Debug\net8.0\SWP391Project.Repositories.dll
@@ -82,3 +83,5 @@ D:\Slide\Sem_5\SWP\New folder\BE\Repositories\obj\Debug\net8.0\refint\SWP391Proj
 D:\Slide\Sem_5\SWP\New folder\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.pdb
 D:\Slide\Sem_5\SWP\New folder\BE\Repositories\obj\Debug\net8.0\SWP391Project.Repositories.genruntimeconfig.cache
 D:\Slide\Sem_5\SWP\New folder\BE\Repositories\obj\Debug\net8.0\ref\SWP391Project.Repositories.dll
+=======
+>>>>>>> 737b5a8b9b610958c012e5667f037addc6eee394

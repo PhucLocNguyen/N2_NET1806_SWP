@@ -12,15 +12,22 @@ function RequireAuth({ allowedRole }) {
 
       return (<Navigate to='/login' state={{ from: location }} replace />)
 
-   } else if (role === allowedRole) {
-
-      return (<Outlet />)
-
    } else {
+      var checkPermission = false;
+      allowedRole.forEach((item)=>{
+         if(role == item){
+            checkPermission = true;
+         }
+      })
+      if (checkPermission) {
 
-      return (<Navigate to='error' replace />)
+         return (<Outlet />)
+   
+      }else {
+         return (<Navigate to='error' replace />)
+      }
 
-   }
+   } 
 
 }
 

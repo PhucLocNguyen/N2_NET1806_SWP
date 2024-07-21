@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import ApiListRequirement from "../../api/manager/ListRequirement";
 import { FetchApiRequirementHaveUserWithStatus } from "../../api/Requirements/FetchApiRequirement";
 import useAuth from "../../hooks/useAuth";
 import RowOrderSupportList from "./RowOrderSupportList";
 
 function OrderSupportList() {
-    const status = -2;
+    const statusSupportConfirm = [-2,-6];
 
    const [data, setData] = useState([]);
    const {UserId} = useAuth();
 
    const fetchApi = async () => {
-      const respone = await FetchApiRequirementHaveUserWithStatus(status, UserId);
-      setData(respone)
+      const response = await FetchApiRequirementHaveUserWithStatus(statusSupportConfirm[0], UserId);
+      const getDesignReject = await FetchApiRequirementHaveUserWithStatus(statusSupportConfirm[1], UserId);
+      const dataGet = [...response, ...getDesignReject];
+      setData([...dataGet])
    }
 
    useEffect(() => {
@@ -25,8 +26,6 @@ function OrderSupportList() {
       }
 
    }, [])
-
-   console.log(data);
 
 
    return (
@@ -47,7 +46,7 @@ function OrderSupportList() {
                         <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Customer Name</h2>
                      </div>
                      <div className="flex items-center">
-                        <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Order Date</h2>
+                        <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Status</h2>
                      </div>
                      <div className="flex items-center">
                         <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Type</h2>

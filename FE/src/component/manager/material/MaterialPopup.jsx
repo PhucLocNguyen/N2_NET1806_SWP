@@ -160,6 +160,14 @@ function MaterialPopup({ setIsOpenPopup }) {
     const handleFileChange = async (event) => {
       const selectedFile = event.target.files[0];
       if (selectedFile) {
+        const fileType = selectedFile.type;
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+        if (!validImageTypes.includes(fileType)) {
+            toast.error('Please select a valid image file (JPEG, PNG, GIF).');
+            return;
+        }
+
         if (formData.image !== "") {
           await DeleteImage(formData.image);
         }

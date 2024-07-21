@@ -16,6 +16,8 @@ import { useState } from "react";
 import { getStatusClass, getStatusCustomerByCode } from "../../orderCustomer/OrderCustomer";
 import formatVND from "../../../utils/FormatCurrency";
 import { motion } from "framer-motion";
+import PaymentSummary from "./PaymentSummary";
+import { PostPaymentByStaff } from "../../../api/payment/PaymentApi";
 function ViewOrderDetailPopup({
   requirement,
   design,
@@ -34,18 +36,21 @@ function ViewOrderDetailPopup({
   };
   const handleCloseUpdate = (data) => {
     setOpen(false);
-    CancelOrder(data);
+    payCashOrder(data);
     setIsChange(!isChange);
 
   }
-  const CancelOrder = async (data) => {
-    const actionUpdate = await PutApiRequirement(
-      { ...data, status: "-1" },
-      "Cancel order completed",
-      "Failed to cancel the order"
+  const payCashOrder = async (data) => {
+    const formData = {
+      "paymentContent": "Pay in cash for requirement #"+data.requirementId,
+      "requirementsId": data.requirementId
+    }
+    const actionPayment = await PostPaymentByStaff(
+      formData,
+      "Add payment for the order successful",
+      "Failed to add payment to the order"
     );
     handleUpdateData();
-    setStatus("-1");
   };
 
   return (
@@ -222,53 +227,25 @@ function ViewOrderDetailPopup({
 
           <div className="sticky top-[24px]  py-[2.5rem] px-[2rem] rounded-[30px] border-[1px] border-[#e9eaf3] border-solid bg-[white]">
             <h2 className="text-[22px] mb-[1rem] font-bold leading-[1.273em]">
-              Price Quotation
+              Summary
             </h2>
 
-            <div className="h-[1.5px] bg-[#e9eaf3] my-[1.5rem]"></div>
-
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ArrowDropDownIcon />}
-                aria-controls="panel2-content"
-                id="panel2-header"
-              >
-                <Typography sx={{ fontWeight: "bold" }}>
-                  Weight of material
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{requirement?.weightOfMaterial}</Typography>
-              </AccordionDetails>
-            </Accordion>
-
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ArrowDropDownIcon />}
-                aria-controls="panel2-content"
-                id="panel2-header"
-              >
-                <Typography sx={{ fontWeight: "bold" }}>Machining fee</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{requirement?.machiningFee != null ? formatVND(requirement?.machiningFee) : null}</Typography>
-              </AccordionDetails>
-            </Accordion>
 
             <div className="h-[1.5px] bg-[#e9eaf3] my-[1.5rem]"></div>
+            <PaymentSummary requirementDetail={requirement} designDetail={design}/>
 
             <div>
               <div className="mt-[1rem]">
                 <Button
                   variant="outlined"
-                  color="error"
-                  disabled={requirement.status == "-1"|| requirement.status=="12"}
+                  color="primary"
+                  disabled={requirement.status == "-1"}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleClickOpen();
                   }}
                 >
-                  Cancel order
+                Pay with cash
                 </Button>
               </div>
             </div>
@@ -282,19 +259,19 @@ function ViewOrderDetailPopup({
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Cancel this order?"}
+            {"Pay for this order?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              After clicking the Agree button, the order will be cancel and you can't restore.
+              After clicking the Agree button, the order will be paid and you can't restore.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Disagree</Button>
+            <Button onClick={handleClose} color="error">Disagree</Button>
             <Button onClick={(e) => {
               e.stopPropagation();
               handleCloseUpdate(data)
-            }} color="error" autoFocus>
+            }} color="info" autoFocus>
               Agree
             </Button>
           </DialogActions>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { FetchApiRequirementByIdSecure } from "../../api/Requirements/FetchApiRequirement";
+import { FetchApiRequirementByIdSecure, FetchSummaryPriceByRequirementId } from "../../api/Requirements/FetchApiRequirement";
 import useAuth from "../../hooks/useAuth";
 import formatVND from "../../utils/FormatCurrency";
 import CustomerPayButton from "./CustomerPayButton";
@@ -9,10 +9,10 @@ function CustomerPay({
   title,
   designDetail,
   requirementDetail,
-  total,
   status,
 }) {
   const [getRequirementNew, setRequirementNew] = useState({});
+  const [getSummary, setSummary] = useState({});
   const {UserId} = useAuth();
   async function callNewDataRequirement(requirementId){
     const response = await FetchApiRequirementByIdSecure(
@@ -22,6 +22,8 @@ function CustomerPay({
     if (response != null) {
       setRequirementNew(response);
     }
+    const summaryPrice = await FetchSummaryPriceByRequirementId(requirementId);
+    setSummary(summaryPrice);
   }
   useEffect(()=>{
     callNewDataRequirement(requirementDetail.requirementId);
@@ -31,45 +33,44 @@ function CustomerPay({
    
     switch (getRequirementNew.status) {
       case "4":{
-       
+       console.log(getSummary);
         return (
           <div>
             <div className="bg-gray-200 p-4 rounded-lg w-full px-3 mb-3 ">
               {designDetail.masterGemstone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Master Gemstone</p>
-                  <p>{formatVND(getRequirementNew.masterGemStonePriceAtMoment)}</p>
+                  <p>{formatVND(getSummary.masterGemStonePriceAtMomentAnon)}</p>
                 </div>
               ) : null}
               {designDetail.stone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Melee Stones</p>
-                  <p>{formatVND(getRequirementNew.stonePriceAtMoment)}</p>
+                  <p>{formatVND(getSummary.stonePriceAtMomentAnon)}</p>
                 </div>
               ) : null}
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Material</p>
                 <p>
                   {formatVND(
-                    getRequirementNew.materialPriceAtMoment *
-                      getRequirementNew.weightOfMaterial
+                    getSummary.materialPriceAtMomentAnon
                   )}
                 </p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Machining Fee</p>
-                <p>{formatVND(getRequirementNew.machiningFee)}</p>
+                <p>{formatVND(getSummary.machiningFeeAnon)}</p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300">
                 <p className="text-[18px]">Total</p>
-                <p className="text-[18px]">{formatVND(Math.ceil(getRequirementNew.totalMoney))}</p>
+                <p className="text-[18px]">{formatVND(getSummary.totalMoneyAnon)}</p>
               </div>
             </div>
             <div>
               <div className="flex justify-between py-2 border-b border-gray-300 text-lg text-gray-900 font-semibold">
                 <p className="text-[20px]">Deposit 50%</p>
                 <p className="text-[20px]">
-                  {formatVND(Math.ceil(getRequirementNew.totalMoney / 2))} 
+                  {formatVND(getSummary.deposit)}
                 </p>
               </div>
             </div>
@@ -85,36 +86,35 @@ function CustomerPay({
               {designDetail.masterGemstone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Master Gemstone</p>
-                  <p>{formatVND(getRequirementNew.masterGemStonePriceAtMoment)}</p>
+                  <p>{formatVND(getSummary.masterGemStonePriceAtMomentAnon)}</p>
                 </div>
               ) : null}
               {designDetail.stone != null ? (
                 <div className="flex justify-between py-2 border-b border-gray-300">
                   <p>Melee Stones</p>
-                  <p>{formatVND(getRequirementNew.stonePriceAtMoment)}</p>
+                  <p>{formatVND(getSummary.stonePriceAtMomentAnon)}</p>
                 </div>
               ) : null}
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Material</p>
                 <p>
                   {formatVND(
-                    getRequirementNew.materialPriceAtMoment *
-                      getRequirementNew.weightOfMaterial
+                    getSummary.materialPriceAtMomentAnon
                   )}
                 </p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300 ">
                 <p>Machining Fee</p>
-                <p>{formatVND(getRequirementNew.machiningFee)}</p>
+                <p>{formatVND(getSummary.machiningFeeAnon)}</p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300">
                 <p className="text-[20px]">Total</p>
-                <p className="text-[20px]">{formatVND(Math.ceil(getRequirementNew.totalMoney))}</p>
+                <p className="text-[20px]">{formatVND(getSummary.totalMoneyAnon)}</p>
               </div>
               <div className="flex justify-between py-2 border-b border-gray-300 text-lg text-gray-900 font-semibold">
                 <p className="text-[20px]">Deposit 50%</p>
                 <p className="text-[20px]">
-                  -{formatVND(Math.ceil(getRequirementNew.totalMoney / 2))}  
+                  -{formatVND(getSummary.deposit)}  
                 </p>
               </div>
             </div>
@@ -122,7 +122,7 @@ function CustomerPay({
             <div className="flex justify-between py-2 border-b border-gray-300 text-lg text-gray-900 font-semibold">
                 <p className="text-[20px]">Pay the rest</p>
                 <p className="text-[20px]">
-                  {formatVND(Math.ceil(getRequirementNew.totalMoney) - Math.ceil(getRequirementNew.totalMoney / 2))} 
+                  {formatVND(getSummary.payTheRest)} 
                 </p>
               </div>
             </div>
@@ -139,7 +139,7 @@ function CustomerPay({
         <h2 className="text-3xl font-bold text-gray-900 mb-6">{title}</h2>
         <h3 className="text-xl font-semibold text-gray-700 mb-3">Summary:</h3>
         <ReDesignSummary status={status} />
-        <CustomerPayButton moneyWillPay={getRequirementNew.status=="10"?Math.ceil(getRequirementNew.totalMoney-Math.ceil(getRequirementNew.totalMoney/2)) : Math.ceil(getRequirementNew.totalMoney/2)} />
+        <CustomerPayButton />
       </div>
     </div>
   );

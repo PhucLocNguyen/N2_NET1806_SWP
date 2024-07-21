@@ -9,7 +9,7 @@ import RequirementDone from "./RequirementDone";
 import { summaryContext } from "./SummaryContext";
 
 function PaymentSelection() {
-  const { total, requirementDetail, designDetail, payNow, status, setStatus } =
+  const {  requirementDetail, designDetail, status, setStatus } =
     useContext(summaryContext);
   const [title, setTitle] = useState("");
 
@@ -35,6 +35,9 @@ function PaymentSelection() {
         break;
       case "6":
         setTitle("Working with design staff");
+        break;
+        case "-6":
+        setTitle("Please contact with sale in chat system");
         break;
       case "7":
         setTitle("Confirm the sketch design");
@@ -67,7 +70,6 @@ function PaymentSelection() {
   function SelectionRender({
     setStatus,
     status,
-    moneyWillPay,
     designDetail,
     title,
     requirementDetail,
@@ -83,7 +85,7 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
+            
             status={status}
           />
         );
@@ -93,7 +95,7 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
+            
             status={status}
           />
         );
@@ -105,7 +107,7 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
+            
           />
         );
       case "4":
@@ -115,7 +117,7 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
+            
           />
         );
       case "5": {
@@ -125,7 +127,7 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
+            
           />
         );
         break;
@@ -137,11 +139,21 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
+            
           />
         );
         break;
       }
+      case "-6":
+        return (
+          <CustomerWaiting
+            designDetail={designDetail}
+            title={title}
+            requirementDetail={requirementDetail}
+            
+            status={status}
+          />
+        );
       case "7": {
         return (
           <CustomerConfirmation
@@ -150,7 +162,7 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
+            
           />
         );
         break;
@@ -161,7 +173,6 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
             status={status}
           />
         );
@@ -171,7 +182,6 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
             status={status}
           />
         );
@@ -181,7 +191,6 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
             status={status}
           />
         );
@@ -192,7 +201,6 @@ function PaymentSelection() {
             designDetail={designDetail}
             title={title}
             requirementDetail={requirementDetail}
-            total={total}
           />
         );
       case "11":
@@ -222,11 +230,10 @@ function PaymentSelection() {
     <SelectionRender
       setStatus={setStatus}
       status={status}
-      moneyWillPay={Math.ceil(total / 2)}
       designDetail={designDetail}
       title={title}
       requirementDetail={requirementDetail}
-      total={total}
+      
     />
   );
 }

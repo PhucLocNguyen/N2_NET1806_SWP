@@ -5,6 +5,7 @@ const OrderSupportDetail = lazy(() => import("../component/saleStaff/OrderSuppor
 const OrderSupportList = lazy(() => import("../component/saleStaff/OrderSupportList"));
 const ChatStaff = lazy(() => import("../component/staff/ChatStaff"));
 
+const waranty = lazy(() => import('../component/warranty/Warranty'));
 const Design = lazy(() => import('../component/category/Category'));
 const BlogList = lazy(() => import('../component/blog_list/blogList'));
 const ListAll = lazy(() => import('../component/category/ListAll'));
@@ -44,7 +45,7 @@ const StaffLayout = lazy(() => import('../component/layout/StaffLayout'));
 
 const RejectDesignList = lazy(() => import('../component/designProductPlan/RejectDesignList'));
 const RejectDesignDetail = lazy(() => import('../component/designProductPlan/RejectDesignDetail'));
-
+const OrderWaitingPayList = lazy(()=>import("../component/saleStaff/PaySupport/OrderWaitingPayList"));
 const publicRoutes = [
    {
       index: true,
@@ -64,6 +65,10 @@ const publicRoutes = [
    {
       path: '/design/:id',
       component: DesignInfo
+   },
+   {
+      path: '/warranty',
+      component: waranty,
    },
    {
       path: '/blog',
@@ -96,6 +101,11 @@ const publicRoutes = [
    {
       path: '/payment/response',
       component: PaymentResponse,
+      layout: null
+   },
+   {
+      path: '*',
+      component: PageError,
       layout: null
    }
 ]
@@ -156,7 +166,8 @@ const privateRoutes = [
       component: StaffLayout,
       children: [
          { path: 'order-support', component: OrderSupportList },
-         { path: 'order-support/:id', component: OrderSupportDetail }
+         { path: 'order-support/:id', component: OrderSupportDetail},
+         {path: 'pay-support',component: OrderWaitingPayList }
       ],
       role: ["Sale"],
    },
@@ -177,7 +188,8 @@ const privateRoutes = [
          { path: ':id', component: OrderDetail }
       ],
       role: ['Customer']
-   },
+   }
+   ,
    {
       path: '/customer-profile',
       component: MyAccount,

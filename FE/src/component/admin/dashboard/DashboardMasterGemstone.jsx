@@ -29,7 +29,7 @@ function DashboardMasterGemstone() {
                      labels: data?.map((item) => item.masterGemstone),
                      datasets: [
                         {
-                           label: 'Last month',
+                           label: 'Quantity',
                            data: data?.map((item) => item.amount),
                            backgroundColor: '#ff7979'
                         }

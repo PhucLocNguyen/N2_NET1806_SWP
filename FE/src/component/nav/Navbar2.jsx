@@ -50,6 +50,14 @@ function Navbar() {
                       Blog
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      to="/warranty"
+                      className="font-normal text-2xl hover:text-[#C6AD8A] hover:duration-200"
+                    >
+                      Warranty
+                    </Link>
+                  </li>
                 </ul>
               </div>
 

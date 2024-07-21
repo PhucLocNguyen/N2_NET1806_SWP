@@ -4,14 +4,15 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import CreateConversationJoin from "../../utils/CreateConversationJoin";
 import { useEffect } from "react";
 import { useState } from "react";
 import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
 import useAuth from "../../hooks/useAuth";
+import iconStaff from "../../assets/icon/staffIcon.jpg";
+
 function CustomerWorkingDesignStaff({ title, requirementDetail, status }) {
   const { UserId } = useAuth();
+ 
   if (status == "5") {
     return (
       <div className="col-span-2 flex flex-col justify-center items-center">
@@ -72,19 +73,6 @@ function CustomerWorkingDesignStaff({ title, requirementDetail, status }) {
               >
                 Designer details
               </Typography>
-              <Typography sx={{ color: "text.secondary" }}>
-                <Link to="/chat">
-                  <Button
-                    variant="contained"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      CreateConversationJoin(UserId, designer.usersId);
-                    }}
-                  >
-                    Chat with design staff
-                  </Button>
-                </Link>
-              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex items-center gap-4">
@@ -92,10 +80,10 @@ function CustomerWorkingDesignStaff({ title, requirementDetail, status }) {
                   src={
                     designer.image != null
                       ? designer.image
-                      : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                      : iconStaff
                   }
                   className="w-[150px] rounded-full"
-                  alt=""
+                  alt="image of design staff"
                 />
                 <div>
                   <h4 className="text-[20px]">

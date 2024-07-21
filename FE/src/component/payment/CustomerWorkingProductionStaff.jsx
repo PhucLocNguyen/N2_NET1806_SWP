@@ -3,17 +3,14 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import CreateConversationJoin from "../../utils/CreateConversationJoin";
 import { useEffect } from "react";
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
 import { FetchApiUserBasedRoleInRequirement } from "../../api/Requirements/FetchApiUser";
 import useAuth from "../../hooks/useAuth";
+import iconStaff from "../../assets/icon/staffIcon.jpg";
 function CustomerWorkingProductionStaff({ title, requirementDetail, status }) {
   const { UserId } = useAuth();
-  const navigate = useNavigate();
+
   if (status == "8") {
     return (
       <div className="col-span-2 flex flex-col justify-center items-center">
@@ -69,20 +66,6 @@ function CustomerWorkingProductionStaff({ title, requirementDetail, status }) {
              <h3 className="text-2xl font-semibold text-gray-700 mb-3 mr-6">
             Production staff information
           </h3>
-              <Typography sx={{ color: "text.secondary" }}>
-                <Link to="/chat">
-                  <Button
-                    variant="contained"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      CreateConversationJoin(UserId, productionStaff.usersId);
-                      navigate("/chat",{replace:false});
-                    }}
-                  >
-                    Chat
-                  </Button>
-                </Link>
-              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <div className="flex items-center gap-4">
@@ -90,10 +73,10 @@ function CustomerWorkingProductionStaff({ title, requirementDetail, status }) {
                   src={
                     productionStaff.image != null
                       ? productionStaff.image
-                      : "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1141335507.1719273600&semt=ais_user"
+                      : iconStaff
                   }
                   className="w-[150px] rounded-full"
-                  alt=""
+                  alt="Image of production staff"
                 />
                 <div>
                   <h4 className="text-[20px]">

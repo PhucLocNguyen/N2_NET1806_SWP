@@ -10,6 +10,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
 import FormHelperText from '@mui/material/FormHelperText';
+import { toast } from 'react-toastify';
 
 import { ApigGetTypeOfJewellery, ApiCreateParentDesign } from '../../../api/manager/ApiDesign';
 import { FetchApiDesignRuleById } from '../../../api/Requirements/FetchApiDesignRule';
@@ -282,6 +283,15 @@ function DesignPopup({ setIsOpenPopup }) {
 
    const handleFileChange = async (event) => {
       const selectedFile = event.target.files[0];
+
+      const fileType = selectedFile.type;
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+      if (!validImageTypes.includes(fileType)) {
+         toast.error('Please select a valid image file (JPEG, PNG, GIF).');
+         return;
+      }
+
       if (selectedFile) {
          if (formData.image !== '') {
             await DeleteImage(formData.image);

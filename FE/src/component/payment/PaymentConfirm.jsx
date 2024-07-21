@@ -1,17 +1,11 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
-import { FetchApiDesignById } from "../../api/Requirements/FetchApiDesign";
+
 import WestIcon from '@mui/icons-material/West';
 import { IconButton, Tooltip } from "@mui/material";
-import { CustomButton } from "../home/Home";
-import useAuth from "../../hooks/useAuth"
-import { PostPaymentApi } from "../../api/payment/PaymentApi";
 import PaymentSelection from "./PaymentSelection";
 import { useContext } from "react";
 import { summaryContext } from "./SummaryContext";

@@ -1,72 +1,82 @@
-import CategoryItem from "./CategoryItem"
-import { useEffect, useState } from "react"
-import { fetchApiDesign } from "../../api/FetchApiDesign"
-import { useLocation } from "react-router-dom"
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import { useState, useEffect } from "react";
+import Stack from "@mui/material/Stack";
+import Pagination from "@mui/material/Pagination";
+import bannerPic from "../../assets/blogList/bannerPic-2022.jpg";
+import { FetchApiBlog } from "../../api/blog/FetchApiBlog";
+import BoxContent from "./BoxContent";
+import "./BlogList.css";
 
-function ListAll() {
-   const [design, setDesign] = useState([])
-   const location = useLocation()
-   const pageSize = 8;
-   const [page, setPage] = useState(1);
-   const [dataSize, setDataSize] = useState(0);
+export default function BlogList() {
+  const pageSize = 6;
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+  const [dataSize, setDataSize] = useState(0);
 
-   // Goi API de lay du lieu cua tat ca design
-   useEffect(() => {
-      const fetchAPI = async () => {
-         const respone = await fetchApiDesign()
-         let filterDesign = filter === 'all' ? respone : respone.filter(item => item.typeOfJewellery.name.toLowerCase() === filter)
-         // Neu pagination sai thi vo sua lai dieu kien cho nay
-         let size = filterDesign.length
-         filterDesign = filterDesign.slice((page - 1) * pageSize, page * pageSize);
-         setDataSize(size)
-
-         setDesign(filterDesign)
+  useEffect(() => {
+    const fetchAPI = async () => {
+      try {
+        const response = await FetchApiBlog({ pageSize, page });
+        const totalDataSize = response.totalCount;
+        const paginatedData = response.data;
+        setData(paginatedData);
+        setDataSize(totalDataSize);
+      } catch (error) {
+        console.error(error);
+        setData([]);
+        setDataSize(0);
       }
-      fetchAPI()
+    };
 
-   }, [location.pathname, page])
+    fetchAPI();
+  }, [page]);
 
-   // Lay type cua san pham thong qua path
-   const getTypeFromPath = (path) => {
-      const values = path.split('/').filter(value => value !== '')
-      return values[values.length - 1]
-   }
+  const totalPages = Math.ceil(dataSize / pageSize);
 
-   const filter = getTypeFromPath(location.pathname) === 'design' ? 'all' : getTypeFromPath(location.pathname)
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
-   const handleChange = (event, value) => {
-      setPage(value);
-   };
-
-   console.log(filter)
-
-   return (
-      <div className="px-[6.25rem] pb-[3rem]">
-         <div className="text-[1rem] leading-[1.3em] font-normal">
-            <div className="grid gap-x-[2.5rem] gap-y-[2.5rem] grid-cols-4">
-
-               {design?.map((item, index) => {
-                  return (
-                     // <Link key={index} to={`/design/${item.designId}`}>
-                     <CategoryItem key={index} design={item} />
-                     // </Link>
-                  )
-
-               })}
-            </div>
-
-            <div className='flex justify-center items-center mt-[15px]'>
-               <Stack>
-                  <Pagination count={(Math.ceil(dataSize / 8)) || 0} page={page} onChange={handleChange} />
-
-               </Stack>
-            </div>
-
-         </div>
+  return (
+    <>
+      {/* Banner Picture */}
+      <div className="relative w-full h-60 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[#0000004f] z-10 opacity-0 animate-fade-in-up">
+          <div className="flex flex-col justify-center items-center h-full text-center">
+            <h1 className="text-xl text-white">JEWELLERY BLOG</h1>
+            <p className="text-white">
+              Articles by Australian designer Simone Walsh
+            </p>
+          </div>
+        </div>
+        <img
+          src={bannerPic}
+          className="absolute top-0 left-0 w-full h-full object-cover object-center scale-110 opacity-0 animate-zoom-in"
+          style={{
+            objectPosition: "51.6277% 55.0512%",
+          }}
+        />
       </div>
-   )
-}
 
-export default ListAll
+      {/* Content */}
+      <div className="grid grid-cols-3 gap-10 mx-96">
+        {data.map((item, index) => (
+          <BoxContent key={index} data={item} />
+        ))}
+      </div>
+
+      <div className="flex justify-center items-center mt-10">
+        <Stack>
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handleChange}
+            siblingCount={1}
+            boundaryCount={1}
+            showFirstButton
+            showLastButton
+          />
+        </Stack>
+      </div>
+    </>
+  );
+}

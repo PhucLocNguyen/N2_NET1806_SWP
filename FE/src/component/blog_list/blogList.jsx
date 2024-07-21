@@ -20,8 +20,9 @@ export default function BlogList() {
     const fetchApi = async () => {
       try {
         const response = await FetchApiBlog({ pageSize, page });
+        const responseTotal = await FetchApiBlog({});
         setData(response);
-        setDataSize(response.totalCount);
+        setDataSize(responseTotal?.length);
       } catch (error) {
         console.error(error);
         setData([]);

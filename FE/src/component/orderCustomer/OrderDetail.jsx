@@ -31,6 +31,8 @@ import PageError from "../pageerror/PageError";
 import { getStatusCustomerByCode, getStatusClass } from "./OrderCustomer";
 import { PutApiRequirement } from "../../api/Requirements/PutApiRequirement";
 
+import formatVND from "../../utils/FormatCurrency.jsx";
+
 const OrderDetail = () => {
   const [show3DDesign, setShow3DDesign] = useState(false);
   const [masterGemStone, setMasterGemStone] = useState(null);
@@ -45,7 +47,7 @@ const OrderDetail = () => {
   const [statusLabel, setStatusLabel] = useState("");
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = React.useState(false);
-  const [isChange,setIsChange] = useState(false);
+  const [isChange, setIsChange] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -53,19 +55,22 @@ const OrderDetail = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCloseUpdate = ()=>{
+  const handleCloseUpdate = () => {
     setOpen(false);
     CancelOrder(data);
     setIsChange(!isChange);
-
-  }
-  const CancelOrder=async(data)=>{
-    const actionUpdate = await PutApiRequirement({...data,status:"-1"},"Cancel order completed", "Failed to cancel the order");
+  };
+  const CancelOrder = async (data) => {
+    const actionUpdate = await PutApiRequirement(
+      { ...data, status: "-1" },
+      "Cancel order completed",
+      "Failed to cancel the order"
+    );
     setStatus("-1");
-  }
-  useEffect(()=>{
-    getRequirementById(id,UserId);
-  },[isChange])
+  };
+  useEffect(() => {
+    getRequirementById(id, UserId);
+  }, [isChange]);
   const getRequirementById = async (requirementId, UserId) => {
     try {
       const response = await FetchApiRequirementByIdSecure(
@@ -179,11 +184,11 @@ const OrderDetail = () => {
                 </div>
                 <div className="flex flex-col justify-center items-end">
                   <div className="flex gap-3">
-                  <Button
+                    <Button
                       variant="outlined"
                       color="error"
                       onClick={handleClickOpen}
-                      disabled={!(data.status>=0&&data.status<=4)}
+                      disabled={!(data.status >= 0 && data.status <= 4)}
                     >
                       Cancel order
                     </Button>
@@ -195,8 +200,6 @@ const OrderDetail = () => {
                     >
                       Track order
                     </Button>
-
-                    
                   </div>
                   {!(data.status >= 0 && data.status < 3) ? (
                     <span className="pb-3">
@@ -227,7 +230,7 @@ const OrderDetail = () => {
                             .replace(/^./, (str) => str.toUpperCase())}
                           :
                         </strong>{" "}
-                        {value}
+                        {key === "totalMoney" ? formatVND(value) : value}
                       </Typography>
                     </Grid>
                   ))}
@@ -253,7 +256,9 @@ const OrderDetail = () => {
                           Object.entries(masterGemStone)
                             .filter(
                               ([key]) =>
-                                key !== "image" && key !== "masterGemstoneId" && key !== 'price'
+                                key !== "image" &&
+                                key !== "masterGemstoneId" &&
+                                key !== "price"
                             )
                             .map(([key, value]) => (
                               <TableRow key={key}>
@@ -291,7 +296,12 @@ const OrderDetail = () => {
                       <TableBody>
                         {dataDesign.material &&
                           Object.entries(dataDesign.material)
-                            .filter(([key]) => key !== "image" && key !== 'materialId' && key !== 'price')
+                            .filter(
+                              ([key]) =>
+                                key !== "image" &&
+                                key !== "materialId" &&
+                                key !== "price"
+                            )
                             .map(([key, value]) => (
                               <TableRow key={key}>
                                 <TableCell>
@@ -320,7 +330,9 @@ const OrderDetail = () => {
                       <TableBody>
                         {stone &&
                           Object.entries(stone)
-                            .filter(([key]) => key !== "stonesId" && key !== 'price')
+                            .filter(
+                              ([key]) => key !== "stonesId" && key !== "price"
+                            )
                             .map(([key, value]) => (
                               <TableRow key={key}>
                                 <TableCell>
@@ -385,7 +397,8 @@ const OrderDetail = () => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-                After clicking the Agree button, the order will be cancel and you can't restore.
+              After clicking the Agree button, the order will be cancel and you
+              can't restore.
             </DialogContentText>
           </DialogContent>
           <DialogActions>

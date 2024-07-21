@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ApiListRequirement from "../../api/manager/ListRequirement";
 import { FetchApiRequirementHaveUserWithStatus } from "../../api/Requirements/FetchApiRequirement";
 import useAuth from "../../hooks/useAuth";
 import RowOrderSupportList from "./RowOrderSupportList";
@@ -28,8 +27,6 @@ function OrderSupportList() {
 
    }, [])
 
-   console.log(data);
-
 
    return (
       <>
@@ -49,7 +46,7 @@ function OrderSupportList() {
                         <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Customer Name</h2>
                      </div>
                      <div className="flex items-center">
-                        <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Order Date</h2>
+                        <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Status</h2>
                      </div>
                      <div className="flex items-center">
                         <h2 className="text-[1rem] font-medium tracking-[0.06em] leading-[1.167em]">Type</h2>

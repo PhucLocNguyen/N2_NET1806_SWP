@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Accordion from '@mui/material/Accordion';
@@ -108,7 +107,7 @@ function OrderSupportDetail() {
                   <h2 className="text-[32px] font-bold ">Order #{id}</h2>
 
                   <Chip
-                    label="Need support"
+                    label={requirement.status=="-6"?"Design Reject need support": "Confirm price reject need support"}
                     color="warning"
                     variant="outlined"
                     sx={{ fontWeight: 700 }}
@@ -246,6 +245,7 @@ function OrderSupportDetail() {
                   </table>
                 </div>
               </div>
+              <div className="mt-3">
               <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -285,6 +285,8 @@ function OrderSupportDetail() {
                   </div>
                 </AccordionDetails>
               </Accordion>
+              </div>
+              
               {/* Note cua customer */}
               <div className=" my-[1.5rem] py-[2.5rem] px-[2.5rem] rounded-[30px] border-[1px] border-[#e9eaf3] border-solid bg-[white]">
                 <h2 className="text-[22px] mb-[1rem] font-bold leading-[1.273em]">
@@ -305,12 +307,12 @@ function OrderSupportDetail() {
             {/* Ben phai */}
             <div className="sticky top-[24px]  py-[2.5rem] px-[2rem] rounded-[30px] border-[1px] border-[#e9eaf3] border-solid bg-[white]">
               <h2 className="text-[22px] mb-[1rem] font-bold leading-[1.273em]">
-                Price Quotation
+                {requirement.status==-6?"Design Detail":"Price Quotation"}
               </h2>
 
               <div className="h-[1.5px] bg-[#e9eaf3] my-[1.5rem]"></div>
-
-              <Accordion>
+              {requirement.status==-2?(<>
+                <Accordion expanded>
                 <AccordionSummary
                   expandIcon={<ArrowDropDownIcon />}
                   aria-controls="panel2-content"
@@ -325,7 +327,7 @@ function OrderSupportDetail() {
                 </AccordionDetails>
               </Accordion>
 
-              <Accordion>
+              <Accordion expanded>
                 <AccordionSummary
                   expandIcon={<ArrowDropDownIcon />}
                   aria-controls="panel2-content"
@@ -341,6 +343,10 @@ function OrderSupportDetail() {
                   </Typography>
                 </AccordionDetails>
               </Accordion>
+              </>):(<>
+                <img src={requirement.design3D} className="w-full h-[300px] object-contain" alt={"Design 3D of requriement #"+requirement.requirementId}/>
+              </>)}
+              
 
               <div className="h-[1.5px] bg-[#e9eaf3] my-[1.5rem]"></div>
 

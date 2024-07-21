@@ -5,6 +5,7 @@ const OrderSupportDetail = lazy(() => import("../component/saleStaff/OrderSuppor
 const OrderSupportList = lazy(() => import("../component/saleStaff/OrderSupportList"));
 const ChatStaff = lazy(() => import("../component/staff/ChatStaff"));
 
+const waranty = lazy(() => import('../component/warranty/Warranty'));
 const Design = lazy(() => import('../component/category/Category'));
 const BlogList = lazy(() => import('../component/blog_list/blogList'));
 const ListAll = lazy(() => import('../component/category/ListAll'));
@@ -64,6 +65,10 @@ const publicRoutes = [
    {
       path: '/design/:id',
       component: DesignInfo
+   },
+   {
+      path: '/warranty',
+      component: waranty,
    },
    {
       path: '/blog',

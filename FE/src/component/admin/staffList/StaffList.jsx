@@ -77,7 +77,6 @@ function StaffList() {
                               <TableCell align='left'>Name</TableCell>
                               <TableCell align='left'>Role</TableCell>
                               <TableCell align='left'>Email</TableCell>
-                              <TableCell align='left'>Phone</TableCell>
                               <TableCell align='left'></TableCell>
                            </TableRow>
                         </TableHead>

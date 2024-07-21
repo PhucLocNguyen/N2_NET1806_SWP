@@ -142,10 +142,10 @@ function ListMaterial() {
             </div>
 
             {/* Header row */}
-            <div className="grid grid-cols-8 gap-x-10 py-4 px-16 border-t border-solid border-gray-300 cursor-pointer my-4">
+            <div className="grid grid-cols-7 gap-x-10 py-4 px-16 border-t border-solid border-gray-300 cursor-pointer my-4">
               <div className="flex items-center col-span-1">
                 <h2 className="text-base font-medium tracking-wide leading-snug">
-                materialId
+                Material ID
                 </h2>
               </div>
               <div className="flex items-center col-span-1">
@@ -158,14 +158,14 @@ function ListMaterial() {
                   Price
                 </h2>
               </div>
-              <div className="flex items-center col-span-3">
-                <h2 className="text-base font-medium tracking-wide leading-snug">
-                image
-                </h2>
-              </div>
               <div className="flex items-center col-span-1">
                 <h2 className="text-base font-medium tracking-wide leading-snug">
-                managerId
+                Image
+                </h2>
+              </div>
+              <div className="flex items-center col-span-2">
+                <h2 className="text-base font-medium tracking-wide leading-snug">
+                Manager ID
                 </h2>
               </div>
             </div>

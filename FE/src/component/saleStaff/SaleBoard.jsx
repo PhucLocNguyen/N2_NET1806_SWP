@@ -35,7 +35,7 @@ function SaleBoard() {
    useEffect(()=>{
 loadDataToBoard();
 const newConnection = new signalR.HubConnectionBuilder()
-.withUrl('https://app-swp391-su24.azurewebsites.net/Working')
+.withUrl('https://localhost:7103/Working')
 .withAutomaticReconnect()
 .build();
 

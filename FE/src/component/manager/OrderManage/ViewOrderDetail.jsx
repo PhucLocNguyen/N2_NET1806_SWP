@@ -262,7 +262,7 @@ function ViewOrderDetailPopup({
                 <Button
                   variant="outlined"
                   color="error"
-                  disabled={requirement.status == "-1"}
+                  disabled={requirement.status == "-1"|| requirement.status=="12"}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleClickOpen();

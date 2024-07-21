@@ -38,24 +38,24 @@ function BlogRow({
     <>
       <div className="grid grid-cols-8 gap-x-20 py-4 px-16 border-t border-solid border-gray-300 cursor-pointer my-4">
         <div className="flex items-center col-span-2">
-          <h2 className="text-sm font-medium tracking-wide leading-snug">
+          <p className="text-sm font-medium tracking-wide leading-snug">
             {data?.title}
-          </h2>
+          </p>
         </div>
         <div className="flex items-center col-span-3">
-          <h2 className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
+          <p className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
             {data?.description}
-          </h2>
+          </p>
         </div>
         <div className="flex items-center col-span-1">
-          <h2 className="text-sm font-medium tracking-wide leading-snug overflow-hidden text-ellipsis line-clamp-2">
-            {data?.image}
-          </h2>
+          <div>
+            <img src={data?.image} className="w-16 h-16 object-cover"/>
+          </div>
         </div>
         <div className="flex items-center col-span-1">
-          <h2 className="text-sm font-medium tracking-wide leading-snug">
+          <p className="text-sm font-medium tracking-wide leading-snug">
             {data?.manager?.username}
-          </h2>
+          </p>
         </div>
         <div className="flex items-center justify-center col-span-1">
           <IconButton onClick={handleOpenMenu}>

@@ -1,6 +1,5 @@
 import React from "react";
 import Logocard from "../../assets/footer/Logocard.webp";
-import { SvgIcon } from "@mui/material";
 import EditLocationIcon from "@mui/icons-material/EditLocation";
 import CallIcon from "@mui/icons-material/Call";
 import AlarmOnIcon from "@mui/icons-material/AlarmOn";
@@ -8,10 +7,10 @@ import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import XIcon from "@mui/icons-material/X";
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import ForumIcon from '@mui/icons-material/Forum';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 
 function Footer() {
   return (
@@ -21,8 +20,8 @@ function Footer() {
       {/* Footer starts */}
       <div className="bg-[#fdf9f2] h-[100px] w-full flex justify-around items-center">
         <div className="w-fit flex items-center">
-          <LocalShippingIcon />
-          <span className="font-light text-xl ml-2">Free Delivery</span>
+          <AssuredWorkloadIcon />
+          <span className="font-light text-xl ml-2">No Incur Fee</span>
         </div>
         <div className="w-fit flex items-center">
           <MonetizationOnIcon />
